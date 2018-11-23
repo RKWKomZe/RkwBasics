@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-02-19T11:21:59Z" product-name="rkwbasics">
+		<header/>
+		<body>
+
+			<trans-unit id="tx_rkwbasics_fe_layout_next_level.description">
+				<source>txRkwbasicsFeLayoutNextLevel</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_css_class.description">
+				<source>txRkwbasicsCssClass</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_teaser_text.description">
+				<source>txRkwBasicsTeaserText</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_teaser_image.description">
+				<source>txRkwBasicsTeaserImage</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-02-17T16:22:14Z" product-name="rkwbasics">
+		<header/>
+		<body>
+
+            <!-- Palettes -->
+            <trans-unit id="tx_rkwbasics_domain_model_pages.palettes.common" approved="yes">
+                <source>Common</source>
+                <target>Allgemein</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.palettes.extended" approved="yes">
+                <source>Extended</source>
+                <target>Erweitert</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_pages -->
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_alternative_title">
+                <source>Alternative Label for Menu</source>
+                <target>Alternative Beschriftung für Menü (Kurzbeschriftung)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level" approved="yes">
+				<source>Frontend Layout (for subpages of this page)</source>
+				<target>Frontend Layout (für Unterseiten dieser Seite)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class" approved="yes">
+				<source>CSS- Class</source>
+				<target>CSS- Klasse</target>
+			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
+                <source>Proxy Caching for logged in users</source>
+                <target>Proxy Caching für angemeldete FE-Nutzer erlauben</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.inherit">
+                <source>Inherit</source>
+                <target>Vererben</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.enabled">
+                <source>Allow</source>
+                <target>Erlauben</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.disabled">
+                <source>Disallow</source>
+                <target>Verbieten</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_domain">
+                <source>Old Domain (Domain only, without "http://"!)</source>
+                <target>Alte Domain (ohne vorangestelltes "http://"!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_link">
+                <source>Old Link (Link only, without domain and prepended backslash)</source>
+                <target>Alter Link (ohne vorangestellte Domain und ohne vorangestelltes "/"!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical">
+                <source>Canonical</source>
+                <target>Canonical</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical.I.enabled">
+                <source>Use old domain/link as canonical</source>
+                <target>Alten Link als Canonical verwenden</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text" approved="yes">
+				<source>Teaser Text</source>
+				<target>Teaser-Text</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image" approved="yes">
+				<source>Teaser Image</source>
+				<target>Teaser-Bild</target>
+			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image" approved="yes">
+                <source>Article Image</source>
+                <target>Artikel-Bild</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video" approved="yes">
+                <source>YouTube Video-Link (replaces Article Image)</source>
+                <target>YouTube Video-Link (ersetzt Artikel-Bild)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_information">
+                <source>Further Information</source>
+                <target>Weiterführende Informationen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
+                <source>Department</source>
+                <target>Fachbereich/Thema</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_genre" approved="yes">
+                <source>Genre</source>
+                <target>Textgattung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_type" approved="yes">
+                <source>Document Type</source>
+                <target>Dokumentenart</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_series">
+                <source>Series</source>
+                <target>Serie / Reihe</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_enterprisesize">
+                <source>Enterprise Size</source>
+                <target>Unternehmensgröße</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_sector">
+                <source>Sector</source>
+                <target>Branche</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file" approved="yes">
+                <source>Download</source>
+                <target>Download (Cover wird automatisch erstellt aus erster Seite!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
+                <source>Cover (Used only when no Download-File is set)</source>
+                <target>Cover (Überschreibt Cover aus Download-Datei)</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_mediafilemeta -->
+            <trans-unit id="tx_rkwbasics_domain_model_mediafilemeta" approved="yes" >
+				<source>Media File</source>
+				<target>Media File</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_publisher" approved="yes">
+				<source>Publisher</source>
+				<target>Herausgeber / Copyright</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_source" approved="yes">
+				<source>Source</source>
+				<target>Quelle</target>
+			</trans-unit>
+
+
+
+            <!-- tx_rkwbasics_domain_model_mediasources -->
+            <trans-unit id="tx_rkwbasics_domain_model_mediasources" approved="yes">
+				<source>RKW Basics: Media Sources</source>
+				<target>RKW Basics: Medienquellen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediasources.name" approved="yes">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediasources.url" approved="yes">
+				<source>Url</source>
+				<target>Url</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal">
+				<source>Internal  (e.g. for own photos)</source>
+				<target>Intern (z.B. bei eigenen Fotos)</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal.I.disabled" approved="yes">
+				<source>Do not show as copyright information in frontend</source>
+				<target>Im Frontend nicht als Copyright-Information anzeigen</target>
+			</trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_content-->
+			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright" approved="yes">
+				<source>Copyright Information</source>
+				<target>Copyright-Informationen</target>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright.I.disabled" approved="yes">
+				<source>Do not show copyright information in frontend</source>
+				<target>Im Frontend keine Copyright-Informationen ausgeben</target>
+			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_bodytext_mobile">
+                <source>Alternative text</source>
+                <target>Alternativer Text (Sonderfunktionen)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_header_link_caption">
+                <source>Caption for Link</source>
+                <target>Beschriftung für Link (nur Slider und Partner-Boxen)</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_department -->
+            <trans-unit id="tx_rkwbasics_domain_model_department" appoved="yes">
+                <source>RKW Basics: Department</source>
+                <target>RKW Basics: Fachbereich/Thema</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.name" appoved="yes">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.short_name" appoved="yes">
+                <source>Short Name</source>
+                <target>Kurzname (für mobile Endgeräte)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.internal_name" approved="yes">
+                <source>Internal Name</source>
+                <target>Interner Name (NICHT OHNE RÜCKSPRACHE ÄNDERN!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.css_class" appoved="yes">
+                <source>CSS- Class</source>
+                <target>CSS- Klasse (system-interne Verwendung - NICHT OHNE RÜCKSPRACHE ÄNDERN!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.main_page">
+                <source>Main Page</source>
+                <target>Hauptseite des Themas</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.box_image">
+                <source>Box Image</source>
+                <target>Bild für Boxen auf Startseite</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.visibility">
+                <source>Visibility</source>
+                <target>Sichtbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_department.visibility.I.visible">
+                <source>Show in search filter</source>
+                <target>In Suchfilter anzeigen</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_documenttype -->
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype" appoved="yes">
+                <source>RKW Basics: Document Type</source>
+                <target>RKW Basics: Dokumentenart</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.name" appoved="yes">
+                <source>Name</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.short_name" appoved="yes">
+                <source>Short Name</source>
+                <target>Kurzname</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwprojects_domain_model_documenttype.internal_name">
+                <source>Internal Name</source>
+                <target>Interner Name (NICHT OHNE RÜCKSPRACHE ÄNDERN!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.box_template_name" appoved="yes">
+                <source>Box Template Name</source>
+                <target>Template-Name für Boxen (NICHT OHNE RÜCKSPRACHE ÄNDERN!)</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type">
+                <source>Use with type</source>
+                <target>Anzeige bei Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.default">
+                <source>All</source>
+                <target>Alle</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.other">
+                <source>Other</source>
+                <target>Sonstige</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.events">
+                <source>Events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.publications">
+                <source>Publications</source>
+                <target>Publikationen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility">
+                <source>Visibility</source>
+                <target>Sichtbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility.I.visible">
+                <source>Show in search filter</source>
+                <target>In Suchfilter anzeigen</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_series -->
+            <trans-unit id="tx_rkwbasics_domain_model_series" appoved="yes">
+                <source>RKW Basics: Series</source>
+                <target>RKW Basics: Serien / Reihen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.name" appoved="yes">
+                <source>Name</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.short_name" appoved="yes">
+                <source>Short Name</source>
+                <target>Kurzname</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.type">
+                <source>Use with type</source>
+                <target>Anzeige bei Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.type.I.default">
+                <source>Other</source>
+                <target>Sonstige</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.type.I.events">
+                <source>Events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.type.I.publications">
+                <source>Publications</source>
+                <target>Publikationen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.visibility">
+                <source>Visibility</source>
+                <target>Sichtbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_series.visibility.I.visible">
+                <source>Show in search filter</source>
+                <target>In Suchfilter anzeigen</target>
+            </trans-unit>
+
+
+            <!-- tx_rkwbasics_domain_model_enterprisesize -->
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize" appoved="yes">
+                <source>RKW Basics: Enterprise Size</source>
+                <target>RKW Basics: Unternehmensgröße</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.name" appoved="yes">
+                <source>Name</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.short_name" appoved="yes">
+                <source>Short Name</source>
+                <target>Kurzname</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type">
+                <source>Use with type</source>
+                <target>Anzeige bei Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.default">
+                <source>Other</source>
+                <target>Sonstige</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.events">
+                <source>Events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.publications">
+                <source>Publications</source>
+                <target>Publikationen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.visibility">
+                <source>Visibility</source>
+                <target>Sichtbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_enterprisesize.visibility.I.visible">
+                <source>Show in search filter</source>
+                <target>In Suchfilter anzeigen</target>
+            </trans-unit>
+
+            
+            <!-- tx_rkwbasics_domain_model_sector -->
+            <trans-unit id="tx_rkwbasics_domain_model_sector" appoved="yes">
+                <source>RKW Basics: Sector</source>
+                <target>RKW Basics: Branche</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.name" appoved="yes">
+                <source>Name</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.short_name" appoved="yes">
+                <source>Short Name</source>
+                <target>Kurzname</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.type">
+                <source>Use with type</source>
+                <target>Anzeige bei Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.type.I.default">
+                <source>Other</source>
+                <target>Sonstige</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.type.I.events">
+                <source>Events</source>
+                <target>Veranstaltungen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.type.I.publications">
+                <source>Publications</source>
+                <target>Publikationen</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.visibility">
+                <source>Visibility</source>
+                <target>Sichtbarkeit</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_sector.visibility.I.visible">
+                <source>Show in search filter</source>
+                <target>In Suchfilter anzeigen</target>
+            </trans-unit>            
+            
+
+            <!-- sys_file_reference -->
+            <trans-unit id="sys_file_reference.ratio.topic_page">
+                <source>Topic Pages</source>
+                <target>Themen-Header</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.ratio.article_page">
+                <source>Article Pages</source>
+                <target>Artikel-Bild</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.ratio.boxes">
+                <source>Boxes</source>
+                <target>Teaser-Bild</target>
+            </trans-unit>
+            <trans-unit id="sys_file_reference.ratio.free">
+                <source>Free</source>
+                <target>Frei</target>
+            </trans-unit>
+
+
+            <!-- Flexform -->
+			<trans-unit id="flexform.mediasources.function.headline" approved="yes">
+				<source>Function</source>
+				<target>Funktion</target>
+			</trans-unit>
+			<trans-unit id="flexform.mediasources.function.select" approved="yes">
+				<source>Select function</source>
+				<target>Funktion auswählen</target>
+			</trans-unit>
+			<trans-unit id="flexform.mediasources.function.select.I.list" approved="yes">
+				<source>List of used media sources</source>
+				<target>Liste aller verwendeten Medienquellen</target>
+			</trans-unit>
+            <trans-unit id="flexform.mediasources.function.select.I.listPage" approved="yes">
+                <source>List of used media sources for current page</source>
+                <target>Liste aller verwendeten Medienquellen für aktuelle Seite</target>
+            </trans-unit>
+            <trans-unit id="flexform.departments.function.headline">
+                <source>Function</source>
+                <target>Funktion</target>
+            </trans-unit>
+            <trans-unit id="flexform.departments.function.select">
+                <source>Select function</source>
+                <target>Funktion auswählen</target>
+            </trans-unit>
+            <trans-unit id="flexform.departments.function.select.I.boxes">
+                <source>Show boxes</source>
+                <target>Fachbereiche als Boxen</target>
+            </trans-unit>
+
+		</body>
+	</file>	
+</xliff>

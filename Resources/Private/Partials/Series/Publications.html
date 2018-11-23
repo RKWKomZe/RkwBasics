@@ -1,0 +1,36 @@
+{namespace rkwSearch=RKW\RkwSearch\ViewHelpers}
+<div>
+	<f:link.page pageUid="{page.uid}" class="box publication" title="{page.title}" >
+
+		<div class="cover">
+			<f:if condition="{page.txRkwbasicsTeaserImage}" >
+				<f:then>
+					<figure><f:cObject typoscriptObjectPath="plugin.tx_rkwsearch.libs.responsivePdfThumbnail" data="{page.txRkwbasicsFile}"/></figure>
+				</f:then>
+				<f:else>
+					<figure><f:cObject typoscriptObjectPath="plugin.tx_rkwsearch.libs.responsivePdfThumbnail" data="EXT:rkw_search/Resources/Public/Images/publications-fallback.jpg"/></figure>
+				</f:else>
+			</f:if>
+		</div>
+		{page.title}
+		<header>
+			<p>
+				<f:format.crop maxCharacters="{box.headerCrop}" respectWordBoundaries="FALSE">{page.title}</f:format.crop>
+			</p>
+		</header>
+		<div class="box-content">
+
+			<div class="wysiwyg">
+				<p>
+					<f:format.crop maxCharacters="{box.contentCrop}" respectWordBoundaries="TRUE">{box.item.subtitleParent}</f:format.crop>
+				</p>
+			</div>
+		</div>
+		<footer>
+			<p class="icon-book" title="{box.item.documentType}">
+				<f:format.crop maxCharacters="{box.footerCrop}" respectWordBoundaries="FALSE">{box.item.documentType}</f:format.crop>
+			</p>
+		</footer>
+
+	</f:link.page>
+</div>

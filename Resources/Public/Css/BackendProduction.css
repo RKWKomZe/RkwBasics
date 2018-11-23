@@ -1,0 +1,17 @@
+#typo3-cms-backend-backend-toolbaritems-clearcachetoolbaritem .dropdown-list:before{
+    content: "!!! LIVE-SYSTEM !!! IMPORTANT: Do NOT clear any caches except when really no other solution works! Clearing the cache will cause massive server load - and an angry admin! ";
+    background-color: red !important;
+    color:#fff;
+    padding:6px 8px;
+    line-height:2em;
+    font-weight:bold;
+    display:inline-block;
+}
+
+.typo3-topbar-site-name::after {
+    content: "LIVE-SYSTEM";
+    background-color:red !important;
+    color:#fff;
+    padding:16px;
+    margin-left:16px;
+}
