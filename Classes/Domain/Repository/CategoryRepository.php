@@ -20,7 +20,8 @@ use \RKW\RkwBasics\Domain\Model\Category;
 /**
  * Class CategoryRepository
  *
- * @author Steffen Kroggel <developer@steffenkroggel.de>, Maximilian Fäßler <maximilian@faesslerweb.de>
+ * @author Maximilian Fäßler <maximilian@faesslerweb.de>
+ * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
@@ -123,7 +124,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * findAllOrRecursiveBySelection
      *
-     * @author Maximilian Fäßler
      * @param array $sysCategoryList
      * @param boolean $returnUidArray
      * @param boolean $excludeEntriesWithoutParent
