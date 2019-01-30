@@ -58,5 +58,3 @@ if (TYPO3_MODE == "BE") {
         $TBE_STYLES['inDocStyles_TBEstyle'] .= '@import "/typo3conf/ext/rkw_basics/Resources/Public/Css/BackendDevelopment.css";';
     }
 }
-
-?>
