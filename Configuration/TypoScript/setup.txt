@@ -283,7 +283,6 @@ plugin.tx_rkwbasics {
                     mediaQuery = (min-device-with: {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile}px) AND (min-resolution: 192dpi)
                     dataKey = mobileRetina2
                 }
-plugin.tx_rkwbasics.settings.includeAjaxApiJs
                 mobile {
                     if {
                         value = {$styles.content.imgtext.layoutKey}
