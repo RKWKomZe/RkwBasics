@@ -339,13 +339,25 @@ class Json
         $this->_viewHelperTemplateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
         $this->_viewHelperPartialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
 
-        if ($extbaseFrameworkConfiguration['view']['layoutRootPath']) {
+        if (
+            is_array($this->_viewHelperLayoutRootPaths)
+            && !count($this->_viewHelperLayoutRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['layoutRootPath']
+        ) {
             $this->_viewHelperLayoutRootPaths = array($extbaseFrameworkConfiguration['view']['layoutRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['templateRootPath']) {
+        if (
+            is_array($this->_viewHelperTemplateRootPaths)
+            && !count($this->_viewHelperTemplateRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['templateRootPath']
+        ) {
             $this->_viewHelperTemplateRootPaths = array($extbaseFrameworkConfiguration['view']['templateRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['partialRootPath']) {
+        if (
+            is_array($this->_viewHelperPartialRootPaths)
+            && !count($this->_viewHelperPartialRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['partialRootPath']
+        ) {
             $this->_viewHelperPartialRootPaths = array($extbaseFrameworkConfiguration['view']['partialRootPath']);
         }
     }
