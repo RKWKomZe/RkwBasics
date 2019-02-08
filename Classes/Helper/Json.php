@@ -23,7 +23,6 @@ namespace RKW\RkwBasics\Helper;
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-
 class Json
 {
 
@@ -98,8 +97,8 @@ class Json
     /**
      * Sets message
      *
-     * @param string $id
-     * @param string $message
+     * @param string  $id
+     * @param string  $message
      * @param integer $type
      * @return $this
      */
@@ -161,13 +160,14 @@ class Json
     /**
      * Sets HTML
      *
-     * @param string $id
+     * @param string       $id
      * @param string|array $html
-     * @param string $type
-     * @param string $template
+     * @param string       $type
+     * @param string       $template
+     * @param string       $htmlString
      * @return $this
      */
-    public function setHtml($id, $html, $type = 'replace', $template = null)
+    public function setHtml($id, $html, $type = 'replace', $template = null, $htmlString = '')
     {
 
         if (!$this->html[$id]) {
@@ -180,7 +180,11 @@ class Json
         }
 
         // set html
-        $this->html[$id][$finalType] = $this->getHtmlRaw($html, $template);
+        if ($template) {
+            $this->html[$id][$finalType] = $this->getHtmlRaw($html, $template);
+        } else {
+            $this->html[$id][$finalType] = $htmlString;
+        }
 
         return $this;
         //===
@@ -191,7 +195,7 @@ class Json
      * get HTML
      *
      * @param string|array $html
-     * @param string $template
+     * @param string       $template
      * @return NULL|string
      * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
      */
@@ -242,7 +246,7 @@ class Json
      * Sets JavaScript
      *
      * @param boolean $before
-     * @param string $javaScript
+     * @param string  $javaScript
      * @return $this
      */
     public function setJavaScript($javaScript, $before = false)
@@ -335,13 +339,25 @@ class Json
         $this->_viewHelperTemplateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
         $this->_viewHelperPartialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
 
-        if ($extbaseFrameworkConfiguration['view']['layoutRootPath']) {
+        if (
+            is_array($this->_viewHelperLayoutRootPaths)
+            && !count($this->_viewHelperLayoutRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['layoutRootPath']
+        ) {
             $this->_viewHelperLayoutRootPaths = array($extbaseFrameworkConfiguration['view']['layoutRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['templateRootPath']) {
+        if (
+            is_array($this->_viewHelperTemplateRootPaths)
+            && !count($this->_viewHelperTemplateRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['templateRootPath']
+        ) {
             $this->_viewHelperTemplateRootPaths = array($extbaseFrameworkConfiguration['view']['templateRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['partialRootPath']) {
+        if (
+            is_array($this->_viewHelperPartialRootPaths)
+            && !count($this->_viewHelperPartialRootPaths) > 0
+            && $extbaseFrameworkConfiguration['view']['partialRootPath']
+        ) {
             $this->_viewHelperPartialRootPaths = array($extbaseFrameworkConfiguration['view']['partialRootPath']);
         }
     }
