@@ -114,7 +114,7 @@ class Common
     /**
      * Allows multiple delimiter replacement for explode
      *
-     * @param array $delimiters
+     * @param array  $delimiters
      * @param string $string
      * @return array
      */
@@ -131,7 +131,7 @@ class Common
     /**
      * Splits string at upper-case chars
      *
-     * @param string $string String to process
+     * @param string  $string String to process
      * @param integer $key Key to return
      * @return array
      * @see http://stackoverflow.com/questions/8577300/explode-a-string-on-upper-case-characters
@@ -143,9 +143,8 @@ class Common
 
         if ($key !== null) {
             return $result[$key];
+            //===
         }
-
-        //===
 
         return $result;
         //===
