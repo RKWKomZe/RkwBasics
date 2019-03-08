@@ -160,11 +160,11 @@ class Json
     /**
      * Sets HTML
      *
-     * @param string       $id
+     * @param string $id
      * @param string|array $html
-     * @param string       $type
-     * @param string       $template
-     * @param string       $htmlString
+     * @param string $type
+     * @param string $template
+     * @param string $htmlString
      * @return $this
      */
     public function setHtml($id, $html, $type = 'replace', $template = null, $htmlString = '')
@@ -195,7 +195,7 @@ class Json
      * get HTML
      *
      * @param string|array $html
-     * @param string       $template
+     * @param string $template
      * @return NULL|string
      * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
      */
@@ -246,7 +246,7 @@ class Json
      * Sets JavaScript
      *
      * @param boolean $before
-     * @param string  $javaScript
+     * @param string $javaScript
      * @return $this
      */
     public function setJavaScript($javaScript, $before = false)
@@ -330,22 +330,41 @@ class Json
     public function __construct()
     {
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
+     /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+
+        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface $configurationManager */
         $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
 
         // get paths
         $extbaseFrameworkConfiguration = $configurationManager->getConfiguration(\TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK);
-        $this->_viewHelperLayoutRootPaths = $extbaseFrameworkConfiguration['view']['layoutRootPaths'];
-        $this->_viewHelperTemplateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
-        $this->_viewHelperPartialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
+        if (is_array($extbaseFrameworkConfiguration['view']['layoutRootPaths'])) {
+            $this->_viewHelperLayoutRootPaths = $extbaseFrameworkConfiguration['view']['layoutRootPaths'];
+        }
+        if (is_array( $extbaseFrameworkConfiguration['view']['templateRootPaths'])) {
+            $this->_viewHelperTemplateRootPaths = $extbaseFrameworkConfiguration['view']['templateRootPaths'];
+        }
+        if (is_array($extbaseFrameworkConfiguration['view']['partialRootPaths'])) {
+            $this->_viewHelperPartialRootPaths = $extbaseFrameworkConfiguration['view']['partialRootPaths'];
+        }
 
-        if ($extbaseFrameworkConfiguration['view']['layoutRootPath']) {
+        // fallback: old version
+        if (
+            (count($this->_viewHelperLayoutRootPaths) < 1)
+            && (isset($extbaseFrameworkConfiguration['view']['layoutRootPath']))
+        ) {
             $this->_viewHelperLayoutRootPaths = array($extbaseFrameworkConfiguration['view']['layoutRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['templateRootPath']) {
+        if (
+            (count($this->_viewHelperTemplateRootPaths) < 1)
+            && (isset($extbaseFrameworkConfiguration['view']['templateRootPath']))
+        ) {
             $this->_viewHelperTemplateRootPaths = array($extbaseFrameworkConfiguration['view']['templateRootPath']);
         }
-        if ($extbaseFrameworkConfiguration['view']['partialRootPath']) {
+        if (
+            (count($this->_viewHelperPartialRootPaths) < 1)
+            && (isset($extbaseFrameworkConfiguration['view']['partialRootPath']))
+        ) {
             $this->_viewHelperPartialRootPaths = array($extbaseFrameworkConfiguration['view']['partialRootPath']);
         }
     }
