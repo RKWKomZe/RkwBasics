@@ -87,6 +87,9 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_sector">
 				<source>Sector</source>
 			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
+				<source>Company type</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
                 <source>Download</source>
             </trans-unit>
@@ -310,7 +313,6 @@
 				<source>Show in search filter</source>
 			</trans-unit>
 
-
 			<!-- tx_rkwbasics_domain_model_sector -->
 			<trans-unit id="tx_rkwbasics_domain_model_sector">
 				<source>RKW Basics: Sector</source>
@@ -343,6 +345,13 @@
 				<source>Show in search filter</source>
 			</trans-unit>			
 
+			<!-- tx_rkwbasics_domain_model_companytype -->
+			<trans-unit id="tx_rkwbasics_domain_model_companytype">
+				<source>RKW Basics: Company type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_companytype.name">
+				<source>Name</source>
+			</trans-unit>
 
 			<!-- sys_file_reference -->
 			<trans-unit id="sys_file_reference.ratio.topic_page">
