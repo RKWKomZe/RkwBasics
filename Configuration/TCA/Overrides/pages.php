@@ -262,6 +262,23 @@ $tempColumnsPages = array(
         ),
     ),
 
+    'tx_rkwbasics_companytype' => array(
+        'exclude' => 0,
+        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype',
+        'config' => array(
+            'type' => 'select',
+            'renderType' => 'selectSingle',
+            'foreign_table' => 'tx_rkwbasics_domain_model_companytype',
+            'foreign_table_where' => 'AND tx_rkwbasics_domain_model_companytype.sys_language_uid = ###REC_FIELD_sys_language_uid### ORDER BY tx_rkwbasics_domain_model_companytype.name ASC',
+            'minitems' => 0,
+            'maxitems' => 1,
+            'items' => array(
+                array('---', NULL),
+            ),
+        ),
+    ),
+
     'tx_rkwbasics_file' => array(
         'exclude' => 0,
         'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
