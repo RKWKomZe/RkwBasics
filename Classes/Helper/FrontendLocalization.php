@@ -194,7 +194,10 @@ class FrontendLocalization
         $locallangPathAndFilename = 'EXT:' . \TYPO3\CMS\Core\Utility\GeneralUtility::camelCaseToLowerCaseUnderscored($extensionName) . '/' . self::$locallangPath . 'locallang.xml';
         self::setLanguageKeys();
         $renderCharset = TYPO3_MODE === 'FE' ? $GLOBALS['TSFE']->renderCharset : $GLOBALS['LANG']->charSet;
-        self::$LOCAL_LANG[$extensionName] = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($locallangPathAndFilename, self::$languageKey, $renderCharset);
+        /** @var $languageFactory \TYPO3\CMS\Core\Localization\LocalizationFactory */
+        $languageFactory = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Localization\LocalizationFactory::class);
+        self::$LOCAL_LANG[$extensionName] = $languageFactory->getParsedData($locallangPathAndFilename, self::$languageKey, $renderCharset);
+
         foreach (self::$alternativeLanguageKeys as $language) {
             $tempLL = \TYPO3\CMS\Core\Utility\GeneralUtility::readLLfile($locallangPathAndFilename, $language, $renderCharset);
             if (self::$languageKey !== 'default' && isset($tempLL[$language])) {
