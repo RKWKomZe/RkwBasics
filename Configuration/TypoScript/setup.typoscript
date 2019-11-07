@@ -426,8 +426,8 @@ plugin.tx_rkwbasics._CSS_DEFAULT_STYLE (
 #===============================================================
 // Google Sitemap
 #===============================================================
-TxRkwBasicsGoogleSitemap = PAGE
-TxRkwBasicsGoogleSitemap {
+txRkwBasicsGoogleSitemap = PAGE
+txRkwBasicsGoogleSitemap {
     typeNum = 1453279478
     config {
         disableAllHeaderCode = 1
