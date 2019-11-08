@@ -62,7 +62,7 @@ call_user_func(
         $pluginName = strtolower('Rkwmediasources');
         $pluginSignature = $extensionName.'_'.$pluginName;
 
-        $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
             $pluginSignature,
             'FILE:EXT:' . $extKey . '/Configuration/FlexForms/MediaSources.xml'
@@ -70,7 +70,7 @@ call_user_func(
 
         //$pluginName = strtolower('Rkwdepartments');
         //$pluginSignature = $extensionName.'_'.$pluginName;
-        //$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        //$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
         //\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/Departments.xml');
 
 
