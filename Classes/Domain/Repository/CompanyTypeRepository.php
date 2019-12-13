@@ -43,4 +43,9 @@ class CompanyTypeRepository extends AbstractRepository
         $this->setDefaultQuerySettings($querySettings);
     }
 
+    // Order by name
+    protected $defaultOrderings = array(
+        'name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+    );
+
 }
