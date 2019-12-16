@@ -1,7 +1,7 @@
 <?php
 return [
     'ctrl' => [
-        'title'	=> 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_targetgroup',
+        'title'	=> 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_target_group',
         'label' => 'name',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -19,7 +19,7 @@ return [
             'endtime' => 'endtime',
         ],
         'searchFields' => 'name, description',
-        'iconfile' => 'EXT:rkw_basics/Resources/Public/Icons/tx_rkwbasics_domain_model_targetgroup.gif'
+        'iconfile' => 'EXT:rkw_basics/Resources/Public/Icons/tx_rkwbasics_domain_model_target_group.gif'
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, description',
@@ -56,8 +56,8 @@ return [
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_rkwbasics_domain_model_targetgroup',
-                'foreign_table_where' => 'AND tx_rkwbasics_domain_model_targetgroup.pid=###CURRENT_PID### AND tx_rkwbasics_domain_model_targetgroup.sys_language_uid IN (-1,0)',
+                'foreign_table' => 'tx_rkwbasics_domain_model_target_group',
+                'foreign_table_where' => 'AND tx_rkwbasics_domain_model_target_group.pid=###CURRENT_PID### AND tx_rkwbasics_domain_model_target_group.sys_language_uid IN (-1,0)',
             ],
         ],
         'l10n_diffsource' => [
@@ -108,7 +108,7 @@ return [
 
         'name' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_targetgroup.name',
+            'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_target_group.name',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -118,7 +118,7 @@ return [
 
         'description' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_targetgroup.description',
+            'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_target_group.description',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,

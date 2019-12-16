@@ -90,7 +90,7 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
 				<source>Company type</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_targetgroup">
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_target_group">
 				<source>Target group</source>
 			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
@@ -356,14 +356,14 @@
 				<source>Name</source>
 			</trans-unit>
 
-			<!-- tx_rkwbasics_domain_model_targetgroup -->
-			<trans-unit id="tx_rkwbasics_domain_model_targetgroup">
-				<source>RKW Basics: Taregt group</source>
+			<!-- tx_rkwbasics_domain_model_target_group -->
+			<trans-unit id="tx_rkwbasics_domain_model_target_group">
+				<source>RKW Basics: Target group</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_targetgroup.name">
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.name">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_targetgroup.description">
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.description">
 				<source>Description</source>
 			</trans-unit>
 

@@ -305,9 +305,9 @@ CREATE TABLE tx_rkwbasics_domain_model_companytype (
 );
 
 #
-# Table structure for table 'tx_rkwbasics_domain_model_targetgroup'
+# Table structure for table 'tx_rkwbasics_domain_model_target_group'
 #
-CREATE TABLE tx_rkwbasics_domain_model_targetgroup (
+CREATE TABLE tx_rkwbasics_domain_model_target_group (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,

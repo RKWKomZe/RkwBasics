@@ -55,7 +55,7 @@ call_user_func(
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
-            'tx_rkwbasics_domain_model_targetgroup'
+            'tx_rkwbasics_domain_model_target_group'
         );
 
 

@@ -411,16 +411,16 @@
                 <target>Name</target>
             </trans-unit>
 
-            <!-- tx_rkwbasics_domain_model_targetgroup-->
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup" appoved="yes">
-                <source>RKW Basics: Targetgroup</source>
+            <!-- tx_rkwbasics_domain_model_target_group-->
+            <trans-unit id="tx_rkwbasics_domain_model_target_group" appoved="yes">
+                <source>RKW Basics: Target group</source>
                 <target>RKW Basics: Zielgruppe</target>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.name" appoved="yes">
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.name" appoved="yes">
                 <source>Name</source>
                 <target>Name</target>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.description" appoved="yes">
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.description" appoved="yes">
                 <source>Description</source>
                 <target>Beschreibung</target>
             </trans-unit>

@@ -115,14 +115,14 @@
                 <source>Name</source>
             </trans-unit>
 
-			<!-- tx_rkwbasics_domain_model_targetgroup -->
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup">
-                <source>Targetgroup</source>
+			<!-- tx_rkwbasics_domain_model_target_group -->
+            <trans-unit id="tx_rkwbasics_domain_model_target_group">
+                <source>Target group</source>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.name">
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.name">
                 <source>Name</source>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.description">
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.description">
                 <source>Description</source>
             </trans-unit>
 
