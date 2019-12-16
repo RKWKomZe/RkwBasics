@@ -107,6 +107,24 @@
                 <source>Description</source>
             </trans-unit>
 
+			<!-- tx_rkwbasics_domain_model_companytype -->
+            <trans-unit id="tx_rkwbasics_domain_model_companytype">
+                <source>Company Type</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_companytype.name">
+                <source>Name</source>
+            </trans-unit>
+
+			<!-- tx_rkwbasics_domain_model_targetgroup -->
+            <trans-unit id="tx_rkwbasics_domain_model_targetgroup">
+                <source>Targetgroup</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.name">
+                <source>Name</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_targetgroup.description">
+                <source>Description</source>
+            </trans-unit>
 
             <!-- Templates/MediaSources/List -->
             <trans-unit id="templates_mediaSources_list_sum">
