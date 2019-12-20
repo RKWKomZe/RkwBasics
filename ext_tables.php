@@ -54,6 +54,10 @@ call_user_func(
             'tx_rkwbasics_domain_model_series'
         );
 
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_target_group'
+        );
+
 
         //=================================================================
         // Add Flexforms
