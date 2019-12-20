@@ -411,6 +411,20 @@
                 <target>Name</target>
             </trans-unit>
 
+            <!-- tx_rkwbasics_domain_model_target_group-->
+            <trans-unit id="tx_rkwbasics_domain_model_target_group" appoved="yes">
+                <source>RKW Basics: Target group</source>
+                <target>RKW Basics: Zielgruppe</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.name" appoved="yes">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+
             <!-- sys_file_reference -->
             <trans-unit id="sys_file_reference.ratio.topic_page">
                 <source>Topic Pages</source>
