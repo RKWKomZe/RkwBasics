@@ -60,7 +60,6 @@ class Common
         self::$_underscoreCache[$name] = $result;
 
         return $result;
-        //===
     }
 
     /**
@@ -75,14 +74,12 @@ class Common
 
         if (isset(self::$_backslashCache[$name])) {
             return self::$_backslashCache[$name];
-            //===
         }
 
         $result = preg_replace('/(.)([A-Z])/', "$1\\\\$2", $name);
         self::$_backslashCache[$name] = $result;
 
         return $result;
-        //===
     }
 
 
@@ -100,14 +97,12 @@ class Common
 
         if (isset(self::$_camelizeCache[$name])) {
             return self::$_camelizeCache[$name];
-            //===
         }
 
         $result = lcfirst(str_replace(' ', $destSep, ucwords(str_replace($srcSep, ' ', $name))));
         self::$_camelizeCache[$name] = $result;
 
         return $result;
-        //===
     }
 
 
@@ -125,7 +120,6 @@ class Common
         $result = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiters[0], $ready, true);
 
         return $result;
-        //===
     }
 
     /**
@@ -143,11 +137,9 @@ class Common
 
         if ($key !== null) {
             return $result[$key];
-            //===
         }
 
         return $result;
-        //===
     }
 
 
@@ -175,12 +167,58 @@ class Common
             ) {
                 return $settings;
             }
-            //===
         }
 
         return array();
-        //===
     }
 
 
+    /**
+     * init frontend to render frontend links in task
+     *
+     * @param int $pid
+     * @param integer $typeNum
+     * @return void
+     */
+    public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
+    {
+
+        // only if in BE-Mode!!! Otherwise FE will be crashed
+        if (TYPO3_MODE == 'BE') {
+
+            if (!is_object($GLOBALS['TT'])) {
+                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
+                $GLOBALS['TT']->start();
+            }
+
+            // check if we have another id or typeNum here - otherwise we use the existing object
+            if (
+                (!$GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)
+                || ($GLOBALS['TSFE']->id != $pid)
+                || ($GLOBALS['TSFE']->type != $typeNum)
+            ) {
+                $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $id, $typeNum);
+                $GLOBALS['TSFE']->connectToDB();
+                $GLOBALS['TSFE']->initFEuser();
+                $GLOBALS['TSFE']->determineId();
+                $GLOBALS['TSFE']->initTemplate();
+                $GLOBALS['TSFE']->getConfigArray();
+                $GLOBALS['LANG']->csConvObj = $GLOBALS['TSFE']->csConvObj;
+
+                if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
+
+                    $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
+                    $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
+                    $_SERVER['HTTP_HOST'] = $host;
+                    $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
+                    $GLOBALS['TSFE']->absRefPrefix = '/';
+                    \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+                }
+
+                // for Files
+                $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class);
+                $GLOBALS['BE_USER'] = $backendUserAuthentication;
+            }
+        }
+    }
 }
