@@ -179,6 +179,7 @@ class Common
      * @param int $pid
      * @param integer $typeNum
      * @return void
+     * @throws \Exception
      */
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
@@ -191,32 +192,54 @@ class Common
                 $GLOBALS['TT']->start();
             }
 
-            // check if we have another id or typeNum here - otherwise we use the existing object
+            // check if we have another pid OR typeNum here - otherwise we use the existing object
             if (
                 (!$GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)
-                || ($GLOBALS['TSFE']->id != $pid)
                 || ($GLOBALS['TSFE']->type != $typeNum)
+                || ($GLOBALS['TSFE']->id != $pid)
             ) {
-                $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $id, $typeNum);
-                $GLOBALS['TSFE']->connectToDB();
-                $GLOBALS['TSFE']->initFEuser();
-                $GLOBALS['TSFE']->determineId();
-                $GLOBALS['TSFE']->initTemplate();
-                $GLOBALS['TSFE']->getConfigArray();
-                $GLOBALS['LANG']->csConvObj = $GLOBALS['TSFE']->csConvObj;
 
-                if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
+                // add correct domain to environment variables and flush their cache
+                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
+                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
+                $_SERVER['HTTP_HOST'] = $host;
+                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
 
-                    $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
-                    $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
-                    $_SERVER['HTTP_HOST'] = $host;
-                    $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
-                    $GLOBALS['TSFE']->absRefPrefix = '/';
-                    \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+                // add link-prefix
+                $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
+                $GLOBALS['TSFE']->absRefPrefix = '/';
+
+                // remove page-not-found-redirect in BE-context
+                $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = '';
+
+                // load frontend context
+                try {
+                    
+                    /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
+                    $frontendController = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                        \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
+                        $GLOBALS['TYPO3_CONF_VARS'],
+                        $pid,
+                        $typeNum
+                    );
+
+                    $frontendController->connectToDB();
+                    $frontendController->initFEuser();
+                    $frontendController->determineId();
+                    $frontendController->initTemplate();
+                    $frontendController->getConfigArray();
+
+                    $GLOBALS['TSFE'] = $frontendController;
+                    $GLOBALS['LANG']->csConvObj = $frontendController->csConvObj;
+
+                } catch (\Exception $e) {
+                    throw new \Exception ($e->getMessage());
                 }
 
-                // for Files
-                $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class);
+                // for files
+                $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    \TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class
+                );
                 $GLOBALS['BE_USER'] = $backendUserAuthentication;
             }
         }
