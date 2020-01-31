@@ -1,0 +1,53 @@
+plugin.tx_rkwbasics {
+	view {
+		# cat=plugin.tx_rkwbasics/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:rkw_basics/Resources/Private/Templates/
+
+		# cat=plugin.tx_rkwbasics/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:rkw_basics/Resources/Private/Partials/
+
+		# cat=plugin.tx_rkwbasics/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:rkw_basics/Resources/Private/Layouts/
+	}
+	persistence {
+		# cat=plugin.tx_rkwbasics//a; type=string; label=Default storage PID
+		storagePid =
+	}
+
+	settings {
+
+        # cat=plugin.tx_rkwbasics//a; type=boolean; label=Include jQuery?
+        includeJQuery = 0
+
+        # cat=plugin.tx_rkwbasics//a; type=boolean; label=Include JS for AJAX-API?
+        includeAjaxApiJs = 0
+
+        # cat=plugin.tx_rkwbasics//a; type=string; label=comma-separated list of fields to look up when searching for images
+        includeFieldsList =
+
+        # cat=plugin.tx_rkwbasics//a; type=string; label=Proxy
+        proxy =
+
+        # cat=plugin.tx_rkwbasics//a; type=string; label=Username for proxy
+        proxyUsername =
+
+        # cat=plugin.tx_rkwbasics//a; type=string; label=Password for proxy
+        proxyPassword =
+
+
+		responsiveImages {
+			breakpoints {
+
+				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for mobile
+				mobile = 320
+
+				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for tablet
+				tablet = 768
+
+				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for desktop
+				desktop = 1024
+			}
+		}
+	}
+}
+

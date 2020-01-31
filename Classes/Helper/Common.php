@@ -60,7 +60,6 @@ class Common
         self::$_underscoreCache[$name] = $result;
 
         return $result;
-        //===
     }
 
     /**
@@ -75,14 +74,12 @@ class Common
 
         if (isset(self::$_backslashCache[$name])) {
             return self::$_backslashCache[$name];
-            //===
         }
 
         $result = preg_replace('/(.)([A-Z])/', "$1\\\\$2", $name);
         self::$_backslashCache[$name] = $result;
 
         return $result;
-        //===
     }
 
 
@@ -100,21 +97,19 @@ class Common
 
         if (isset(self::$_camelizeCache[$name])) {
             return self::$_camelizeCache[$name];
-            //===
         }
 
         $result = lcfirst(str_replace(' ', $destSep, ucwords(str_replace($srcSep, ' ', $name))));
         self::$_camelizeCache[$name] = $result;
 
         return $result;
-        //===
     }
 
 
     /**
      * Allows multiple delimiter replacement for explode
      *
-     * @param array $delimiters
+     * @param array  $delimiters
      * @param string $string
      * @return array
      */
@@ -125,13 +120,12 @@ class Common
         $result = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiters[0], $ready, true);
 
         return $result;
-        //===
     }
 
     /**
      * Splits string at upper-case chars
      *
-     * @param string $string String to process
+     * @param string  $string String to process
      * @param integer $key Key to return
      * @return array
      * @see http://stackoverflow.com/questions/8577300/explode-a-string-on-upper-case-characters
@@ -145,10 +139,7 @@ class Common
             return $result[$key];
         }
 
-        //===
-
         return $result;
-        //===
     }
 
 
@@ -176,12 +167,81 @@ class Common
             ) {
                 return $settings;
             }
-            //===
         }
 
         return array();
-        //===
     }
 
 
+    /**
+     * init frontend to render frontend links in task
+     *
+     * @param int $pid
+     * @param integer $typeNum
+     * @return void
+     * @throws \Exception
+     */
+    public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
+    {
+
+        // only if in BE-Mode!!! Otherwise FE will be crashed
+        if (TYPO3_MODE == 'BE') {
+
+            if (!is_object($GLOBALS['TT'])) {
+                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
+                $GLOBALS['TT']->start();
+            }
+
+            // check if we have another pid OR typeNum here - otherwise we use the existing object
+            if (
+                (!$GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)
+                || ($GLOBALS['TSFE']->type != $typeNum)
+                || ($GLOBALS['TSFE']->id != $pid)
+            ) {
+
+                // add correct domain to environment variables and flush their cache
+                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
+                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
+                $_SERVER['HTTP_HOST'] = $host;
+                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+
+                // add link-prefix
+                $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
+                $GLOBALS['TSFE']->absRefPrefix = '/';
+
+                // remove page-not-found-redirect in BE-context
+                $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = '';
+
+                // load frontend context
+                try {
+                    
+                    /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
+                    $frontendController = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                        \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
+                        $GLOBALS['TYPO3_CONF_VARS'],
+                        $pid,
+                        $typeNum
+                    );
+
+                    $frontendController->connectToDB();
+                    $frontendController->initFEuser();
+                    $frontendController->determineId();
+                    $frontendController->initTemplate();
+                    $frontendController->getConfigArray();
+
+                    $GLOBALS['TSFE'] = $frontendController;
+                    $GLOBALS['LANG']->csConvObj = $frontendController->csConvObj;
+
+                } catch (\Exception $e) {
+                    throw new \Exception ($e->getMessage());
+                }
+
+                // for files
+                $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    \TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class
+                );
+                $GLOBALS['BE_USER'] = $backendUserAuthentication;
+            }
+        }
+    }
 }

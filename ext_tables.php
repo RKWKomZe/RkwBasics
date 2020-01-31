@@ -1,45 +1,96 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-	die ('Access denied.');
-}
+defined('TYPO3_MODE') || die('Access denied.');
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'RKW.' . $_EXTKEY,
-    'Rkwmediasources',
-    'RKW MediaSources'
+call_user_func(
+    function($extKey)
+    {
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'RKW.' . $extKey,
+            'Rkwmediasources',
+            'RKW MediaSources'
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'RKW.' . $extKey,
+            'Rkwdepartments',
+            'RKW Departments'
+        );
+
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'RKW.' . $extKey,
+            'Rkwgoogle',
+            'RKW Google Sitemap'
+        );
+
+        //=================================================================
+        // Add tables
+        //=================================================================
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_companytype'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('
+            tx_rkwbasics_domain_model_department'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_documenttype'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_enterprisesize'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_mediasources'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_sector'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_series'
+        );
+
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_target_group'
+        );
+
+
+        //=================================================================
+        // Add Flexforms
+        //=================================================================
+        $extensionName = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($extKey));
+        $pluginName = strtolower('Rkwmediasources');
+        $pluginSignature = $extensionName.'_'.$pluginName;
+
+        $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+            $pluginSignature,
+            'FILE:EXT:' . $extKey . '/Configuration/FlexForms/MediaSources.xml'
+        );
+
+        //$pluginName = strtolower('Rkwdepartments');
+        //$pluginSignature = $extensionName.'_'.$pluginName;
+        //$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+        //\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/Departments.xml');
+
+
+        //=================================================================
+        // Add TypoScript
+        //=================================================================
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile(
+            $extKey,
+            'Configuration/TypoScript',
+            'RKW Basics'
+        );
+
+    },
+    $_EXTKEY
 );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'RKW.' . $_EXTKEY,
-	'Rkwdepartments',
-	'RKW Departments'
-);
-
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-	'RKW.' . $_EXTKEY,
-	'Rkwgoogle',
-	'RKW Google Sitemap'
-);
-
-//=================================================================
-// Add Flexforms
-//=================================================================
-$extensionName = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($_EXTKEY));
-$pluginName = strtolower('Rkwmediasources');
-$pluginSignature = $extensionName.'_'.$pluginName;
-
-$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/MediaSources.xml');
-
-//$pluginName = strtolower('Rkwdepartments');
-//$pluginSignature = $extensionName.'_'.$pluginName;
-//$TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $_EXTKEY . '/Configuration/FlexForms/Departments.xml');
-
-//=================================================================
-// Add TypoScript
-//=================================================================
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'RKW Basics');
 
 
 //=================================================================

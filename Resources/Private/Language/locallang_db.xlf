@@ -87,7 +87,13 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_sector">
 				<source>Sector</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
+				<source>Company type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_target_group">
+				<source>Target group</source>
+			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
                 <source>Download</source>
             </trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
@@ -310,7 +316,6 @@
 				<source>Show in search filter</source>
 			</trans-unit>
 
-
 			<!-- tx_rkwbasics_domain_model_sector -->
 			<trans-unit id="tx_rkwbasics_domain_model_sector">
 				<source>RKW Basics: Sector</source>
@@ -343,6 +348,24 @@
 				<source>Show in search filter</source>
 			</trans-unit>			
 
+			<!-- tx_rkwbasics_domain_model_companytype -->
+			<trans-unit id="tx_rkwbasics_domain_model_companytype">
+				<source>RKW Basics: Company type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_companytype.name">
+				<source>Name</source>
+			</trans-unit>
+
+			<!-- tx_rkwbasics_domain_model_target_group -->
+			<trans-unit id="tx_rkwbasics_domain_model_target_group">
+				<source>RKW Basics: Target group</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.description">
+				<source>Description</source>
+			</trans-unit>
 
 			<!-- sys_file_reference -->
 			<trans-unit id="sys_file_reference.ratio.topic_page">

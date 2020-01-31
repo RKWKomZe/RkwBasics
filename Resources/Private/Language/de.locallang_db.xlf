@@ -104,6 +104,10 @@
                 <source>Sector</source>
                 <target>Branche</target>
             </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
+                <source>Company type</source>
+                <target>Rechtsform</target>
+            </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file" approved="yes">
                 <source>Download</source>
                 <target>Download (Cover wird automatisch erstellt aus erster Seite!)</target>
@@ -396,7 +400,30 @@
                 <source>Show in search filter</source>
                 <target>In Suchfilter anzeigen</target>
             </trans-unit>            
-            
+
+            <!-- tx_rkwbasics_domain_model_companytype-->
+            <trans-unit id="tx_rkwbasics_domain_model_companytype" appoved="yes">
+                <source>RKW Basics: Company type</source>
+                <target>RKW Basics: Rechtsform</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_companytype.name" appoved="yes">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+
+            <!-- tx_rkwbasics_domain_model_target_group-->
+            <trans-unit id="tx_rkwbasics_domain_model_target_group" appoved="yes">
+                <source>RKW Basics: Target group</source>
+                <target>RKW Basics: Zielgruppe</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.name" appoved="yes">
+                <source>Name</source>
+                <target>Name</target>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_target_group.description" appoved="yes">
+                <source>Description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
 
             <!-- sys_file_reference -->
             <trans-unit id="sys_file_reference.ratio.topic_page">

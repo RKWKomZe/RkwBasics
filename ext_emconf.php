@@ -10,7 +10,7 @@
  * "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array(
+$EM_CONF[$_EXTKEY] = [
 	'title' => 'RKW Basics',
 	'description' => 'Extension with some basic extensions for BE and FE',
 	'category' => 'be',
@@ -20,26 +20,22 @@ $EM_CONF[$_EXTKEY] = array(
 	'shy' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'beta',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => '0',
 	'createDirs' => '',
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '8.7.1',
-	'constraints' => array(
-		'depends' => array(
-			'extbase' => '6.2.0-8.7.99',
-			'fluid' => '6.2.0-8.7.99',
-			'typo3' => '6.2.0-8.7.99',
-            'filemetadata' => '6.2.0-8.7.99',
-		),
-		'conflicts' => array(
-		),
-		'suggests' => array(
-		),
-	),
-);
-
-?>
+	'version' => '8.7.11',
+    'constraints' => [
+		'depends' => [
+			'typo3' => '8.7.0-8.7.99',
+            'filemetadata' => '8.7.0-8.7.99',
+		],
+		'conflicts' => [
+		],
+		'suggests' => [
+		],
+	],
+];

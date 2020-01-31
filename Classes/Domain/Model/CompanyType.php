@@ -16,15 +16,45 @@ namespace RKW\RkwBasics\Domain\Model;
  */
 
 /**
- * Class Pages
+ * Class CompanyType
  *
- * @author Steffen Kroggel <developer@steffenkroggel.de>
+ * @author Christian Dilger <c.dilger@addorange.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Category extends \TYPO3\CMS\Extbase\Domain\Model\Category
+class CompanyType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
+    /**
+     * name
+     *
+     * @var string
+     * @validate NotEmpty
+     */
+    protected $name = '';
+
+    /**
+     * Returns the name
+     *
+     * @return string $name
+     */
+    public function getName()
+    {
+        return $this->name;
+        //===
+    }
+
+
+    /**
+     * Sets the name
+     *
+     * @param string $name
+     * @return void
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+    }
 
 }
