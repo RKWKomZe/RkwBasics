@@ -179,7 +179,6 @@ class Common
      * @param int $pid
      * @param integer $typeNum
      * @return void
-     * @throws \Exception
      */
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
@@ -198,16 +197,6 @@ class Common
                 || ($GLOBALS['TSFE']->type != $typeNum)
                 || ($GLOBALS['TSFE']->id != $pid)
             ) {
-
-                // add correct domain to environment variables and flush their cache
-                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
-                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
-                $_SERVER['HTTP_HOST'] = $host;
-                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
-
-                // add link-prefix
-                $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
-                $GLOBALS['TSFE']->absRefPrefix = '/';
 
                 // remove page-not-found-redirect in BE-context
                 $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = '';
@@ -233,8 +222,19 @@ class Common
                     $GLOBALS['LANG']->csConvObj = $frontendController->csConvObj;
 
                 } catch (\Exception $e) {
-                    throw new \Exception ($e->getMessage());
+                    // do nothing
                 }
+
+                // add correct domain to environment variables and flush their cache
+                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
+                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
+                $_SERVER['HTTP_HOST'] = $host;
+                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+
+                // add host and link-prefix
+                $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
+                $GLOBALS['TSFE']->config['config']['baseURL'] = $host;
+                $GLOBALS['TSFE']->absRefPrefix = '/';
 
                 // for files
                 $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
