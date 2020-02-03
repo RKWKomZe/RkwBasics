@@ -204,22 +204,20 @@ class Common
                 // load frontend context
                 try {
                     
-                    /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $frontendController */
-                    $frontendController = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $GLOBALS['TSFE'] */
+                    $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                         \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
                         $GLOBALS['TYPO3_CONF_VARS'],
                         $pid,
                         $typeNum
                     );
 
-                    $frontendController->connectToDB();
-                    $frontendController->initFEuser();
-                    $frontendController->determineId();
-                    $frontendController->initTemplate();
-                    $frontendController->getConfigArray();
-
-                    $GLOBALS['TSFE'] = $frontendController;
-                    $GLOBALS['LANG']->csConvObj = $frontendController->csConvObj;
+                    $GLOBALS['TSFE']->connectToDB();
+                    $GLOBALS['TSFE']->initFEuser();
+                    $GLOBALS['TSFE']->determineId();
+                    $GLOBALS['TSFE']->initTemplate();
+                    $GLOBALS['TSFE']->getConfigArray();
+                    $GLOBALS['LANG']->csConvObj = $GLOBALS['TSFE']->csConvObj;
 
                 } catch (\Exception $e) {
                     // do nothing
