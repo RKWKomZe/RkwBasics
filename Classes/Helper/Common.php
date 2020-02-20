@@ -155,6 +155,7 @@ class Common
     {
 
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
+
         /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
         $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
 
@@ -182,6 +183,10 @@ class Common
      */
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
+
+        if (!$pid) {
+            $pid = 1;
+        }
 
         // only if in BE-Mode!!! Otherwise FE will be crashed
         if (TYPO3_MODE == 'BE') {
@@ -234,12 +239,56 @@ class Common
                 $GLOBALS['TSFE']->config['config']['baseURL'] = $host;
                 $GLOBALS['TSFE']->absRefPrefix = '/';
 
+            }
+
+
+            if (!is_object($GLOBALS['BE_USER'])) {
+
                 // for files
+                /** @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $backendUserAuthentication */
                 $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
                     \TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class
                 );
+
+                /**
+                 * @toDo: not sure if we REALLY need this. The following code is the result of an weird error during image rendering in e-mails: You are not allowed to access the given folder: "_processed_"
+                */
+                /*
+                // take the _cli_scheduler-User and add some permissions for image rendering
+                $backendUserAuthentication->setBeUserByName('_cli_scheduler');
+
+                $backendUserAuthentication->userTS_text = '
+                    permissions.file.default {
+                       addFile      = 1
+                       readFile     = 1
+                       writeFile    = 1
+                       copyFile     = 1
+                       moveFile     = 1
+                       renameFile   = 1
+                       unzipFile    = 0
+                       deleteFile   = 0
+                       addFolder    = 1
+                       readFolder   = 1
+                       writeFolder  = 1
+                       copyFolder   = 1
+                       moveFolder   = 1
+                       renameFolder = 1
+                       deleteFolder = 0
+                       recursivedeleteFolder = 0
+                    }
+                ';
+
+                // render TSconfig
+                $parseObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Configuration\TsConfigParser::class);
+                $res = $parseObj->parseTSconfig($backendUserAuthentication->userTS_text, 'userTS');
+                if ($res) {
+                    $backendUserAuthentication->userTS = $res['TSconfig'];
+                }
+                */
+
                 $GLOBALS['BE_USER'] = $backendUserAuthentication;
             }
+
         }
     }
 }
