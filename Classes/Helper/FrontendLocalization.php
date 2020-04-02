@@ -21,7 +21,7 @@ use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
-if ($currentVersion <= 7000000) {
+if ($currentVersion < 8000000) {
 
     /**
      * Localization helper which should be used to fetch localized labels.
