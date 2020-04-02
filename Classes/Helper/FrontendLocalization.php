@@ -24,11 +24,16 @@ $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_vers
 if ($currentVersion < 8000000) {
 
     /**
-     * Localization helper which should be used to fetch localized labels.
+     * Class FrontendLocalization
      *
+     * Localization helper which should be used to fetch localized labels.
      * We can not extend the basic class here, since the methods are used as static methods and this confuses translation-handling
      *
      * @api
+     * @author Steffen Kroggel <developer@steffenkroggel.de>
+     * @copyright Rkw Kompetenzzentrum
+     * @package RKW_RkwBasics
+     * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
      * @see \TYPO3\CMS\Extbase\Utility\LocalizationUtility, base is TYPO3 6.2
      */
     class FrontendLocalization
@@ -353,11 +358,16 @@ if ($currentVersion < 8000000) {
 
 
     /**
-     * Localization helper which should be used to fetch localized labels.
+     * Class FrontendLocalization
      *
+     * Localization helper which should be used to fetch localized labels.
      * We can not extend the basic class here, since the methods are used as static methods and this confuses translation-handling
      *
      * @api
+     * @author Steffen Kroggel <developer@steffenkroggel.de>
+     * @copyright Rkw Kompetenzzentrum
+     * @package RKW_RkwBasics
+     * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
      * @see \TYPO3\CMS\Extbase\Utility\LocalizationUtility, base is TYPO3 8.7
      */
     class FrontendLocalization
