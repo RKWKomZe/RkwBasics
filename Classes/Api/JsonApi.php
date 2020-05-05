@@ -225,7 +225,7 @@ class JsonApi
      * @param string $template
      * @param string $htmlString
      * @return $this
-     * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
      */
     public function setHtml($id, $html, $type = 'replace', $template = null, $htmlString = '')
     {
@@ -256,7 +256,7 @@ class JsonApi
      * @param string|array $html
      * @param string $template
      * @return NULL|string
-     * @throws \TYPO3\CMS\Fluid\View\Exception\InvalidTemplateResourceException
+     * @throws \TYPO3Fluid\Fluid\View\Exception\InvalidTemplateResourceException
      */
     public function getHtmlRaw($html, $template = null)
     {

@@ -35,6 +35,7 @@ if ($currentVersion < 8000000) {
      * @package RKW_RkwBasics
      * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
      * @see \TYPO3\CMS\Extbase\Utility\LocalizationUtility, base is TYPO3 6.2
+     * @deprecated
      */
     class FrontendLocalization
     {

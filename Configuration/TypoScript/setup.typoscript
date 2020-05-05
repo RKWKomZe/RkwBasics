@@ -31,14 +31,46 @@ config.tx_extbase {
                         uid.mapOnProperty = uid
                         pid.mapOnProperty = pid
                         sorting.mapOnProperty = sorting
-                        title.mapOnProperty = title
-                        subtitle.mapOnProperty = subtitle
-                        no_search.mapOnProperty = noSearch
                         crdate.mapOnProperty = crdate
                         tstamp.mapOnProperty = tstamp
                         hidden.mapOnProperty = hidden
                         deleted.mapOnProperty = deleted
+                        title.mapOnProperty = title
+                        subtitle.mapOnProperty = subtitle
+                        no_search.mapOnProperty = noSearch
+                        lastUpdated.mapOnProperty = lastUpdated
+                        abstract.mapOnProperty = abstract
+                    }
+                }
+            }
 
+            RKW\RkwBasics\Domain\Model\PagesLanguageOverlay {
+
+                mapping {
+
+                    # set table name to map to
+                    tableName = pages_language_overlay
+
+                    # on pages tables it's the doktype
+                    # if we set an value, we filter by it
+                    # if do not set anything, all pages are found
+                    recordType =
+
+                    # mapping to properties of class
+                    columns {
+                        uid.mapOnProperty = uid
+                        pid.mapOnProperty = pid
+                        sorting.mapOnProperty = sorting
+                        crdate.mapOnProperty = crdate
+                        tstamp.mapOnProperty = tstamp
+                        hidden.mapOnProperty = hidden
+                        deleted.mapOnProperty = deleted
+                        title.mapOnProperty = title
+                        subtitle.mapOnProperty = subtitle
+                        no_search.mapOnProperty = noSearch
+                        lastUpdated.mapOnProperty = lastUpdated
+                        abstract.mapOnProperty = abstract
+                        sys_language_uid.mapOnProperty = sysLanguageUid
                     }
                 }
             }

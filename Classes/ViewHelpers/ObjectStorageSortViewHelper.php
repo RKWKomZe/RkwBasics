@@ -27,7 +27,7 @@ class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
 {
 
     /**
-     * @throws \TYPO3\CMS\Fluid\Core\ViewHelper\Exception
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
      *
      */
     public function initializeArguments()
