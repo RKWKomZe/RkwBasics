@@ -44,23 +44,32 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
+     * crdate
+     *
      * @var integer
      */
     protected $crdate;
 
 
     /**
+     * tstamp
+     *
      * @var integer
      */
     protected $tstamp;
 
 
     /**
+     * hidden
+     *
      * @var integer
      */
     protected $hidden;
 
+
     /**
+     * deleted
+     *
      * @var integer
      */
     protected $deleted;
@@ -70,9 +79,9 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * sorting
      *
      * @var int
-     * @validate NotEmpty
      */
     protected $sorting;
+
 
     /**
      * title
@@ -81,6 +90,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $title;
 
+
     /**
      * subtitle
      *
@@ -88,12 +98,38 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $subtitle;
 
+
+    /**
+     * abstract
+     *
+     * @var string
+     */
+    protected $abstract;
+
+
+    /**
+     * description
+     *
+     * @var string
+     */
+    protected $description;
+
+
     /**
      * noSearch
      *
      * @var integer
      */
     protected $noSearch = 0;
+
+
+    /**
+     * lastUpdated
+     *
+     * @var integer
+     */
+    protected $lastUpdated;
+
 
     /**
      * txRkwbasicsAlternativeTitle
@@ -138,8 +174,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * txRkwbasicsTeaserText
      *
      * @var string
+     * @deprecated
      */
     protected $txRkwbasicsTeaserText = '';
+
 
     /**
      * txRkwbasicsTeaserImage
@@ -148,10 +186,12 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $txRkwbasicsTeaserImage = null;
 
+
     /**
      * txRkwbasicsArticleImage
      *
      * @var \RKW\RkwBasics\Domain\Model\FileReference
+     * @deprecated
      */
     protected $txRkwbasicsArticleImage = null;
 
@@ -218,7 +258,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getPid()
     {
         return $this->pid;
-        //===
     }
 
     /**
@@ -229,9 +268,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getCrdate()
     {
-
         return $this->crdate;
-        //===
     }
 
 
@@ -244,7 +281,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getTstamp()
     {
         return $this->tstamp;
-        //===
     }
 
     /**
@@ -256,7 +292,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getHidden()
     {
         return $this->hidden;
-        //===
     }
 
     /**
@@ -268,7 +303,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getDeleted()
     {
         return $this->deleted;
-        //===
     }
 
 
@@ -280,7 +314,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getSorting()
     {
         return $this->sorting;
-        //===
     }
 
     /**
@@ -291,7 +324,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getTitle()
     {
         return $this->title;
-        //===
     }
 
     /**
@@ -313,7 +345,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getSubtitle()
     {
         return $this->subtitle;
-        //===
     }
 
     /**
@@ -327,28 +358,97 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->subtitle = $subtitle;
     }
 
+    /**
+     * Returns the abstract
+     *
+     * @return string $abstract
+     */
+    public function getAbstract()
+    {
+        return $this->abstract;
+    }
+
+    /**
+     * Set the abstract
+     *
+     * @param string $abstract
+     * @return void
+     */
+    public function setAbstract($abstract)
+    {
+        $this->abstract = $abstract;
+    }
+
+
+
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
 
     /**
      * Returns the noSearch
      *
-     * @return string $noSearch
+     * @return int $noSearch
      */
     public function getNoSearch()
     {
         return $this->noSearch;
-        //===
     }
+
 
     /**
      * Set the noSearch
      *
-     * @param string $noSearch
+     * @param int $noSearch
      * @return void
      */
     public function setNoSearch($noSearch)
     {
         $this->noSearch = $noSearch;
     }
+
+
+
+    /**
+     * Returns the lastUpdated
+     *
+     * @return int $lastUpdated
+     */
+    public function getLastUpdated()
+    {
+        return $this->lastUpdated;
+    }
+
+    /**
+     * Set the lastUpdated
+     *
+     * @param int $lastUpdated
+     * @return void
+     */
+    public function setLastUpdated($lastUpdated)
+    {
+        $this->lastUpdated = $lastUpdated;
+    }
+
+
 
     /**
      * Returns the txRkwbasicsAlternativeTitle
@@ -463,10 +563,12 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsTeaserText
      *
      * @return string $txRkwbasicsTeaserText
+     * @deprecated
      */
     public function getTxRkwbasicsTeaserText()
     {
-        return $this->txRkwbasicsTeaserText;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
+        return ($this->txRkwbasicsTeaserText ? $this->txRkwbasicsTeaserText : $this->getAbstract());
     }
 
     /**
@@ -474,9 +576,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $txRkwbasicsTeaserText
      * @return void
+     * @deprecated
      */
     public function setTxRkwbasicsTeaserText($txRkwbasicsTeaserText)
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
         $this->txRkwbasicsTeaserText = $txRkwbasicsTeaserText;
     }
 
@@ -505,9 +609,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsArticleImage
      *
      * @return \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
+     * @deprecated
      */
     public function getTxRkwbasicsArticleImage()
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
         return $this->txRkwbasicsArticleImage;
     }
 
@@ -516,9 +622,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
      * @return void
+     * @deprecated
      */
     public function setTxRkwbasicsArticleImage(\RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsArticleImage)
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
         $this->txRkwbasicsArticleImage = $txRkwbasicsArticleImage;
     }
 

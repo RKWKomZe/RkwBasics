@@ -16,14 +16,14 @@ namespace RKW\RkwBasics\Domain\Repository;
  */
 
 /**
- * Class PagesRepository
+ * Class PagesLanguageOverlayRepository
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PagesRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
+class PagesLanguageOverlayRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
 
     /**
@@ -43,30 +43,4 @@ class PagesRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         $this->setDefaultQuerySettings($querySettings);
     }
 
-
-    /**
-     * find all pages which have the given seriesId but not the currentPageId
-     *
-     * @param integer $seriesId
-     * @param integer $currentPageId
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
-     */
-    public function findByTxRkwbasicsSeries($seriesId, $currentPageId)
-    {
-
-        $query = $this->createQuery();
-        $query->matching(
-            $query->logicalAnd(
-                $query->equals('tx_rkwbasics_series', $seriesId),
-                $query->logicalNot(
-                    $query->equals('uid', $currentPageId)
-                )
-            )
-        );
-
-        return $query->execute();
-        //===
-    }
-
 }
-

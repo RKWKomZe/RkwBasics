@@ -391,17 +391,19 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'layout','tx_rkwbasics_fe_layout_next_level','after:layout');
 
 // Add field to the existing palette
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--','before:media');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--','after:media');
 
 // Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'access','--linebreak--,tx_rkwbasics_proxy_caching','after:fe_login_mode');
 
 
 // Add field to the existing palette and remove default abstract field
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_article_video','before:abstract');
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_information,','before:abstract');
-//$GLOBALS['TCA']['pages']['palettes']['abstract']['showitem'] = '';
-//str_replace(', abstract;LLL:EXT:cms/locallang_tca.xlf:pages.abstract_formlabel', '', $GLOBALS['TCA']['pages']['palettes']['abstract']['showitem']);
+$currentVersion = TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+if ($currentVersion < 8000000) {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_article_video','before:abstract');
+} else {
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','--linebreak--,tx_rkwbasics_article_video','after:abstract');
+}
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text','before:abstract');
 //\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_information,','before:abstract');
