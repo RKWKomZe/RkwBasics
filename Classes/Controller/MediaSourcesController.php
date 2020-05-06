@@ -14,6 +14,7 @@ namespace RKW\RkwBasics\Controller;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class MediaSourcesController
@@ -63,6 +64,7 @@ class MediaSourcesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
         }
 
         $mediaSources = $this->mediaSourcesRepository->findAllWithPublisher($pagesList, false);
+    //    DebuggerUtility::var_dump($mediaSources); exit;
         $this->view->assign('mediaSources', $mediaSources);
         $this->view->assign('mediaSourcesSum', count($mediaSources));
 
