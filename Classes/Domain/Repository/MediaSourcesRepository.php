@@ -95,7 +95,7 @@ class MediaSourcesRepository extends AbstractRepository
                 ' . $fileMetaTable . '.title as imageTitle,
                 ' . $fileMetaTable . '.description as imageDescription,
                 ' . $fileTable . '.name as fileName, 
-                GROUP_CONCAT(DISTINCT pages.uid, "###", pages.title SEPARATOR "|") AS pagesList
+                GROUP_CONCAT(DISTINCT pages.uid, "###", pages.title SEPARATOR "|||") AS pagesList
 
             FROM ' . $fileReferenceTable . '
             RIGHT JOIN (' . $fileMetaTable . ')

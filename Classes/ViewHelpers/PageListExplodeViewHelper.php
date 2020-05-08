@@ -14,6 +14,7 @@ namespace RKW\RkwBasics\ViewHelpers;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class PageListExplodeViewHelper
@@ -32,7 +33,7 @@ class PageListExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
      * @param string $delimiterTwo
      * @return array
      */
-    public function render($list, $delimiter = '|', $delimiterTwo = '###')
+    public function render($list, $delimiter = '|||', $delimiterTwo = '###')
     {
 
         $result = array();
