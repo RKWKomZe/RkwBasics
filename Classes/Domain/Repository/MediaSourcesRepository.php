@@ -129,13 +129,13 @@ class MediaSourcesRepository extends AbstractRepository
                     (
                         ' . $fileReferenceTable . '.tablenames = "pages"
                         AND  ' . $fileReferenceTable . '.uid_foreign = pages.uid
-                        AND pages.hidden = 0 AND pages.deleted = 0
+                        AND doktype = 1 AND pages.hidden = 0 AND pages.deleted = 0
                     ) OR
                     (
                         ' . $fileReferenceTable . '.tablenames = "tt_content"
                         AND  tt_content.pid = pages.uid
                         ' . $this->getWhereClauseForEnabledFields("tt_content") . '
-                        AND pages.hidden = 0 AND pages.deleted = 0
+                        AND doktype = 1 AND pages.hidden = 0 AND pages.deleted = 0
                     )
                     ' . $this->getWhereClauseForEnabledFields("pages") . '
                 )
