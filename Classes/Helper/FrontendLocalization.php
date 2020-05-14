@@ -604,7 +604,7 @@ if ($currentVersion < 8000000) {
         {
             $configurationManager = static::getConfigurationManager();
             $frameworkConfiguration = $configurationManager->getConfiguration(ConfigurationManagerInterface::CONFIGURATION_TYPE_FRAMEWORK, $extensionName);
-            if (!is_array($frameworkConfiguration['_LOCAL_LANG'] ?? false)) {
+            if (!is_array($frameworkConfiguration['_LOCAL_LANG'])) {
                 return;
             }
             self::$LOCAL_LANG_UNSET[$extensionName] = [];
