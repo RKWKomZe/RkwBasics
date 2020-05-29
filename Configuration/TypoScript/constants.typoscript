@@ -38,14 +38,17 @@ plugin.tx_rkwbasics {
 		responsiveImages {
 			breakpoints {
 
-				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for mobile
-				mobile = 320
+				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for desktop
+				desktop = 1024
 
 				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for tablet
 				tablet = 768
 
-				# cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for desktop
-				desktop = 1024
+                # cat=plugin.tx_rkwbasics//a; type=integer; label=Second breakpoint for mobile
+                mobile2 = 640
+
+				# cat=plugin.tx_rkwbasics//a; type=integer; label=First breakpoint for mobile
+				mobile = 320
 			}
 		}
 	}
