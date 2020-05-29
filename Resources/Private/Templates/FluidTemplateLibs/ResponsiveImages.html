@@ -1,0 +1,19 @@
+{namespace rkwBasics=RKW\RkwBasics\ViewHelpers}
+
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
+
+    <f:if condition="{fileReference}">
+        <!-- Responsive Images v2.0 -->
+        <picture>
+            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.default}', breakpoint: '{settings.breakpoint.desktop}', cropVariant: 'desktop'}" />
+            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.desktop}', breakpoint: '{settings.breakpoint.tablet}', cropVariant: 'tablet'}" />
+            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.tablet}', breakpoint: '{settings.breakpoint.mobile}', cropVariant: 'mobile'}" />
+            <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{f:if(condition: '{fileTitle}', then: '{fileTitle}', else: '{settings.title}')}" srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{settings.maxWidth.mobile}', cropVariant:'mobile')}" />
+        </picture>
+    </f:if>
+
+    <f:section name="SrcSet">
+        <source srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
+        <source srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{maxWidth}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
+    </f:section>
+</html>

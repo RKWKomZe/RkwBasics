@@ -67,111 +67,6 @@ $tempColumnsPages = [
             ],
         ],
     ],
-    'tx_rkwbasics_teaser_image' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image',
-
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'txRkwBasicsTeaserImage',
-            [
-                'maxitems' => 1,
-
-                // Use the imageoverlayPalette instead of the basicoverlayPalette
-                'foreign_types' => [
-                    '0' => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                    ],
-                ],
-
-            ],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        ),
-    ],
-    'tx_rkwbasics_article_image' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image',
-
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'txRkwBasicsArticleImage',
-            [
-                'maxitems' => 1,
-
-                // Use the imageoverlayPalette instead of the basicoverlayPalette
-                'foreign_types' => [
-                    '0' => [
-                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                                ],
-                                \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
-                                        'showitem' => '
-                            --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                    ],
-                ],
-
-            ],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        ),
-    ],
-
-    'tx_rkwbasics_article_video' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video',
-        'config' => [
-            'type' => 'input',
-            'size' => 50,
-            'eval' => 'trim'
-        ],
-    ],
-
     'tx_rkwbasics_department' => [
 		'exclude' => 0,
         'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
@@ -275,6 +170,53 @@ $tempColumnsPages = [
             ],
         ],
     ],
+    'tx_rkwbasics_teaser_image' => [
+        'exclude' => 0,
+        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image',
+
+        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+            'txRkwBasicsTeaserImage',
+            [
+                'maxitems' => 1,
+
+                // Use the imageoverlayPalette instead of the basicoverlayPalette
+                'foreign_types' => [
+                    '0' => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                    \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
+                        'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                    ],
+                ],
+
+            ],
+            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+        ),
+    ],
 
     'tx_rkwbasics_file' => [
         'exclude' => 0,
@@ -328,17 +270,6 @@ $tempColumnsPagesMulti = [
         ],
     ],
 
-    'tx_rkwbasics_teaser_text' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text',
-        'config' => [
-            'type' => 'text',
-            'cols' => 40,
-            'rows' => 15,
-            'eval' => 'trim',
-        ],
-    ],
-
     'tx_rkwbasics_information' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_information',
@@ -351,6 +282,107 @@ $tempColumnsPagesMulti = [
 ];
 
 
+/**
+ * @deprected
+ */
+$currentVersion = TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+if ($currentVersion < 8000000) {
+
+    $tempColumnsPages = array_merge(
+        $tempColumnsPages,
+        [
+
+            'tx_rkwbasics_article_image' => [
+                'exclude' => 0,
+                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image',
+
+                'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+                    'txRkwBasicsArticleImage',
+                    [
+                        'maxitems' => 1,
+
+                        // Use the imageoverlayPalette instead of the basicoverlayPalette
+                        'foreign_types' => [
+                            '0' => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                            \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
+                                'showitem' => '
+                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+                                --palette--;;filePalette'
+                            ],
+                        ],
+
+                    ],
+                    $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+                ),
+            ],
+
+            'tx_rkwbasics_article_video' => [
+                'exclude' => 0,
+                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video',
+                'config' => [
+                    'type' => 'input',
+                    'size' => 50,
+                    'eval' => 'trim'
+                ],
+            ]
+        ]
+    );
+
+
+    $tempColumnsPagesMulti = array_merge (
+        $tempColumnsPagesMulti,
+        [
+
+            'tx_rkwbasics_teaser_text' => [
+                'exclude' => 0,
+                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text',
+                'config' => [
+                    'type' => 'text',
+                    'cols' => 40,
+                    'rows' => 15,
+                    'eval' => 'trim',
+                ],
+            ],
+
+            'tx_rkwbasics_information' => [
+                'exclude' => 0,
+                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_information',
+                'config' => [
+                    'type' => 'text',
+                    'rows' => 42,
+                ],
+                'defaultExtras' => 'richtext[]:rte_transform[flag=rte_enabled|mode=ts_css]'
+            ],
+        ]
+    );
+
+
+
+}
 
 //===========================================================================
 // Add meta-tab to folders
@@ -398,17 +430,10 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 
 
 // Add field to the existing palette and remove default abstract field
-$currentVersion = TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
 if ($currentVersion < 8000000) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_article_video','before:abstract');
-} else {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','--linebreak--,tx_rkwbasics_article_video','after:abstract');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text','before:abstract');
 }
-
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text','before:abstract');
-//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_information,','before:abstract');
-//$GLOBALS['TCA']['pages_language_overlay']['palettes']['abstract']['showitem'] = '';
-// str_replace('abstract;LLL:EXT:frontend/Resources/Private/Language/locallang_tca.xlf:pages.abstract_formlabel', '', $GLOBALS['TCA']['pages_language_overlay']['palettes']['abstract']['showitem']);
 
 // Add field after another
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_information', '', 'after:abstract');

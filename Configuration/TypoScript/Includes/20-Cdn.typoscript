@@ -1,0 +1,23 @@
+#===============================================================
+# Configuration for CDN
+#===============================================================
+config {
+    tx_rkwbasics_cdn {
+
+        // Activate CDN
+        enable = 0
+        enablePostProc = 0
+
+        // Maximum number of connections per domain
+        maxConnectionsPerDomain = 4
+
+        // Maximum number of subdomains
+        maxSubdomains = 100
+
+        // Ignore some files like CSS and JS because browser security stuff may cause problems
+        ignoreIfContains = /\.css|\.js|\?noCdn=1/
+
+        // Regular expression for replacement
+        search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
+    }
+}
