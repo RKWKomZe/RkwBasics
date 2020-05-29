@@ -200,6 +200,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * txRkwbasicsArticleVideo
      *
      * @var string
+     * @deprecated
      */
     protected $txRkwbasicsArticleVideo = null;
 
@@ -632,9 +633,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
-     * Returns the txRkwbasicsArticleVideoe
+     * Returns the txRkwbasicsArticleVideo
      *
      * @return string
+     * @deprecated
      */
     public function getTxRkwbasicsArticleVideo()
     {
@@ -647,6 +649,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $txRkwbasicsArticleVideo
      * @return void
+     * @deprecated
      */
     public function setTxRkwbasicsArticleVideo($txRkwbasicsArticleVideo)
     {
