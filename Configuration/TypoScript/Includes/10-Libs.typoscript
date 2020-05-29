@@ -12,19 +12,30 @@ lib.txRkwBasics {
         file = {$plugin.tx_rkwbasics.view.templateRootPath}FluidTemplateLibs/ResponsiveImages.html
         settings {
 
-            title = Image
-
-            maxWidth {
-                default = 2000
-                desktop = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.desktop}
-                tablet = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.tablet}
-                mobile = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile}
-            }
+            titleFallback = Image
+            additionalAttributes =
 
             breakpoint {
                 desktop = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.desktop}
                 tablet =  {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.tablet}
+                mobile2 = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile2}
                 mobile = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile}
+            }
+
+            maxWidth {
+                desktop = 2000
+                tablet = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.desktop}
+                mobile2 = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.tablet}
+                mobile = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile2}
+                fallback = {$plugin.tx_rkwbasics.settings.responsiveImages.breakpoints.mobile}
+            }
+
+            cropVariant {
+                desktop = desktop
+                tablet = tablet
+                mobile2 = mobile
+                mobile = mobile
+                fallback = default
             }
         }
 
