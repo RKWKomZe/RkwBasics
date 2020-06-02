@@ -2,14 +2,14 @@
 
 <html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers" data-namespace-typo3-fluid="true">
 
-    <f:if condition="{fileReference}">
+    <f:if condition="{file}">
         <!-- Responsive Images v2.0 -->
         <picture{f:if(condition:'{settings.additionalAttributes}', then: ' {settings.additionalAttributes}')}>
-            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.desktop}', breakpoint: '{settings.breakpoint.desktop}', cropVariant: '{settings.cropVariant.desktop}'}" />
-            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.tablet}', breakpoint: '{settings.breakpoint.tablet}', cropVariant: '{settings.cropVariant.tablet}'}" />
-            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.mobile2}', breakpoint: '{settings.breakpoint.mobile2}', cropVariant: '{settings.cropVariant.mobile2}'}" />
-            <f:render section="SrcSet" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.mobile}', breakpoint: '{settings.breakpoint.mobile}', cropVariant: '{settings.cropVariant.mobile}'}" />
-            <f:render section="Fallback" arguments="{fileReference: '{fileReference}', maxWidth: '{settings.maxWidth.fallback}', breakpoint: '0', cropVariant: '{settings.cropVariant.fallback}', title: '{f:if(condition: \'{fileTitle}\', then: \'{fileTitle}\', else: \'{settings.titleFallback}\')}'}" />
+            <f:render section="SrcSet" arguments="{file: '{file}', isReference: '{f:if(condition: \'{treatIdAsReference}\', then: \'1\', else: \'0\')}', maxWidth: '{settings.maxWidth.desktop}', breakpoint: '{settings.breakpoint.desktop}', cropVariant: '{settings.cropVariant.desktop}'}" />
+            <f:render section="SrcSet" arguments="{file: '{file}', isReference: '{f:if(condition: \'{treatIdAsReference}\', then: \'1\', else: \'0\')}', maxWidth: '{settings.maxWidth.tablet}', breakpoint: '{settings.breakpoint.tablet}', cropVariant: '{settings.cropVariant.tablet}'}" />
+            <f:render section="SrcSet" arguments="{file: '{file}', isReference: '{f:if(condition: \'{treatIdAsReference}\', then: \'1\', else: \'0\')}', maxWidth: '{settings.maxWidth.mobile2}', breakpoint: '{settings.breakpoint.mobile2}', cropVariant: '{settings.cropVariant.mobile2}'}" />
+            <f:render section="SrcSet" arguments="{file: '{file}', isReference: '{f:if(condition: \'{treatIdAsReference}\', then: \'1\', else: \'0\')}', maxWidth: '{settings.maxWidth.mobile}', breakpoint: '{settings.breakpoint.mobile}', cropVariant: '{settings.cropVariant.mobile}'}" />
+            <f:render section="Fallback" arguments="{file: '{file}', isReference: '{f:if(condition: \'{treatIdAsReference}\', then: \'1\', else: \'0\')}', maxWidth: '{settings.maxWidth.fallback}', breakpoint: '0', cropVariant: '{settings.cropVariant.fallback}', title: '{f:if(condition: \'{title}\', then: \'{title}\', else: \'{settings.titleFallback}\')}'}" />
         </picture>
     </f:if>
 
@@ -26,17 +26,17 @@
     <f:section name="Fallback">
         <!-- maxWidth: {maxWidth}, breakPoint: {breakpoint} -->
         <f:render section="Retina" arguments="{_ALL}" />
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{title}" srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" />
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{title}" srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" />
     </f:section>
 
 
     <f:section name="Retina">
-        <source srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
+        <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
     </f:section>
 
 
     <f:section name="Regular">
-        <source srcset="{f:uri.image(src:'{fileReference}', treatIdAsReference:'1', maxWidth:'{maxWidth}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
+        <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}',cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
     </f:section>
 
 </html>

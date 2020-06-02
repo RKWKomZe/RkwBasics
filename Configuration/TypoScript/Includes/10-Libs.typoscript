@@ -41,11 +41,14 @@ lib.txRkwBasics {
 
         variables {
 
-            fileReference = TEXT
-            fileReference.value.current = 1
+            file = TEXT
+            file.value.current = 1
 
-            fileTitle = FILES
-            fileTitle {
+            treatIdAsReference = TEXT
+            treatIdAsReference.value = 1
+
+            title = FILES
+            title {
                 if.isPositive.current = 1
                 references.current = 1
                 renderObj = TEXT
