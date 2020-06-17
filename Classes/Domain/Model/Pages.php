@@ -568,7 +568,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getTxRkwbasicsTeaserText()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
         return ($this->txRkwbasicsTeaserText ? $this->txRkwbasicsTeaserText : $this->getAbstract());
     }
 
@@ -581,7 +581,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setTxRkwbasicsTeaserText($txRkwbasicsTeaserText)
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
         $this->txRkwbasicsTeaserText = $txRkwbasicsTeaserText;
     }
 
@@ -614,7 +614,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function getTxRkwbasicsArticleImage()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
         return $this->txRkwbasicsArticleImage;
     }
 
@@ -627,7 +627,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     public function setTxRkwbasicsArticleImage(\RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsArticleImage)
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
         $this->txRkwbasicsArticleImage = $txRkwbasicsArticleImage;
     }
 

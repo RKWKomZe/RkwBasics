@@ -1,8 +1,6 @@
 <?php
 
 namespace RKW\RkwBasics\Api;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -15,6 +13,11 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Mvc\Web\Request;
+use RKW\RkwBasics\View\StandaloneView;
 
 /**
  * Class JsonApi
@@ -98,10 +101,10 @@ class JsonApi
     {
 
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
-        $objectManager = GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\ObjectManager::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
         /** @var \TYPO3\CMS\Extbase\Mvc\Web\Request $webRequest */
-        $webRequest = $objectManager->get(\TYPO3\CMS\Extbase\Mvc\Web\Request::class);
+        $webRequest = $objectManager->get(Request::class);
         $webRequest->setControllerVendorName($request->getControllerVendorName());
         $webRequest->setControllerExtensionName($request->getControllerExtensionName());
         $webRequest->setPluginName($request->getPluginName());
@@ -121,7 +124,6 @@ class JsonApi
             $overrideAction = str_replace('Ajax', '', $webRequest->getControllerActionName());
         }
         $webRequest->setControllerActionName($overrideAction);
-
         $this->request = $webRequest;
         return $this;
     }
@@ -268,18 +270,20 @@ class JsonApi
         ) {
 
             // load ViewHelper
-            /** @var  \RKW\RkwBasics\View\StandaloneView $viewHelper */
-            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Extbase\Object\ObjectManager');
-            $viewHelper = $objectManager->get('RKW\\RkwBasics\\View\\StandaloneView');
+            /** @var \RKW\RkwBasics\View\StandaloneView $viewHelper */
+            $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(ObjectManager::class);
+            $viewHelper = $objectManager->get(StandaloneView::class);
+
+            // set request; this is relevant for validation with forms - needs to be done first!
+            if ($this->getRequest()) {
+                $viewHelper->setRequest($this->getRequest());
+            }
+
+            // now set relevant paths
             $viewHelper->setLayoutRootPaths($this->_viewHelperLayoutRootPaths);
             $viewHelper->setTemplateRootPaths($this->_viewHelperTemplateRootPaths);
             $viewHelper->setPartialRootPaths($this->_viewHelperPartialRootPaths);
             $viewHelper->setTemplate($template);
-
-            // set request; this is relevant for validation with forms
-            if ($this->getRequest()) {
-                $viewHelper->setRequest($this->getRequest());
-            }
 
             $viewHelper->assignMultiple($html);
             $html = $viewHelper->render();

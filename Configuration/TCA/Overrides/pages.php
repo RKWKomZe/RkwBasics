@@ -270,21 +270,10 @@ $tempColumnsPagesMulti = [
         ],
     ],
 
-    'tx_rkwbasics_information' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_information',
-        'config' => [
-            'type' => 'text',
-            'rows' => 42,
-        ],
-        'defaultExtras' => 'richtext[]:rte_transform[flag=rte_enabled|mode=ts_css]'
-    ],
 ];
 
 
-/**
- * @deprected
- */
+/** @deprecated */
 $currentVersion = TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
 if ($currentVersion < 8000000) {
 
@@ -428,17 +417,16 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 // Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'access','--linebreak--,tx_rkwbasics_proxy_caching','after:fe_login_mode');
 
-
-// Add field to the existing palette and remove default abstract field
+/** @deprecated */
 if ($currentVersion < 8000000) {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_article_video','before:abstract');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text','before:abstract');
+
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_information', '', 'after:abstract');
+    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages_language_overlay','tx_rkwbasics_information', '', 'after:abstract');
 }
 
 // Add field after another
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_information', '', 'after:abstract');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages_language_overlay','tx_rkwbasics_information', '', 'after:abstract');
-
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_css_class', '', 'after:backend_layout_next_level');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_old_domain', '', 'after:subtitle');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_old_link', '', 'after:tx_rkwbasics_old_domain');

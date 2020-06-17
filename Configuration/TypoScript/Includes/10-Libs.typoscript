@@ -31,29 +31,87 @@ lib.txRkwBasics {
             }
 
             cropVariant {
-                desktop = desktop
-                tablet = tablet
-                mobile2 = mobile
-                mobile = mobile
-                fallback = default
+                desktop = Default
+                tablet = Default
+                mobile2 = Default
+                mobile = Default
+                fallback = Default
             }
         }
 
         variables {
 
             file = TEXT
-            file.value.current = 1
+            file {
+                data = field:file
+                stdWrap.ifEmpty.cObject = TEXT
+                stdWrap.ifEmpty.cObject {
+                    value.current = 1
+                }
+            }
+
+            additionalAttributes = TEXT
+            additionalAttributes {
+                data = field:additionalAttributes
+                stdWrap.ifEmpty.cObject = TEXT
+                stdWrap.ifEmpty.cObject {
+                    value < lib.txRkwBasics.responsiveImage.settings.additionalAttributes
+                }
+            }
 
             treatIdAsReference = TEXT
-            treatIdAsReference.value = 1
+            treatIdAsReference {
+                data = field:treatIdAsReference
+                stdWrap.ifEmpty.cObject = COA
+                stdWrap.ifEmpty.cObject {
 
-            title = FILES
+                    // set default to 1, but do NOT do this in case value was explicitly set to zero
+                    10 = TEXT
+                    10 {
+                        value = 1
+                        if.equals.data = field:treatIdAsReference
+                        if.value = 0
+                        if.negate = 1
+                    }
+                }
+            }
+
+            title = TEXT
             title {
-                if.isPositive.current = 1
-                references.current = 1
-                renderObj = TEXT
-                renderObj {
-                    data = file:current:title
+
+                data = field:title
+                stdWrap.ifEmpty.cObject = COA
+                stdWrap.ifEmpty.cObject {
+
+                    // get title of references
+                    10 = FILES
+                    10 {
+                        if.isPositive < lib.txRkwBasics.responsiveImage.variables.file
+                        if.isPositive.if.isTrue < lib.txRkwBasics.responsiveImage.variables.treatIdAsReference
+                        references < lib.txRkwBasics.responsiveImage.variables.file
+                        renderObj = TEXT
+                        renderObj {
+                           data = file:current:title
+                        }
+                    }
+
+                    // get title of normal files
+                    20 = FILES
+                    20 {
+                        if.isPositive < lib.txRkwBasics.responsiveImage.variables.file
+                        if.isPositive.if.isFalse < lib.txRkwBasics.responsiveImage.variables.treatIdAsReference
+                        files < lib.txRkwBasics.responsiveImage.variables.file
+                        renderObj = TEXT
+                        renderObj {
+                           data = file:current:title
+                        }
+                    }
+
+                    // fallback value
+                    stdWrap.ifEmpty.cObject = TEXT
+                    stdWrap.ifEmpty.cObject {
+                        value < lib.txRkwBasics.responsiveImage.settings.titleFallback
+                    }
                 }
             }
         }
