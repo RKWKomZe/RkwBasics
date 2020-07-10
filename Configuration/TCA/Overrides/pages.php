@@ -225,7 +225,7 @@ $tempColumnsPages = [
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'txRkwbasicsFile',
             ['maxitems' => 1],
-            'doc,docx,docm,xls,xlsx,pdf'
+            'doc,docx,docm,xls,xlsx,pdf,zip'
         ),
     ],
 
