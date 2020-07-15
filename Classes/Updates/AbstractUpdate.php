@@ -54,7 +54,6 @@ abstract class AbstractUpdate extends \TYPO3\CMS\Install\Updates\AbstractUpdate
     protected $sortIntervals = 256;
 
 
-
     /**
      * Moves elements into a newly added grid container
      *

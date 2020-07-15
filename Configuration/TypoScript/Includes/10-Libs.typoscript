@@ -53,10 +53,6 @@ lib.txRkwBasics {
             additionalAttributes = TEXT
             additionalAttributes {
                 data = field:additionalAttributes
-                stdWrap.ifEmpty.cObject = TEXT
-                stdWrap.ifEmpty.cObject {
-                    value < lib.txRkwBasics.responsiveImage.settings.additionalAttributes
-                }
             }
 
             treatIdAsReference = TEXT
@@ -105,12 +101,6 @@ lib.txRkwBasics {
                         renderObj {
                            data = file:current:title
                         }
-                    }
-
-                    // fallback value
-                    stdWrap.ifEmpty.cObject = TEXT
-                    stdWrap.ifEmpty.cObject {
-                        value < lib.txRkwBasics.responsiveImage.settings.titleFallback
                     }
                 }
             }

@@ -25,7 +25,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\HiddenRestriction;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 
 /**
- * Class UpdateWizard
+ * Class UpdateCore8Wizard
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
@@ -33,7 +33,7 @@ use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 
-class UpdateWizard extends AbstractUpdate
+class UpdateCore8Wizard extends AbstractUpdate
 {
 
     /**
@@ -85,8 +85,7 @@ class UpdateWizard extends AbstractUpdate
         $this->migrateFieldArticleImage($databaseQueries);
         $this->migrateFieldArticleVideo($databaseQueries);
 
-        //$this->markWizardAsDone();
-
+        $this->markWizardAsDone();
         return true;
     }
 

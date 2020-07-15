@@ -45,7 +45,7 @@ call_user_func(
         //=================================================================
         // register update wizard
         //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\RKW\RkwBasics\Updates\UpdateWizard::class] = \RKW\RkwBasics\Updates\UpdateWizard::class;
+        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\RKW\RkwBasics\Updates\UpdateCore8Wizard::class] = \RKW\RkwBasics\Updates\UpdateCore8Wizard::class;
 
         //=================================================================
         // Add Rootline Fields
