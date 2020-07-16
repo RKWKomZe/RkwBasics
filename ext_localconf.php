@@ -78,7 +78,7 @@ call_user_func(
                 // add a FileWriter
                 'TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
                     // configuration for the writer
-                    'logFile' => 'typo3temp/logs/tx_rkwbasics.log'
+                    'logFile' => 'typo3temp/var/logs/tx_rkwbasics.log'
                 )
             ),
         );
