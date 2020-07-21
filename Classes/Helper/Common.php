@@ -14,6 +14,8 @@ namespace RKW\RkwBasics\Helper;
  *
  * The TYPO3 project - inspiring people to share!
  */
+use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
 
 /**
  * Class Common
@@ -184,111 +186,8 @@ class Common
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
 
-        if (!$pid) {
-            $pid = 1;
-        }
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ .'() is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendSimulatorUtility instead.');
+        FrontendSimulatorUtility::simulateFrontendEnvironment($pid);
 
-        // only if in BE-Mode!!! Otherwise FE will be crashed
-        if (TYPO3_MODE == 'BE') {
-
-            if (!is_object($GLOBALS['TT'])) {
-                $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
-                $GLOBALS['TT']->start();
-            }
-
-            // check if we have another pid OR typeNum here - otherwise we use the existing object
-            if (
-                (!$GLOBALS['TSFE'] instanceof \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController)
-                || ($GLOBALS['TSFE']->type != $typeNum)
-                || ($GLOBALS['TSFE']->id != $pid)
-            ) {
-
-                // remove page-not-found-redirect in BE-context
-                $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = '';
-
-                // load frontend context
-                try {
-                    
-                    /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $GLOBALS['TSFE'] */
-                    $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                        \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
-                        $GLOBALS['TYPO3_CONF_VARS'],
-                        $pid,
-                        $typeNum
-                    );
-
-                    $GLOBALS['TSFE']->connectToDB();
-                    $GLOBALS['TSFE']->initFEuser();
-                    $GLOBALS['TSFE']->determineId();
-                    $GLOBALS['TSFE']->initTemplate();
-                    $GLOBALS['TSFE']->getConfigArray();
-                    $GLOBALS['LANG']->csConvObj = $GLOBALS['TSFE']->csConvObj;
-
-                } catch (\Exception $e) {
-                    // do nothing
-                }
-
-                // add correct domain to environment variables and flush their cache
-                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
-                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
-                $_SERVER['HTTP_HOST'] = $host;
-                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
-
-                // add host and link-prefix
-                $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
-                $GLOBALS['TSFE']->config['config']['baseURL'] = $host;
-                $GLOBALS['TSFE']->absRefPrefix = '/';
-
-            }
-
-
-            if (!is_object($GLOBALS['BE_USER'])) {
-
-                // for files
-                /** @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $backendUserAuthentication */
-                $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-                    \TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class
-                );
-
-                /**
-                 * @toDo: not sure if we REALLY need this. The following code is the result of an weird error during image rendering in e-mails: You are not allowed to access the given folder: "_processed_"
-                */
-                /*
-                // take the _cli_scheduler-User and add some permissions for image rendering
-                $backendUserAuthentication->setBeUserByName('_cli_scheduler');
-
-                $backendUserAuthentication->userTS_text = '
-                    permissions.file.default {
-                       addFile      = 1
-                       readFile     = 1
-                       writeFile    = 1
-                       copyFile     = 1
-                       moveFile     = 1
-                       renameFile   = 1
-                       unzipFile    = 0
-                       deleteFile   = 0
-                       addFolder    = 1
-                       readFolder   = 1
-                       writeFolder  = 1
-                       copyFolder   = 1
-                       moveFolder   = 1
-                       renameFolder = 1
-                       deleteFolder = 0
-                       recursivedeleteFolder = 0
-                    }
-                ';
-
-                // render TSconfig
-                $parseObj = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Backend\Configuration\TsConfigParser::class);
-                $res = $parseObj->parseTSconfig($backendUserAuthentication->userTS_text, 'userTS');
-                if ($res) {
-                    $backendUserAuthentication->userTS = $res['TSconfig'];
-                }
-                */
-
-                $GLOBALS['BE_USER'] = $backendUserAuthentication;
-            }
-
-        }
     }
 }
