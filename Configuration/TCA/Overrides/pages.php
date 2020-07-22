@@ -69,7 +69,7 @@ $tempColumnsPages = [
     ],
     'tx_rkwbasics_department' => [
 		'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
 		'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_department',
 		'config' => [
             'type' => 'select',
@@ -87,7 +87,7 @@ $tempColumnsPages = [
 
 	'tx_rkwbasics_document_type' => [
 		'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_type',
 		'config' => [
             'type' => 'select',
@@ -104,7 +104,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_series' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_series',
         'config' => [
             'type' => 'select',
@@ -122,7 +122,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_enterprisesize' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_enterprisesize',
         'config' => [
             'type' => 'select',
@@ -139,7 +139,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_sector' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_sector',
         'config' => [
             'type' => 'select',
@@ -156,7 +156,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_companytype' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype',
         'config' => [
             'type' => 'select',
@@ -220,7 +220,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_file' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_file',
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'txRkwbasicsFile',
@@ -231,7 +231,7 @@ $tempColumnsPages = [
 
     'tx_rkwbasics_cover' => [
         'exclude' => 0,
-        'displayCond' => 'FIELD:tx_bmpdf2content_is_import_sub:=:0',
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover',
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'txRkwbasicsCover',
