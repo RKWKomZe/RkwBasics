@@ -17,26 +17,16 @@
     <f:section name="SrcSet">
         <f:if condition="{breakpoint}">
             <!-- maxWidth: {maxWidth}, breakPoint: {breakpoint} -->
-            <f:render section="Retina" arguments="{_ALL}" />
-            <f:render section="Regular" arguments="{_ALL}" />
+            <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
+            <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
         </f:if>
     </f:section>
 
 
     <f:section name="Fallback">
         <!-- maxWidth: {maxWidth}, breakPoint: {breakpoint} -->
-        <f:render section="Retina" arguments="{_ALL}" />
-        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{title->rkwBasics:format.trim()}" srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" />
-    </f:section>
-
-
-    <f:section name="Retina">
         <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
-    </f:section>
-
-
-    <f:section name="Regular">
-        <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
+        <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{title->rkwBasics:format.trim()}" srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" />
     </f:section>
 
 </html>
