@@ -152,6 +152,10 @@ plugin.tx_rkwbasics {
                 defaultDomain =
             }
         }
+
+        cookie {
+            allowedKeys = {$plugin.tx_rkwbasics.settings.cookie.allowedKeys}
+        }
     }
 }
 
