@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Session\Backend\Exception\SessionNotUpdatedException;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use Doctrine\DBAL\DBALException;
 use RKW\RkwBasics\Service\CookieService;
+use RKW\RkwBasics\Service\CacheService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
@@ -54,12 +55,12 @@ class RkwSessionBackend extends \TYPO3\CMS\Core\Session\Backend\DatabaseSessionB
     {
         // to handle some data issues on login / logout, we're using an own cookie management
         // activate it through setting the "cookieNameRkwBasics"
+        $sesData = unserialize($sessionData['ses_data']);
 
         if ($configuredCookieName = trim($GLOBALS['TYPO3_CONF_VARS']['FE']['cookieNameRkwBasics'])) {
-
             // to synchronize the data of the RkwCookie with the TYPO3 session data, we clear the RkwCookie before we rewrite it
             //CookieService::removeCookie();
-            $sesData = unserialize($sessionData['ses_data']);
+
             foreach ($sesData as $key => $data) {
                 //$this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Writing key "%s" with data "%s" to RKW cookie with fe_user ses_id %s', $key, $data, $sessionId));
                 // fetch flashMessageArray and other not serialized stuff
@@ -70,6 +71,20 @@ class RkwSessionBackend extends \TYPO3\CMS\Core\Session\Backend\DatabaseSessionB
                 }
             }
         }
+
+
+
+
+        foreach ($sesData as $key => $data) {
+            // fetch flashMessageArray and other not serialized stuff
+            if ($data
+                && is_string($data)
+            ) {
+                CacheService::setDataKey($key, $data);
+            }
+        }
+
+
 
         // do what the function always does
         return parent::update($sessionId, $sessionData);

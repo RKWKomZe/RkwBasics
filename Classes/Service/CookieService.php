@@ -151,7 +151,7 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
                 // Means anyhow: Calling this function in RkwSessionBackend::update would create a wonderful loop
                 // -> don't be a hero
                 // see: \RKW\RkwBasics\Session\RkwSessionBackend::update
-                $GLOBALS['TSFE']->storeSessionData();
+                //$GLOBALS['TSFE']->storeSessionData();
             }
         }
     }
@@ -232,8 +232,8 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
         // necessary to work immediately with it: https://stackoverflow.com/questions/3230133/accessing-cookie-immediately-after-setcookie
         $_COOKIE[self::getCookieName()] = serialize($value);
 
-        //self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Following value is delivered: %s', serialize($value)));
-        //self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Writing following value to the cookie: %s', serialize(self::getDataArray())));
+        self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Following value is delivered: %s', serialize($value)));
+        self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Writing following value to the cookie: %s', serialize(self::getDataArray())));
     }
 
 
