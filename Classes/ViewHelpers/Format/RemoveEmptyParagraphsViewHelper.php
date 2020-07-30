@@ -66,12 +66,12 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
         $pregMatch = [
 
             // for usage with FluidStyledContents
-            "#(" . $bodyTextWrapStartRegExp . ")(<p>&nbsp;</p>){1,}#i",
-            "#(<p>&nbsp;</p>){1,}(" . $bodyTextWrapEndRegExp . ")#i",
+            "#(" . $bodyTextWrapStartRegExp . ")(<p[^>]*>&nbsp;</p>){1,}#i",
+            "#(<p[^>]*>&nbsp;</p>){1,}(" . $bodyTextWrapEndRegExp . ")#i",
 
             // for usage in custom content elements
-            "#^(<p>&nbsp;</p>){1,}#i",
-            "#(<p>&nbsp;</p>){1,}$#i",
+            "#^(<p[^>]*>&nbsp;</p>){1,}#i",
+            "#(<p[^>]*>&nbsp;</p>){1,}$#i",
         ];
 
         $pregReplace = [
