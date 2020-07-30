@@ -73,18 +73,24 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public static function setDataKey(string $key, string $data)
     {
-        $settings = self::getSettings();
-        // Hint: if "settings.cookies.allowedKeys" is empty, all keys are allowed
-        if (
-            !$settings['cookies']['allowedKeys']
-            || in_array($key, GeneralUtility::trimExplode(',', $settings['cookies']['allowedKeys']))
-        ) {
-            // we're updating a cookie by setting a new one (with merged data)
-            self::createCookie($key, $data);
+        // Important: Check if something is new, before handle the cookie
+        $existingDataOfKey = self::getDataKey($key);
+        if ($existingDataOfKey != $data) {
 
-        } else {
-            // do nothing
+            $settings = self::getSettings();
+            // Hint: if "settings.cookies.allowedKeys" is empty, all keys are allowed
+            if (
+                !$settings['cookies']['allowedKeys']
+                || in_array($key, GeneralUtility::trimExplode(',', $settings['cookies']['allowedKeys']))
+            ) {
+                // we're updating a cookie by setting a new one (with merged data)
+                self::createCookie($key, $data);
+
+            } else {
+                // do nothing
+            }
         }
+
 
 
         return self::getCookieValue();
@@ -117,7 +123,9 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public static function removeCookie()
     {
+        // will delete the cookie with next page reload
         setcookie(self::getCookieName(), "", time() - 3600);
+        $_COOKIE[self::getCookieName()] = "";
     }
 
 
@@ -130,16 +138,20 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     public static function copyCookieDataToFeUserSession()
     {
+
         if (is_array(self::getDataArray())) {
 
             foreach (self::getDataArray() as $key => $data) {
-                $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
-                $GLOBALS['TSFE']->storeSessionData();
+                if ($key != 'typo3_session_id') {
+                    $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+                }
+
                 // Reminder: The "storeSessionData" will save the DB session data in turn again to our cookie
                 // Means: What ever happen in meantime: RkwCookie and FeUserSessionData are synchronized now
                 // Means anyhow: Calling this function in RkwSessionBackend::update would create a wonderful loop
                 // -> don't be a hero
                 // see: \RKW\RkwBasics\Session\RkwSessionBackend::update
+                $GLOBALS['TSFE']->storeSessionData();
             }
         }
     }
@@ -156,30 +168,46 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected static function createCookie(string $key, string $data = '')
     {
+        // if typo3_session_id has no match: Kill cookie before create a new one
+        // (means: our RKW cookie is part of an old session or the session of another user)
+        if (
+            $data
+            && self::getDataKey('typo3_session_id')
+            != $GLOBALS['TSFE']->fe_user->id
+        ) {
+            self::removeCookie();
+        }
+
         if(!isset($_COOKIE[self::getCookieName()])) {
 
-            // just serialize data
-            $value = [$key => $data];
+            // just serialize given data
+            // bind cookie to feUserSessionId
+            $value = [
+                $key => $data,
+                'typo3_session_id' => $GLOBALS['TSFE']->fe_user->id
+            ];
+
 
         } else {
             // read existing data and merge with new one
             $cookiePresetValue = unserialize($_COOKIE[self::getCookieName()]);
-            if (!$data) {
-                // REMOVE
+
+            // REMOVE value (always, if exists)
+            if (key_exists($key, $cookiePresetValue)) {
                 unset($cookiePresetValue[$key]);
-            } else {
-                // ADD (or overwrite)
+                //unset($cookiePresetValue['typo3_session_id']);
+            }
+
+            // (RE-)SET value
+            if ($data) {
+                // add (or overwrite)
                 $cookiePresetValue[$key] = $data;
             }
 
             // copy to $value which is written below to the cookie
             $value = $cookiePresetValue;
-            DebuggerUtility::var_dump($key);
-            DebuggerUtility::var_dump($value);
-        }
 
-        // remove before set the new one
-        //self::removeCookie();
+        }
 
         /*
          Von SK via Slack:
@@ -194,11 +222,18 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
         //$value = "";
         $expires = 0;
         $path = "/";
-        $domain = trim($GLOBALS['TYPO3_CONF_VARS']['BE']['cookieDomain']);
+        $domain = trim($GLOBALS['TYPO3_CONF_VARS']['FE']['cookieDomain']);
         $secure = trim($GLOBALS['TYPO3_CONF_VARS']['SYS']['cookieSecure']);
         $httpOnly = true;
 
-        setcookie ($cookieName, serialize($value), $expires, $path, $domain, $secure, $httpOnly);
+
+        // will set after page reload
+        setcookie($cookieName, serialize($value), $expires, $path, $domain, $secure, $httpOnly);
+        // necessary to work immediately with it: https://stackoverflow.com/questions/3230133/accessing-cookie-immediately-after-setcookie
+        $_COOKIE[self::getCookieName()] = serialize($value);
+
+        //self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Following value is delivered: %s', serialize($value)));
+        //self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Writing following value to the cookie: %s', serialize(self::getDataArray())));
     }
 
 
@@ -247,5 +282,17 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
 
         return Common::getTyposcriptConfiguration('Rkwbasics', $which);
         //===
+    }
+
+
+
+    /**
+     * Returns logger instance
+     *
+     * @return \TYPO3\CMS\Core\Log\Logger
+     */
+    public static function getLogger()
+    {
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
     }
 }

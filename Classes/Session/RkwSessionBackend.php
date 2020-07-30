@@ -43,7 +43,7 @@ class RkwSessionBackend extends \TYPO3\CMS\Core\Session\Backend\DatabaseSessionB
      * Updates the session data.
      * ses_id will always be set to $sessionId and overwritten if existing in $sessionData
      * This method updates ses_tstamp automatically
-     * Always called on $GLOBALS['TSFE']->storeSessionData();
+     * IMPORTANT: Always called on $GLOBALS['TSFE']->storeSessionData();
      *
      * @param string $sessionId
      * @param array $sessionData The session data to update. Data may be partial.
@@ -54,25 +54,38 @@ class RkwSessionBackend extends \TYPO3\CMS\Core\Session\Backend\DatabaseSessionB
     {
         // to handle some data issues on login / logout, we're using an own cookie management
         // activate it through setting the "cookieNameRkwBasics"
+
         if ($configuredCookieName = trim($GLOBALS['TYPO3_CONF_VARS']['FE']['cookieNameRkwBasics'])) {
 
             // to synchronize the data of the RkwCookie with the TYPO3 session data, we clear the RkwCookie before we rewrite it
             //CookieService::removeCookie();
-
-            foreach (unserialize($sessionData['ses_data']) as $key => $data) {
+            $sesData = unserialize($sessionData['ses_data']);
+            foreach ($sesData as $key => $data) {
+                //$this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Writing key "%s" with data "%s" to RKW cookie with fe_user ses_id %s', $key, $data, $sessionId));
                 // fetch flashMessageArray and other not serialized stuff
-                if (is_string($data)) {
+                if ($data
+                    && is_string($data)
+                ) {
                     CookieService::setDataKey($key, $data);
                 }
             }
         }
 
-        DebuggerUtility::var_dump(unserialize($sessionData['ses_data']));
-        DebuggerUtility::var_dump(CookieService::getDataArray()); exit;
-
         // do what the function always does
         return parent::update($sessionId, $sessionData);
         //===
+    }
+
+
+
+    /**
+     * Returns logger instance
+     *
+     * @return \TYPO3\CMS\Core\Log\Logger
+     */
+    public static function getLogger()
+    {
+        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
     }
 
 }
