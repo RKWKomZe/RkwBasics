@@ -67,8 +67,6 @@ call_user_func(
             $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
         }
 
-
-
         //=================================================================
         // Configure Logger
         //=================================================================
