@@ -53,7 +53,7 @@ plugin.tx_rkwbasics {
 
         cookie {
 
-            isActive = 0
+            isActive = 1
 
             # Handles TYPO3 8.7 behavior, to kill session data on login and logout. This disturbed some website functions
             # This settings allows to copy session data to an RKW own cookie to keep important data
