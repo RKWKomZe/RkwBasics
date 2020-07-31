@@ -31,13 +31,25 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 class CookieService implements \TYPO3\CMS\Core\SingletonInterface
 {
     /**
+     * cookie name
+     */
+    const COOKIE_NAME = 'rkw_rkwbasics_fe_typo_user';
+
+
+
+    /**
      * Read session data
      *
      * @return array Returns the key related data
      */
     public static function getDataArray()
     {
-        return self::getCookieValue();
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+            return self::getCookieValue();
+            //===
+        }
+        return [];
         //===
     }
 
@@ -49,14 +61,16 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      * @param string $key
      * @return string Returns the key related data
      */
-    public static function getDataKey(string $key)
+    public static function getKey(string $key)
     {
-        // @toDo: Read cookie
-        $data = self::getCookieValue();
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+            $data = self::getCookieValue();
 
-        // @toDo: remove entry?
-
-        return $data[$key];
+            return $data[$key];
+            //===
+        }
+        return [];
         //===
     }
 
@@ -69,15 +83,14 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @param string $key
      * @param string $data
-     * @return array The cookie content
+     * @return bool
      */
-    public static function setDataKey(string $key, string $data)
+    public static function setKey(string $key, string $data)
     {
-        // Important: Check if something is new, before handle the cookie
-        $existingDataOfKey = self::getDataKey($key);
-        if ($existingDataOfKey != $data) {
 
-            $settings = self::getSettings();
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+
             // Hint: if "settings.cookies.allowedKeys" is empty, all keys are allowed
             if (
                 !$settings['cookies']['allowedKeys']
@@ -89,11 +102,11 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
             } else {
                 // do nothing
             }
+
+            return true;
+            //===
         }
-
-
-
-        return self::getCookieValue();
+        return false;
         //===
     }
 
@@ -103,14 +116,19 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      * Removes cookie data
      *
      * @param string $key
-     * @return array The cookie content
+     * @return bool
      */
     public static function removeKey(string $key)
     {
-        // remove key
-        self::createCookie($key);
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+            // remove key
+            self::createCookie($key);
+            return true;
+            //===
+        }
 
-        return self::getCookieValue();
+        return false;
         //===
     }
 
@@ -119,13 +137,25 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * Remove cookie
      *
-     * @return void
+     * @return bool
      */
     public static function removeCookie()
     {
-        // will delete the cookie with next page reload
-        setcookie(self::getCookieName(), "", time() - 3600);
-        $_COOKIE[self::getCookieName()] = "";
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+            // will delete the cookie with next page reload
+            try {
+                setcookie(self::getCookieName(), "", time() - 3600);
+                $_COOKIE[self::getCookieName()] = "";
+                return true;
+                //===
+            } catch (\Exception $e) {
+                self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to delete a cookie. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+            }
+
+        }
+        return false;
+        //===
     }
 
 
@@ -134,26 +164,25 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      * Merge RkwCookie data to the FeUser session data
      * (overwrites existing keys of session data; but is not deleting something other)
      *
-     * @return void
+     * @return bool
      */
     public static function copyCookieDataToFeUserSession()
     {
+        $settings = self::getSettings();
+        if ($settings['cookie']['isActive']) {
+            if (is_array(self::getDataArray())) {
 
-        if (is_array(self::getDataArray())) {
-
-            foreach (self::getDataArray() as $key => $data) {
-                if ($key != 'typo3_session_id') {
-                    $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+                foreach (self::getDataArray() as $key => $data) {
+                    if ($key != 'typo3_session_id') {
+                        $GLOBALS['TSFE']->fe_user->setKey('ses', $key, $data);
+                    }
                 }
-
-                // Reminder: The "storeSessionData" will save the DB session data in turn again to our cookie
-                // Means: What ever happen in meantime: RkwCookie and FeUserSessionData are synchronized now
-                // Means anyhow: Calling this function in RkwSessionBackend::update would create a wonderful loop
-                // -> don't be a hero
-                // see: \RKW\RkwBasics\Session\RkwSessionBackend::update
-                //$GLOBALS['TSFE']->storeSessionData();
             }
+            return true;
+            //===
         }
+        return false;
+        //===
     }
 
 
@@ -168,15 +197,19 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected static function createCookie(string $key, string $data = '')
     {
+
+        // @toDo: Would we have a real benefit to bind the RKW cookie to a user session?
+
         // if typo3_session_id has no match: Kill cookie before create a new one
         // (means: our RKW cookie is part of an old session or the session of another user)
+        /*
         if (
             $data
-            && self::getDataKey('typo3_session_id')
-            != $GLOBALS['TSFE']->fe_user->id
+            && self::getKey('typo3_session_id') != $GLOBALS['TSFE']->fe_user->id
         ) {
             self::removeCookie();
         }
+        */
 
         if(!isset($_COOKIE[self::getCookieName()])) {
 
@@ -184,7 +217,7 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
             // bind cookie to feUserSessionId
             $value = [
                 $key => $data,
-                'typo3_session_id' => $GLOBALS['TSFE']->fe_user->id
+                //'typo3_session_id' => $GLOBALS['TSFE']->fe_user->id
             ];
 
 
@@ -195,7 +228,6 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
             // REMOVE value (always, if exists)
             if (key_exists($key, $cookiePresetValue)) {
                 unset($cookiePresetValue[$key]);
-                //unset($cookiePresetValue['typo3_session_id']);
             }
 
             // (RE-)SET value
@@ -226,14 +258,14 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
         $secure = trim($GLOBALS['TYPO3_CONF_VARS']['SYS']['cookieSecure']);
         $httpOnly = true;
 
-
-        // will set after page reload
-        setcookie($cookieName, serialize($value), $expires, $path, $domain, $secure, $httpOnly);
-        // necessary to work immediately with it: https://stackoverflow.com/questions/3230133/accessing-cookie-immediately-after-setcookie
-        $_COOKIE[self::getCookieName()] = serialize($value);
-
-        self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Following value is delivered: %s', serialize($value)));
-        self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('Writing following value to the cookie: %s', serialize(self::getDataArray())));
+        try {
+            // will set after page reload
+            setcookie($cookieName, serialize($value), $expires, $path, $domain, $secure, $httpOnly);
+            // necessary to work immediately with it: https://stackoverflow.com/questions/3230133/accessing-cookie-immediately-after-setcookie
+            $_COOKIE[self::getCookieName()] = serialize($value);
+        } catch (\Exception $e) {
+            self::getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to write a cookie. Message: %s', str_replace(array("\n", "\r"), '', $e->getMessage())));
+        }
     }
 
 
@@ -245,12 +277,10 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected static function getCookieName()
     {
-        // @toDo: Make it possible to set cookie name via TS?
-
-
+        // just optional
         $configuredCookieName = trim($GLOBALS['TYPO3_CONF_VARS']['FE']['cookieNameRkwBasics']);
         if (empty($configuredCookieName)) {
-            $configuredCookieName = 'rkw_rkwbasics_fe_typo_user';
+            $configuredCookieName = self::COOKIE_NAME;
         }
         return $configuredCookieName;
         //===
@@ -291,7 +321,7 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
      *
      * @return \TYPO3\CMS\Core\Log\Logger
      */
-    public static function getLogger()
+    protected static function getLogger()
     {
         return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
     }

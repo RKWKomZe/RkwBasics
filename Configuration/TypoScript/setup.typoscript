@@ -154,6 +154,7 @@ plugin.tx_rkwbasics {
         }
 
         cookie {
+            isActive = {$plugin.tx_rkwbasics.settings.cookie.isActive}
             allowedKeys = {$plugin.tx_rkwbasics.settings.cookie.allowedKeys}
         }
     }

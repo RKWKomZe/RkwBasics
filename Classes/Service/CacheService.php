@@ -22,6 +22,23 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * CacheService
+ * This is an alternative caching service
+ *
+ *
+ * Following the necessary ext_localconf entry
+//=================================================================
+// Register Caching
+//=================================================================
+if( !is_array($GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey] ) ) {
+$GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey] = array();
+}
+if( !isset($GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['frontend'] ) ) {
+$GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['frontend'] = 'TYPO3\\CMS\\Core\\Cache\\Frontend\\VariableFrontend';
+}
+
+if( !isset($GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['groups'] ) ) {
+$GLOBALS['TYPO3_CONF_VARS'] ['SYS']['caching']['cacheConfigurations'][$extKey]['groups'] = array('pages');
+}
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
  * @copyright Rkw Kompetenzzentrum
@@ -245,7 +262,7 @@ class CacheService implements \TYPO3\CMS\Core\SingletonInterface
      */
     protected static function getCacheName()
     {
-        return $GLOBALS['TSFE']->fe_user->id;
+        return 'rkwbasics_cachingservice_' . $key;
         //===
     }
 
