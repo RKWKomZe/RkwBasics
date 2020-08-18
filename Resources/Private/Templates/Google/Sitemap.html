@@ -1,24 +1,14 @@
 {namespace rkw=RKW\RkwBasics\ViewHelpers}
 
-<f:layout name="Default" />
+<f:layout name="Sitemap" />
 
-This Template is responsible for creating a table of domain objects.
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
 <f:section name="main">
-
 	<f:if condition="{pages}">
 		<f:for each="{pages}" as="page">
 			<url>
 				<loc><f:uri.page pageUid="{page.uid}" absolute="1" /></loc>
-				<lastmod><f:format.date format="%Y-%m-%dT%H:%M:%S%Z">{page.tstamp}</f:format.date></lastmod>
+				<lastmod><f:format.date format="c">{page.tstamp}</f:format.date></lastmod>
 				<changefreq>weekly</changefreq>
 				<priority>0.5</priority>
 			</url>

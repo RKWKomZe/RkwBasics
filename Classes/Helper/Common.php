@@ -182,6 +182,7 @@ class Common
      * @param int $pid
      * @param integer $typeNum
      * @return void
+     * @deprecated
      */
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
