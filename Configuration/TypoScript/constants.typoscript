@@ -34,7 +34,6 @@ plugin.tx_rkwbasics {
         # cat=plugin.tx_rkwbasics//a; type=string; label=Password for proxy
         proxyPassword =
 
-
 		responsiveImages {
 			breakpoints {
 
@@ -51,6 +50,22 @@ plugin.tx_rkwbasics {
 				mobile = 320
 			}
 		}
+
+        cookie {
+
+            isActive = 1
+
+            # Handles TYPO3 8.7 behavior, to kill session data on login and logout. This disturbed some website functions
+            # This settings allows to copy session data to an RKW own cookie to keep important data
+            # Example of the rkw_registration: "rkw_registration_redirect_xdl_url" is needed for multidomain login and logout purpose
+            # Example of rkw_ecosystem: "rkw_ecosystem" is needed to keep an existing dataset in session, to work properly
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Comma separated list of session-keys to keep on login
+            # e.g. rkw_registration_redirect_referrer, rkw_registration_redirect_xdl_url, rkw_ecosystem
+            # ATTENTION: If empty, ALL keys are allowed!
+            allowedKeys =
+
+        }
 	}
 }
 
