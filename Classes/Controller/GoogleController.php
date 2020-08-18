@@ -38,10 +38,11 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * action sitemap
      *
      * @return void
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function sitemapAction()
     {
-        $pages = $this->pagesRepository->findAll();
+        $pages = $this->pagesRepository->findByDokTypes();
         $this->view->assign('pages', $pages);
     }
 
