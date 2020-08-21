@@ -24,7 +24,15 @@ namespace RKW\RkwBasics\Helper;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @deprecated since 2019-08-02 - use \RKW\RkwBasics\Api\JsonApi instead
  */
-class Json extends \RKW\RkwBasics\Api\JsonApi
+class Json extends \RKW\RkwAjax\Encoder\JsonTemplateEncoder
 {
 
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use RKW\RkwAjax\Encoder\JsonTemplateEncoder instead.');
+        parent::__construct();
+    }
 }
