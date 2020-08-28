@@ -168,18 +168,6 @@ plugin.tx_rkwbasics._CSS_DEFAULT_STYLE (
 
 )
 
-#===============================================================
-# JSON AJAX
-#===============================================================
-# Add jquery if not disabled
-[globalVar = LIT:1 = {$plugin.tx_rkwbasics.settings.includeJQuery}]
-    page.includeJSFooterlibs.jquery = EXT:rkw_basics/Resources/Public/Js/jQuery-2.2.4-min.js
-[global]
-
-[globalVar = LIT:1 = {$plugin.tx_rkwbasics.settings.includeAjaxApiJs}]
-    page.includeJSFooter.rkwAjaxApi = EXT:rkw_basics/Resources/Public/Js/AjaxApi.js
-[global]
-
 
 #===============================================================
 # Includes

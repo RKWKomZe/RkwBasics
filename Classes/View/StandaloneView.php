@@ -14,11 +14,7 @@ namespace RKW\RkwBasics\View;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
-use TYPO3\CMS\Extbase\Mvc\Controller\ControllerContext;
-use TYPO3\CMS\Extbase\Mvc\Web\Routing\UriBuilder;
-use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 
 /**
@@ -26,87 +22,22 @@ use TYPO3\CMS\Fluid\Core\Rendering\RenderingContext;
  * Should be used as view if you want to use Fluid without Extbase extensions
  *
  * @api
+ * @deprecated This class is deprecated and will be removed soon. Use RKW\RkwAjax\View\AjaxStandaloneView instead.
  */
-class StandaloneView extends \TYPO3\CMS\Fluid\View\StandaloneView
+class StandaloneView extends \RKW\RkwAjax\View\AjaxStandaloneView
 {
 
-
     /**
-     * Sets the template
+     * Constructor
      *
-     * @param string $templateName
-     * @api
+     * @param ContentObjectRenderer $contentObject The current cObject. If NULL a new instance will be created
+     * @throws \InvalidArgumentException
+     * @throws \UnexpectedValueException
      */
-    public function setTemplate($templateName)
+    public function __construct(ContentObjectRenderer $contentObject = null)
     {
-
-        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
-        if ($currentVersion < 8000000) {
-
-            parent::setTemplate($templateName);
-
-        } else {
-
-            // check if there is a template path included
-            // with TYPO3 8 templates are set via the given controller action.
-            // Thus using setTemplate with relative paths will result in using this path as controller action.
-            if (
-                ($subFolder = dirname($templateName))
-                && ($subFolder != '.')
-            ){
-                $newTemplatePaths = $existingTemplatePaths = $this->baseRenderingContext->getTemplatePaths()->getTemplateRootPaths();
-                foreach ($existingTemplatePaths as $path) {
-                    $newTemplatePaths[] = $path . $subFolder;
-                }
-                $this->baseRenderingContext->getTemplatePaths()->setTemplateRootPaths($newTemplatePaths);
-                parent::setTemplate(basename($templateName));
-
-                \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '(): Please do not use this method with relative paths included. ' .
-                    'The paths should be added to the TemplateRootPaths instead. From TYPO3 8.7 on templates are set via the given controller action. ' .
-                    'Thus using setTemplate with relative paths will in turn result in using this path as controller action.'
-                );
-            }
-        }
-    }
-
-
-
-    /**
-     * Set the request object
-     *
-     * @param \TYPO3\CMS\Extbase\Mvc\Web\Request $webRequest
-     * @return void
-     * @see __construct()
-     */
-    public function setRequest(\TYPO3\CMS\Extbase\Mvc\Web\Request $webRequest)
-    {
-        // set basics
-        $webRequest->setRequestURI(GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL'));
-        $webRequest->setBaseURI(GeneralUtility::getIndpEnv('TYPO3_SITE_URL'));
-
-        /** @var UriBuilder $uriBuilder  **/
-        $uriBuilder = $this->objectManager->get(UriBuilder::class);
-        $uriBuilder->setRequest($webRequest);
-
-        $currentVersion = VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
-        if ($currentVersion < 8000000) {
-
-            /** @var ControllerContext $controllerContext **/
-            $this->controllerContext->setRequest($webRequest);
-            $this->controllerContext->setUriBuilder($uriBuilder);
-
-        } else {
-
-            /** @var ControllerContext $controllerContext **/
-            $controllerContext = $this->objectManager->get(ControllerContext::class);
-            $controllerContext->setRequest($webRequest);
-            $controllerContext->setUriBuilder($uriBuilder);
-
-            /** @var RenderingContext $renderingContext */
-            $renderingContext = $this->objectManager->get(RenderingContext::class, $this);
-            $renderingContext->setControllerContext($controllerContext);
-            $this->setRenderingContext($renderingContext);
-        }
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        parent::__construct($contentObject);
     }
 
 }

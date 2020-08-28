@@ -16,12 +16,6 @@ plugin.tx_rkwbasics {
 
 	settings {
 
-        # cat=plugin.tx_rkwbasics//a; type=boolean; label=Include jQuery?
-        includeJQuery = 0
-
-        # cat=plugin.tx_rkwbasics//a; type=boolean; label=Include JS for AJAX-API?
-        includeAjaxApiJs = 0
-
         # cat=plugin.tx_rkwbasics//a; type=string; label=comma-separated list of fields to look up when searching for images
         includeFieldsList =
 
