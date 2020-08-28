@@ -182,12 +182,12 @@ class Common
      * @param int $pid
      * @param integer $typeNum
      * @return void
-     * @deprecated
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendSimulatorUtility instead.
      */
     public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ .'() is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendSimulatorUtility instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         FrontendSimulatorUtility::simulateFrontendEnvironment($pid);
 
     }

@@ -36,12 +36,12 @@ class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $pluginName
      * @param string $extensionName
      * @return array
-     * @deprecated
+     * @deprecated This function is is deprecated and will be removed soon. Use RKW\RkwAjax\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.
      */
     public function fetchFlexFormDataByUid($ttContentUid, $pluginName, $extensionName)
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . ' is deprecated and will be removed soon. Use RKW\RkwAjax\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
 
         $query = $this->createQuery();
         $query->statement('SELECT pi_flexform from tt_content where list_type="' . strtolower($extensionName) . '_' . strtolower($pluginName) . '" and uid = ' . $ttContentUid);

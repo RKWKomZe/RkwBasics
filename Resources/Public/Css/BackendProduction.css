@@ -1,4 +1,15 @@
-#typo3-cms-backend-backend-toolbaritems-clearcachetoolbaritem .dropdown-list:before{
+.topbar-header-site-name::after,
+.typo3-topbar-site-name::after {
+    content: "LIVE-SYSTEM";
+    background-color:red !important;
+    color:#fff;
+    padding:16px;
+    margin-left:16px;
+    display:inline-block;
+}
+
+#typo3-cms-backend-backend-toolbaritems-clearcachetoolbaritem .dropdown-menu::before,
+#typo3-cms-backend-backend-toolbaritems-clearcachetoolbaritem .dropdown-list::before{
     content: "!!! LIVE-SYSTEM !!! IMPORTANT: Do NOT clear any caches except when really no other solution works! Clearing the cache will cause massive server load - and an angry admin! ";
     background-color: red !important;
     color:#fff;
@@ -6,12 +17,5 @@
     line-height:2em;
     font-weight:bold;
     display:inline-block;
-}
-
-.typo3-topbar-site-name::after {
-    content: "LIVE-SYSTEM";
-    background-color:red !important;
-    color:#fff;
-    padding:16px;
-    margin-left:16px;
+    margin-bottom:1em;
 }

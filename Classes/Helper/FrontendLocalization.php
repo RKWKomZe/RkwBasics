@@ -25,7 +25,7 @@ namespace RKW\RkwBasics\Helper;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @deprecated
+ * @deprecated This class is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendLocalization instead.
  */
 class FrontendLocalization extends \RKW\RkwBasics\Utility\FrontendLocalization
 {
@@ -34,6 +34,6 @@ class FrontendLocalization extends \RKW\RkwBasics\Utility\FrontendLocalization
      */
     public function __construct()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendLocalization instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
     }
 }

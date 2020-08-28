@@ -32,7 +32,6 @@ class IsEmptyViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHel
      */
     public function render($string = '')
     {
-
         // strip spaces and line breaks
         return empty(preg_replace('/\s/', '', $string));
     }

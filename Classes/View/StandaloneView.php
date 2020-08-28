@@ -22,7 +22,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * Should be used as view if you want to use Fluid without Extbase extensions
  *
  * @api
- * @deprecated
+ * @deprecated This class is deprecated and will be removed soon. Use RKW\RkwAjax\View\AjaxStandaloneView instead.
  */
 class StandaloneView extends \RKW\RkwAjax\View\AjaxStandaloneView
 {
@@ -36,7 +36,7 @@ class StandaloneView extends \RKW\RkwAjax\View\AjaxStandaloneView
      */
     public function __construct(ContentObjectRenderer $contentObject = null)
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use RKW\RkwAjax\View\AjaxStandaloneView instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         parent::__construct($contentObject);
     }
 

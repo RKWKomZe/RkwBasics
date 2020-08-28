@@ -14,10 +14,6 @@ namespace RKW\RkwBasics\Api;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Mvc\Web\Request;
-use RKW\RkwAjax\View\StandaloneView;
 
 /**
  * Class JsonApi
@@ -26,6 +22,7 @@ use RKW\RkwAjax\View\StandaloneView;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated Class RKW\RkwBasics\Api\JsonApi is deprecated and will be removed soon. Use RKW\RkwAjax\Encoder\JsonTemplateEncoder instead.
  */
 class JsonApi extends \RKW\RkwAjax\Encoder\JsonTemplateEncoder
 {
@@ -36,7 +33,7 @@ class JsonApi extends \RKW\RkwAjax\Encoder\JsonTemplateEncoder
      */
     public function __construct()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use RKW\RkwAjax\Encoder\JsonTemplateEncoder instead.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         parent::__construct();
     }
 

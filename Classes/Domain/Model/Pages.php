@@ -564,11 +564,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsTeaserText
      *
      * @return string $txRkwbasicsTeaserText
-     * @deprecated
+     * @deprecated This function  is deprecated and will be removed soon.
      */
     public function getTxRkwbasicsTeaserText()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return ($this->txRkwbasicsTeaserText ? $this->txRkwbasicsTeaserText : $this->getAbstract());
     }
 
@@ -577,11 +577,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $txRkwbasicsTeaserText
      * @return void
-     * @deprecated
+     * @deprecated This function deprecated and will be removed soon.
      */
     public function setTxRkwbasicsTeaserText($txRkwbasicsTeaserText)
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsTeaserText = $txRkwbasicsTeaserText;
     }
 
@@ -610,11 +610,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsArticleImage
      *
      * @return \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     * @deprecated
+     * @deprecated This function is deprecated and will be removed soon.
      */
     public function getTxRkwbasicsArticleImage()
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsArticleImage;
     }
 
@@ -623,11 +623,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
      * @return void
-     * @deprecated
+     * @deprecated This function is deprecated and will be removed soon.
      */
     public function setTxRkwbasicsArticleImage(\RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsArticleImage)
     {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . '::' . __METHOD__ . '() is deprecated and will be removed soon.');
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsArticleImage = $txRkwbasicsArticleImage;
     }
 
