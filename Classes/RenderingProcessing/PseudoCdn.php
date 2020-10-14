@@ -1,6 +1,6 @@
 <?php
 
-namespace RKW\RkwBasics\Cdn;
+namespace RKW\RkwBasics\RenderingProcessing;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -16,14 +16,14 @@ namespace RKW\RkwBasics\Cdn;
  */
 
 /**
- * Class SearchReplace
+ * Class PseudoCdn
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class SearchReplace
+class PseudoCdn
 {
     /**
      * @var array contains configuration
@@ -114,8 +114,6 @@ class SearchReplace
 
         // add domain to url
         return $prefix . $this->config['protocol'] . $domain . '/' . $path;
-        //===
-
     }
 
 
@@ -139,14 +137,10 @@ class SearchReplace
                 }
             }
 
-            //===
-
             return $object->addDomain($matches[1], $matches[2]);
-            //===
         };
 
         return preg_replace_callback($this->config['search'], $callback, $content);
-        //===
     }
 
 

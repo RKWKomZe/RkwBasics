@@ -213,7 +213,7 @@ lib.txmyExtension {
 </html>
 ```
 
-## 2. Configuration
+## 1.1.2. Configuration
 * Per default the lib uses the following breakpoints defined via TypoScript:
 ```
 # cat=plugin.tx_rkwbasics//a; type=integer; label=Breakpoint for desktop
@@ -243,8 +243,67 @@ mobile = 320
 ```    
 * You can configure the usage of CropVariants per breakpoint and also set your own breakpoints and maxWidths via TypoScript
 
+## 1.2. CDN
 
-## 3. Breaking Changes 
+With the CDN functionality it is possible to reduce the loading time of the website considerably by loading static content from subdomains of the respective website.
+This is not a real CDN, but a Pseudo-CDN, since no external servers are used.
+
+Example without Pseudo-CDN
+```
+<picture >
+    <source srcset="https://www.rkw.de/fileadmin/_processed_/e/e/csm_20191112-Unternehmensberatung-Desktop_20772b022d.jpg" media="(min-width: 1025px)">
+    <source srcset="https://www.rkw.de/fileadmin/_processed_/a/2/csm_20191112-Unternehmensberatung-Tablet_e748abd11d.jpg" media="(min-width:769px)">
+    <source srcset="https://www.rkw.de/fileadmin/_processed_/a/2/csm_20191112-Unternehmensberatung-Tablet_a7c14e847a.jpg" media="(min-width:481px)">
+    <source srcset="https://www.rkwde/fileadmin/_processed_/4/9/csm_20191112-Unternehmensberatung-Mobile_3c8697c74b.jpg" media="(min-width:321px)">
+    <source srcset="https://www.rkw.de/fileadmin/_processed_/4/9/csm_20191112-Unternehmensberatung-Mobile_f329b9da89.jpg" media="(min-width:0px)">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="Ihre Unternehmensberatung ">
+</picture>
+```
+Example with Pseudo-CDN
+```
+<picture >
+    <source srcset="https://static1.rkw.de/fileadmin/_processed_/e/e/csm_20191112-Unternehmensberatung-Desktop_20772b022d.jpg" media="(min-width: 1025px)">
+    <source srcset="https://static1.rkw.de/fileadmin/_processed_/a/2/csm_20191112-Unternehmensberatung-Tablet_e748abd11d.jpg" media="(min-width:769px)">
+    <source srcset="https://static1.rkw.de/fileadmin/_processed_/a/2/csm_20191112-Unternehmensberatung-Tablet_a7c14e847a.jpg" media="(min-width:481px)">
+    <source srcset="https://static2.rkwde/fileadmin/_processed_/4/9/csm_20191112-Unternehmensberatung-Mobile_3c8697c74b.jpg" media="(min-width:321px)">
+    <source srcset="https://static2rkw.de/fileadmin/_processed_/4/9/csm_20191112-Unternehmensberatung-Mobile_f329b9da89.jpg" media="(min-width:0px)">
+    <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="Ihre Unternehmensberatung ">
+</picture>
+```
+### 1.2.1 Settings
+```
+config {
+    tx_rkwbasics_cdn {
+
+        // Activate CDN
+        enable = 0
+
+        // Maximum number of connections per domain
+        maxConnectionsPerDomain = 4
+
+        // Maximum number of subdomains
+        maxSubdomains = 100
+
+        // Ignore some files like CSS and JS because browser security stuff may cause problems
+        ignoreIfContains = /\.css|\.js|\?noCdn=1/
+
+        // Regular expression for replacement
+        search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
+    }
+}
+```
+* **enable** activates the Pseudo-CDN
+* **maxConnectionsPerDomain** defines how many resources are loaded from a subdomain. 
+* **maxSubdomains** defines how many sudomains there should be. If the value is set to 10 the subdomains static1.example.com to static10.example.com are used.
+* **search** allows to override the regular expression for searching/replacing paths to static content
+* **ignoreIfContains** allows to specify exclusion criteria for the pseudoCDN. Especially JS files should be excluded here (cross-domain issues)
+
+
+Translated with www.DeepL.com/Translator (free version)
+
+## 3. Image Protection
+
+## 4. Breaking Changes 
 ### In version >= 8.7.20
 * __Moved field tx_rkwbasics_teaser_image to resources-tab in page properties.__
 Please adapt your permission settings in BE accordingly.

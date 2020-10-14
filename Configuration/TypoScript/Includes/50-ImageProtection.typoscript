@@ -1,0 +1,13 @@
+#===============================================================
+# Configuration for CDN
+#===============================================================
+config {
+    tx_rkwbasics_imageprotection {
+
+        // Activate image protection
+        enable = 0
+
+        // Regular expression for replacement
+        search = /(<img [^>]+>)/i
+    }
+}

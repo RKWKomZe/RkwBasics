@@ -6,7 +6,6 @@ config {
 
         // Activate CDN
         enable = 0
-        enablePostProc = 0
 
         // Maximum number of connections per domain
         maxConnectionsPerDomain = 4
