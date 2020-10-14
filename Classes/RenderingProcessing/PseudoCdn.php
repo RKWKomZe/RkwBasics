@@ -107,7 +107,7 @@ class PseudoCdn
         $baseDomain = str_replace($this->config['protocol'], '', $this->config['baseDomain']);
 
         // build new subdomain
-        $domain = 'static' . (intval($this->config['subdomainCountBase']) + $this->domainCnt) . '.' . $baseDomain;
+        $domain = 'static' . ($this->domainCnt) . '.' . $baseDomain;
 
         // Add one to counter
         $this->replacementCnt++;

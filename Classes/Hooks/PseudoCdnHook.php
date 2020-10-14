@@ -43,11 +43,13 @@ class PseudoCdnHook
         $config = $obj->config['config']['tx_rkwbasics_cdn.'];
 
         // check if enabled
-        if ($config['enable'] != 1) {
+        if (
+            ($config['enable'] != 1)
+            || (! $config['maxSubdomains'])
+        ){
             return;
         }
 
-        $config['subdomainCountBase'] = intval($config['maxSubdomains']);
         $config['maxSubdomains'] = intval($config['maxSubdomains']);
 
         // get domain from base-url	if not set
