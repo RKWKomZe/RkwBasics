@@ -69,6 +69,13 @@ call_user_func(
         }
 
         //=================================================================
+        // XClass
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Mvc\Web\Request::class] = [
+            'className' => RKW\RkwBasics\XClasses\Extbase\Mvc\Web\Request::class
+        ];
+
+        //=================================================================
         // Configure Logger
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['LOG']['RKW']['RkwBasics']['writerConfiguration'] = array(
@@ -83,6 +90,7 @@ call_user_func(
                 )
             ),
         );
+
 
     },
     $_EXTKEY
