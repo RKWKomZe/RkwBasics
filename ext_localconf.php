@@ -33,17 +33,16 @@ call_user_func(
         );
 
         //=================================================================
-        // Register Hooks for CDN
+        // Register Hooks
         //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ImageProtectionHook->hook_contentPostProc';
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\PseudoCdnHook->hook_contentPostProc';
+        if (TYPO3_MODE !== 'BE') {
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ImageProtectionHook->hook_contentPostProc';
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\PseudoCdnHook->hook_contentPostProc';
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ProxyCachingHook->sendHeader';
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-postTransform'][] = 'RKW\\RkwBasics\\Hooks\\InlineCssHook->render_postTransform';
+        }
 
-        //=================================================================
-        // Register Hook for Varnish
-        //=================================================================
-        $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ProxyCachingHook->sendHeader';
-
-        //=================================================================
+            //=================================================================
         // register update wizard
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\RKW\RkwBasics\Updates\UpdateCore8Wizard::class] = \RKW\RkwBasics\Updates\UpdateCore8Wizard::class;
@@ -69,12 +68,17 @@ call_user_func(
         }
 
         //=================================================================
-        // XClass
+        // XClasses
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Mvc\Web\Request::class] = [
             'className' => RKW\RkwBasics\XClasses\Extbase\Mvc\Web\Request::class
         ];
-
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Service\ImageService::class] = [
+            'className' => RKW\RkwBasics\XClasses\Extbase\Service\ImageService::class
+        ];
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Core\Resource\ResourceCompressor::class] = [
+            'className' => RKW\RkwBasics\XClasses\Core\Resource\ResourceCompressor::class
+        ];
         //=================================================================
         // Configure Logger
         //=================================================================

@@ -69,18 +69,22 @@ class PagesRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
 
     /**
-     * find all pages by type
+     * find all pages of list and dokTypes
      *
+     * @param array $uidList
      * @param array $dokTypes
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findByDokTypes($dokTypes = [1])
+    public function findByUidListAndDokTypes(array $uidList, array $dokTypes = [1])
     {
 
         $query = $this->createQuery();
         $query->matching(
-            $query->in('doktype', $dokTypes)
+            $query->logicalAnd(
+                $query->in('uid', $uidList),
+                $query->in('doktype', $dokTypes)
+            )
         );
 
         return $query->execute();

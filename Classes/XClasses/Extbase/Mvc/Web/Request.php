@@ -17,13 +17,10 @@ namespace RKW\RkwBasics\XClasses\Extbase\Mvc\Web;
 use TYPO3\CMS\Extbase\Mvc\Web\ReferringRequest;
 
 /**
- * Represents a web request.
- *
- * @api
+ * Bugfix for referrer callback in TYPO3 8.7
  */
 class Request extends \TYPO3\CMS\Extbase\Mvc\Web\Request
 {
-
 
     /**
      * Get a freshly built request object pointing to the Referrer.
@@ -34,17 +31,24 @@ class Request extends \TYPO3\CMS\Extbase\Mvc\Web\Request
      */
     public function getReferringRequest()
     {
-        if (isset($this->internalArguments['__referrer']['@request'])) {
-            $referrerArray = unserialize($this->hashService->validateAndStripHmac($this->internalArguments['__referrer']['@request']), ['allowed_classes' => false]);
-            $arguments = [];
-            if (isset($this->internalArguments['__referrer']['arguments'])) {
-                // This case is kept for compatibility in 7.6 and 6.2, but will be removed in 8
-                $arguments = unserialize(base64_decode($this->hashService->validateAndStripHmac($this->internalArguments['__referrer']['arguments'])));
+        $currentVersion = \TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
+        if ($currentVersion < 9000000) {
+            if (isset($this->internalArguments['__referrer']['@request'])) {
+                $referrerArray = unserialize($this->hashService->validateAndStripHmac($this->internalArguments['__referrer']['@request']), ['allowed_classes' => false]);
+                $arguments = [];
+                if (isset($this->internalArguments['__referrer']['arguments'])) {
+                    // This case is kept for compatibility in 7.6 and 6.2, but will be removed in 8
+                    $arguments = unserialize(base64_decode($this->hashService->validateAndStripHmac($this->internalArguments['__referrer']['arguments'])));
+                }
+                $referringRequest = new ReferringRequest();
+                $referringRequest->setArguments(array_replace_recursive($arguments, $referrerArray));
+
+                return $referringRequest;
             }
-            $referringRequest = new ReferringRequest();
-            $referringRequest->setArguments(array_replace_recursive($arguments, $referrerArray));
-            return $referringRequest;
+
+            return null;
+        } else {
+            return parent::getReferringRequest();
         }
-        return null;
     }
 }

@@ -29,8 +29,8 @@
 				<target>CSS- Klasse</target>
 			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
-                <source>Proxy Caching for logged in users</source>
-                <target>Proxy Caching für angemeldete FE-Nutzer erlauben</target>
+                <source>Allow Proxy Caching (ATTENTION: valid even for logged in FE-users)</source>
+                <target>Proxy Caching erlauben (ACHTUNG: gilt auch für angemeldete FE-Nutzer)</target>
             </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.inherit">
                 <source>Inherit</source>

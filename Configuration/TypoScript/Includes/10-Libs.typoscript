@@ -12,6 +12,7 @@ lib.txRkwBasics {
         file = {$plugin.tx_rkwbasics.view.templateRootPath}FluidTemplateLibs/ResponsiveImages.html
         settings {
 
+            lazyLoading = 1
             titleFallback = Image
             additionalAttributes =
 

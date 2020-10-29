@@ -77,7 +77,6 @@ class PseudoCdn
         ) {
             $this->config['protocol'] = 'https://';
         }
-
     }
 
     /**

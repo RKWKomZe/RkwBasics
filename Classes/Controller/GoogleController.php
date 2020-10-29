@@ -34,6 +34,7 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected $pagesRepository = null;
 
+
     /**
      * action sitemap
      *
@@ -42,7 +43,18 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     public function sitemapAction()
     {
-        $pages = $this->pagesRepository->findByDokTypes();
+
+        $currentPid = $GLOBALS['TSFE']->id;
+        $depth = 999999;
+
+        /** @var \TYPO3\CMS\Core\Database\QueryGenerator $queryGenerator */
+        $queryGenerator = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\QueryGenerator::class );
+        $treeList = explode(
+            ',',
+            $queryGenerator->getTreeList($currentPid , $depth, 0, 1)
+        );
+
+        $pages = $this->pagesRepository->findByUidListAndDokTypes($treeList);
         $this->view->assign('pages', $pages);
     }
 
