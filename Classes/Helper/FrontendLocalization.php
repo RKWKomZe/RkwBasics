@@ -34,6 +34,7 @@ class FrontendLocalization extends \RKW\RkwBasics\Utility\FrontendLocalization
      */
     public function __construct()
     {
+        parent::__construct();
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
     }
 }

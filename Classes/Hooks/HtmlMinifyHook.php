@@ -15,15 +15,16 @@ namespace RKW\RkwBasics\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+
 /**
- * Class PseudoCdnHooks
+ * Class HtmlMinifyHook
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PseudoCdnHook
+class HtmlMinifyHook
 {
 
     /**
@@ -34,15 +35,15 @@ class PseudoCdnHook
      */
     function hook_contentPostProc(&$params)
     {
+
         // get object
         $obj = $params['pObj'];
 
         // get CDN
-        $cdn = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\PseudoCdn::class);
+        $cdn = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\HtmlMinify::class);
 
         // Replace content
         $obj->content = $cdn->process($obj->content);
-
     }
 
 } 

@@ -1,0 +1,11 @@
+plugin.tx_rkwbasics {
+
+    settings {
+        cdn {
+            ignoreIfContains = New-Setup-Test
+        }
+	}
+}
+
+// needed because of BE-Mode with test
+module.tx_rkwbasics < plugin.tx_rkwbasics

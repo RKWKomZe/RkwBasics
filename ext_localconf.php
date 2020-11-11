@@ -36,13 +36,14 @@ call_user_func(
         // Register Hooks
         //=================================================================
         if (TYPO3_MODE !== 'BE') {
-            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ImageProtectionHook->hook_contentPostProc';
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ReplaceExtensionPathsHook->hook_contentPostProc';
             $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\PseudoCdnHook->hook_contentPostProc';
+            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\HtmlMinifyHook->hook_contentPostProc';
             $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['tslib/class.tslib_fe.php']['contentPostProc-output'][] = 'RKW\\RkwBasics\\Hooks\\ProxyCachingHook->sendHeader';
-            $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-postTransform'][] = 'RKW\\RkwBasics\\Hooks\\InlineCssHook->render_postTransform';
+            //$GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_pagerenderer.php']['render-postTransform'][] = 'RKW\\RkwBasics\\Hooks\\InlineCssHook->render_postTransform';
         }
 
-            //=================================================================
+        //=================================================================
         // register update wizard
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['ext/install']['update'][\RKW\RkwBasics\Updates\UpdateCore8Wizard::class] = \RKW\RkwBasics\Updates\UpdateCore8Wizard::class;
@@ -79,6 +80,12 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Core\Resource\ResourceCompressor::class] = [
             'className' => RKW\RkwBasics\XClasses\Core\Resource\ResourceCompressor::class
         ];
+        /*if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('varnish')) {
+            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\Snowflake\Varnish\Utility\VarnishHttpUtility::class] = [
+                'className' => RKW\RkwBasics\XClasses\Varnish\Utility\VarnishHttpUtility::class
+            ];
+        }*/
+
         //=================================================================
         // Configure Logger
         //=================================================================
