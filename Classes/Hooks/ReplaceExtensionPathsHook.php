@@ -16,19 +16,18 @@ namespace RKW\RkwBasics\Hooks;
  */
 
 /**
- * Class ImageProtectionHook
+ * Class ReplaceExtensionPathHook
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
- * @package RKW_RkwBasics
+ * @package RKW_RkwTemplates
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ImageProtectionHook
+class ReplaceExtensionPathsHook
 {
 
+
     /**
-     * Replaces string patterns from the page content.
-     * You can use it to replace URLs for Content Delivery Network (CDN).
      * Called before page is outputed in order to include INT-Scripts
      *
      * @param array $params
@@ -36,25 +35,15 @@ class ImageProtectionHook
      */
     function hook_contentPostProc(&$params)
     {
-        /**@toDo:not working properly with picture-tags */
-        return;
 
         // get object
         $obj = $params['pObj'];
 
-        // Fetch configuration
-        $config = $obj->config['config']['tx_rkwbasics_imageprotection.'];
-
-        // check if enabled
-        if ($config['enable'] != 1) {
-            return;
-        }
-
-        // get object
-        $cdn = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('RKW\\RkwBasics\\RenderingProcessing\\ImageProtection', $config);
+        // get class
+        $replaceExtensionPaths = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\ReplaceExtensionPaths::class);
 
         // Replace content
-        $obj->content = $cdn->searchReplace($obj->content, true);
+        $obj->content = $replaceExtensionPaths->process($obj->content);
 
     }
 

@@ -110,7 +110,7 @@ class PageNotFound
                 // redirect and exit
                 HttpUtility::redirect($link, HttpUtility::HTTP_STATUS_301);
 
-                // check if we were clever enough to set a fallback pid
+            // check if we were clever enough to set a fallback pid
             } else {
 
                 if ($configuration['fallbackPid']) {

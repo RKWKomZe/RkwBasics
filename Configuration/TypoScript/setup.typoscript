@@ -157,6 +157,20 @@ plugin.tx_rkwbasics {
             isActive = {$plugin.tx_rkwbasics.settings.cookie.isActive}
             allowedKeys = {$plugin.tx_rkwbasics.settings.cookie.allowedKeys}
         }
+
+        cdn {
+            enable = {$plugin.tx_rkwbasics.settings.cdn.enable}
+            maxConnectionsPerDomain = {$plugin.tx_rkwbasics.settings.cdn.maxConnectionsPerDomain}
+            maxSubdomains = {$plugin.tx_rkwbasics.settings.cdn.maxSubdomains}
+            ignoreIfContains = {$plugin.tx_rkwbasics.settings.cdn.ignoreIfContains}
+            search = {$plugin.tx_rkwbasics.settings.cdn.search}
+        }
+
+        htmlMinify {
+            enable = {$plugin.tx_rkwbasics.settings.htmlMinify.enable}
+            excludePids = {$plugin.tx_rkwbasics.settings.htmlMinify.excludePids}
+            includePageTypes = {$plugin.tx_rkwbasics.settings.htmlMinify.includePageTypes}
+        }
     }
 }
 

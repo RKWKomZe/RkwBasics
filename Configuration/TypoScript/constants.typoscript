@@ -58,6 +58,38 @@ plugin.tx_rkwbasics {
             # e.g. rkw_registration_redirect_referrer, rkw_registration_redirect_xdl_url, rkw_ecosystem
             # ATTENTION: If empty, ALL keys are allowed!
             allowedKeys =
+        }
+
+
+        cdn {
+
+            # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate CDN
+            enable = 0
+
+            # cat=plugin.tx_rkwbasics//a; type=integer; label=Maximum number of connections per domain
+            maxConnectionsPerDomain = 4
+
+            # cat=plugin.tx_rkwbasics//a; type=integer; label=Maximum number of subdomains
+            maxSubdomains = 100
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Ignore some files like CSS and JS because browser security stuff may cause problems
+            ignoreIfContains = /\.css|\.js|\?noCdn=1/
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Regular expression for replacement
+            search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
+        }
+
+
+        htmlMinify {
+
+            # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate HTML Minifier
+            enable = 0
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Pids to exclude, comma-separated
+            excludePids =
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Page types to include, comma-separated
+            includePageTypes = 0
 
         }
 	}

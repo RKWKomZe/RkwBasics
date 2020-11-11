@@ -244,6 +244,7 @@ mobile = 320
 * You can configure the usage of CropVariants per breakpoint and also set your own breakpoints and maxWidths via TypoScript
 
 ## 1.2. Pseudo-CDN
+### 1.2.1 Description
 
 With the CDN functionality it is possible to reduce the loading time of the website considerably by loading static content from subdomains of the respective website.
 This is not a real CDN, but a Pseudo-CDN, since no external servers are used.
@@ -270,25 +271,27 @@ Example with Pseudo-CDN
     <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="Ihre Unternehmensberatung ">
 </picture>
 ```
-### 1.2.1 Settings
+### 1.2.2 Settings
 ```
-config {
-    tx_rkwbasics_cdn {
+plugin.tx_rkwbasics {
+    settings {
+        cdn {
 
-        // Activate CDN
-        enable = 0
+            # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate CDN
+            enable = 0
 
-        // Maximum number of connections per domain
-        maxConnectionsPerDomain = 4
+            # cat=plugin.tx_rkwbasics//a; type=integer; label=Maximum number of connections per domain
+            maxConnectionsPerDomain = 4
 
-        // Maximum number of subdomains
-        maxSubdomains = 100
+            # cat=plugin.tx_rkwbasics//a; type=integer; label=Maximum number of subdomains
+            maxSubdomains = 100
 
-        // Ignore some files like CSS and JS because browser security stuff may cause problems
-        ignoreIfContains = /\.css|\.js|\?noCdn=1/
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Ignore some files like CSS and JS because browser security stuff may cause problems
+            ignoreIfContains = /\.css|\.js|\?noCdn=1/
 
-        // Regular expression for replacement
-        search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Regular expression for replacement
+            search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
+        }
     }
 }
 ```
@@ -298,7 +301,34 @@ config {
 * **search** allows to override the regular expression for searching/replacing paths to static content
 * **ignoreIfContains** allows to specify exclusion criteria for the pseudoCDN. Especially JS files should be excluded here (cross-domain issues)
 
-##  1.3 Enforced ImageRendering
+## 1.3 HTML Minify
+### 1.3.1 Description
+
+This function removes unnecessary breaks and spaces from the HTML code. This significantly reduces the size of the HTML code.
+
+### 1.3.1 Settings
+```
+plugin.tx_rkwbasics {
+    settings {
+        htmlMinify {
+        
+            # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate HTML Minifier
+            enable = 0
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Pids to exclude, comma-separated
+            excludePids =
+
+            # cat=plugin.tx_rkwbasics//a; type=string; label=Page types to include, comma-separated
+            includePageTypes = 0
+        }
+    }
+}
+```
+* **enable** activates the HTML Minify
+* **excludePids** excludes the PIDs defined in this comma-separated list 
+* **includePageTypes** includes the pageTypes defined in this comma-separated list
+
+##  1.4 Enforced ImageRendering
 Normally TYPO3 only calculates those images whose size does not fit, for example. 
 For all others, however, image optimization would not work. 
 Using an XClass, this extension forces ImageProcessing for all images in the Frontend, 
@@ -332,125 +362,197 @@ Since Varnish configurations are very individual, only the relevant lines that c
 The following configuration example assumes that ```rkw/rkw-basics``` is used together with ```opsone-ch/varnish```.
 
 ```
+#
+# Varnish file by Steffen Kroggel (developer@steffenkroggel.de)
+# Version 1.0.5
+# Date 2020/11/05
+#
+
+# Marker to tell the VCL compiler that this VCL has been adapted to the
+# new 4.0 format.
+vcl 4.0;
+import std;
+import xkey;
+[...]
+
 #========================================================
 # Sub-routine when request is received
 #========================================================
 sub vcl_recv {
+    # Happens before we check if we have this in cache already.
+    #
+    # Typically you clean up the request here, removing cookies you don't need,
+    # rewriting the request, etc.
 
-[...]
+    [...]
+
+
+    # Set X-Forwarded-For Header
+    if (req.restarts == 0) {
+
+        if (req.http.X-Forwarded-For) {
+            set req.http.X-Forwarded-For = req.http.X-Forwarded-For + ", " + client.ip;
+        } else {
+            set req.http.X-Forwarded-For = client.ip;
+        }
+    }
 
     # Catch BAN Command for TYPO3 extension "Varnish"
     # This bans specific cache objects from cache
-    if (req.method == "BAN" && client.ip ~ ban) {
-    
-        if(req.http.Varnish-Ban-All == "1" && req.http.Varnish-Ban-TYPO3-Sitename) {
-            ban("req.url ~ /" + " && obj.http.TYPO3-Sitename == " + req.http.Varnish-Ban-TYPO3-Sitename);
-            return (synth(200, "Banned all on site "+ req.http.Varnish-Ban-TYPO3-Sitename)) ;
-            #===
-        } else if(req.http.Varnish-Ban-All == "1") {
-            ban("req.url ~ /");
-            return (synth(200, "Banned all"));
+    if (
+        (req.method == "BAN")
+        || (req.method == "PURGE")
+    ) {
+
+        # Check if  IP is allowed to BAN/Purge
+        if (req.http.X-Forwarded-For ~ "^127.0.0.0") {
+            return(synth(405,"Not allowed. IP: " + req.http.X-Forwarded-For));
             #===
         }
-    
-        if(req.http.Varnish-Ban-TYPO3-Pid && req.http.Varnish-Ban-TYPO3-Sitename) {
-            ban("obj.http.TYPO3-Pid == " + req.http.Varnish-Ban-TYPO3-Pid + " && obj.http.TYPO3-Sitename == " + req.http.Varnish-Ban-TYPO3-Sitename);
-            return (synth(202, "Banned TYPO3 pid " + req.http.Varnish-Ban-TYPO3-Pid + " on site " + req.http.Varnish-Ban-TYPO3-Sitename));
+
+        # Check if one single page of an instance is to be invalidated
+        if (req.http.Varnish-Ban-TYPO3-Pid && req.http.Varnish-Ban-TYPO3-Sitename) {
+            set req.http.n-gone = xkey.softpurge(req.http.Varnish-Ban-TYPO3-Sitename + "_" + req.http.Varnish-Ban-TYPO3-Pid);
+            return (synth(200, "Softpurge. Invalidated " + req.http.n-gone + " objects with " + req.http.Varnish-Ban-TYPO3-Sitename + "_" + req.http.Varnish-Ban-TYPO3-Pid));
+            #====
+
+        # Check if all pages of an instance are to be invalidated
+        } else if (req.http.Varnish-Ban-TYPO3-Sitename) {
+            set req.http.n-gone = xkey.softpurge(req.http.Varnish-Ban-TYPO3-Sitename);
+            return (synth(200, "Softpurge. Invalidated " + req.http.n-gone + " objects with " + req.http.Varnish-Ban-TYPO3-Sitename));
             #===
-        } else if(req.http.Varnish-Ban-TYPO3-Pid) {
-            ban("obj.http.TYPO3-Pid == " + req.http.Varnish-Ban-TYPO3-Pid);
-            return (synth(200, "Banned TYPO3 pid "+ req.http.Varnish-Ban-TYPO3-Pid)) ;
+
+        # Fallback with minimum impact
+        } else {
+            ban("req.http.host == " + req.http.host + " && req.url == " + req.url);
+            return(synth(200,"Ban. Banned " + req.http.host + req.url));
             #===
         }
     }
 
-    # Do purge as ban for current page
-    if (req.method == "PURGE" && client.ip ~ purge) {
-	    ban("req.http.host == " + req.http.host + " && req.url == " + req.url);
-	    return(synth(200,"Purged"));
+    
+    [...]
+
+    # Do not cache authorized content (login via htaccess)
+    if (req.http.Authorization) {
+        return (pass);
+        #===
+    }
+
+    # Force lookup if the request is a no-cache request from the client (STRG + F5)
+    if (req.http.Cache-Control ~ "no-cache") {
+        return (pass);
+        #=== 
+    }
+
+    # Do not cache image files, pdfs, xls, docs, zips, etc. This fills up the cache to fast
+    # and it keeps WebP-optimization on apache side from working
+    if (req.url ~ "(?i)\.(jpeg|jpg|png|gif|ico|webp|txt|pdf|gz|zip|doc|docx|ppt|pptx|xls|xlsx)$") {
+        return (pass);
 	    #===
+    } 
+
+    # Do not cache TYPO3 BE User requests
+    if (req.http.Cookie ~ "be_typo_user" || req.url ~ "^/typo3/") {
+        return (pass);
+        #===
+    }
+
+    # Do not cache non-cached pages or specific page types and params
+    # We also ignore some RealUrl-coded params from extensions
+    if (
+        (req.url ~ "^/nc/?")
+        || (req.url ~ "$/gitpull.php")
+        || (req.url ~ "(\?|&)type=")
+        || (req.url ~ "(\?|&)typeNum=")
+        || (req.url ~ "(\?|&)no_cache=1")
+        || (req.url ~ "(\?|&)no_varnish=1")
+        || (req.url ~ "(\?|&)eID=")
+        || (req.url ~ "(\?|&)cHash=")
+        || (req.url ~ "/tx-[a-z-]+/")
+        || (req.url ~ "/pagetype-[a-z-]+/")
+        || (req.url ~ "^/phpmyadmin/?")
+    ) {
+        return (pass);
+        #===
     }
 
 
-[...]
+    # unset grace-header from request
+    unset req.http.grace;
 
-    # Removes all cookies named __utm? (utma, utmb...) and __unam - tracking thing. This would prevent caching
+    # Removes all cookies named __utm? (utma, utmb...) and __unam - tracking thing
+    # Otherwise we might run into problems with caching
     set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *__utm.=[^;]+;? *", "\1"); # Google Analytics
     set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *__unam=[^;]+;? *", "\1"); # Google Analytics
-    set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *_et_coid=[^;]+;? *", "\1"); # eTracker 
+    set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *_et_coid=[^;]+;? *", "\1"); # eTracker
     set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *isSdEnabled=[^;]+;? *", "\1"); # perso-net shit
     set req.http.Cookie = regsuball(req.http.Cookie, "(^|(?<=; )) *cookie_optin=[^;]+;? *", "\1"); # Cookie-Opt-In
     if (req.http.Cookie == "") {
-	    unset req.http.Cookie;
+        unset req.http.Cookie;
     }
 
-
-[...]
-
-    # do not cache TYPO3 BE User requests
-    if (req.http.Cookie ~ "be_typo_user" || req.url ~ "^/typo3/") {
-	    return (pass);
-	    #===
-    }
-
-[...]
-
-    # do not cache non-cached pages or specific page types and params
-    # We also ignore some RealUrl-coded params from extensions
-    if (
-	(req.url ~ "/nc/?")
-	|| (req.url ~ "/gitpull.php")
-	|| (req.url ~ "(\?|&)type=")
-	|| (req.url ~ "(\?|&)typeNum=")
-	|| (req.url ~ "(\?|&)no_cache=1")
-	|| (req.url ~ "(\?|&)no_varnish=1")
-	|| (req.url ~ "(\?|&)eID=")
-	|| (req.url ~ "(\?|&)cHash=")
-	|| (req.url ~ "/tx-[a-z-]+/")
-	|| (req.url ~ "/pagetype-[a-z-]+/")
-	|| (req.url ~ "/phpmyadmin/")
-    ) {
-	    return (pass);
-	    #===
-    }
-
-[...]
-
+    [...]
 }
 
 #========================================================
 # Sub-routine after data from backend is received and before it is cached
 #========================================================
 sub vcl_backend_response {
+    # Happens after we have read the response headers from the backend.
+    #
+    # Here you clean the response headers, removing silly Set-Cookie headers
+    # and other mistakes your backend does.
 
-[...]
+    # Set TTL and grace
+    set beresp.ttl = 1w;
+    set beresp.grace = 3d;
 
-    # Check for some things in header that indicate that we should not cache
-    # e.g. we do NOT cache contents that are generated by users with cookies!!!
+    [...]
+
+    # Only cache objects that are requested with frontend-cookies if ProxyCaching is set to 1
+    if (
+        (bereq.http.Cookie)
+        && (! beresp.http.X-TYPO3-ProxyCaching == "1")
+    ) {
+
+        # Do not cache this object and do not keep decision 
+        set beresp.uncacheable = true;
+        set beresp.ttl = 0s;
+        set beresp.grace = 0s;
+        return (deliver);
+    }
+
+
+    # Check for some things in the response-header that indicate that we should not cache
+    # e.g. we do NOT cache contents that are about to set a cookie
+    # or where ProxyCaching is set to 2
     if (
         (beresp.http.Set-Cookie)
         || (beresp.http.Vary == "*")
         || (beresp.http.Authorization)
         || (beresp.http.Pragma ~ "nocache")
         || (beresp.http.Cache-Control ~ "no-cache")
-        || (beresp.http.X-TYPO3-ProxyCaching ~ "2")
+        || (beresp.http.X-TYPO3-ProxyCaching == "2")
 
         # TYPO3 uses "private" when INT-Scripts are used!
         # so we check for ProxyCaching variable in addition
         || (
             (beresp.http.Cache-Control ~ "private")
-            && (! beresp.http.X-TYPO3-ProxyCaching ~ "1")
+            && (! beresp.http.X-TYPO3-ProxyCaching == "1")
         )
     ) {
 
-        # Do not cache this object and keep decision for the next 2 minutes
+        # Do not cache this object and do not keep the decision
         set beresp.uncacheable = true;
-        set beresp.ttl = 120s;
+        set beresp.ttl = 0s;
+        set beresp.grace = 0s;
         return (deliver);
         #===
     }
 
-[...]
+    return (deliver);
+    #===
 
 }
 
@@ -459,19 +561,19 @@ sub vcl_backend_response {
 #========================================================
 sub vcl_hit {
 
-[...]
+    [...]
+    
     # Based on the already cached object we check if there is login sensitive data allowed on the cached pages
     # If so, we pass to backend if a cookie is set
     if (
-        (! obj.http.X-TYPO3-ProxyCaching ~ "1")
-        && (req.http.Cookie ~ "(.fe_typo_user|PHPSESSID)")
-    ) {
-	    return (pass);
-	    #===
+        (! obj.http.X-TYPO3-ProxyCaching == "1")
+        && (req.http.Cookie)
+    ){
+        return (pass);
+        #===
     }
 
-[...]
-
+   [...]
 }
 
 #========================================================
@@ -479,20 +581,27 @@ sub vcl_hit {
 #========================================================
 sub vcl_deliver {
 
-[...]
+    # Happens when we have all the pieces we need, and are about to send the
+    # response to the client.
+    #
+    # You can do accounting or modifying the final object here.
 
+    [...]
+    
     # Remove cache control if it isn't needed
     if (resp.http.X-TYPO3-ProxyCaching ~ "1") {
 	    unset resp.http.cache-control;
     }
 
-    # related to Varnish-Extension and RKW Basics
-    unset resp.http.TYPO3-Pid;
-    unset resp.http.TYPO3-Sitename;
+    [...]
+
+    # Remove entries related to Varnish-Extension and RKW Basics
+    unset resp.http.xtag;
     unset resp.http.X-TYPO3-ProxyCaching;
 
-[...]
+    [...]   
 }
+
 
 ```
 
