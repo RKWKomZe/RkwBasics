@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class GoogleController
  *
@@ -25,6 +27,19 @@ namespace RKW\RkwBasics\Controller;
  */
 class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 {
+
+
+    /**
+     * @var \RKW\RkwBasics\Cache\SitemapCache
+     * @inject
+     */
+    protected $cache;
+
+
+    /**
+     * @var \TYPO3\CMS\Core\Log\Logger
+     */
+    protected $logger;
 
     /**
      * pagesRepository
@@ -38,24 +53,90 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
     /**
      * action sitemap
      *
-     * @return void
+     * @return string
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
     public function sitemapAction()
     {
 
-        $currentPid = $GLOBALS['TSFE']->id;
-        $depth = 999999;
+        if (!$sitemap = $this->getCache()->getContent($this->getCacheKey())) {
 
-        /** @var \TYPO3\CMS\Core\Database\QueryGenerator $queryGenerator */
-        $queryGenerator = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\QueryGenerator::class );
-        $treeList = explode(
-            ',',
-            $queryGenerator->getTreeList($currentPid , $depth, 0, 1)
-        );
+            $currentPid = $GLOBALS['TSFE']->id;
+            $depth = 999999;
 
-        $pages = $this->pagesRepository->findByUidListAndDokTypes($treeList);
-        $this->view->assign('pages', $pages);
+            /** @var \TYPO3\CMS\Core\Database\QueryGenerator $queryGenerator */
+            $queryGenerator = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Database\QueryGenerator::class );
+            $treeList = explode(
+                ',',
+                $queryGenerator->getTreeList($currentPid , $depth, 0, 1)
+            );
+
+            $pages = $this->pagesRepository->findByUidListAndDokTypes($treeList);
+            $this->view->assign('pages', $pages);
+            $sitemap = $this->view->render();
+
+            // flush caches
+            $this->getCache()->getCacheManager()->flushCachesByTag('rkwbasics_sitemap');
+
+            // save results in cache
+            $this->getCache()->setContent(
+                $sitemap,
+                array(
+                    'rkwbasics_sitemap',
+                ),
+                $this->getCacheKey()
+            );
+
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully rebuilt Google sitemap feed.'));
+        } else {
+            $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Successfully loaded Google sitemap from cache.'));
+        }
+
+        return $sitemap;
+
     }
 
+
+    /**
+     * Returns cache key
+     *
+     * @return string
+     */
+    protected function getCacheKey()
+    {
+        return GeneralUtility::getHostname();
+    }
+
+
+
+    /**
+     * Returns logger instance
+     *
+     * @return \TYPO3\CMS\Core\Log\Logger
+     */
+    protected function getLogger()
+    {
+
+        if (!$this->logger instanceof \TYPO3\CMS\Core\Log\Logger) {
+            $this->logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+        }
+
+        return $this->logger;
+    }
+
+
+    /**
+     * Returns the cache object
+     *
+     * @return \RKW\RkwBasics\Cache\SitemapCache
+     */
+    protected function getCache()
+    {
+
+        if (!$this->cache instanceof \RKW\RkwBasics\Cache\SitemapCache) {
+            $this->cache = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\Cache\SitemapCache::class);
+        }
+
+        return $this->cache;
+    }
 }

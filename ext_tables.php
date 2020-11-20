@@ -23,6 +23,12 @@ call_user_func(
             'RKW Google Sitemap'
         );
 
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            'RKW.' . $extKey,
+            'Rkwnotfound',
+            'RKW AssetNotFound'
+        );
+
         //=================================================================
         // Add tables
         //=================================================================
