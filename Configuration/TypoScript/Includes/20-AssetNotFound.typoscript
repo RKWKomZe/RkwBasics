@@ -1,0 +1,39 @@
+#===============================================================
+// AssetsNotFound
+#===============================================================
+txRkwBasicsAssetNotFound = PAGE
+txRkwBasicsAssetNotFound {
+    typeNum = 1605802513
+    config {
+        disableAllHeaderCode = 1
+        xhtml_cleaning = 0
+        admPanel = 0
+        no_cache = 0
+        debug = 0
+
+        metaCharset = utf-8
+
+        index_enable = 0
+        index_metatags = 0
+        index_externals = 0
+    }
+
+    10 = USER_INT
+    10 {
+        userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+        extensionName = RkwBasics
+        pluginName = Rkwnotfound
+        vendorName = RKW
+        controller = NotFound
+        switchableControllerActions {
+            # Again: Controller-Name and Action
+            NotFound {
+                1 = assets
+            }
+        }
+
+        view < plugin.tx_rkwbasics.view
+        persistence < plugin.tx_rkwbasics.persistence
+        settings < plugin.tx_rkwbasics.settings
+    }
+}
