@@ -29,12 +29,12 @@ abstract class CacheAbstract implements \TYPO3\CMS\Core\SingletonInterface
     /**
      * @var string Key for cache
      */
-    protected $_key = 'rkwbasics';
+    protected $_key = 'rkw_basics';
 
     /**
      * @var string Identifier for cache
      */
-    protected $_identifier = 'rkwbasics';
+    protected $_identifier = 'rkw_basics';
 
     /**
      * @var string Contains context mode (Production, Development...)
