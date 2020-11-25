@@ -21,6 +21,7 @@ namespace RKW\RkwBasics\ViewHelpers;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This ViewHelper is not needed any more and will be removed soon
  */
 class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
 {
@@ -35,7 +36,7 @@ class OrViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
      */
     public function render($or1, $or2, $or3 = null)
     {
-
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use natively supported logical operators supported since TYPO3 8.7.');
         if ($or1 || $or2 || $or3) {
             return true;
             //===
