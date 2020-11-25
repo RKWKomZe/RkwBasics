@@ -18,14 +18,14 @@ use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
 /**
- * Class RemoveEmptyParagraphsViewHelper
+ * Class AddSlashesViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
+class AddSlashesViewHelper extends AbstractViewHelper {
 
     use CompileWithContentArgumentAndRenderStatic;
 
@@ -43,10 +43,11 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
     {
         parent::initializeArguments();
         $this->registerArgument('value', 'string', 'string to format');
+
     }
 
     /**
-     * Removes empty paragraphs from beginning and end of a string
+     * Applies addslashes() on the specified value.
      *
      * @param array $arguments
      * @param \Closure $renderChildrenClosure
@@ -55,31 +56,6 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
-
-        // some cleanup for better matching
-        $string = trim(preg_replace("#\r|\n#", "", $renderChildrenClosure()));
-
-        $bodyTextWrapStartRegExp = '<div[^>]+class="(frame|ce-bodytext)[^>]+>';
-        $bodyTextWrapEndRegExp = '</div>';
-
-        $pregMatch = [
-
-            // for usage with FluidStyledContents
-            "#(" . $bodyTextWrapStartRegExp . ")(<p[^>]*>&nbsp;</p>){1,}#i",
-            "#(<p[^>]*>&nbsp;</p>){1,}(" . $bodyTextWrapEndRegExp . ")#i",
-
-            // for usage in custom content elements
-            "#^(<p[^>]*>&nbsp;</p>){1,}#i",
-            "#(<p[^>]*>&nbsp;</p>){1,}$#i",
-        ];
-
-        $pregReplace = [
-            '$1',
-            '$2',
-            '',
-            ''
-        ];
-
-        return preg_replace($pregMatch, $pregReplace, $string);
+        return addslashes($renderChildrenClosure());
     }
 }

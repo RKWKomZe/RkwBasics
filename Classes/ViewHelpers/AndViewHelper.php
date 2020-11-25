@@ -12,6 +12,9 @@ namespace RKW\RkwBasics\ViewHelpers;
  *
  * The TYPO3 project - inspiring people to share!
  */
+
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class AndViewHelper
  *
@@ -20,6 +23,7 @@ namespace RKW\RkwBasics\ViewHelpers;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This ViewHelper is not needed any more and will be removed soon
  */
 class AndViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
 
@@ -32,6 +36,7 @@ class AndViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper 
 	 */
 	public function render($and1, $and2) {
 
+        \TYPO3\CMS\Core\Utility\GeneralUtility::deprecationLog(__CLASS__ . ' is deprecated and will be removed soon. Use natively supported logical operators supported since TYPO3 8.7.');
 		if ($and1 && $and2) {
 			return true;
 			//===
