@@ -42,12 +42,15 @@ class ContentObjectProductionExceptionHandler extends ProductionExceptionHandler
      * @return string
      * @throws \Exception
      */
-    public function handle(\Exception $exception, AbstractContentObject $contentObject = null, $contentObjectConfiguration = [])
-    {
+    public function handle(
+        \Exception $exception,
+        AbstractContentObject $contentObject = null,
+        $contentObjectConfiguration = []
+    ) : string {
+
         if (!empty($this->configuration['ignoreCodes.'])) {
             if (in_array($exception->getCode(), array_map('intval', $this->configuration['ignoreCodes.']), true)) {
                 throw $exception;
-                //===
             }
         }
 
@@ -56,9 +59,7 @@ class ContentObjectProductionExceptionHandler extends ProductionExceptionHandler
         $code = date('YmdHis', $_SERVER['REQUEST_TIME']) . GeneralUtility::getRandomHexString(8);
 
         $this->logException($exception, $requestedUrl, $code);
-
         return str_replace('%s', $code, $errorMessage);
-        //===
     }
 
     /**

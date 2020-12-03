@@ -256,6 +256,34 @@ $tempColumnsPages = [
             ],
         ],
     ],
+    'tx_rkwbasics_no_index' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index',
+        'config' => [
+            'type' => 'check',
+            'default' => 0,
+            'exclude' => true,
+            'items' => [
+                '1' => [
+                    '0' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index.I.enabled'
+                ],
+            ],
+        ],
+    ],
+    'tx_rkwbasics_no_follow' => [
+        'exclude' => 1,
+        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow',
+        'config' => [
+            'type' => 'check',
+            'default' => 0,
+            'exclude' => true,
+            'items' => [
+                '1' => [
+                    '0' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow.I.enabled'
+                ],
+            ],
+        ],
+    ],    
 ];
 
 $tempColumnsPagesMulti = [
@@ -407,15 +435,10 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 // Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
-
-// Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'layout','tx_rkwbasics_fe_layout_next_level','after:layout');
-
-// Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--','after:media');
-
-// Add field to the existing palette
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'access','--linebreak--,tx_rkwbasics_proxy_caching','after:fe_login_mode');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'visibility','--linebreak--,tx_rkwbasics_no_index, tx_rkwbasics_no_follow','after:nav_hide');
 
 /** @deprecated */
 if ($currentVersion < 8000000) {

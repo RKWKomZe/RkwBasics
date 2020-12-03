@@ -610,8 +610,21 @@ The feature can be activated by adding the following lines to your `.htaccess`-f
 ```
 **Attention: It may be necessary to change the protocol to https.**
 
+## 1.6 MetaTags & Robot-Instructions
+This extension comes along with a library for meta-descriptions and allows settings for robot-rules in the page properties.
 
-## 1.6 Enforced Inline CSS - NOT ACTIVE!!!!
+Usage via TypoScript:
+```
+page {
+
+    meta >
+    headerData {
+        50 =< lib.txRkwBasics.metaTags
+    }
+}
+```
+
+## 1.7 Enforced Inline CSS - NOT ACTIVE!!!!
 Ideally, the CSS is output inline directly to the header of the website.
 This saves reloading the CSS files and speeds up the rendering. 
 From TYPO3 9 upwards, it is possible to force inline output via TypoScript, 
