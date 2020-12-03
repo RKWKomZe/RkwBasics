@@ -111,6 +111,18 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical.I.enabled">
 				<source>Use old domain/link as canonical</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index">
+                <source>Indexing by Search Engines</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index.I.enabled">
+                <source>Inactivate (incl. Subpages)</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow">
+                <source>Link-Following by Search Engines</source>
+            </trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow.I.enabled">
+                <source>Inactivate (incl. Subpages)</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text">
 				<source>Teaster Text</source>
 			</trans-unit>

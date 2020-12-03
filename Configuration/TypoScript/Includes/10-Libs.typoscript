@@ -121,7 +121,6 @@ lib.txRkwBasics {
             10 {
                 typolink {
 
-
                     parameter.data = TSFE:id
                     forceAbsoluteUrl = 1
                     returnLast = url
@@ -160,16 +159,271 @@ lib.txRkwBasics {
             # Alternative: Use canonical based on old link
             20 = TEXT
             20 {
-                value = http://{field:tx_rkwbasics_old_domain}/{field:tx_rkwbasics_old_link}
+                value = https://{field:tx_rkwbasics_old_domain}/{field:tx_rkwbasics_old_link}
                 value.insertData = 1
-
                 if.isTrue.field = tx_rkwbasics_use_as_canonical
             }
         }
 
         wrap = <link href="|" rel="canonical">
     }
+
+    #===============================================================
+    # MetaTags
+    #===============================================================
+    metaTags = COA
+    metaTags {
+
+        #===============================================================
+        10 = TEXT
+        10 {
+            data = levelfield:-1, keywords, slide
+            stdWrap {
+                required = 1
+                htmlSpecialChars = 1
+                wrap = <meta name="keywords" content="|" />
+            }
+        }
+
+        #===============================================================
+        20 = TEXT
+        20 {
+
+            data = levelfield:-1, tx_rkwbasics_teaser_text, slide
+            override {
+                field = description
+                if.isTrue.field = description
+            }
+
+            stdWrap {
+                required = 1
+                htmlSpecialChars = 1
+                wrap = <meta name="description" content="|" />
+            }
+        }
+
+        #===============================================================
+        30 = COA
+        30 {
+            10 = TEXT
+            10 {
+                value = noindex
+                if {
+                    equals.data = levelfield:-1, tx_rkwbasics_no_index, slide
+                    value = 1
+                }
+            }
+
+            11 = TEXT
+            11 {
+                value = index
+                if {
+                    equals.data = levelfield:-1, tx_rkwbasics_no_index, slide
+                    value = 1
+                    negate = 1
+                }
+            }
+
+            20 = TEXT
+            20.value = ,
+
+            30 = TEXT
+            30 {
+                value = nofollow
+                if {
+                    equals.data = levelfield:-1, tx_rkwbasics_no_follow, slide
+                    value = 1
+                }
+            }
+
+            31 = TEXT
+            31 {
+                value = follow
+                if {
+                    equals.data = levelfield:-1, tx_rkwbasics_no_follow, slide
+                    value = 1
+                    negate = 1
+                }
+            }
+
+            40 = TEXT
+            40.value = ,noodp,noydir
+
+            stdWrap {
+                required = 1
+                htmlSpecialChars = 1
+                wrap = <meta name="robots" content="|" />
+            }
+        }
+
+        #===============================================================
+        40 = TEXT
+        40 {
+            value = notranslate
+            stdWrap {
+                htmlSpecialChars = 1
+                wrap = <meta name="google" content="|" />
+            }
+        }
+    }
+
+
+    #===============================================================
+    # TitleTag
+    #===============================================================
+    titleTag = COA_INT
+    titleTag {
+
+        // title
+        20 = TEXT
+        20 {
+            field = title
+        }
+
+        // global wrapper
+        stdWrap.wrap = <title>|</title>
+
+        // specialchars for title
+        stdWrap.htmlSpecialChars = 1
+    }
 }
+
+
+#=============================================================
+# Additions based on loaded extensions
+#=============================================================
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_pdf2content')]
+    lib.txRkwBasics {
+
+        titleTag {
+
+            // prepend publication title on publication pages
+            // For import-sub-pages only!
+            10 = COA
+            10 {
+
+                10 = USER
+                10 {
+                    userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+                    extensionName = RkwPdf2content
+                    pluginName = Pi1
+                    vendorName = RKW
+                    controller = DisplayPages
+                    switchableControllerActions {
+                        // Again: Controller-Name and Action
+                        DisplayPages {
+                            1 = importParentPage
+                        }
+                    }
+
+                    view =< plugin.tx_rkwpdf2content.view
+                    persistence =< plugin.tx_rkwpdf2content.persistence
+                    settings =< plugin.tx_rkwpdf2content.settings
+                    settings.importParentPage.showField = title
+                }
+
+                stdWrap.noTrimWrap = ||: |
+                if {
+                    value = 1
+                    equals.field = tx_rkwpdf2content_is_import_sub
+                }
+            }
+
+
+            // additional label for publication main pages
+            // in order to avoid conflicts with blog-articles
+            21 = TEXT
+            21 {
+
+                value = Publikation
+                stdWrap.noTrimWrap = | - ||
+                if {
+                    value = 1
+                    equals {
+
+                        field = tx_rkwpdf2content_is_import
+                    }
+                }
+            }
+        }
+    }
+[global]
+
+
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_events')]
+    lib.txRkwBasics {
+
+        titleTag {
+
+            // additional title for events
+            30 = COA
+            30 {
+
+                10 = TEXT
+                10 {
+                    dataWrap = DB:tx_rkwevents_domain_model_event:{gp:tx_rkwevents_pi1|event}:title
+                    wrap3 = {|}
+                    insertData=1
+                }
+
+                stdWrap.noTrimWrap = |: | - Veranstaltung |
+                stdWrap.required = 1
+            }
+        }
+
+
+        #metaTags {
+        #    20 {
+        #        override {
+        #            dataWrap = DB:tx_rkwevents_domain_model_event:{gp:tx_rkwevents_pi1|event}:description
+        #            wrap3 = {|}
+        #            insertData=1
+        #            if >
+        #        }
+        #    }
+        #}
+    }
+[global]
+
+
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_authors')]
+    lib.txRkwBasics {
+
+        titleTag {
+
+            // additional title for authors
+            40 = COA
+            40 {
+
+                10 = TEXT
+                10 {
+                    dataWrap = DB:tx_rkwauthors_domain_model_authors:{gp:tx_rkwauthors_rkwauthorsdetail|author}:first_name
+                    wrap3 = {|}
+                    insertData=1
+                }
+
+                stdWrap.noTrimWrap = |: ||
+                stdWrap.required = 1
+            }
+
+            50 = COA
+            50 {
+
+                10 = TEXT
+                10 {
+                    dataWrap = DB:tx_rkwauthors_domain_model_authors:{gp:tx_rkwauthors_rkwauthorsdetail|author}:last_name
+                    wrap3 = {|}
+                    insertData=1
+                }
+
+                stdWrap.noTrimWrap = | | - Kontakt |
+                stdWrap.required = 1
+            }
+        }
+    }
+[global]
+
+
 
 
 ####################################################################
