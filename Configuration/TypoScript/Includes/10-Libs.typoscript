@@ -382,6 +382,31 @@ lib.txRkwBasics {
         #        }
         #    }
         #}
+
+        metaTags {
+
+            #===============================================================
+            20 = USER_INT
+            20 {
+                userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+                extensionName = RkwEvents
+                pluginName = Eventtitle
+                vendorName = RKW
+                controller = Event
+                switchableControllerActions {
+                    // Again: Controller-Name and Action
+                    Event {
+                        1 = description
+                    }
+                }
+                stdWrap {
+                    required = 1
+                    htmlSpecialChars = 1
+                    wrap = <meta name="description" content="|" />
+                }
+            }
+        }
+
     }
 [global]
 
