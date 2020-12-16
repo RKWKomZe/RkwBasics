@@ -175,13 +175,16 @@ lib.txRkwBasics {
     metaTags {
 
         #===============================================================
-        10 = TEXT
+        10 = COA_INT
         10 {
-            data = levelfield:-1, keywords, slide
-            stdWrap {
-                required = 1
-                htmlSpecialChars = 1
-                wrap = <meta name="keywords" content="|" />
+            10 = TEXT
+            10 {
+                data = levelfield:-1, keywords, slide
+                stdWrap {
+                    required = 1
+                    # htmlSpecialChars = 1
+                    wrap = <meta name="keywords" content="|" />
+                }
             }
         }
 
@@ -378,9 +381,42 @@ lib.txRkwBasics {
         metaTags {
 
             #===============================================================
+            // keywords for events
+            10 {
+
+                // only show defaults when not on detail page
+                10 {
+                    if {
+                        value = {$plugin.tx_rkwevents.settings.showPid}
+                        equals.field = uid
+                        negate = 1
+                    }
+                }
+
+
+                // show special keywords when on detail page
+                20 = COA_INT
+                20 {
+                    20 = TEXT
+                    20 {
+                        dataWrap = DB:tx_rkwevents_domain_model_event:{gp:tx_rkwevents_pi1|event}:keywords
+                        wrap3 = {|}
+                        insertData=1
+                    }
+                    stdWrap {
+                        required = 1
+                        # htmlSpecialChars = 1
+                        wrap = <meta name="keywords" content="|" />
+                    }
+                    if {
+                        value = {$plugin.tx_rkwevents.settings.showPid}
+                        equals.field = uid
+                    }
+                }
+            }
+
             // meta description for events
             20 {
-
 
                 // only show defaults when not on detail page
                 10 {
