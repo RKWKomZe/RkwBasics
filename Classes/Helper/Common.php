@@ -14,7 +14,8 @@ namespace RKW\RkwBasics\Helper;
  *
  * The TYPO3 project - inspiring people to share!
  */
-use TYPO3\CMS\Core\Utility\VersionNumberUtility;
+
+use RKW\RkwBasics\Utility\GeneralUtility;
 use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
 
 /**
@@ -25,43 +26,22 @@ use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class Common
+class Common extends GeneralUtility
 {
 
-    /**
-     * @var array Setter/Getter underscore transformation cache
-     */
-    protected static $_underscoreCache = array();
-
-    /**
-     * @var array Setter/Getter backslash transformation cache
-     */
-    protected static $_backslashCache = array();
-
-    /**
-     * @var array Setter/Getter camlize transformation cache
-     */
-    protected static $_camelizeCache = array();
-
-
-    /**
+      /**
      * Converts field names for setters and getters
      * Uses cache to eliminate unnecessary preg_replace
      *
      * @param string $name
      * @return string
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function underscore($name)
+    public static function underscore(string $name): string
     {
-        if (isset(self::$_underscoreCache[$name])) {
-            return self::$_underscoreCache[$name];
-            //===
-        }
 
-        $result = strtolower(preg_replace('/(.)([A-Z])/', "$1_$2", $name));
-        self::$_underscoreCache[$name] = $result;
-
-        return $result;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::underscore($name);
     }
 
     /**
@@ -70,18 +50,13 @@ class Common
      *
      * @param string $name
      * @return string
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function backslash($name)
+    public static function backslash(string $name): string
     {
 
-        if (isset(self::$_backslashCache[$name])) {
-            return self::$_backslashCache[$name];
-        }
-
-        $result = preg_replace('/(.)([A-Z])/', "$1\\\\$2", $name);
-        self::$_backslashCache[$name] = $result;
-
-        return $result;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::backslash($name);
     }
 
 
@@ -93,18 +68,13 @@ class Common
      * @param string $destSep
      * @param string $srcSep
      * @return string
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function camelize($name, $destSep = '', $srcSep = '_')
+    public static function camelize(string $name, string $destSep = '', string $srcSep = '_'): string
     {
 
-        if (isset(self::$_camelizeCache[$name])) {
-            return self::$_camelizeCache[$name];
-        }
-
-        $result = lcfirst(str_replace(' ', $destSep, ucwords(str_replace($srcSep, ' ', $name))));
-        self::$_camelizeCache[$name] = $result;
-
-        return $result;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::camelize($name, $destSep, $srcSep);
     }
 
 
@@ -114,14 +84,13 @@ class Common
      * @param array  $delimiters
      * @param string $string
      * @return array
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function multiExplode($delimiters, $string)
+    public static function multiExplode(array $delimiters, string $string): array
     {
 
-        $ready = str_replace($delimiters, $delimiters[0], $string);
-        $result = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiters[0], $ready, true);
-
-        return $result;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::multiExplode($delimiters, $string);
     }
 
     /**
@@ -130,18 +99,14 @@ class Common
      * @param string  $string String to process
      * @param integer $key Key to return
      * @return array
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      * @see http://stackoverflow.com/questions/8577300/explode-a-string-on-upper-case-characters
      */
-    public static function splitAtUpperCase($string, $key = null)
+    public static function splitAtUpperCase(string $string, $key = null)
     {
 
-        $result = preg_split('/(?=[A-Z])/', $string, -1, PREG_SPLIT_NO_EMPTY);
-
-        if ($key !== null) {
-            return $result[$key];
-        }
-
-        return $result;
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::splitAtUpperCase($string, $key);
     }
 
 
@@ -152,27 +117,13 @@ class Common
      * @param string $type
      * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
+     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function getTyposcriptConfiguration($extension = null, $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
+    public static function getTyposcriptConfiguration(string $extension = null, string $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
     {
 
-        $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
-
-        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
-        $configurationManager = $objectManager->get('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface');
-
-        // load configuration
-        if ($configurationManager) {
-            $settings = $configurationManager->getConfiguration($type, $extension);
-            if (
-                ($settings)
-                && (is_array($settings))
-            ) {
-                return $settings;
-            }
-        }
-
-        return array();
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        return GeneralUtility::getTyposcriptConfiguration($extension, $type);
     }
 
 
@@ -184,8 +135,7 @@ class Common
      * @return void
      * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\FrontendSimulatorUtility instead.
      */
-    public static function initFrontendInBackendContext ($pid = 1, $typeNum = 0)
-    {
+    public static function initFrontendInBackendContext (int $pid = 1, int $typeNum = 0) {
 
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         FrontendSimulatorUtility::simulateFrontendEnvironment($pid);
