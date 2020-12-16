@@ -73,7 +73,7 @@ plugin.tx_rkwbasics {
             maxSubdomains = 100
 
             # cat=plugin.tx_rkwbasics//a; type=string; label=Ignore some files like CSS and JS because browser security stuff may cause problems
-            ignoreIfContains = /\.css|\.js|\?noCdn=1/
+            ignoreIfContains = /\.css|\.js|\.pdf|\?noCdn=1/
 
             # cat=plugin.tx_rkwbasics//a; type=string; label=Regular expression for replacement
             search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
