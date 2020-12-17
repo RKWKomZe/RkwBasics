@@ -43,6 +43,8 @@ class AddSlashesViewHelper extends AbstractViewHelper {
     {
         parent::initializeArguments();
         $this->registerArgument('value', 'string', 'string to format');
+        $this->registerArgument('charList', 'string', 'Characters to escape. If not set, it behaves like the PHP-function addslashes()');
+
 
     }
 
@@ -56,6 +58,9 @@ class AddSlashesViewHelper extends AbstractViewHelper {
      */
     public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
     {
+        if ($arguments['charList']) {
+            return addcslashes($renderChildrenClosure(), $arguments['charList']);
+        }
         return addslashes($renderChildrenClosure());
     }
 }
