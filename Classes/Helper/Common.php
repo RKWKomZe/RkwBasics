@@ -29,13 +29,12 @@ use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
 class Common extends GeneralUtility
 {
 
-      /**
+    /**
      * Converts field names for setters and getters
      * Uses cache to eliminate unnecessary preg_replace
      *
      * @param string $name
      * @return string
-     * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
     public static function underscore(string $name): string
     {
@@ -119,7 +118,7 @@ class Common extends GeneralUtility
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      * @deprecated This function is deprecated and will be removed soon. Please use RKW\RkwBasics\Utility\GeneralUtility instead.
      */
-    public static function getTyposcriptConfiguration(string $extension = null, string $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
+    public static function getTyposcriptConfiguration(string $extension = null, $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
     {
 
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();

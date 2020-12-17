@@ -97,7 +97,6 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
      */
     public static function camelize(string $name, string $destSep = '', string $srcSep = '_'): string
     {
-
         if (isset(self::$_camelizeCache[$name])) {
             return self::$_camelizeCache[$name];
         }
@@ -118,8 +117,6 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
      */
     public static function multiExplode(array $delimiters, string $string): array
     {
-
-
         $ready = str_replace($delimiters, $delimiters[0], $string);
         $result = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode($delimiters[0], $ready, true);
         return $result;
@@ -135,7 +132,6 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
      */
     public static function splitAtUpperCase(string $string, $key = null)
     {
-
         $result = preg_split('/(?=[A-Z])/', $string, -1, PREG_SPLIT_NO_EMPTY);
 
         if ($key !== null) {
@@ -154,7 +150,7 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
      * @return array
      * @throws \TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException
      */
-    public static function getTyposcriptConfiguration(string $extension = null, string $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
+    public static function getTyposcriptConfiguration(string $extension = null, $type = \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS): array
     {
 
         $objectManager = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Object\\ObjectManager');
@@ -227,6 +223,7 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
                 }
             }
         }
+
         return $theList;
     }
 
