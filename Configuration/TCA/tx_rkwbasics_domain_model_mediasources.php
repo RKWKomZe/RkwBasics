@@ -9,8 +9,7 @@ return [
 		'dividers2tabs' => TRUE,
 		'default_sortby' => 'ORDER BY name',
 
-		'versioningWS' => 2,
-		'versioning_followPages' => TRUE,
+		'versioningWS' => TRUE,
 
 		'languageField' => 'sys_language_uid',
 		'transOrigPointerField' => 'l10n_parent',
@@ -87,34 +86,38 @@ return [
 		],
 		'starttime' => [
 			'exclude' => 0,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.starttime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
-				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
 				],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			],
 		],
 		'endtime' => [
 			'exclude' => 0,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => 'LLL:EXT:lang/locallang_general.xlf:LGL.endtime',
 			'config' => [
 				'type' => 'input',
+                'renderType' => 'inputDateTime',
 				'size' => 13,
-				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
 				],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ]
 			],
 		],
 
@@ -132,32 +135,7 @@ return [
 			'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_mediasources.url',
 			'config' => [
 				'type' => 'input',
-				'size' => 30,
-                'max' =>  256,
-				'eval' => 'trim',
-                'wizards' => [
-                    'link' => [
-                        'type' => 'popup',
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xlf:header_link_formlabel',
-                        'icon' => 'EXT:backend/Resources/Public/Images/FormFieldWizard/wizard_link.gif',
-                        'module' => [
-                            'name' => 'wizard_link',
-                            'urlParameters' => [
-                                    'mode' => 'wizard',
-                            ],
-                        ],
-                        'JSopenParams' => 'height=400,width=550,status=0,menubar=0,scrollbars=1',
-                        'params' => [
-                            // List of tabs to hide in link window. Allowed values are:
-                            // file, mail, page, spec, folder, url
-                            'blindLinkOptions' => 'mail,file,page,spec,folder',
-
-                            // allowed extensions for file
-                            //'allowedExtensions' => 'mp3,ogg',
-                        ],
-                    ],
-                ],
-                'softref' => 'typolink'
+                'renderType' => 'inputLink',
 			],
 		],
 
