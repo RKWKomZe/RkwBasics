@@ -3,6 +3,59 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
+//=================================================================
+// Register Plugin
+//=================================================================
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'RKW.RkwBasics',
+    'Rkwmediasources',
+    'RKW MediaSources'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'RKW.RkwBasics',
+    'Rkwdepartments',
+    'RKW Departments'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'RKW.RkwBasics',
+    'Rkwgoogle',
+    'RKW Google Sitemap'
+);
+
+\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+    'RKW.RkwBasics',
+    'Rkwnotfound',
+    'RKW AssetNotFound'
+);
+
+//=================================================================
+// Add Flexforms
+//=================================================================
+$extKey = 'rkw_basics';
+
+$extensionName = strtolower(\TYPO3\CMS\Core\Utility\GeneralUtility::underscoredToUpperCamelCase($extKey));
+$pluginName = strtolower('Rkwmediasources');
+$pluginSignature = $extensionName.'_'.$pluginName;
+
+$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue(
+    $pluginSignature,
+    'FILE:EXT:' . $extKey . '/Configuration/FlexForms/MediaSources.xml'
+);
+
+//$pluginName = strtolower('Rkwdepartments');
+//$pluginSignature = $extensionName.'_'.$pluginName;
+//$GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+//\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extKey . '/Configuration/FlexForms/Departments.xml');
+
+
+//=================================================================
+// OTHER STUFF
+//=================================================================
+
 $tempColumnsContent = [
 
     'tx_rkwbasics_images_no_copyright' => [
