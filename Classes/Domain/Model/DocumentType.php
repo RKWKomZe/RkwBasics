@@ -46,6 +46,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      * @validate NotEmpty
+     * @deprecated
      */
     protected $internalName = '';
 
@@ -53,6 +54,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * boxTemplateName
      *
      * @var string
+     * @deprecated
      */
     protected $boxTemplateName = '';
 
@@ -129,6 +131,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the internalName
      *
      * @return string $internalName
+     * @deprecated
      */
     public function getInternalName()
     {
@@ -141,6 +144,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $internalName
      * @return void
+     * @deprecated
      */
     public function setInternalName($internalName)
     {
@@ -151,6 +155,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the boxTemplateName
      *
      * @return string $boxTemplateName
+     * @deprecated
      */
     public function getBoxTemplateName()
     {
@@ -163,6 +168,7 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $boxTemplateName
      * @return void
+     * @deprecated
      */
     public function setBoxTemplateName($boxTemplateName)
     {

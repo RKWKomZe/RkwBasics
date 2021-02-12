@@ -22,10 +22,10 @@ return [
 		'iconfile' => 'EXT:rkw_basics/Resources/Public/Icons/tx_rkwbasics_domain_model_documenttype.gif'
 	],
 	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, visibility, type, box_template_name, description',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, name, visibility, type, description',
 	],
 	'types' => [
-		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, --palette--;;1,  name, visibility, type, internal_name, box_template_name, description, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
+		'1' => ['showitem' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, --palette--;;1,  name, visibility, type, description, --div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'],
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
@@ -160,7 +160,8 @@ return [
                 'eval' => 'trim,alphanum_x,lower,unique',
             ],
         ],
-		'internal_name' => [
+        /** @deprecated
+        'internal_name' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwprojects_domain_model_documenttype.internal_name',
 			'config' => [
@@ -177,7 +178,7 @@ return [
 				'size' => 30,
 				'eval' => 'trim,alphanum_x,lower',
 			],
-		],
+		],*/
 		'description' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_documenttype.description',
