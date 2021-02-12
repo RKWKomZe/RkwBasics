@@ -48,6 +48,7 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      * @validate NotEmpty
+     * @deprecated
      */
     protected $internalName = '';
 
@@ -137,6 +138,7 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the internalName
      *
      * @return string $internalName
+     * @deprecated
      */
     public function getInternalName()
     {
@@ -148,6 +150,7 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $internalName
      * @return void
+     * @deprecated
      */
     public function setInternalName($internalName)
     {
