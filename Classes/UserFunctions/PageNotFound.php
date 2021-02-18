@@ -89,12 +89,12 @@ class PageNotFound
             $languageAddition = '&L=' . $this->getLanguageKey();
         }
 
-
         try {
+            /*
             // check if there is a redirect page
             if ($redirectPid = $this->getRedirectPid($path, $host)) {
 
-                /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj */
+                /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
                 $cObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
                 $link = $cObj->typolink_URL(
                     array(
@@ -111,7 +111,7 @@ class PageNotFound
                 HttpUtility::redirect($link, HttpUtility::HTTP_STATUS_301);
 
             // check if we were clever enough to set a fallback pid
-            } else {
+            } else {*/
 
                 if ($configuration['fallbackPid']) {
 
@@ -144,7 +144,7 @@ class PageNotFound
                         die();
                         //===
                     }
-                }
+                /*}*/
             }
         } catch (\Exception $e) {
             $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to catch the page-not-found-page for URL "%s". Please check the configuration. Error: %s', $host . '/' . $path, $e->getMessage()));
