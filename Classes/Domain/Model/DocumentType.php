@@ -30,7 +30,6 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * name
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $name = '';
 
@@ -45,7 +44,6 @@ class DocumentType extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * internalName
      *
      * @var string
-     * @validate NotEmpty
      * @deprecated
      */
     protected $internalName = '';

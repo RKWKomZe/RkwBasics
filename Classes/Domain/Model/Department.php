@@ -30,7 +30,6 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * name
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $name = '';
 
@@ -47,7 +46,6 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * internalName
      *
      * @var string
-     * @validate NotEmpty
      * @deprecated
      */
     protected $internalName = '';
@@ -57,7 +55,6 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * cssClass
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $cssClass = '';
 
@@ -65,7 +62,6 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * main page
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $mainPage = '';
 
