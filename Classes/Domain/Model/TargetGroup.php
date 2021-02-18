@@ -30,7 +30,6 @@ class TargetGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * name
      *
      * @var string
-     * @validate NotEmpty
      */
     protected $name = '';
 

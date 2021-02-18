@@ -30,7 +30,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * uid
      *
      * @var int
-     * @validate NotEmpty
      */
     protected $uid;
 
@@ -38,7 +37,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * pid
      *
      * @var int
-     * @validate NotEmpty
      */
     protected $pid;
 
