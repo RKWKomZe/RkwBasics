@@ -1,47 +1,39 @@
-{namespace rkw=RKW\RkwBasics\ViewHelpers}
+<html xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+	xmlns:rkwBasics="http://typo3.org/ns/RKW/RkwBasics/ViewHelpers"
+	data-namespace-typo3-fluid="true">
 
-<f:layout name="Default" />
+	<f:layout name="Default" />
 
-This Template is responsible for creating a table of domain objects.
+	<f:section name="main">
 
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        List.html: keep
+		<f:render partial="FlashMessages" arguments="{_all}" />
 
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-<f:section name="main">
-
-    <f:render partial="FlashMessages" arguments="{_all}" />
-
-	<f:if condition="{mediaSources}">
-		<ul class="media-sources-list">
-			<f:for each="{mediaSources}" as="mediaSource">
-				<f:for each="<rkw:PageListExplode list='{mediaSource.pagesList}' delimiter='|' delimiterTwo='###' />" as="pageTitle" key="pageUid">
-					<li>
-						<f:link.page pageUid="{pageUid}" rel="nofollow">{pageTitle}</f:link.page>:&nbsp;
-						<f:if condition="{mediaSource.imageTitle}">
-							<f:then>
-								{mediaSource.imageTitle}&nbsp;
-							</f:then>
-							<f:else>
-                                <f:if condition="{mediaSource.imageDescription}">
-								    <f:then>
-                                        {mediaSource.imageDescription}&nbsp;
-                                    </f:then>
-                                    <f:else>
-                                        {mediaSource.fileName}&nbsp;
-                                    </f:else>
-                                </f:if>
-							</f:else>
-						</f:if>
-						&copy; <f:if condition="{mediaSource.publisher}">{mediaSource.publisher} - </f:if>
-						<f:link.page pageUid="{mediaSource.distributerUrl}" target="_blank" rel="nofollow">{mediaSource.distributerName}</f:link.page></li>
+		<f:if condition="{mediaSources}">
+			<ul class="media-sources-list">
+				<f:for each="{mediaSources}" as="mediaSource">
+					<f:for each="{rkwBasics:PageListExplode(list:'{mediaSource.pagesList}', delimiter:'|' delimiterTwo:'###')}" as="pageTitle" key="pageUid">
+						<li>
+							<f:link.page pageUid="{pageUid}" rel="nofollow">{pageTitle}</f:link.page>:
+							<f:if condition="{mediaSource.imageTitle}">
+								<f:then>
+									{mediaSource.imageTitle}
+								</f:then>
+								<f:else>
+									<f:if condition="{mediaSource.imageDescription}">
+										<f:then>
+											{mediaSource.imageDescription}
+										</f:then>
+										<f:else>
+											{mediaSource.fileName}
+										</f:else>
+									</f:if>
+								</f:else>
+							</f:if>
+							<rkwBasics:mediaCopyright originator="{mediaSource.publisher}" source="{mediaSource.distributerName}" />
+					</f:for>
 				</f:for>
-			</f:for>
-		</ul>
-        <!-- <f:translate key="templates_mediaSources_list_sum" arguments="{0: mediaSourcesSum}" />-->
-	</f:if>
-</f:section>
+			</ul>
+			<!-- <f:translate key="templates_mediaSources_list_sum" arguments="{0: mediaSourcesSum}" />-->
+		</f:if>
+	</f:section>
+</html>
