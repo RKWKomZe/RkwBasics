@@ -68,8 +68,9 @@ class MediaSourcesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
 
     }
 
+
     /**
-     *  shows resources of current page - including those which have been inherited
+     * shows resources of current page - including those which have been inherited
      *
      * @return void
      */
