@@ -96,7 +96,7 @@ lib.txRkwBasics {
                         20 {
                             text.data = register:OgImageMediaSource
                             fontColor = #ffffff
-                            fontSize = 24
+                            fontSize = 20
                             offset = [10.w]-[20.w]+5,[10.h]-15
                             angle = 90
                             niceText = 1
