@@ -35,6 +35,7 @@ config.tx_extbase {
                         tstamp.mapOnProperty = tstamp
                         hidden.mapOnProperty = hidden
                         deleted.mapOnProperty = deleted
+                        doktype.mapOnProperty = doktype
                         title.mapOnProperty = title
                         subtitle.mapOnProperty = subtitle
                         no_search.mapOnProperty = noSearch

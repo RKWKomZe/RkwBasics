@@ -82,6 +82,14 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
+     * doktype
+     *
+     * @var int
+     */
+    protected $doktype;
+
+
+    /**
      * title
      *
      * @var string
@@ -272,6 +280,18 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
+     * Sets the crdate value
+     *
+     * @param int $crdate
+     * @return void
+     * @api
+     */
+    public function setCrdate(int $crdate)
+    {
+        $this->crdate = $crdate;
+    }
+
+    /**
      * Returns the tstamp value
      *
      * @return integer
@@ -283,6 +303,18 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
     /**
+     * Sets the tstamp value
+     *
+     * @param int $tstamp
+     * @return void
+     * @api
+     */
+    public function setTstamp(int $tstamp)
+    {
+        $this->tstamp = $tstamp;
+    }
+    
+    /**
      * Returns the hidden value
      *
      * @return integer
@@ -291,6 +323,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getHidden()
     {
         return $this->hidden;
+    }
+    
+
+    /**
+     * Sets the hidden value
+     *
+     * @param int $hidden
+     * @return void
+     * @api
+     */
+    public function setHidden(int $hidden)
+    {
+        $this->hidden = $hidden;
     }
 
     /**
@@ -306,6 +351,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 
 
     /**
+     * Sets the deleted value
+     *
+     * @param int $deleted
+     * @return void
+     * @api
+     */
+    public function setDeleted(int $deleted)
+    {
+        $this->deleted = $deleted;
+    }
+
+
+    /**
      * Returns the sorting
      *
      * @return int $sorting
@@ -314,6 +372,44 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->sorting;
     }
+
+
+    /**
+     * Sets the sorting value
+     *
+     * @param int $sorting
+     * @return void
+     * @api
+     */
+    public function setSorting(int $sorting)
+    {
+        $this->sorting = $sorting;
+    }
+
+
+    /**
+     * Returns the doktype
+     *
+     * @return int $doktype
+     */
+    public function getDoktype()
+    {
+        return $this->doktype;
+    }
+
+
+    /**
+     * Sets the doktype value
+     *
+     * @param int $doktype
+     * @return void
+     * @api
+     */
+    public function setDoktype(int $doktype)
+    {
+        $this->doktype = $doktype;
+    }
+
 
     /**
      * Returns the title
