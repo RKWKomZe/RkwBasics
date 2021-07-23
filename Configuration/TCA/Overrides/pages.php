@@ -454,3 +454,19 @@ $tempConfig = '--div--;LLL:EXT:rkw_basics/Resources/Private/Language/locallang_d
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', $tempConfig , '1,3');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages_language_overlay',$tempConfig , '1,3');
 
+//===========================================================================
+// Add cropping for ogImage
+//===========================================================================
+/*$GLOBALS['TCA']['pages']['columns']['tx_rkwbasics_teaser_image']['config']['overrideChildTca']['columns']['crop']['config']['cropVariants'] = [
+
+    'ogImage' => [
+        'title' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage',
+        'allowedAspectRatios' => [
+            '1200:630' => [
+                'title' => '1200 x 630',
+                'value' => 1200 / 630
+            ]
+        ]
+    ],
+];
+*/
