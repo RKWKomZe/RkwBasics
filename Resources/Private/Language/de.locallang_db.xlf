@@ -84,6 +84,10 @@
 				<source>Teaser Image</source>
 				<target>Teaser-Bild</target>
 			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage" approved="yes">
+                <source>Preview for Social Media</source>
+                <target>Vorschaubild für Social Media</target>
+            </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image" approved="yes">
                 <source>Article Image</source>
                 <target>Artikel-Bild</target>
@@ -132,6 +136,9 @@
                 <source>Cover (Used only when no Download-File is set)</source>
                 <target>Cover (Überschreibt Cover aus Download-Datei)</target>
             </trans-unit>
+
+
+
 
 
             <!-- tx_rkwbasics_domain_model_mediafilemeta -->

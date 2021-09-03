@@ -129,6 +129,9 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image">
 				<source>Teaster Image</source>
 			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage" approved="yes">
+                <source>Preview for Social Media</source>
+            </trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image" approved="yes">
 				<source>Article Image</source>
 			</trans-unit>
