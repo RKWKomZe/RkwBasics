@@ -41,6 +41,12 @@ lib.txRkwBasics {
                             dataWrap = &tx_rkwauthors_rkwauthorsdetail[controller]={GP:tx_rkwauthors_rkwauthorsdetail|controller}&tx_rkwauthors_rkwauthorsdetail[action]={GP:tx_rkwauthors_rkwauthorsdetail|action}&tx_rkwauthors_rkwauthorsdetail[author]={GP:tx_rkwauthors_rkwauthorsdetail|author}
                             if.isTrue.data = GP:tx_rkwauthors_rkwauthorsdetail|author
                         }
+
+                        50 = TEXT
+                        50 {
+                            dataWrap = &tx_rkwinfographics_infographics[controller]={GP:tx_rkwinfographics_infographics|controller}&tx_rkwinfographics_infographics[action]={GP:tx_rkwinfographics_infographics|action}&tx_rkwinfographics_infographics[infographic]={GP:tx_rkwinfographics_infographics|infographic}
+                            if.isTrue.data = GP:tx_rkwinfographics_infographics|infographic
+                        }
                     }
                 }
 
