@@ -15,6 +15,28 @@ lib.txRkwBasics {
                 data = levelmedia : -1, slide
                 override.data =  levelfield : -1, tx_rkwbasics_teaser_image, slide
                 override.required = 1
+
+                // addition for rkw_infographics START
+                override.override.cObject = FILES
+                override.override.cObject {
+                    references {
+                        table = tx_rkwinfographics_domain_model_infographic
+                        uid.data = gp:tx_rkwinfographics_infographics|infographic
+                        uid.insertData = 1
+                        fieldName = image_social
+                    }
+
+                    begin = 0
+                    maxItems = 1
+                    required = 1
+
+                    renderObj = TEXT
+                    renderObj {
+                        data = file:current:uid
+                    }
+                }
+                // addition for rkw_infographics END
+
             }
 
             maxItems = 1
