@@ -142,3 +142,27 @@ lib.txRkwBasics {
         }
     }
 [global]
+
+[userFunc = TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('rkw_infographics')]
+    lib.txRkwBasics {
+
+        titleTag {
+
+            // additional title for infographics
+            30 = COA
+            30 {
+
+                10 = TEXT
+                10 {
+                    dataWrap = DB:tx_rkwinfographics_domain_model_infographic:{gp:tx_rkwinfographics_infographics|infographic}:title
+                    wrap3 = {|}
+                    insertData=1
+                }
+
+                stdWrap.noTrimWrap = |: | - Infografik |
+                stdWrap.required = 1
+            }
+
+        }
+    }
+[global]
