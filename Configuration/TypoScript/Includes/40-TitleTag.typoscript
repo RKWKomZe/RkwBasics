@@ -149,8 +149,8 @@ lib.txRkwBasics {
         titleTag {
 
             // additional title for infographics
-            30 = COA
-            30 {
+            60 = COA
+            60 {
 
                 10 = TEXT
                 10 {
