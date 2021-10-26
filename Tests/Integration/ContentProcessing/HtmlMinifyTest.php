@@ -110,7 +110,7 @@ class HtmlMinifyTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(HtmlMinify::class);
 
         $result = $this->subject->getSettings();
-        static::assertEquals('9999', $result['excludePids']);
+        self::assertEquals('9999', $result['excludePids']);
     }
 
     /**
@@ -139,7 +139,7 @@ class HtmlMinifyTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(HtmlMinify::class);
 
         $result = $this->subject->getSettings();
-        static::assertEquals('0', $result['includePageTypes']);
+        self::assertEquals('0', $result['includePageTypes']);
     }
 
 
@@ -172,7 +172,7 @@ class HtmlMinifyTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(HtmlMinify::class);
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
-        static::assertEquals($html, $this->subject->process($html));
+        self::assertEquals($html, $this->subject->process($html));
     }
 
 
@@ -210,7 +210,7 @@ class HtmlMinifyTest extends FunctionalTestCase
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
         $expected = file_get_contents(self::BASE_PATH . '/Fixtures/Expected/Check20.html');
-        static::assertEquals($expected, $this->subject->process($html));
+        self::assertEquals($expected, $this->subject->process($html));
     }
 
 
@@ -244,7 +244,7 @@ class HtmlMinifyTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(HtmlMinify::class);
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
-        static::assertEquals($html, $this->subject->process($html));
+        self::assertEquals($html, $this->subject->process($html));
     }
 
     /**
@@ -277,7 +277,7 @@ class HtmlMinifyTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(HtmlMinify::class);
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
-        static::assertEquals($html, $this->subject->process($html));
+        self::assertEquals($html, $this->subject->process($html));
     }
 
 

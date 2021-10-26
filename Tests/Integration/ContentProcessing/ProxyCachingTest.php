@@ -90,7 +90,7 @@ class ProxyCachingTest extends FunctionalTestCase
          * When getProxyCaching is called
          * Then zero is returned
          */
-        static::assertEquals(0, $this->subject::getProxyCachingSetting(1));
+        self::assertEquals(0, $this->subject::getProxyCachingSetting(1));
     }
 
     /**
@@ -109,7 +109,7 @@ class ProxyCachingTest extends FunctionalTestCase
          * Then the proxyCaching-value of the current page is returned
          */
         $this->importDataSet(self::BASE_PATH .'/Fixtures/Database/Check10.xml');
-        static::assertEquals(2, $this->subject::getProxyCachingSetting(101));
+        self::assertEquals(2, $this->subject::getProxyCachingSetting(101));
     }
 
 
@@ -129,7 +129,7 @@ class ProxyCachingTest extends FunctionalTestCase
          * Then the proxyCaching-value of the parent page is returned
          */
         $this->importDataSet(self::BASE_PATH .'/Fixtures/Database/Check20.xml');
-        static::assertEquals(1, $this->subject::getProxyCachingSetting(201));
+        self::assertEquals(1, $this->subject::getProxyCachingSetting(201));
     }
 
     /**
@@ -149,7 +149,7 @@ class ProxyCachingTest extends FunctionalTestCase
          * Then the proxyCaching-value of the parent page of the parent page is returned
          */
         $this->importDataSet(self::BASE_PATH .'/Fixtures/Database/Check30.xml');
-        static::assertEquals(1, $this->subject::getProxyCachingSetting(2001));
+        self::assertEquals(1, $this->subject::getProxyCachingSetting(2001));
     }
 
     //=============================================
@@ -170,7 +170,7 @@ class ProxyCachingTest extends FunctionalTestCase
 
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = 'test.com';
         $expected = GeneralUtility::hmac($GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename']);
-        static::assertEquals($expected, $this->subject::getSiteTag());
+        self::assertEquals($expected, $this->subject::getSiteTag());
     }
 
     //=============================================
@@ -191,7 +191,7 @@ class ProxyCachingTest extends FunctionalTestCase
 
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] = 'test.com';
         $expected = GeneralUtility::hmac($GLOBALS['TYPO3_CONF_VARS']['SYS']['sitename'] . '_' . 2);
-        static::assertEquals($expected, $this->subject::getPageTag(2));
+        self::assertEquals($expected, $this->subject::getPageTag(2));
     }
 
     /**

@@ -17,6 +17,10 @@ namespace RKW\RkwBasics\Tests\Integration\Utility;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\FrontendConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
  * FrontendSimulatorUtilityTest
@@ -43,8 +47,6 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
      * @var string[]
      */
     protected $coreExtensionsToLoad = [ ];
-
-
 
 
     /**
@@ -86,8 +88,8 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          */
 
         $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = 'Test';
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertEmpty($GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling']);
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertEmpty($GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling']);
     }
 
 
@@ -111,9 +113,9 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         $_SERVER['HTTP_HOST'] = 'example.com';
         GeneralUtility::getIndpEnv('HTTP_HOST');
 
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertEquals('www.rkw-kompetenzzentrum.rkw.local', $_SERVER['HTTP_HOST']);
-        static::assertEquals('www.rkw-kompetenzzentrum.rkw.local',  GeneralUtility::getIndpEnv('HTTP_HOST'));
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertEquals('www.rkw-kompetenzzentrum.rkw.local', $_SERVER['HTTP_HOST']);
+        self::assertEquals('www.rkw-kompetenzzentrum.rkw.local',  GeneralUtility::getIndpEnv('HTTP_HOST'));
 
     }
 
@@ -136,9 +138,9 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         // set variables
         $_GET['id'] = $_POST['id'] = 99;
 
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertEquals(3, $_GET['id']);
-        static::assertEquals(3, $_POST['id']);
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertEquals(3, $_GET['id']);
+        self::assertEquals(3, $_POST['id']);
 
     }
 
@@ -159,12 +161,12 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          * Then this TyposcriptFrontendController-Object contains a config-key 'baseURL' which is set to the domain of the given sub-page
          * Then this TyposcriptFrontendController-Object contains a property 'absRefPrefix' which is set to '/'
          */
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
 
-        static::assertEquals('/', $GLOBALS['TSFE']->config['config']['absRefPrefix']);
-        static::assertEquals('www.rkw-kompetenzzentrum.rkw.local', $GLOBALS['TSFE']->config['config']['baseURL']);
-        static::assertEquals('/', $GLOBALS['TSFE']->absRefPrefix);
+        self::assertEquals('/', $GLOBALS['TSFE']->config['config']['absRefPrefix']);
+        self::assertEquals('www.rkw-kompetenzzentrum.rkw.local', $GLOBALS['TSFE']->config['config']['baseURL']);
+        self::assertEquals('/', $GLOBALS['TSFE']->absRefPrefix);
 
     }
 
@@ -187,10 +189,10 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
 
         $GLOBALS['LANG']->csConvObj = null;
 
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertInstanceOf(\TYPO3\CMS\Core\Charset\CharsetConverter::class, $GLOBALS['LANG']->csConvObj);
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertInstanceOf(\TYPO3\CMS\Core\Charset\CharsetConverter::class, $GLOBALS['LANG']->csConvObj);
 
-        static::assertEquals($GLOBALS['LANG']->csConvObj, $GLOBALS['TSFE']->csConvObj);
+        self::assertEquals($GLOBALS['LANG']->csConvObj, $GLOBALS['TSFE']->csConvObj);
 
     }
 
@@ -222,27 +224,27 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          * Then this TyposcriptFrontendController-Object has the property 'tmpl' set to a TYPO3\CMS\Core\TypoScript\TemplateService-object
          */
 
-        static::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        static::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
-        static::assertEquals(3, $GLOBALS['TSFE']->id);
-        static::assertInternalType('array', $GLOBALS['TSFE']->rootLine);
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
+        self::assertEquals(3, $GLOBALS['TSFE']->id);
+        self::assertInternalType('array', $GLOBALS['TSFE']->rootLine);
 
         $rootline = $GLOBALS['TSFE']->rootLine;
-        static::assertCount(3, $rootline);
-        static::assertEquals(1, $rootline[0]['uid']);
-        static::assertEquals(2, $rootline[1]['uid']);
-        static::assertEquals(3, $rootline[2]['uid']);
+        self::assertCount(3, $rootline);
+        self::assertEquals(1, $rootline[0]['uid']);
+        self::assertEquals(2, $rootline[1]['uid']);
+        self::assertEquals(3, $rootline[2]['uid']);
 
-        static::assertEquals(3, $GLOBALS['TSFE']->page['uid']);
-        static::assertEquals('Test-Sub-Page', $GLOBALS['TSFE']->page['title']);
+        self::assertEquals(3, $GLOBALS['TSFE']->page['uid']);
+        self::assertEquals('Test-Sub-Page', $GLOBALS['TSFE']->page['title']);
 
-        static::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);
-        static::assertEquals(0,$GLOBALS['TSFE']->sys_language_uid);
-        static::assertEquals(0, $GLOBALS['TSFE']->pageNotFound);
+        self::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);
+        self::assertEquals(0,$GLOBALS['TSFE']->sys_language_uid);
+        self::assertEquals(0, $GLOBALS['TSFE']->pageNotFound);
 
-        static::assertInstanceOf(\TYPO3\CMS\Frontend\Page\PageRepository::class, $GLOBALS['TSFE']->sys_page);
-        static::assertInstanceOf(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, $GLOBALS['TSFE']->fe_user);
-        static::assertInstanceOf(\TYPO3\CMS\Core\TypoScript\TemplateService::class, $GLOBALS['TSFE']->tmpl);
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Page\PageRepository::class, $GLOBALS['TSFE']->sys_page);
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, $GLOBALS['TSFE']->fe_user);
+        self::assertInstanceOf(\TYPO3\CMS\Core\TypoScript\TemplateService::class, $GLOBALS['TSFE']->tmpl);
 
     }
 
@@ -280,15 +282,70 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(11);
 
-        static::assertEquals(2, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+        self::assertEquals(2, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
 
-        static::assertEquals($beforeTSFE, $GLOBALS['TSFE']);
-        static::assertEquals($beforeConfVars, $GLOBALS['TYPO3_CONF_VARS']);
-        static::assertEquals($beforeGET, $_GET);
-        static::assertEquals($beforePOST, $_POST);
-        static::assertEquals($beforeSERVER, $_SERVER);
-        static::assertEquals($beforeEnvironmentCache,  GeneralUtility::getIndpEnv('HTTP_HOST'));
+        self::assertEquals($beforeTSFE, $GLOBALS['TSFE']);
+        self::assertEquals($beforeConfVars, $GLOBALS['TYPO3_CONF_VARS']);
+        self::assertEquals($beforeGET, $_GET);
+        self::assertEquals($beforePOST, $_POST);
+        self::assertEquals($beforeSERVER, $_SERVER);
+        self::assertEquals($beforeEnvironmentCache,  GeneralUtility::getIndpEnv('HTTP_HOST'));
+        
+    }
 
+    /**
+     * @test
+     */
+    public function simulateFrontendEnvironmentSetsFrontendConfigurationManager()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a sub-page in the rootline
+         * When the method is called
+         * Then the method returns the value 1
+         * Then the Typoscript-configuration for frontend is available via configurationManager
+         */
+
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+        $configurationManager = $objectManager->get(ConfigurationManager::class);
+
+        $settings = $configurationManager->getConfiguration($configurationManager::CONFIGURATION_TYPE_SETTINGS, 'rkwBasics');
+        self::assertEquals(1, $settings['frontendContext']);
+    }
+
+    /**
+     * @test
+     */
+    public function simulateFrontendEnvironmentSetsContentObjectRenderer ()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a sub-page in the rootline
+         * Given the configurationManager has no contentObjectRenderer-object
+         * When the method is called
+         * Then the method returns the value 1
+         * Then the configurationManager has a contentObjectRenderer-object
+         */
+
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+        $configurationManager = $objectManager->get(ConfigurationManager::class);
+        
+        self::assertEmpty($configurationManager->getContentObject());
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+
+        self::assertNotEmpty($configurationManager->getContentObject());
 
     }
 
@@ -304,6 +361,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         /**
          * Scenario:
          *
+         * Given we were in FE-Mode
          * Given a sub-page in the rootline
          * Given simulateFrontendEnvironment was called before
          * When the method is called
@@ -314,8 +372,8 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = 'Test';
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
-        static::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
-        static::assertEquals('Test', $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling']);
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        self::assertEquals('Test', $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling']);
     }
 
 
@@ -328,6 +386,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         /**
          * Scenario:
          *
+         * Given we were in FE-Mode
          * Given a sub-page in the rootline
          * Given simulateFrontendEnvironment was called before
          * When the method is called
@@ -341,9 +400,9 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         GeneralUtility::getIndpEnv('HTTP_HOST');
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
-        static::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
-        static::assertEquals('example.com', $_SERVER['HTTP_HOST']);
-        static::assertEquals('example.com',  GeneralUtility::getIndpEnv('HTTP_HOST'));
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        self::assertEquals('example.com', $_SERVER['HTTP_HOST']);
+        self::assertEquals('example.com',  GeneralUtility::getIndpEnv('HTTP_HOST'));
 
     }
 
@@ -358,6 +417,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         /**
          * Scenario:
          *
+         * Given we were in FE-Mode
          * Given a sub-page in the rootline
          * Given simulateFrontendEnvironment was called before
          * When the method is called
@@ -369,9 +429,9 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         $_GET['id'] = $_POST['id'] = 99;
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
-        static::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
-        static::assertEquals(99, $_GET['id']);
-        static::assertEquals(99, $_POST['id']);
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        self::assertEquals(99, $_GET['id']);
+        self::assertEquals(99, $_POST['id']);
 
     }
 
@@ -385,6 +445,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         /**
          * Scenario:
          *
+         * Given we were in FE-Mode
          * Given a sub-page in the rootline
          * Given simulateFrontendEnvironment was called before
          * When the method is called
@@ -401,12 +462,65 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         );
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
-        static::assertNotSame($before, $GLOBALS['TSFE']);
-        static::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
-        static::assertSame($before, $GLOBALS['TSFE']);
+        self::assertNotSame($before, $GLOBALS['TSFE']);
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        self::assertSame($before, $GLOBALS['TSFE']);
 
     }
 
+
+    /**
+     * @test
+     */
+    public function resetFrontendEnvironmentDoesNotSetEmptyValues()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given we were in BE-mode 
+         * Given the $GLOBALS['TSFE']-object was not set
+         * Given simulateFrontendEnvironment was called before
+         * When the method is called
+         * Then the method returns true
+         * Then the $GLOBALS['TSFE']-object is not set
+         */
+        FrontendSimulatorUtility::simulateFrontendEnvironment(3);
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        self::assertNull($GLOBALS['TSFE']);
+
+    }
+
+    /**
+     * @test
+     */
+    public function resetFrontendEnvironmentSetsBackendConfigurationManager()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given we were in BE-Mode
+         * Given a sub-page in the rootline
+         * Given simulateFrontendEnvironment was called before
+         * When the method is called
+         * Then the method returns true
+         * Then the Typoscript-configuration for backend is available via configurationManager
+         */
+
+        FrontendSimulatorUtility::simulateFrontendEnvironment(3);
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+        
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+        /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+        $configurationManager = $objectManager->get(ConfigurationManager::class);
+
+        $settings = $configurationManager->getConfiguration($configurationManager::CONFIGURATION_TYPE_SETTINGS, 'rkwBasics');
+        self::assertEquals(1, $settings['backendContext']);
+    }
+    
 
     //=============================================
 

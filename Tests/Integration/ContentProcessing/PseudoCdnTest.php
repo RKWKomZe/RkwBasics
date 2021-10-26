@@ -109,7 +109,7 @@ class PseudoCdnTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(PseudoCdn::class);
 
         $result = $this->subject->getSettings();
-        static::assertEquals('Old-Setup-Test', $result['ignoreIfContains']);
+        self::assertEquals('Old-Setup-Test', $result['ignoreIfContains']);
     }
 
 
@@ -143,7 +143,7 @@ class PseudoCdnTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(PseudoCdn::class);
 
         $result = $this->subject->getSettings();
-        static::assertEquals('New-Setup-Test', $result['ignoreIfContains']);
+        self::assertEquals('New-Setup-Test', $result['ignoreIfContains']);
     }
 
     /**
@@ -172,7 +172,7 @@ class PseudoCdnTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(PseudoCdn::class);
 
         $result = $this->subject->getSettings();
-        static::assertEquals('/\.css|\.js|\?noCdn=1/', $result['ignoreIfContains']);
+        self::assertEquals('/\.css|\.js|\?noCdn=1/', $result['ignoreIfContains']);
     }
 
     //=============================================
@@ -205,7 +205,7 @@ class PseudoCdnTest extends FunctionalTestCase
         $this->subject = $this->objectManager->get(PseudoCdn::class);
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
-        static::assertEquals($html, $this->subject->process($html));
+        self::assertEquals($html, $this->subject->process($html));
     }
 
     /**
@@ -241,7 +241,7 @@ class PseudoCdnTest extends FunctionalTestCase
 
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Default.html');
         $expected = file_get_contents(self::BASE_PATH . '/Fixtures/Expected/Check30.html');
-        static::assertEquals($expected, $this->subject->process($html));
+        self::assertEquals($expected, $this->subject->process($html));
     }
 
 

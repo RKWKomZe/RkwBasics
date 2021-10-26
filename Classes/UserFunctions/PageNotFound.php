@@ -2,6 +2,9 @@
 
 namespace RKW\RkwBasics\UserFunctions;
 
+use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
+use TYPO3\CMS\Core\Controller\ErrorPageController;
+use TYPO3\CMS\Core\Log\LogManager;
 use TYPO3\CMS\Core\Messaging\ErrorpageMessage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\HttpUtility;
@@ -66,7 +69,7 @@ class PageNotFound
         $host = preg_replace('/[^a-z0-9\-_\.]/i', '', $host);
 
         // load FE and get configuration
-        $this->initTSFE();
+        FrontendSimulatorUtility::simulateFrontendEnvironment($GLOBALS['TSFE']->id);
         $configuration = $this->getConfiguration();
         $settings = $this->getSettings();
 
@@ -88,63 +91,37 @@ class PageNotFound
         if ($this->getLanguageKey()) {
             $languageAddition = '&L=' . $this->getLanguageKey();
         }
-
         try {
-            /*
-            // check if there is a redirect page
-            if ($redirectPid = $this->getRedirectPid($path, $host)) {
+            if ($configuration['fallbackPid']) {
 
-                /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $cObj
-                $cObj = GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
-                $link = $cObj->typolink_URL(
-                    array(
-                        'parameter'        => intval($redirectPid),
-                        'additionalParams' => $languageAddition,
-                        'forceAbsoluteUrl' => 1,
-                    )
-                );
+                // set up context if proxy is used
+                $aContext = array();
+                if ($settings['proxy']) {
 
-                // log what we are doing
-                $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::INFO, sprintf('Redirecting "%s" to "%s".', $host . '/' . $path, $link));
+                    $aContext = array(
+                        'http' => array(
+                            'proxy'           => $settings['proxy'],
+                            'request_fulluri' => true,
+                        ),
+                    );
 
-                // redirect and exit
-                HttpUtility::redirect($link, HttpUtility::HTTP_STATUS_301);
-
-            // check if we were clever enough to set a fallback pid
-            } else {*/
-
-                if ($configuration['fallbackPid']) {
-
-                    // set up context if proxy is used
-                    $aContext = array();
-                    if ($settings['proxy']) {
-
-                        $aContext = array(
-                            'http' => array(
-                                'proxy'           => $settings['proxy'],
-                                'request_fulluri' => true,
-                            ),
-                        );
-
-                        if ($settings['proxyUsername']) {
-                            $auth = base64_encode($settings['proxyUsername'] . ':' . $settings['proxyPassword']);
-                            $aContext['http']['header'] = 'Proxy-Authorization: Basic ' . $auth;
-                        }
+                    if ($settings['proxyUsername']) {
+                        $auth = base64_encode($settings['proxyUsername'] . ':' . $settings['proxyPassword']);
+                        $aContext['http']['header'] = 'Proxy-Authorization: Basic ' . $auth;
                     }
+                }
 
-                    // Code 404 and exit
-                    $cxContext = stream_context_create($aContext);
-                    if ($content = file_get_contents($domain . '/index.php?id=' . intval($configuration['fallbackPid']) . $languageAddition . '&originalUrl=' . urlencode($_SERVER['REQUEST_URI']), false, $cxContext)) {
+                // Code 404 and exit
+                $cxContext = stream_context_create($aContext);
+                if ($content = file_get_contents($domain . '/index.php?id=' . intval($configuration['fallbackPid']) . $languageAddition, false, $cxContext)) {
 
-                        // log what we are doing
-                        $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::WARNING, sprintf('Showing fallback not-found-page for URL "%s".', $host . '/' . $path));
+                    // log what we are doing
+                    $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::WARNING, sprintf('Showing fallback not-found-page for URL "%s".', $host . '/' . $path));
 
-                        HttpUtility::setResponseCode(HttpUtility::HTTP_STATUS_404);
-                        echo $content;
-                        die();
-                        //===
-                    }
-                /*}*/
+                    HttpUtility::setResponseCode(HttpUtility::HTTP_STATUS_404);
+                    echo $content;
+                    die();
+                }
             }
         } catch (\Exception $e) {
             $this->getLogger()->log(\TYPO3\CMS\Core\Log\LogLevel::ERROR, sprintf('An error occurred while trying to catch the page-not-found-page for URL "%s". Please check the configuration. Error: %s', $host . '/' . $path, $e->getMessage()));
@@ -155,12 +132,12 @@ class PageNotFound
 
         // fallback of fallback
         $title = 'Page Not Found';
-        $message = $params['reasonText'] ? 'Reason: ' . htmlspecialchars($params['reasonText']) : 'Page cannot be found.';
-        $messagePage = GeneralUtility::makeInstance(ErrorpageMessage::class, $message, $title);
-        $messagePage->output();
+        $message = $params['reasonText'] ? 'Reason: ' . $params['reasonText'] : 'Page cannot be found.';
+        
+        /** @var \TYPO3\CMS\Core\Controller\ErrorPageController $errorPageController */
+        $errorPageController = GeneralUtility::makeInstance(ErrorPageController::class);
+        echo $errorPageController->errorAction($title, $message);
         die();
-        //===
-
     }
 
 
@@ -224,51 +201,8 @@ class PageNotFound
         }
 
         return $languageKey;
-        //===
     }
-
-
-    /**
-     * Returns the redirect url based on the old page-names
-     *
-     * @param string $path
-     * @param string $domain
-     * @return string
-     * @throws \TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException
-     */
-    private function getRedirectPid($path, $domain)
-    {
-
-        // search for a matching page
-        $result = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow(
-            'pages.uid',
-            'pages',
-            '(
-            tx_rkwbasics_old_link = "' . addslashes($path) . '"
-            OR tx_rkwbasics_old_link = "' . addslashes($path . '/') . '"
-            )
-             AND (
-                tx_rkwbasics_old_domain = "' . addslashes($domain) . '"
-                OR  tx_rkwbasics_old_domain = "' . addslashes($domain . '/') . '"
-                OR  tx_rkwbasics_old_domain = "' . addslashes('http://' . $domain) . '"
-                OR  tx_rkwbasics_old_domain = "' . addslashes('http://' . $domain . '/') . '"
-            )' .
-            \RKW\RkwBasics\Helper\QueryTypo3::getWhereClauseForEnableFields('pages') .
-            \RKW\RkwBasics\Helper\QueryTypo3::getWhereClauseForVersioning('pages'),
-            $groupBy = '',
-            $orderBy = ''
-        );
-
-        if ($result['uid']) {
-            return intval($result['uid']);
-        }
-
-        //===
-
-        return null;
-        //===
-    }
-
+    
 
     /**
      * Returns TYPO3 settings
@@ -279,8 +213,7 @@ class PageNotFound
      */
     private function getSettings($which = ConfigurationManagerInterface::CONFIGURATION_TYPE_SETTINGS)
     {
-        return Common::getTyposcriptConfiguration('RkwBasics', $which);
-        //===
+        return \RKW\RkwBasics\Utility\GeneralUtility::getTyposcriptConfiguration('RkwBasics', $which);
     }
 
 
@@ -309,52 +242,12 @@ class PageNotFound
 
         if ($config[$host]) {
             return $config[$host];
-            //===
         }
-
 
         return $config['_DEFAULT'];
-        //===
-
     }
 
-    /**
-     * init frontend to render frontend links in task
-     *
-     * @param integer $id
-     * @param integer $typeNum
-     * @return void
-     */
-    private function initTSFE($id = 0, $typeNum = 0)
-    {
-
-        if (!$id) {
-            $id = 1;
-            if ($GLOBALS['TSFE']->id) {
-                $id = $GLOBALS['TSFE']->id;
-            }
-        }
-        if (!is_object($GLOBALS['TT'])) {
-            $GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\NullTimeTracker;
-            $GLOBALS['TT']->start();
-        }
-        $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $GLOBALS['TYPO3_CONF_VARS'], $id, $typeNum);
-        $GLOBALS['TSFE']->connectToDB();
-        $GLOBALS['TSFE']->initFEuser();
-        $GLOBALS['TSFE']->determineId();
-        $GLOBALS['TSFE']->initTemplate();
-        $GLOBALS['TSFE']->getConfigArray();
-
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('realurl')) {
-            $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($id);
-            $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
-            $_SERVER['HTTP_HOST'] = $host;
-            $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $host;
-        }
-
-    }
-
-
+    
     /**
      * Returns logger instance
      *
@@ -362,8 +255,7 @@ class PageNotFound
      */
     private function getLogger()
     {
-        return \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Log\\LogManager')->getLogger(__CLASS__);
-        //===
+        return GeneralUtility::makeInstance(LogManager::class)->getLogger(__CLASS__);
     }
 
 

@@ -108,7 +108,7 @@ class ReplaceExtensionPathsTest extends FunctionalTestCase
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Check10.html');
         $expected = file_get_contents(self::BASE_PATH . '/Fixtures/Expected/Check10.html');
 
-        static::assertEquals($expected, $this->subject->process($html));
+        self::assertEquals($expected, $this->subject->process($html));
     }
 
     /**
@@ -128,7 +128,7 @@ class ReplaceExtensionPathsTest extends FunctionalTestCase
         $html = file_get_contents(self::BASE_PATH . '/Fixtures/Frontend/Templates/Check20.html');
         $expected = file_get_contents(self::BASE_PATH . '/Fixtures/Expected/Check20.html');
 
-        static::assertEquals($expected, $this->subject->process($html));
+        self::assertEquals($expected, $this->subject->process($html));
     }
 
 

@@ -14,6 +14,13 @@ namespace RKW\RkwBasics\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Backend\Utility\BackendUtility;
+use TYPO3\CMS\Core\Charset\CharsetConverter;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+
 /**
  * Utility to simulate a frontend in backend context.
  *
@@ -45,7 +52,6 @@ class FrontendSimulatorUtility
      */
     public static function simulateFrontendEnvironment($pid = 1): int
     {
-
         if (!$pid) {
             $pid = 1;
         }
@@ -65,8 +71,24 @@ class FrontendSimulatorUtility
                 $_POST = (isset(self::$cache[$pid]['_POST']) ? self::$cache[$pid]['_POST'] : null);
 
                 // flush cache of environment variables
-                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+                GeneralUtility::flushInternalRuntimeCaches();
 
+                // load correct concreteConfigurationManager based on new environmentContext (FE vs. BE)
+                /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+                
+                /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+                $configurationManager = $objectManager->get(ConfigurationManager::class);
+                $configurationManager->initializeObject();
+                
+                // set contentObjectRenderer if not set
+                if (! $configurationManager->getContentObject()) {
+                    
+                    /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject */
+                    $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+                    $configurationManager->setContentObject($contentObject);
+                }
+                
                 return 2;
             }
 
@@ -86,18 +108,18 @@ class FrontendSimulatorUtility
                 $GLOBALS['TYPO3_CONF_VARS']['FE']['pageNotFound_handling'] = '';
 
                 // add correct domain to environment variables
-                $rootline = \TYPO3\CMS\Backend\Utility\BackendUtility::BEgetRootLine($pid);
-                $host = \TYPO3\CMS\Backend\Utility\BackendUtility::firstDomainRecord($rootline);
+                $rootline = BackendUtility::BEgetRootLine($pid);
+                $host = BackendUtility::firstDomainRecord($rootline);
                 $_SERVER['HTTP_HOST'] = $host;
 
                 // flush cache of environment variables
-                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+                GeneralUtility::flushInternalRuntimeCaches();
 
                 // set pid to $_GET - we need this for BackendConfigurationManager to load the right configuration
                 $_GET['id'] = $_POST['id'] = $pid;
 
                 /** @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $GLOBALS ['TSFE'] */
-                $GLOBALS['TSFE'] = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
                     \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
                     $GLOBALS['TYPO3_CONF_VARS'],
                     $pid,
@@ -111,7 +133,7 @@ class FrontendSimulatorUtility
                 $GLOBALS['TSFE']->getConfigArray();
                 $GLOBALS['TSFE']->getPageAndRootline();
                 $GLOBALS['TSFE']->domainStartPage = $GLOBALS['TSFE']->rootLine[0]['uid'];
-                $GLOBALS['LANG']->csConvObj = $GLOBALS['TSFE']->csConvObj;
+                $GLOBALS['LANG']->csConvObj = GeneralUtility::makeInstance(CharsetConverter::class);
 
                 // set absRefPrefix and baseURL accordingly
                 $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $GLOBALS['TSFE']->config['config']['baseURL'] = $host;
@@ -122,20 +144,37 @@ class FrontendSimulatorUtility
 
                     // for file access
                     /** @var \TYPO3\CMS\Core\Authentication\BackendUserAuthentication $backendUserAuthentication */
-                    $backendUserAuthentication = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                    $backendUserAuthentication = GeneralUtility::makeInstance(
                         \TYPO3\CMS\Core\Authentication\BackendUserAuthentication::class
                     );
 
                     $GLOBALS['BE_USER'] = $backendUserAuthentication;
                 }
 
+                // load correct concreteConfigurationManager based on new environmentContext (FE vs. BE)
+                /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+                /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+                $configurationManager = $objectManager->get(ConfigurationManager::class);
+                $configurationManager->initializeObject();
+
+                // set contentObjectRenderer if not set
+                if (! $configurationManager->getContentObject()) {
+                    
+                    /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject */
+                    $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+                    $configurationManager->setContentObject($contentObject);
+                }
+
+                return 1;
+
             } catch (\Exception $e) {
                 // do nothing
-                return 0;
             }
         }
 
-        return 1;
+        return 0;
     }
 
 
@@ -161,8 +200,24 @@ class FrontendSimulatorUtility
                 $_POST = (isset(self::$backup['_POST']) ? self::$backup['_POST'] : null);
 
                 // flush cache of environment variables
-                \TYPO3\CMS\Core\Utility\GeneralUtility::flushInternalRuntimeCaches();
+                GeneralUtility::flushInternalRuntimeCaches();
 
+                // load correct concreteConfigurationManager based on new environmentContext (FE vs. BE)
+                /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+                $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
+                /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
+                $configurationManager = $objectManager->get(ConfigurationManager::class);
+                $configurationManager->initializeObject();
+
+                // set contentObjectRenderer if not set
+                if (! $configurationManager->getContentObject()) {
+                    
+                    /** @var \TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer $contentObject */
+                    $contentObject = GeneralUtility::makeInstance(ContentObjectRenderer::class);
+                    $configurationManager->setContentObject($contentObject);
+                }
+                
                 return true;
             }
         }
