@@ -121,7 +121,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
          * Then false is returned
          */
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csd_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg';
-        static::assertFalse( $this->subject->searchFile($url));
+        self::assertFalse( $this->subject->searchFile($url));
     }
     /**
      * @test
@@ -138,7 +138,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
          * Then an array is returned
          */
         $url = 'https://www.rkw-bw.de/typo3temp/assets/babalala/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg';
-        static::assertInternalType('array', $this->subject->searchFile($url));
+        self::assertInternalType('array', $this->subject->searchFile($url));
     }
 
 
@@ -161,7 +161,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
          * Then false is returned
          */
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csd_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.png';
-        static::assertFalse( $this->subject->searchFile($url));
+        self::assertFalse( $this->subject->searchFile($url));
     }
 
     /**
@@ -189,13 +189,13 @@ class AssetFileNotFoundTest extends FunctionalTestCase
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg';
         $result = $this->subject->searchFile($url);
 
-        static::assertInternalType('array', $result);
-        static::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['absolutePath']);
-        static::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['relativePath']);
-        static::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['file']);
-        static::assertEquals('jpg', $result['extension']);
-        static::assertEquals(0, $result['size']);
-        static::assertFileExists($result['absolutePath']);
+        self::assertInternalType('array', $result);
+        self::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['absolutePath']);
+        self::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['relativePath']);
+        self::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['file']);
+        self::assertEquals('jpg', $result['extension']);
+        self::assertEquals(0, $result['size']);
+        self::assertFileExists($result['absolutePath']);
     }
 
     /**
@@ -226,13 +226,13 @@ class AssetFileNotFoundTest extends FunctionalTestCase
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg';
         $result = $this->subject->searchFile($url);
 
-        static::assertInternalType('array', $result);
-        static::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['absolutePath']);
-        static::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['relativePath']);
-        static::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['file']);
-        static::assertEquals('jpg', $result['extension']);
-        static::assertEquals(0, $result['size']);
-        static::assertFileExists($result['absolutePath']);
+        self::assertInternalType('array', $result);
+        self::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['absolutePath']);
+        self::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['relativePath']);
+        self::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['file']);
+        self::assertEquals('jpg', $result['extension']);
+        self::assertEquals(0, $result['size']);
+        self::assertFileExists($result['absolutePath']);
     }
 
 

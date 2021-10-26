@@ -43,3 +43,15 @@ page {
     10 = TEXT
     10.value = Hallo Welt!
 }
+
+plugin.tx_rkwbasics {
+    settings {
+        frontendContext = 1
+    }
+}
+
+module.tx_rkwbasics {
+    settings {
+        backendContext = 1
+    }
+}

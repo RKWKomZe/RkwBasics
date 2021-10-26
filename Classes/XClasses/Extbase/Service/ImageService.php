@@ -22,6 +22,7 @@ use TYPO3\CMS\Core\Resource\ProcessedFile;
  * This class enforces all images to be processed - no matter what
  */
 class ImageService extends \TYPO3\CMS\Extbase\Service\ImageService {
+    
     /**
      * Does exactly the same as the class it extends EXCEPT it ALWAYS creates a file
      *

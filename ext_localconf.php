@@ -109,6 +109,9 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Core\Resource\ResourceCompressor::class] = [
             'className' => RKW\RkwBasics\XClasses\Core\Resource\ResourceCompressor::class
         ];
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Service\EnvironmentService::class] = [
+            'className' => RKW\RkwBasics\XClasses\Extbase\Service\EnvironmentService::class
+        ];
         /*if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('varnish')) {
             $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\Snowflake\Varnish\Utility\VarnishHttpUtility::class] = [
                 'className' => RKW\RkwBasics\XClasses\Varnish\Utility\VarnishHttpUtility::class
