@@ -173,7 +173,6 @@ $tempColumnsPages = [
     'tx_rkwbasics_teaser_image' => [
         'exclude' => 0,
         'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image',
-
         'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
             'txRkwBasicsTeaserImage',
             [
@@ -211,6 +210,23 @@ $tempColumnsPages = [
             'txRkwbasicsCover',
             ['maxitems' => 1],
             $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+        ),
+    ],
+
+    'tx_rkwbasics_external_link' => [
+        'exclude' => 0,
+        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
+        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link',
+        'config' => array(
+            'type' => 'input',
+            'renderType' => 'inputLink',
+            'fieldControl' => [
+                'linkPopup' => [
+                    'options' => [
+                        'blindLinkOptions' => 'mail,page,spec,folder,file'
+                    ]
+                ]
+            ]
         ),
     ],
 
@@ -275,106 +291,6 @@ $tempColumnsPagesMulti = [
 ];
 
 
-/** @deprecated */
-$currentVersion = TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version);
-if ($currentVersion < 8000000) {
-
-    $tempColumnsPages = array_merge(
-        $tempColumnsPages,
-        [
-
-            'tx_rkwbasics_article_image' => [
-                'exclude' => 0,
-                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image',
-
-                'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-                    'txRkwBasicsArticleImage',
-                    [
-                        'maxitems' => 1,
-
-                        // Use the imageoverlayPalette instead of the basicoverlayPalette
-                        'foreign_types' => [
-                            '0' => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                            \TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => [
-                                'showitem' => '
-                                --palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                                --palette--;;filePalette'
-                            ],
-                        ],
-
-                    ],
-                    $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-                ),
-            ],
-
-            'tx_rkwbasics_article_video' => [
-                'exclude' => 0,
-                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video',
-                'config' => [
-                    'type' => 'input',
-                    'size' => 50,
-                    'eval' => 'trim'
-                ],
-            ]
-        ]
-    );
-
-
-    $tempColumnsPagesMulti = array_merge (
-        $tempColumnsPagesMulti,
-        [
-
-            'tx_rkwbasics_teaser_text' => [
-                'exclude' => 0,
-                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text',
-                'config' => [
-                    'type' => 'text',
-                    'cols' => 40,
-                    'rows' => 15,
-                    'eval' => 'trim',
-                ],
-            ],
-
-            'tx_rkwbasics_information' => [
-                'exclude' => 0,
-                'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_information',
-                'config' => [
-                    'type' => 'text',
-                    'rows' => 42,
-                ],
-                'defaultExtras' => 'richtext[]:rte_transform[flag=rte_enabled|mode=ts_css]'
-            ],
-        ]
-    );
-
-
-
-}
-
 //===========================================================================
 // Add meta-tab to folders
 //===========================================================================
@@ -410,18 +326,9 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'layout','tx_rkwbasics_fe_layout_next_level','after:layout');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--','after:media');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--,tx_rkwbasics_external_link,--linebreak--','after:media');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'access','--linebreak--,tx_rkwbasics_proxy_caching','after:fe_login_mode');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'visibility','--linebreak--,tx_rkwbasics_no_index, tx_rkwbasics_no_follow','after:nav_hide');
-
-/** @deprecated */
-if ($currentVersion < 8000000) {
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'abstract','tx_rkwbasics_teaser_text,--linebreak--,tx_rkwbasics_article_image,--linebreak--,tx_rkwbasics_article_video','before:abstract');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'abstract', 'tx_rkwbasics_teaser_text','before:abstract');
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_information', '', 'after:abstract');
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages_language_overlay','tx_rkwbasics_information', '', 'after:abstract');
-}
 
 // Add field after another
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_css_class', '', 'after:backend_layout_next_level');

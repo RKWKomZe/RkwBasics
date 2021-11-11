@@ -93,12 +93,6 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_target_group">
 				<source>Target group</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
-                <source>Download</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
-				<source>Cover (Used only when no Download-File is set)</source>
-			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_domain">
                 <source>Old Domain (Domain only, without "http://"!)</source>
             </trans-unit>
@@ -132,15 +126,15 @@
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage" approved="yes">
                 <source>Preview for Social Media</source>
             </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image" approved="yes">
-				<source>Article Image</source>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
+                <source>Download</source>
+            </trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
+				<source>Cover (Used only when no Download-File is set)</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video" approved="yes">
-				<source>YouTube Video-Link (replaces Article Image)</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_information">
-				<source>Further Information</source>
-			</trans-unit>
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link" approved="yes">
+                <source>Externer Link</source>
+            </trans-unit>
 
 
 			<!-- tx_rkwbasics_domain_model_mediafilemeta -->

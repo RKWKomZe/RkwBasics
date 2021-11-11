@@ -88,18 +88,7 @@
                 <source>Preview for Social Media</source>
                 <target>Vorschaubild für Social Media</target>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_image" approved="yes">
-                <source>Article Image</source>
-                <target>Artikel-Bild</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_article_video" approved="yes">
-                <source>YouTube Video-Link (replaces Article Image)</source>
-                <target>YouTube Video-Link (ersetzt Artikel-Bild)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_information">
-                <source>Further Information</source>
-                <target>Weiterführende Informationen</target>
-            </trans-unit>
+
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
                 <source>Department</source>
                 <target>Fachbereich/Thema</target>
@@ -136,7 +125,10 @@
                 <source>Cover (Used only when no Download-File is set)</source>
                 <target>Cover (Überschreibt Cover aus Download-Datei)</target>
             </trans-unit>
-
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link">
+                <source>External Link</source>
+                <target>Externer Link</target>
+            </trans-unit>
 
 
 
