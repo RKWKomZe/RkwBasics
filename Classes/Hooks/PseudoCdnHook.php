@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\ContentProcessing\PseudoCdn;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class PseudoCdnHooks
  *
@@ -38,7 +41,7 @@ class PseudoCdnHook
         $obj = $params['pObj'];
 
         // get CDN
-        $cdn = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\PseudoCdn::class);
+        $cdn = GeneralUtility::makeInstance(PseudoCdn::class);
 
         // Replace content
         $obj->content = $cdn->process($obj->content);

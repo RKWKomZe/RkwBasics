@@ -1,5 +1,5 @@
 <?php
-namespace RKW\RkwRelated\Tests\Integration\ContentProcessing;
+namespace RKW\RkwBasics\Tests\Integration\ContentProcessing;
 
 /*
  * This file is part of the TYPO3 CMS project.

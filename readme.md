@@ -636,6 +636,43 @@ specified CSS files as inline CSS and also considers external CSS files.
 Currently, this feature cannot yet be deactivated via TypoScript.
 
 
+## 1.8 Include Critical CSS (Above-The-Fold)
+To increase the loading speed of your website, so-called critical CSS (above the fold) can be stored in a separate file. 
+This critical CSS is then written inline into the HTML of the website, while the rest of the CSS (which is included via page.includeCSS) is added in such a way that it does not block the rendering of the page (as is otherwise usual).
+The critical CSS can be specified per frontend-layout. We use the fields 'tx_rkwbasics_fe_layout_next_level' and 'layout' here (layout-field takes precedence in current page).
+If no critical CSS is specified for a layout, the CSS files are included normally.
+
+The configuration is done via Typoscript.
+
+Usage via TypoScript:
+```
+plugin.tx_rkwbasics {
+
+    settings {
+        criticalCss {
+        
+            // globally activate it
+            enable = 1
+
+            filesForLayout {
+            
+                // the key is the frontend-layout in which the following files are to be included 
+                0 {
+                    // this keys here are only determining the order of the inclusion. Extension-keys can be used.
+                    10 = EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/criticalOne.css
+                    20 = EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/criticalTwo.css    
+                }
+            }
+            
+            // here you can define CSS files that are included via page.includeCss that are to be removed when critical-CSS is included
+            filesToRemoveWhenActive {
+                10 = EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/removeOne.css
+                20 = EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/removeTwo.css
+            }
+        }
+	}
+```
+
 # 4. Breaking Changes 
 ### In version >= 8.7.20
 * __Moved field tx_rkwbasics_teaser_image to resources-tab in page properties.__

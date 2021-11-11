@@ -42,7 +42,7 @@ call_user_func(
             'tx_rkwbasics_domain_model_target_group'
         );
     },
-    $_EXTKEY
+    'rkw_basics'
 );
 
 

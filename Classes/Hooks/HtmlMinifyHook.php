@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\ContentProcessing\HtmlMinify;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class HtmlMinifyHook
@@ -40,7 +42,7 @@ class HtmlMinifyHook
         $obj = $params['pObj'];
 
         // get CDN
-        $cdn = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\HtmlMinify::class);
+        $cdn = GeneralUtility::makeInstance(HtmlMinify::class);
 
         // Replace content
         $obj->content = $cdn->process($obj->content);
