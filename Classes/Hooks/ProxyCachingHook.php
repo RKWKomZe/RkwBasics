@@ -2,6 +2,8 @@
 
 namespace RKW\RkwBasics\Hooks;
 
+use RKW\RkwBasics\ContentProcessing\ProxyCaching;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /*
@@ -39,7 +41,7 @@ class ProxyCachingHook
     {
 
         /** @var $proxyCaching \RKW\RkwBasics\ContentProcessing\ProxyCaching */
-        $proxyCaching = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\ProxyCaching::class);
+        $proxyCaching = GeneralUtility::makeInstance(ProxyCaching::class);
         $pid = intval($GLOBALS['TSFE']->id);
 
         header('X-TYPO3-ProxyCaching: ' . $proxyCaching::getProxyCachingSetting($pid));

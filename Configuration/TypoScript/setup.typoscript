@@ -172,6 +172,16 @@ plugin.tx_rkwbasics {
             excludePids = {$plugin.tx_rkwbasics.settings.htmlMinify.excludePids}
             includePageTypes = {$plugin.tx_rkwbasics.settings.htmlMinify.includePageTypes}
         }
+        
+        criticalCss {
+            enable = {$plugin.tx_rkwbasics.settings.criticalCss.enable}
+            filesForLayout {
+                        
+            }
+            filesToRemoveWhenActive {
+            
+            }
+        }
     }
 }
 

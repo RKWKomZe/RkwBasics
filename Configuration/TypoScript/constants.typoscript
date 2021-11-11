@@ -79,7 +79,6 @@ plugin.tx_rkwbasics {
             search = /(href="|src="|srcset=")\/?((uploads\/media|uploads\/pics|typo3temp\/compressor|typo3temp\/GB|typo3conf\/ext|fileadmin)([^"]+))/i
         }
 
-
         htmlMinify {
 
             # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate HTML Minifier
@@ -90,7 +89,12 @@ plugin.tx_rkwbasics {
 
             # cat=plugin.tx_rkwbasics//a; type=string; label=Page types to include, comma-separated
             includePageTypes = 0
-
+        }
+        
+        criticalCss {
+               
+            # cat=plugin.tx_rkwbasics//a; type=boolean; label=Activate Rendering for Critical-CSS
+            enable = 0
         }
 	}
 }

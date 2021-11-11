@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\Hooks;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\ContentProcessing\ReplaceExtensionPaths;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
 /**
  * Class ReplaceExtensionPathHook
  *
@@ -40,7 +43,7 @@ class ReplaceExtensionPathsHook
         $obj = $params['pObj'];
 
         // get class
-        $replaceExtensionPaths = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\RKW\RkwBasics\ContentProcessing\ReplaceExtensionPaths::class);
+        $replaceExtensionPaths = GeneralUtility::makeInstance(ReplaceExtensionPaths::class);
 
         // Replace content
         $obj->content = $replaceExtensionPaths->process($obj->content);

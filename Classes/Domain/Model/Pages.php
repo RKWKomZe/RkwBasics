@@ -156,6 +156,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * txRkwbasicsCssClass
      *
      * @var \integer
+     * @deprecated
      */
     protected $txRkwbasicsCssClass;
 
@@ -164,6 +165,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * txRkwbasicsOldDomain
      *
      * @var string
+     * @deprecated
      */
     protected $txRkwbasicsOldDomain = '';
 
@@ -172,17 +174,9 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * txRkwbasicsOldLink
      *
      * @var string
-     */
-    protected $txRkwbasicsOldLink = '';
-
-
-    /**
-     * txRkwbasicsTeaserText
-     *
-     * @var string
      * @deprecated
      */
-    protected $txRkwbasicsTeaserText = '';
+    protected $txRkwbasicsOldLink = '';
 
 
     /**
@@ -191,32 +185,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \RKW\RkwBasics\Domain\Model\FileReference
      */
     protected $txRkwbasicsTeaserImage = null;
-
-
-    /**
-     * txRkwbasicsArticleImage
-     *
-     * @var \RKW\RkwBasics\Domain\Model\FileReference
-     * @deprecated
-     */
-    protected $txRkwbasicsArticleImage = null;
-
-
-    /**
-     * txRkwbasicsArticleVideo
-     *
-     * @var string
-     * @deprecated
-     */
-    protected $txRkwbasicsArticleVideo = null;
-
-
-    /**
-     * txRkwbasicsInformation
-     *
-     * @var string
-     */
-    protected $txRkwbasicsInformation = '';
 
 
     /**
@@ -256,6 +224,14 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
      */
     protected $txRkwbasicsCover = null;
+
+
+    /**
+     * txRkwbasicsExternalLink
+     *
+     * @var string
+     */
+    protected $txRkwbasicsExternalLink = null;
 
     /**
      * Returns the pid
@@ -521,7 +497,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     }
 
 
-
     /**
      * Returns the lastUpdated
      *
@@ -542,7 +517,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         $this->lastUpdated = $lastUpdated;
     }
-
 
 
     /**
@@ -593,9 +567,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsCssClass
      *
      * @return \integer $txRkwbasicsCssClass
+     * @deprecated 
      */
     public function getTxRkwbasicsCssClass()
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsCssClass;
     }
 
@@ -604,9 +580,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param \integer $txRkwbasicsCssClass
      * @return void
+     * @deprecated 
      */
     public function setTxRkwbasicsCssClass($txRkwbasicsCssClass)
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsCssClass = $txRkwbasicsCssClass;
     }
 
@@ -615,9 +593,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsOldDomain
      *
      * @return string $txRkwbasicsOldDomain
+     * @deprecated 
      */
     public function getTxRkwbasicsOldDomain()
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsOldDomain;
     }
 
@@ -626,9 +606,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $txRkwbasicsOldDomain
      * @return void
+     * @deprecated 
      */
     public function setTxRkwbasicsOldDomain($txRkwbasicsOldDomain)
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsOldDomain = $txRkwbasicsOldDomain;
     }
 
@@ -636,9 +618,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * Returns the txRkwbasicsOldLink
      *
      * @return string $txRkwbasicsOldLink
+     * @deprecated 
      */
     public function getTxRkwbasicsOldLink()
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsOldLink;
     }
 
@@ -647,9 +631,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @param string $txRkwbasicsOldLink
      * @return void
+     * @deprecated 
      */
     public function setTxRkwbasicsOldLink($txRkwbasicsOldLink)
     {
+        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsOldLink = $txRkwbasicsOldLink;
     }
 
@@ -663,22 +649,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function getTxRkwbasicsTeaserText()
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return ($this->txRkwbasicsTeaserText ? $this->txRkwbasicsTeaserText : $this->getAbstract());
+        return $this->getAbstract();
     }
 
-    /**
-     * Sets the txRkwbasicsTeaserText
-     *
-     * @param string $txRkwbasicsTeaserText
-     * @return void
-     * @deprecated This function deprecated and will be removed soon.
-     */
-    public function setTxRkwbasicsTeaserText($txRkwbasicsTeaserText)
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        $this->txRkwbasicsTeaserText = $txRkwbasicsTeaserText;
-    }
-
+   
     /**
      * Returns the txRkwbasicsTeaserImage
      *
@@ -700,79 +674,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->txRkwbasicsTeaserImage = $txRkwbasicsTeaserImage;
     }
 
-    /**
-     * Returns the txRkwbasicsArticleImage
-     *
-     * @return \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     * @deprecated This function is deprecated and will be removed soon.
-     */
-    public function getTxRkwbasicsArticleImage()
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return $this->txRkwbasicsArticleImage;
-    }
-
-    /**
-     * Sets the txRkwbasicsArticleImage
-     *
-     * @param \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     * @return void
-     * @deprecated This function is deprecated and will be removed soon.
-     */
-    public function setTxRkwbasicsArticleImage(\RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsArticleImage)
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        $this->txRkwbasicsArticleImage = $txRkwbasicsArticleImage;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsArticleVideo
-     *
-     * @return string
-     * @deprecated
-     */
-    public function getTxRkwbasicsArticleVideo()
-    {
-        return $this->txRkwbasicsArticleVideo;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsArticleVideo
-     *
-     * @param string $txRkwbasicsArticleVideo
-     * @return void
-     * @deprecated
-     */
-    public function setTxRkwbasicsArticleVideo($txRkwbasicsArticleVideo)
-    {
-        $this->txRkwbasicsArticleVideo = $txRkwbasicsArticleVideo;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsInformation
-     *
-     * @return string $txRkwbasicsInformation
-     */
-    public function getTxRkwbasicsInformation()
-    {
-        return $this->txRkwbasicsInformation;
-    }
-
-    /**
-     * Sets the txRkwbasicsInformation
-     *
-     * @param string $txRkwbasicsInformation
-     * @return void
-     */
-    public function setTxRkwbasicsInformation($txRkwbasicsInformation)
-    {
-        $this->txRkwbasicsInformation = $txRkwbasicsInformation;
-    }
-
-
+    
     /**
      * Returns the txRkwbasicsDepartment
      *
@@ -880,7 +782,24 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         $this->txRkwbasicsCover = $txRkwbasicsCover;
     }
 
+    /**
+     * Returns the txRkwbasicsExternalLink
+     *
+     * @return string $txRkwbasicsExternalLink
+     */
+    public function getTxRkwbasicsExternalLink(): string
+    {
+        return $this->txRkwbasicsExternalLink;
+    }
 
+    /**
+     * Sets the txRkwbasicsExternalLink
+     *
+     * @param string $txRkwbasicsExternalLink
+     * @return void
+     */
+    public function setTxRkwbasicsExternalLink(string $txRkwbasicsExternalLink)
+    {
+        $this->txRkwbasicsExternalLink = $txRkwbasicsExternalLink;
+    }
 }
-
-?>
