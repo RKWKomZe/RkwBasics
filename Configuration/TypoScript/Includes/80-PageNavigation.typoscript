@@ -51,7 +51,7 @@ lib.txRkwBasics {
             renderObj = TEXT
             renderObj.field = uid
         }
-
+       
         // ============================================
         // get the uid of the first child of current page
         // ============================================
@@ -91,7 +91,7 @@ lib.txRkwBasics {
         }
         
         // ============================================
-        // get the uid of the grand-parent page to get the previous sibling without shortcut
+        // get the uid of the grand-parent page to get the previous sibling (may be a shortcut though)
         // ============================================
         pagePrevParent = CONTENT
         pagePrevParent {
@@ -100,7 +100,7 @@ lib.txRkwBasics {
                 pidInList.data = leveluid:-3
                 orderBy = sorting DESC
                 where = deleted = 0 AND hidden = 0 AND doktype IN (0,1,4)
-                where.noTrimWrap = || AND sorting <= (SELECT sorting FROM pages WHERE uid = {field:pid}) AND uid != {field:uid} AND ((shortcut_mode = 3 AND NOT shortcut ='{field:uid}') OR (shortcut_mode = 0 AND NOT shortcut ='{field:uid}'))|
+                where.noTrimWrap = || AND (sorting <= (SELECT sorting FROM pages WHERE uid = {field:pid}) AND uid != {field:uid} AND ((shortcut_mode = 3 AND NOT shortcut ='{field:uid}') OR (shortcut_mode = 0 AND NOT shortcut ='{field:uid}'))) OR (sorting < (SELECT sorting FROM pages WHERE uid = {field:pid}) AND uid != {field:uid})|
                 where.insertData = 1
                 max = 1
             }
