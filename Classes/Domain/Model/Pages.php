@@ -26,27 +26,13 @@ namespace RKW\RkwBasics\Domain\Model;
 class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
-    /**
-     * uid
-     *
-     * @var int
-     */
-    protected $uid;
-
-    /**
-     * pid
-     *
-     * @var int
-     */
-    protected $pid;
-
 
     /**
      * crdate
      *
      * @var integer
      */
-    protected $crdate;
+    protected $crdate = 0;
 
 
     /**
@@ -54,23 +40,23 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $tstamp;
+    protected $tstamp = 0;
 
 
     /**
      * hidden
      *
-     * @var integer
+     * @var bool
      */
-    protected $hidden;
+    protected $hidden = 0;
 
 
     /**
      * deleted
      *
-     * @var integer
+     * @var bool
      */
-    protected $deleted;
+    protected $deleted = 0;
 
 
     /**
@@ -78,7 +64,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var int
      */
-    protected $sorting;
+    protected $sorting = 0;
 
 
     /**
@@ -86,7 +72,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var int
      */
-    protected $doktype;
+    protected $doktype = 1;
 
 
     /**
@@ -94,7 +80,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $title;
+    protected $title = '';
 
 
     /**
@@ -102,7 +88,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $subtitle;
+    protected $subtitle = '';
 
 
     /**
@@ -110,7 +96,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $abstract;
+    protected $abstract = '';
 
 
     /**
@@ -118,15 +104,15 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $description;
+    protected $description = '';
 
 
     /**
      * noSearch
      *
-     * @var integer
+     * @var bool
      */
-    protected $noSearch = 0;
+    protected $noSearch = false;
 
 
     /**
@@ -134,7 +120,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var integer
      */
-    protected $lastUpdated;
+    protected $lastUpdated = 0;
 
 
     /**
@@ -150,7 +136,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var \integer
      */
-    protected $txRkwbasicsFeLayoutNextLevel;
+    protected $txRkwbasicsFeLayoutNextLevel = 0;
 
     /**
      * txRkwbasicsCssClass
@@ -158,7 +144,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @var \integer
      * @deprecated
      */
-    protected $txRkwbasicsCssClass;
+    protected $txRkwbasicsCssClass = 0;
 
 
     /**
@@ -233,12 +219,13 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $txRkwbasicsExternalLink = null;
 
+    
     /**
      * Returns the pid
      *
      * @return int $pid
      */
-    public function getPid()
+    public function getPid(): int
     {
         return $this->pid;
     }
@@ -249,7 +236,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return integer
      * @api
      */
-    public function getCrdate()
+    public function getCrdate(): int
     {
         return $this->crdate;
     }
@@ -262,7 +249,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @api
      */
-    public function setCrdate(int $crdate)
+    public function setCrdate(int $crdate): void
     {
         $this->crdate = $crdate;
     }
@@ -273,7 +260,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return integer
      * @api
      */
-    public function getTstamp()
+    public function getTstamp(): int
     {
         return $this->tstamp;
     }
@@ -285,7 +272,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @api
      */
-    public function setTstamp(int $tstamp)
+    public function setTstamp(int $tstamp): void
     {
         $this->tstamp = $tstamp;
     }
@@ -293,10 +280,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the hidden value
      *
-     * @return integer
+     * @return bool
      * @api
      */
-    public function getHidden()
+    public function getHidden(): bool
     {
         return $this->hidden;
     }
@@ -305,11 +292,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the hidden value
      *
-     * @param int $hidden
+     * @param bool $hidden
      * @return void
      * @api
      */
-    public function setHidden(int $hidden)
+    public function setHidden(bool $hidden)
     {
         $this->hidden = $hidden;
     }
@@ -317,10 +304,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the deleted value
      *
-     * @return integer
+     * @return bool
      * @api
      */
-    public function getDeleted()
+    public function getDeleted(): int
     {
         return $this->deleted;
     }
@@ -329,11 +316,11 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Sets the deleted value
      *
-     * @param int $deleted
+     * @param bool $deleted
      * @return void
      * @api
      */
-    public function setDeleted(int $deleted)
+    public function setDeleted(bool $deleted): void
     {
         $this->deleted = $deleted;
     }
@@ -344,7 +331,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int $sorting
      */
-    public function getSorting()
+    public function getSorting(): int
     {
         return $this->sorting;
     }
@@ -357,7 +344,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @api
      */
-    public function setSorting(int $sorting)
+    public function setSorting(int $sorting): void
     {
         $this->sorting = $sorting;
     }
@@ -368,7 +355,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int $doktype
      */
-    public function getDoktype()
+    public function getDoktype(): int
     {
         return $this->doktype;
     }
@@ -381,7 +368,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @api
      */
-    public function setDoktype(int $doktype)
+    public function setDoktype(int $doktype): void
     {
         $this->doktype = $doktype;
     }
@@ -392,83 +379,88 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $title
      */
-    public function getTitle()
+    public function getTitle(): string
     {
         return $this->title;
     }
 
+    
     /**
      * Returns the title
      *
      * @param string $title
      * @return void
      */
-    public function setTitle($title)
+    public function setTitle(string $title): void
     {
         $this->title = $title;
     }
 
+    
     /**
      * Returns the subtitle
      *
      * @return string $subtitle
      */
-    public function getSubtitle()
+    public function getSubtitle(): string
     {
         return $this->subtitle;
     }
 
+    
     /**
      * Set the subtitle
      *
      * @param string $subtitle
      * @return void
      */
-    public function setSubtitle($subtitle)
+    public function setSubtitle(string $subtitle): void
     {
         $this->subtitle = $subtitle;
     }
 
+    
     /**
      * Returns the abstract
      *
      * @return string $abstract
      */
-    public function getAbstract()
+    public function getAbstract(): string
     {
         return $this->abstract;
     }
 
+    
     /**
      * Set the abstract
      *
      * @param string $abstract
      * @return void
      */
-    public function setAbstract($abstract)
+    public function setAbstract(string $abstract): void
     {
         $this->abstract = $abstract;
     }
-
-
+    
 
     /**
      * Returns the description
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
 
+    
     /**
      * Sets the description
      *
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
@@ -477,9 +469,9 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the noSearch
      *
-     * @return int $noSearch
+     * @return bool $noSearch
      */
-    public function getNoSearch()
+    public function getNoSearch(): bool
     {
         return $this->noSearch;
     }
@@ -488,10 +480,10 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Set the noSearch
      *
-     * @param int $noSearch
+     * @param bool $noSearch
      * @return void
      */
-    public function setNoSearch($noSearch)
+    public function setNoSearch(bool $noSearch): void
     {
         $this->noSearch = $noSearch;
     }
@@ -502,18 +494,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return int $lastUpdated
      */
-    public function getLastUpdated()
+    public function getLastUpdated(): int
     {
         return $this->lastUpdated;
     }
 
+    
     /**
      * Set the lastUpdated
      *
      * @param int $lastUpdated
      * @return void
      */
-    public function setLastUpdated($lastUpdated)
+    public function setLastUpdated(int $lastUpdated): void
     {
         $this->lastUpdated = $lastUpdated;
     }
@@ -524,18 +517,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $txRkwbasicsAlternativeTitle
      */
-    public function getTxRkwbasicsAlternativeTitle()
+    public function getTxRkwbasicsAlternativeTitle(): string
     {
         return $this->txRkwbasicsAlternativeTitle;
     }
 
+    
     /**
      * Sets the txRkwbasicsAlternativeTitle
      *
      * @param string $txRkwbasicsAlternativeTitle
      * @return void
      */
-    public function setTxRkwbasicsAlternativeTitle($txRkwbasicsAlternativeTitle)
+    public function setTxRkwbasicsAlternativeTitle(string $txRkwbasicsAlternativeTitle): void
     {
         $this->txRkwbasicsAlternativeTitle = $txRkwbasicsAlternativeTitle;
     }
@@ -544,20 +538,21 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the txRkwbasicsFeLayoutNextLevel
      *
-     * @return \integer txRkwbasicsFeLayoutNextLevel
+     * @return int txRkwbasicsFeLayoutNextLevel
      */
-    public function getTxRkwbasicsFeLayoutNextLevel()
+    public function getTxRkwbasicsFeLayoutNextLevel(): int
     {
         return $this->txRkwbasicsFeLayoutNextLevel;
     }
 
+    
     /**
      * Sets the txRkwbasicsFeLayoutNextLevel
      *
      * @param \integer $txRkwbasicsFeLayoutNextLevel
      * @return \integer txRkwbasicsFeLayoutNextLevel
      */
-    public function setTxRkwbasicsFeLayoutNextLevel($txRkwbasicsFeLayoutNextLevel)
+    public function setTxRkwbasicsFeLayoutNextLevel(int $txRkwbasicsFeLayoutNextLevel): void
     {
         $this->txRkwbasicsFeLayoutNextLevel = $txRkwbasicsFeLayoutNextLevel;
     }
@@ -566,23 +561,24 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the txRkwbasicsCssClass
      *
-     * @return \integer $txRkwbasicsCssClass
+     * @return int $txRkwbasicsCssClass
      * @deprecated 
      */
-    public function getTxRkwbasicsCssClass()
+    public function getTxRkwbasicsCssClass(): int
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsCssClass;
     }
 
+    
     /**
      * Sets the txRkwbasicsCssClass
      *
-     * @param \integer $txRkwbasicsCssClass
+     * @param int $txRkwbasicsCssClass
      * @return void
      * @deprecated 
      */
-    public function setTxRkwbasicsCssClass($txRkwbasicsCssClass)
+    public function setTxRkwbasicsCssClass(int $txRkwbasicsCssClass): void
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsCssClass = $txRkwbasicsCssClass;
@@ -595,12 +591,13 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return string $txRkwbasicsOldDomain
      * @deprecated 
      */
-    public function getTxRkwbasicsOldDomain()
+    public function getTxRkwbasicsOldDomain(): string
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsOldDomain;
     }
 
+    
     /**
      * Sets the txRkwbasicsOldDomain
      *
@@ -608,24 +605,26 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @deprecated 
      */
-    public function setTxRkwbasicsOldDomain($txRkwbasicsOldDomain)
+    public function setTxRkwbasicsOldDomain(string $txRkwbasicsOldDomain): void
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsOldDomain = $txRkwbasicsOldDomain;
     }
 
+    
     /**
      * Returns the txRkwbasicsOldLink
      *
      * @return string $txRkwbasicsOldLink
      * @deprecated 
      */
-    public function getTxRkwbasicsOldLink()
+    public function getTxRkwbasicsOldLink(): string
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->txRkwbasicsOldLink;
     }
 
+    
     /**
      * Sets the txRkwbasicsOldLink
      *
@@ -633,7 +632,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @deprecated 
      */
-    public function setTxRkwbasicsOldLink($txRkwbasicsOldLink)
+    public function setTxRkwbasicsOldLink(string $txRkwbasicsOldLink): void
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         $this->txRkwbasicsOldLink = $txRkwbasicsOldLink;
@@ -646,7 +645,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return string $txRkwbasicsTeaserText
      * @deprecated This function  is deprecated and will be removed soon.
      */
-    public function getTxRkwbasicsTeaserText()
+    public function getTxRkwbasicsTeaserText(): string
     {
         \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
         return $this->getAbstract();
@@ -663,13 +662,14 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsTeaserImage;
     }
 
+    
     /**
      * Sets the txRkwbasicsTeaserImage
      *
      * @param \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
      * @return void
      */
-    public function setTxRkwbasicsTeaserImage(\RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage)
+    public function setTxRkwbasicsTeaserImage(FileReference $txRkwbasicsTeaserImage): void
     {
         $this->txRkwbasicsTeaserImage = $txRkwbasicsTeaserImage;
     }
@@ -685,13 +685,14 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsDepartment;
     }
 
+    
     /**
      * Sets the txRkwbasicsDepartment
      *
      * @param \RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment
      * @return void
      */
-    public function setTxRkwbasicsDepartment(\RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment)
+    public function setTxRkwbasicsDepartment(Department $txRkwbasicsDepartment): void
     {
         $this->txRkwbasicsDepartment = $txRkwbasicsDepartment;
     }
@@ -707,17 +708,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsDocumentType;
     }
 
+    
     /**
      * Sets the txRkwbasicsDocumentType
      *
      * @param \RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType
      * @return void
      */
-    public function setTxRkwbasicsDocumentType(\RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType)
+    public function setTxRkwbasicsDocumentType(DocumentType $txRkwbasicsDocumentType): void
     {
         $this->txRkwbasicsDocumentType = $txRkwbasicsDocumentType;
     }
 
+    
     /**
      * Returns the txRkwbasicsSeries
      *
@@ -728,17 +731,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsSeries;
     }
 
+    
     /**
      * Sets the txRkwbasicsSeries
      *
      * @param \RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries
      * @return void
      */
-    public function setTxRkwbasicsSeries(\RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries)
+    public function setTxRkwbasicsSeries(Series $txRkwbasicsSeries): void
     {
         $this->txRkwbasicsSeries = $txRkwbasicsSeries;
     }
 
+    
     /**
      * Returns the txRkwbasicsFile
      *
@@ -749,13 +754,14 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsFile;
     }
 
+    
     /**
      * Sets the txRkwbasicsFile
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile
      * @return void
      */
-    public function setTxRkwbasicsFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile)
+    public function setTxRkwbasicsFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile): void
     {
         $this->txRkwbasicsFile = $txRkwbasicsFile;
     }
@@ -771,17 +777,19 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
         return $this->txRkwbasicsCover;
     }
 
+    
     /**
      * Sets the txRkwbasicsCover
      *
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover
      * @return void
      */
-    public function setTxRkwbasicsCover(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover)
+    public function setTxRkwbasicsCover(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover): void
     {
         $this->txRkwbasicsCover = $txRkwbasicsCover;
     }
 
+    
     /**
      * Returns the txRkwbasicsExternalLink
      *
@@ -791,6 +799,7 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     {
         return $this->txRkwbasicsExternalLink;
     }
+    
 
     /**
      * Sets the txRkwbasicsExternalLink
