@@ -50,10 +50,9 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
 
 
     /**
-     *
-     * @var string
+     * @var int
      */
-    protected $uidForeign = '';
+    protected $uidForeign = 0;
 
 
     /**
@@ -61,7 +60,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      *
      * @return string $tableLocal
      */
-    public function getTableLocal()
+    public function getTableLocal(): string
     {
         return $this->tableLocal;
     }
@@ -72,39 +71,40 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      * @param string $tableLocal
      * @return void
      */
-    public function setTableLocal($tableLocal)
+    public function setTableLocal(string $tableLocal): void
     {
         $this->tableLocal = $tableLocal;
     }
 
-
-    /**
-     * Set fieldname
-     *
-     * @param string
-     */
-    public function setFieldname($fieldname)
-    {
-        $this->fieldname = $fieldname;
-    }
-
+    
     /**
      * Get fieldname
      *
      * @return string
      */
-    public function getFilename()
+    public function getFieldname(): string
     {
         return $this->fieldname;
     }
 
+    
+    /**
+     * Set fieldname
+     *
+     * @param string
+     */
+    public function setFieldname(string $fieldname): void
+    {
+        $this->fieldname = $fieldname;
+    }
 
+    
     /**
      * Set file
      *
      * @param \RKW\RkwBasics\Domain\Model\File $file
      */
-    public function setFile($file)
+    public function setFile(File $file): void
     {
         $this->file = $file;
     }
@@ -125,7 +125,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      *
      * @return string $tablenames
      */
-    public function getTablenames()
+    public function getTablenames(): string
     {
         return $this->tablenames;
     }
@@ -136,7 +136,7 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
      * @param string $tablenames
      * @return void
      */
-    public function setTablenames($tablenames)
+    public function setTablenames(string $tablenames): void
     {
         $this->tablenames = $tablenames;
     }
@@ -144,9 +144,9 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Returns the uidForeign
      *
-     * @return string $uidForeign
+     * @return int $uidForeign
      */
-    public function getUidForeign()
+    public function getUidForeign(): int
     {
         return $this->uidForeign;
     }
@@ -154,10 +154,10 @@ class FileReference extends \TYPO3\CMS\Extbase\Domain\Model\FileReference
     /**
      * Sets the uidForeign
      *
-     * @param string $uidForeign
+     * @param int $uidForeign
      * @return void
      */
-    public function setUidForeign($uidForeign)
+    public function setUidForeign(int $uidForeign): void
     {
         $this->uidForeign = $uidForeign;
     }

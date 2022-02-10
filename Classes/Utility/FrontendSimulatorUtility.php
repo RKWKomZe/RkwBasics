@@ -20,6 +20,7 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
+use TYPO3\CMS\Lang\LanguageService;
 
 /**
  * Utility to simulate a frontend in backend context.
@@ -133,7 +134,10 @@ class FrontendSimulatorUtility
                 $GLOBALS['TSFE']->getConfigArray();
                 $GLOBALS['TSFE']->getPageAndRootline();
                 $GLOBALS['TSFE']->domainStartPage = $GLOBALS['TSFE']->rootLine[0]['uid'];
-                $GLOBALS['LANG']->csConvObj = GeneralUtility::makeInstance(CharsetConverter::class);
+
+                /** @var \TYPO3\CMS\Lang\LanguageService $languageService */
+                $languageService = GeneralUtility::makeInstance(LanguageService::class);
+                $GLOBALS['LANG'] = $languageService;
 
                 // set absRefPrefix and baseURL accordingly
                 $GLOBALS['TSFE']->config['config']['absRefPrefix'] = $GLOBALS['TSFE']->config['config']['baseURL'] = $host;
