@@ -185,9 +185,7 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
      */
     static public function getTreeList(int $id, int $depth, int $begin = 0, string $permClause = ''): string
     {
-        $depth = (int)$depth;
-        $begin = (int)$begin;
-        $id = (int)$id;
+
         if ($id < 0) {
             $id = abs($id);
         }
@@ -225,6 +223,42 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
         }
 
         return $theList;
+    }
+
+    /**
+     * Merges arrays by numeric key and sorts them in zipper procedure
+     * 
+     * @param array ...$arrays
+     * @return array
+     */
+    static public function arrayZipMerge(
+        array ...$arrays
+    ): array {
+        
+        // find array with highest number of keys
+        $maxCount = 0;
+        foreach ($arrays as $array) {
+            if (count($array) > $maxCount) {
+                $maxCount = count($array);
+            }
+        }
+        
+        // move all keys to new numeric index
+        foreach($arrays as $key => $array) {
+            $arrays[$key] = array_values($array);
+        }
+        
+        // now rebuild array
+        $result = [];
+        for ($i = 0; $i < $maxCount; $i++) {
+            foreach ($arrays as $array) {
+                if (isset($array[$i])) {
+                    $result[] = $array[$i];
+                }
+            }
+        }        
+        
+        return $result;
     }
 
 }
