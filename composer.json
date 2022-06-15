@@ -26,6 +26,7 @@
         "php": ">=7.4",
         "ext-json": "*",
         "typo3/cms-core": "~9.5.0",
+		"typo3/cms-filemetadata": "~9.5.0",
         "rkw/rkw-ajax" : "~9.5.0 || dev-feature/upgrade9.5",
         "ronanguilloux/isocodes": "^2.3"
     },
