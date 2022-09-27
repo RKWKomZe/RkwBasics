@@ -33,6 +33,7 @@ $EM_CONF[$_EXTKEY] = [
 			'typo3' => '8.7.0-8.7.99',
             'filemetadata' => '8.7.0-8.7.99',
             'rkw_ajax' => '8.7.0-8.7.99',
+            'sr_freecap' => '2.4.6-2.4.99'
 		],
 		'conflicts' => [
 		],
