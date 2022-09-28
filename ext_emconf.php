@@ -27,12 +27,13 @@ $EM_CONF[$_EXTKEY] = [
 	'modify_tables' => '',
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
-	'version' => '8.7.80',
+	'version' => '8.7.81',
     'constraints' => [
 		'depends' => [
 			'typo3' => '8.7.0-8.7.99',
             'filemetadata' => '8.7.0-8.7.99',
             'rkw_ajax' => '8.7.0-8.7.99',
+            'sr_freecap' => '2.4.6-2.4.99'
 		],
 		'conflicts' => [
 		],

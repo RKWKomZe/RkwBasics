@@ -119,6 +119,9 @@ call_user_func(
                 'className' => RKW\RkwBasics\XClasses\Varnish\Utility\VarnishHttpUtility::class
             ];
         }*/
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][SJBR\SrFreecap\Validation\Validator\CaptchaValidator::class] = [
+            'className' => RKW\RkwBasics\XClasses\Validation\Validator\CaptchaValidator::class
+        ];
 
         //=================================================================
         // Configure Logger
