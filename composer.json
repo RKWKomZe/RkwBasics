@@ -29,7 +29,7 @@
 		"typo3/cms-filemetadata": "~9.5.0",
         "rkw/rkw-ajax" : "~9.5.0 || dev-feature/upgrade9.5",
         "ronanguilloux/isocodes": "^2.3",
-		"sjbr/sr-freecap": "~2.5"
+		"sjbr/sr-freecap": "~2.4"
     },
     "autoload": {
         "psr-4": {
