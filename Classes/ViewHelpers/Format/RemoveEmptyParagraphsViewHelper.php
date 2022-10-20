@@ -13,7 +13,7 @@ namespace RKW\RkwBasics\ViewHelpers\Format;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
@@ -34,6 +34,7 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
      */
     protected $escapeOutput = false;
 
+
     /**
      * Initialize arguments.
      *
@@ -45,6 +46,7 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
         $this->registerArgument('value', 'string', 'string to format');
     }
 
+
     /**
      * Removes empty paragraphs from beginning and end of a string
      *
@@ -53,8 +55,11 @@ class RemoveEmptyParagraphsViewHelper extends AbstractViewHelper {
      * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
      * @return string
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
 
         // some cleanup for better matching
         $string = trim(preg_replace("#\r|\n#", "", $renderChildrenClosure()));

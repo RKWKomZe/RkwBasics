@@ -13,7 +13,7 @@ namespace RKW\RkwBasics\ViewHelpers\Format;
  * The TYPO3 project - inspiring people to share!
  */
 
-use TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper;
+use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
 use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
 
@@ -44,8 +44,6 @@ class AddSlashesViewHelper extends AbstractViewHelper {
         parent::initializeArguments();
         $this->registerArgument('value', 'string', 'string to format');
         $this->registerArgument('charList', 'string', 'Characters to escape. If not set, it behaves like the PHP-function addslashes()');
-
-
     }
 
     /**
@@ -56,8 +54,12 @@ class AddSlashesViewHelper extends AbstractViewHelper {
      * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
      * @return string
      */
-    public static function renderStatic(array $arguments, \Closure $renderChildrenClosure, RenderingContextInterface $renderingContext)
-    {
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
+
         if ($arguments['charList']) {
             return addcslashes($renderChildrenClosure(), $arguments['charList']);
         }

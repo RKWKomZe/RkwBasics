@@ -42,7 +42,7 @@ class EnvironmentServiceTest extends FunctionalTestCase
      */
     const FIXTURE_PATH = __DIR__ . '/EnvironmentServiceTest/Fixtures';
 
-    
+
     /**
      * @var string[]
      */
@@ -73,9 +73,9 @@ class EnvironmentServiceTest extends FunctionalTestCase
      * Setup
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
-        
+
         parent::setUp();
 
         $this->importDataSet(self::FIXTURE_PATH . '/Database/Global.xml');
@@ -107,7 +107,7 @@ class EnvironmentServiceTest extends FunctionalTestCase
         * When the method is called
         * Then false is returned
         */
-        
+
         self::assertFalse($this->subject->isEnvironmentInFrontendMode());
     }
 
@@ -126,11 +126,11 @@ class EnvironmentServiceTest extends FunctionalTestCase
          * When the method is called
          * Then true is returned
          */
-        
+
         FrontendSimulatorUtility::simulateFrontendEnvironment(1);
         self::assertTrue($this->subject->isEnvironmentInFrontendMode());
     }
-    
+
     //=============================================
 
 
@@ -179,7 +179,7 @@ class EnvironmentServiceTest extends FunctionalTestCase
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }

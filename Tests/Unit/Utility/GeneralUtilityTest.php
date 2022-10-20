@@ -38,14 +38,14 @@ class GeneralUtilityTest extends UnitTestCase
     /**
      * Setup
      */
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
         $this->subject = GeneralUtility::makeInstance(\RKW\RkwBasics\Utility\GeneralUtility::class);
 
     }
 
-   
+
     //=============================================
 
     /**
@@ -79,9 +79,9 @@ class GeneralUtilityTest extends UnitTestCase
             'a' => 'test2.0',
             'b' => 'test2.1'
         ];
-        
+
         $result = $this->subject::arrayZipMerge($array1, $array2);
-        self::assertInternalType('array', $result);
+        self::assertIsArray($result);
         self::assertCount(6, $result);
         self::assertEquals('test1.0', $result[0]);
         self::assertEquals('test2.0', $result[1]);
@@ -132,7 +132,7 @@ class GeneralUtilityTest extends UnitTestCase
         ];
 
         $result = $this->subject::arrayZipMerge($array1, $array2, $array3);
-        self::assertInternalType('array', $result);
+        self::assertIsArray($result);
         self::assertCount(9, $result);
         self::assertEquals('test1.0', $result[0]);
         self::assertEquals('test2.0', $result[1]);
@@ -151,7 +151,7 @@ class GeneralUtilityTest extends UnitTestCase
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

@@ -2,7 +2,7 @@
 
 namespace RKW\RkwBasics\Domain\Repository;
 
-use RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -94,7 +94,7 @@ class MediaSourcesRepository extends AbstractRepository
                 ' . $fileMetaTable . '.tx_rkwbasics_publisher AS publisher,
                 ' . $fileMetaTable . '.title as imageTitle,
                 ' . $fileMetaTable . '.description as imageDescription,
-                ' . $fileTable . '.name as fileName, 
+                ' . $fileTable . '.name as fileName,
                 GROUP_CONCAT(DISTINCT pages.uid, "###", pages.title SEPARATOR "|") AS pagesList
 
             FROM ' . $fileReferenceTable . '

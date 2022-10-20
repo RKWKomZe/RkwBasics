@@ -16,10 +16,14 @@ namespace RKW\RkwBasics\Tests\Integration\Utility;
 
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use RKW\RkwBasics\Utility\FrontendSimulatorUtility;
+use TYPO3\CMS\Core\Context\Context;
+use TYPO3\CMS\Core\Context\LanguageAspect;
+use TYPO3\CMS\Core\Context\UserAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\FrontendConfigurationManager;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication;
 use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
 
 /**
@@ -34,7 +38,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
 {
 
     const BASE_PATH = __DIR__ . '/FrontendSimulatorUtilityTest';
-
+    const REL_BASE_PATH = 'EXT:rkw_basics/Tests/Integration/Utility/FrontendSimulatorUtilityTest';
 
     /**
      * @var string[]
@@ -53,7 +57,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
      * Setup
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         parent::setUp();
@@ -63,9 +67,19 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
             1,
             [
                 'EXT:rkw_basics/Configuration/TypoScript/setup.txt',
-                'EXT:rkw_basics/Tests/Integration/Utility/FrontendSimulatorUtilityTest/Fixtures/Frontend/Configuration/Rootpage.typoscript',
-            ]
+                self::REL_BASE_PATH  .'/Fixtures/Frontend/Configuration/Rootpage.typoscript',
+            ],
+            [1 => self::REL_BASE_PATH  .'/Fixtures/Sites/config.yaml']
         );
+        $this->setUpFrontendRootPage(
+            11,
+            [
+                'EXT:rkw_basics/Configuration/TypoScript/setup.txt',
+                self::REL_BASE_PATH  .'/Fixtures/Frontend/Configuration/Rootpage.typoscript',
+            ],
+            [11 => self::REL_BASE_PATH  .'/Fixtures/Sites/config10.yaml']
+        );
+
     }
 
 
@@ -174,31 +188,6 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
     /**
      * @test
      */
-    public function simulateFrontendEnvironmentSetsAGlobalCharsetConvertingObject()
-    {
-
-        /**
-         * Scenario:
-         *
-         * Given a sub-page in the rootline
-         * When the method is called
-         * Then the method returns the value 1
-         * Then a global TYPO3\CMS\Core\Charset\CharsetConverter-Object is generated in $GLOBALS['LANG']
-         * Then is object is identical with the corresponding object in $GLOBALS['TSFE']
-         */
-
-        $GLOBALS['LANG']->csConvObj = null;
-
-        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
-        self::assertInstanceOf(\TYPO3\CMS\Core\Charset\CharsetConverter::class, $GLOBALS['LANG']->csConvObj);
-
-        self::assertEquals($GLOBALS['LANG']->csConvObj, $GLOBALS['TSFE']->csConvObj);
-
-    }
-
-    /**
-     * @test
-     */
     public function simulateFrontendEnvironmentGeneratesCompleteFrontendObject()
     {
 
@@ -217,7 +206,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          * Then this array has the key 'id' with the id of the given sub-page
          * Then this array has the key 'title' with the title of the given sub-page
          * Then this TyposcriptFrontendController-Object has the property 'domainStartPage' set to root-page id (=1)
-         * Then this TyposcriptFrontendController-Object has the property 'sys_language_uid' set to zero
+         * Then this TyposcriptFrontendController-Object has the property 'sys_language_uid' / language-aspect set to zero
          * Then this TyposcriptFrontendController-Object has the property 'pageNotFound' set to zero
          * Then this TyposcriptFrontendController-Object has the property 'sys_page' set to a TYPO3\CMS\Frontend\Page\PageRepository-object
          * Then this TyposcriptFrontendController-Object has the property 'fe_user' set to a TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication-object
@@ -227,7 +216,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
         self::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
         self::assertEquals(3, $GLOBALS['TSFE']->id);
-        self::assertInternalType('array', $GLOBALS['TSFE']->rootLine);
+        self::assertIsArray($GLOBALS['TSFE']->rootLine);
 
         $rootline = $GLOBALS['TSFE']->rootLine;
         self::assertCount(3, $rootline);
@@ -238,14 +227,76 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         self::assertEquals(3, $GLOBALS['TSFE']->page['uid']);
         self::assertEquals('Test-Sub-Page', $GLOBALS['TSFE']->page['title']);
 
-        self::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);
+        //  self::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);
+
+        /** @deprecated since TYPO3 9.x - instead we use the Aspect-Version below */
         self::assertEquals(0,$GLOBALS['TSFE']->sys_language_uid);
+
         self::assertEquals(0, $GLOBALS['TSFE']->pageNotFound);
 
         self::assertInstanceOf(\TYPO3\CMS\Frontend\Page\PageRepository::class, $GLOBALS['TSFE']->sys_page);
         self::assertInstanceOf(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, $GLOBALS['TSFE']->fe_user);
         self::assertInstanceOf(\TYPO3\CMS\Core\TypoScript\TemplateService::class, $GLOBALS['TSFE']->tmpl);
 
+    }
+
+
+    /**
+     * @test
+     */
+    public function simulateFrontendEnvironmentGeneratesAspectObjects()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a sub-page in the rootline
+         * When the method is called
+         * Then the method returns the value 1
+         * Then a new dateTimeAspect is generated that is not identical to the original one
+         * Then this object has the current time set
+         * Then a new visibilityAspect is generated that is not identical to the original one
+         * Then a new languageAspect is generated that is not identical to the original one
+         * Then this object has the language uid zero
+         * Then a new UserAspect for the frontendUser is generated that is not identical to the original one
+         * Then this object has the uid zero
+         * Then a new UserAspect for the backendUser is generated that is not identical to the original one
+         * Then this object has the uid zero
+         * Then a new workspaceAspect is generated that is not identical to the original one
+         */
+
+        $beforeDateTimeAspect = GeneralUtility::makeInstance(Context::class)->getAspect('date');
+        $beforeVisibilityAspect = GeneralUtility::makeInstance(Context::class)->getAspect('visibility');
+        $beforeLanguageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $beforeFrontendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+        $beforeBackendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('backend.user');
+        $beforeWorkspaceAspect = GeneralUtility::makeInstance(Context::class)->getAspect('workspace');
+
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
+
+        /** @var \TYPO3\CMS\Core\Context\DateTimeAspect $dateTimeAspect */
+        $dateTimeAspect = GeneralUtility::makeInstance(Context::class)->getAspect('date');
+        self::assertNotSame($beforeDateTimeAspect, $dateTimeAspect);
+        self::assertGreaterThanOrEqual(time()-5, $dateTimeAspect->get('timestamp'));
+
+        self::assertNotSame($beforeVisibilityAspect, GeneralUtility::makeInstance(Context::class)->getAspect('visibility'));
+
+        /** @var \TYPO3\CMS\Core\Context\LanguageAspect $languageAspect */
+        $languageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        self::assertNotSame($beforeLanguageAspect, $languageAspect);
+        self::assertEquals(0, $languageAspect->get('id'));
+
+        /** @var \TYPO3\CMS\Core\Context\UserAspect $frontendUserAspect */
+        $frontendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+        self::assertNotSame($beforeFrontendUserAspect, $frontendUserAspect);
+        self::assertEquals(0, $frontendUserAspect->get('id'));
+
+        /** @var \TYPO3\CMS\Core\Context\UserAspect $backendUserAspect */
+        $backendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('backend.user');
+        self::assertNotSame($beforeBackendUserAspect, $backendUserAspect);
+        self::assertEquals(0, $backendUserAspect->get('id'));
+
+        self::assertNotSame($beforeWorkspaceAspect, GeneralUtility::makeInstance(Context::class)->getAspect('workspace'));
     }
 
 
@@ -260,8 +311,13 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          *
          * Given the method was called for sub-page A in the rootline
          * Given the method was then called for sub-page B in the rootline
-         * Given now sub-page A again
-         * When the method is called
+         * Given the method has set a new dateTimeAspect that is not the same as the original one
+         * Given the method has set a new visibilityAspect that is not the same as the original one
+         * Given the method has set a new languageAspect that is not the same as the original one
+         * Given the method has set a new userAspect for the frontendUser that is not the same as the original one
+         * Given the method has set a new userAspect for the backendUser that is not the same as the original one
+         * Given the method has set a new workspaceAspect that is not the same as the original one
+         * When the method is called for sub-page A again
          * Then the method returns the value 2
          * Then a TyposcriptFrontendController-Object is identical with the one generated the first time
          * Then the _TYPO3_CONF_VARS is identical with the one generated the first time
@@ -269,6 +325,12 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
          * Then the _POST-superglobal is identical with the one generated the first time
          * Then the _GET-superglobal is identical with the one generated the first time
          * Then the environment-cache is flushed and thus identical with the one generated the first time
+         * Then the dateAspect is identical with the one generated the first time
+         * Then the visibilityAspect is identical with the one generated the first time
+         * Then the languageAspect is identical with the one generated the first time
+         * Then the UserAspect for the frontendUser is identical with the one generated the first time
+         * Then the UserAspect for the backendUser is identical with the one generated the first time
+         * Then the WorkspaceAspect is identical with the one generated the first time
          */
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
@@ -279,8 +341,26 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         $beforePOST = $_POST;
         $beforeSERVER = $_SERVER;
         $beforeEnvironmentCache = GeneralUtility::getIndpEnv('HTTP_HOST');
+        $beforeDateTimeAspect = GeneralUtility::makeInstance(Context::class)->getAspect('date');
+        $beforeVisibilityAspect = GeneralUtility::makeInstance(Context::class)->getAspect('visibility');
+        $beforeLanguageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $beforeFrontendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+        $beforeBackendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('backend.user');
+        $beforeWorkspaceAspect = GeneralUtility::makeInstance(Context::class)->getAspect('workspace');
+
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(11);
+
+        self::assertNotEquals($beforeTSFE, $GLOBALS['TSFE']);
+        self::assertNotEquals($beforeGET, $_GET);
+        self::assertNotEquals($beforePOST, $_POST);
+        self::assertNotEquals($beforeEnvironmentCache, GeneralUtility::getIndpEnv('HTTP_HOST'));
+        self::assertNotSame($beforeDateTimeAspect, GeneralUtility::makeInstance(Context::class)->getAspect('date'));
+        self::assertNotSame($beforeVisibilityAspect, GeneralUtility::makeInstance(Context::class)->getAspect('visibility'));
+        self::assertNotSame($beforeLanguageAspect, GeneralUtility::makeInstance(Context::class)->getAspect('language'));
+        self::assertNotSame($beforeFrontendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user'));
+        self::assertNotSame($beforeBackendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('backend.user'));
+        self::assertNotSame($beforeWorkspaceAspect, GeneralUtility::makeInstance(Context::class)->getAspect('workspace'));
 
         self::assertEquals(2, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
 
@@ -290,7 +370,13 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         self::assertEquals($beforePOST, $_POST);
         self::assertEquals($beforeSERVER, $_SERVER);
         self::assertEquals($beforeEnvironmentCache,  GeneralUtility::getIndpEnv('HTTP_HOST'));
-        
+        self::assertSame($beforeDateTimeAspect, GeneralUtility::makeInstance(Context::class)->getAspect('date'));
+        self::assertSame($beforeVisibilityAspect, GeneralUtility::makeInstance(Context::class)->getAspect('visibility'));
+        self::assertSame($beforeLanguageAspect, GeneralUtility::makeInstance(Context::class)->getAspect('language'));
+        self::assertSame($beforeFrontendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user'));
+        self::assertSame($beforeBackendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('backend.user'));
+        self::assertSame($beforeWorkspaceAspect, GeneralUtility::makeInstance(Context::class)->getAspect('workspace'));
+
     }
 
     /**
@@ -341,7 +427,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
 
         /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
         $configurationManager = $objectManager->get(ConfigurationManager::class);
-        
+
         self::assertEmpty($configurationManager->getContentObject());
         self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(3));
 
@@ -472,13 +558,75 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
     /**
      * @test
      */
+    public function resetFrontendEnvironmentRestoresAspectObjects()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given we were in FE-Mode
+         * Given a sub-page in the rootline
+         * Given a dateTimeAspect
+         * Given a languageAspect
+         * Given a userAspect for the frontendUser
+         * Given simulateFrontendEnvironment was then called
+         * Given simulateFrontendEnvironment has set a new dateTimeAspect that is not the same as the original one
+         * Given simulateFrontendEnvironment has set a new visibilityAspect that is not the same as the original one
+         * Given simulateFrontendEnvironment has set a new languageAspect that is not the same as the original one
+         * Given simulateFrontendEnvironment has set a new userAspect for the frontendUser that is not the same as the original one
+         * Given simulateFrontendEnvironment has set a new userAspect for the backendUser that is not the same as the original one
+         * Given simulateFrontendEnvironment has set a new workspaceAspect that is not the same as the original one
+         * When the method is called
+         * Then the method returns true
+         * Then the dateTimeAspect is set to the original one
+         * Then the visibilityAspect is set to the original one
+         * Then the languageAspect is set to the original one
+         * Then the userAspect for the frontendUser is set to the original one
+         * Then the userAspect for the backendUser is set to the original one
+         * Then the workspaceAspect is set to the original one
+         */
+
+        // get the aspects
+        $beforeDateTimeAspect = GeneralUtility::makeInstance(Context::class)->getAspect('date');
+        $beforeVisibilityAspect = GeneralUtility::makeInstance(Context::class)->getAspect('visibility');
+        $beforeLanguageAspect = GeneralUtility::makeInstance(Context::class)->getAspect('language');
+        $beforeFrontendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user');
+        $beforeBackendUserAspect = GeneralUtility::makeInstance(Context::class)->getAspect('backend.user');
+        $beforeWorkspaceAspect = GeneralUtility::makeInstance(Context::class)->getAspect('workspace');
+
+        // DURING
+        FrontendSimulatorUtility::simulateFrontendEnvironment(3);
+
+        self::assertNotSame($beforeDateTimeAspect, GeneralUtility::makeInstance(Context::class)->getAspect('date'));
+        self::assertNotSame($beforeVisibilityAspect, GeneralUtility::makeInstance(Context::class)->getAspect('visibility'));
+        self::assertNotSame($beforeLanguageAspect, GeneralUtility::makeInstance(Context::class)->getAspect('language'));
+        self::assertNotSame($beforeFrontendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user'));
+        self::assertNotSame($beforeBackendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('backend.user'));
+        self::assertNotSame($beforeWorkspaceAspect, GeneralUtility::makeInstance(Context::class)->getAspect('workspace'));
+
+        self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
+
+        // AFTER
+        self::assertSame($beforeDateTimeAspect, GeneralUtility::makeInstance(Context::class)->getAspect('date'));
+        self::assertSame($beforeVisibilityAspect, GeneralUtility::makeInstance(Context::class)->getAspect('visibility'));
+        self::assertSame($beforeLanguageAspect, GeneralUtility::makeInstance(Context::class)->getAspect('language'));
+        self::assertSame($beforeFrontendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('frontend.user'));
+        self::assertSame($beforeBackendUserAspect, GeneralUtility::makeInstance(Context::class)->getAspect('backend.user'));
+        self::assertSame($beforeWorkspaceAspect, GeneralUtility::makeInstance(Context::class)->getAspect('workspace'));
+
+    }
+
+
+    /**
+     * @test
+     */
     public function resetFrontendEnvironmentDoesNotSetEmptyValues()
     {
 
         /**
          * Scenario:
          *
-         * Given we were in BE-mode 
+         * Given we were in BE-mode
          * Given the $GLOBALS['TSFE']-object was not set
          * Given simulateFrontendEnvironment was called before
          * When the method is called
@@ -510,7 +658,7 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
 
         FrontendSimulatorUtility::simulateFrontendEnvironment(3);
         self::assertTrue(FrontendSimulatorUtility::resetFrontendEnvironment());
-        
+
         /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
         $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
 
@@ -520,14 +668,14 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         $settings = $configurationManager->getConfiguration($configurationManager::CONFIGURATION_TYPE_SETTINGS, 'rkwBasics');
         self::assertEquals(1, $settings['backendContext']);
     }
-    
+
 
     //=============================================
 
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 

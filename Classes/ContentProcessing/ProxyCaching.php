@@ -15,6 +15,7 @@ namespace RKW\RkwBasics\ContentProcessing;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 
 /**
  * Class ProxyCaching
@@ -36,10 +37,8 @@ class ProxyCaching {
      */
     static function getProxyCachingSetting ($pid)
     {
-
         // get PageRepository and rootline
-        $repository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-        $rootlinePages = $repository->getRootLine($pid);
+        $rootlinePages = GeneralUtility::makeInstance(RootlineUtility::class, $pid)->get();
 
         $status = 0;
         if (isset($rootlinePages[count($rootlinePages) - 1])) {

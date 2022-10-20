@@ -17,7 +17,7 @@
     <f:section name="SrcSet">
         <f:if condition="{breakpoint}">
             <!-- maxWidth: {maxWidth}, breakPoint: {breakpoint} -->
-            <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
+            <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxWidth:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
             <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px)" />
         </f:if>
     </f:section>
@@ -25,7 +25,7 @@
 
     <f:section name="Fallback">
         <!-- maxWidth: {maxWidth}, breakPoint: {breakpoint} -->
-        <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxValue:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
+        <source srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{rkwBasics:responsiveImageCalc(maxWidth:\'{maxWidth}\', resolution:\'2\')}', cropVariant:'{cropVariant}')}" media="(min-width: {breakpoint}px) AND (min-resolution: 192dpi)" />
         <img src="data:image/gif;base64,R0lGODlhAQABAAAAACwAAAAAAQABAAA=" alt="{title->rkwBasics:format.trim()}" loading="{f:if(condition:'{lazyLoading}', then: 'lazy', else: 'auto')}" srcset="{f:uri.image(src:'{file}', treatIdAsReference:'{isReference}', maxWidth:'{maxWidth}', cropVariant:'{cropVariant}')}" />
     </f:section>
 

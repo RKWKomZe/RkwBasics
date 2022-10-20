@@ -66,7 +66,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
      * Setup
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         parent::setUp();
@@ -79,19 +79,19 @@ class AssetFileNotFoundTest extends FunctionalTestCase
 
 
         // create folder for files
-        if (file_exists(PATH_site . '/typo3temp')) {
+        if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp')) {
 
-            if (! file_exists(PATH_site . '/typo3temp/assets')) {
-                mkdir (PATH_site . '/typo3temp/assets');
+            if (! file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets')) {
+                mkdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets');
             }
 
-            if (! file_exists(PATH_site . '/typo3temp/assets/images')) {
-                mkdir (PATH_site . '/typo3temp/assets/images');
+            if (! file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images')) {
+                mkdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images');
             }
 
             foreach (range(1, 4) as $fileCount) {
-                if (! file_exists(PATH_site . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg')) {
-                    touch (PATH_site . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg');
+                if (! file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg')) {
+                    touch (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg');
                 }
             }
         }
@@ -133,12 +133,12 @@ class AssetFileNotFoundTest extends FunctionalTestCase
          * Scenario:
          *
          * Given the url does refer to an image file
-         * Given the the image file is not referring to the asset-image path
+         * Given the image file is not referring to the asset-image path
          * When searchFile is called
          * Then an array is returned
          */
         $url = 'https://www.rkw-bw.de/typo3temp/assets/babalala/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg';
-        self::assertInternalType('array', $this->subject->searchFile($url));
+        self::assertIsArray( $this->subject->searchFile($url));
     }
 
 
@@ -189,7 +189,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg';
         $result = $this->subject->searchFile($url);
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['absolutePath']);
         self::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['relativePath']);
         self::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_3.jpg', $result['file']);
@@ -226,7 +226,7 @@ class AssetFileNotFoundTest extends FunctionalTestCase
         $url = 'https://www.rkw-bw.de/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg';
         $result = $this->subject->searchFile($url);
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertStringEndsWith('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['absolutePath']);
         self::assertEquals('typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['relativePath']);
         self::assertEquals('csm_2020-10-08-Unternehmensstandort_e47fb575c0_logo_b44a445e64.jpg', $result['file']);
@@ -239,25 +239,25 @@ class AssetFileNotFoundTest extends FunctionalTestCase
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
 
         // remove folders and files
-        if (file_exists(PATH_site . '/typo3temp/assets/images')) {
+        if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images')) {
 
             foreach (range(1, 4) as $fileCount) {
-                if (file_exists(PATH_site . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg')) {
-                    unlink (PATH_site . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg');
+                if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg')) {
+                    unlink (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images/csm_2020-10-08-Unternehmensstandort_e47fb575c0_' . $fileCount . '.jpg');
                 }
             }
 
-            if (file_exists(PATH_site . '/typo3temp/assets/images')) {
-                rmdir (PATH_site . '/typo3temp/assets/images');
+            if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images')) {
+                rmdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets/images');
             }
 
-            if (file_exists(PATH_site . '/typo3temp/assets')) {
-                rmdir (PATH_site . '/typo3temp/assets');
+            if (file_exists(\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets')) {
+                rmdir (\TYPO3\CMS\Core\Core\Environment::getPublicPath() . '/typo3temp/assets');
             }
         }
     }

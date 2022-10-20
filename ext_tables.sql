@@ -38,7 +38,6 @@ CREATE TABLE sys_file_metadata (
 
 	tx_rkwbasics_publisher varchar(255) DEFAULT '' NOT NULL,
 	tx_rkwbasics_source int(11) unsigned DEFAULT '0',
-
 );
 
 

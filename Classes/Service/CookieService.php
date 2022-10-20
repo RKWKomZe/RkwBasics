@@ -2,7 +2,7 @@
 
 namespace RKW\RkwBasics\Service;
 
-use \RKW\RkwBasics\Helper\Common;
+use RKW\RkwBasics\Utility\GeneralUtility as Common;
 use \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
@@ -27,6 +27,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @copyright Rkw Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated This class is deprecated and will be removed with version 10.x
  */
 class CookieService implements \TYPO3\CMS\Core\SingletonInterface
 {
@@ -198,7 +199,7 @@ class CookieService implements \TYPO3\CMS\Core\SingletonInterface
     protected static function createCookie(string $key, string $data = '')
     {
 
-        // @toDo: Would we have a real benefit to bind the RKW cookie to a user session?
+        // @todo Would we have a real benefit to bind the RKW cookie to a user session?
 
         // if typo3_session_id has no match: Kill cookie before create a new one
         // (means: our RKW cookie is part of an old session or the session of another user)

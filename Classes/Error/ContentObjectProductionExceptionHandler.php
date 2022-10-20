@@ -16,6 +16,7 @@ namespace RKW\RkwBasics\Error;
  */
 
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Crypto\Random;
 use TYPO3\CMS\Frontend\ContentObject\AbstractContentObject;
 use \TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
 
@@ -56,7 +57,9 @@ class ContentObjectProductionExceptionHandler extends ProductionExceptionHandler
 
         $requestedUrl = GeneralUtility::getIndpEnv('TYPO3_REQUEST_URL');
         $errorMessage = isset($this->configuration['errorMessage']) ? $this->configuration['errorMessage'] : 'Oops, an error occurred! Code: %s';
-        $code = date('YmdHis', $_SERVER['REQUEST_TIME']) . GeneralUtility::getRandomHexString(8);
+
+        $random = GeneralUtility::makeInstance(Random::class);
+        $code = date('YmdHis', $_SERVER['REQUEST_TIME']) . $random->generateRandomHexString(8);
 
         $this->logException($exception, $requestedUrl, $code);
         return str_replace('%s', $code, $errorMessage);

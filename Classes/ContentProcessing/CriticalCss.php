@@ -17,6 +17,7 @@ namespace RKW\RkwBasics\ContentProcessing;
 use TYPO3\CMS\Core\Resource\ResourceCompressor;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Utility\PathUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Frontend\Page\PageRepository;
@@ -64,7 +65,7 @@ class CriticalCss
             return '';
         }
 
- 
+
         // first of all we rebuild the existing cssIncludes
         /** @see: PageRenderer->renderCssFiles() */
         $cssCode = [];
@@ -84,7 +85,7 @@ class CriticalCss
                     $wrapArr = explode($properties['splitChar'] ?: '|', $properties['allWrap'], 2);
                     $tag = $wrapArr[0] . $tag . $wrapArr[1];
                 }
-                
+
                 if ($properties['forceOnTop']) {
                     array_unshift($cssCode, $tag);
                 } else {
@@ -93,17 +94,17 @@ class CriticalCss
 
                 // remove the file from further processing
                 unset($params['cssFiles'][$file]);
-            }            
+            }
         }
-        
+
         // now process the critical CSS-files
         $criticalCssCode = '';
         foreach ($criticalCssFiles as $file) {
 
             if ($content = $this->getRebasedFileContent($this->getFilePath($file))) {
 
-                $criticalCssCode .= '<style>' 
-                    . $content 
+                $criticalCssCode .= '<style>'
+                    . $content
                     . '</style>'
                     . LF;
             }
@@ -121,7 +122,7 @@ class CriticalCss
      */
     public function preProcess(&$params, \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer): bool
     {
-    
+
         if (
             (!$this->settings['enable'])
             || (!$this->getCriticalCssFiles())
@@ -129,15 +130,15 @@ class CriticalCss
         ) {
             return false;
         }
-        
+
         if (is_array($params['cssFiles'])) {
             foreach ($removeCssFiles as $file) {
                 if (isset($params['cssFiles'][$this->getFilePath($file, true)])) {
                     unset($params['cssFiles'][$this->getFilePath($file, true)]);
                 }
             }
-        }     
-        
+        }
+
         return true;
     }
 
@@ -152,7 +153,7 @@ class CriticalCss
     {
         // try-catch because we rely on external files here
         try {
-            
+
             if ($fileContent = file_get_contents($this->getFilePath($filePath))) {
                 if ($fileContent = preg_replace_callback(
                     '#url\([\'\"]?([^\)\'\"]+)[\'\"]?\)#',
@@ -181,15 +182,15 @@ class CriticalCss
                     return $fileContent;
                 }
             }
-            
+
         } catch (\Exception $e) {
             // do nothing
         }
-        
+
         return '';
     }
 
-    
+
     /**
      * Returns the configured critical CSS-files for the current layout
      *
@@ -205,7 +206,7 @@ class CriticalCss
         ){
             return $this->settings['filesForLayout'][$this->getFrontendLayoutOfPage()];
         }
-        
+
         return [];
     }
 
@@ -229,23 +230,21 @@ class CriticalCss
 
     /**
      * Returns the frontend layout of the current page
-     * 
+     *
      * @return int
      */
     public function getFrontendLayoutOfPage (): int
     {
 
         // get PageRepository and rootline
-        $repository = GeneralUtility::makeInstance(PageRepository::class);
-        $rootlinePages = $repository->getRootLine($GLOBALS['TSFE']->id);
-
+        $rootlinePages = GeneralUtility::makeInstance(RootlineUtility::class, intval($GLOBALS['TSFE']->id))->get();
         $layout = 0;
         if (is_array($rootlinePages)) {
             foreach ($rootlinePages as $key => $page) {
 
                 // own layout-field overrides all
                 if (
-                    ($key == (count($rootlinePages)-1)) 
+                    ($key == (count($rootlinePages)-1))
                     && ($page['layout'])
                 ) {
                     return intval($page['layout']);
@@ -261,11 +260,11 @@ class CriticalCss
 
             }
         }
-        
+
         return $layout;
     }
 
-    
+
     /**
      * Replaces "screen" and "all" from later media-attribute of style-tag
      *
@@ -293,7 +292,7 @@ class CriticalCss
 
     /**
      * Get the absolute file path or the file path relative to the web-dir
-     * 
+     *
      * @param string $file
      * @param bool $fromWebDir
      * @return string
@@ -348,4 +347,4 @@ class CriticalCss
         return $settings;
     }
 
-} 
+}

@@ -66,7 +66,7 @@ class CriticalCssTest extends FunctionalTestCase
      * Setup
      * @throws \Exception
      */
-    protected function setUp()
+    protected function setUp(): void
     {
 
         parent::setUp();
@@ -140,7 +140,7 @@ class CriticalCssTest extends FunctionalTestCase
         self::assertEmpty($result['filesToRemoveWhenActive']);
 
     }
-    
+
     //=============================================
 
     /**
@@ -152,17 +152,17 @@ class CriticalCssTest extends FunctionalTestCase
         /**
          * Scenario:
          *
-         * Given a relative path on the local host 
+         * Given a relative path on the local host
          * When the method is called
          * Then an absolute path on the local host is returned
          */
-        
+
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getFilePath(
             'EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/all.css'
         );
 
-        self::assertStringStartsWith(PATH_site, $result);
+        self::assertStringStartsWith(\TYPO3\CMS\Core\Core\Environment::getPublicPath(), $result);
     }
 
     /**
@@ -188,7 +188,7 @@ class CriticalCssTest extends FunctionalTestCase
 
         self::assertStringStartsWith('typo3conf/ext/', $result);
     }
-    
+
     /**
      * @test
      */
@@ -232,9 +232,9 @@ class CriticalCssTest extends FunctionalTestCase
 
         self::assertEquals('print', $result);
     }
-    
 
-    
+
+
     /**
      * @test
      */
@@ -275,7 +275,7 @@ class CriticalCssTest extends FunctionalTestCase
         self::assertEquals('print', $result);
     }
 
-    
+
     /**
      * @test
      */
@@ -349,7 +349,7 @@ class CriticalCssTest extends FunctionalTestCase
 
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getFrontendLayoutOfPage();
-        
+
         self::assertEquals(10, $result);
 
     }
@@ -422,7 +422,7 @@ class CriticalCssTest extends FunctionalTestCase
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getCssFilesToRemove();
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertCount(2,$result);
         self::assertEquals(
             'EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/removeOne.css',
@@ -464,7 +464,7 @@ class CriticalCssTest extends FunctionalTestCase
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getCssFilesToRemove();
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertEmpty($result);
 
     }
@@ -484,7 +484,7 @@ class CriticalCssTest extends FunctionalTestCase
          * When the method is called
          * Then an array is returned
          * Then the array has two elements
-         * Then these elements are the two defined critical css-files 
+         * Then these elements are the two defined critical css-files
          */
         $this->setUpFrontendRootPage(
             1,
@@ -501,7 +501,7 @@ class CriticalCssTest extends FunctionalTestCase
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getCriticalCssFiles();
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertCount(2,$result);
         self::assertEquals(
             'EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/criticalOne.css',
@@ -510,7 +510,7 @@ class CriticalCssTest extends FunctionalTestCase
         self::assertEquals(
             'EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Global/criticalTwo.css',
             $result[20]
-        );        
+        );
 
     }
 
@@ -544,9 +544,9 @@ class CriticalCssTest extends FunctionalTestCase
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getCriticalCssFiles();
 
-        self::assertInternalType('array', $result);
+        self::assertIsArray( $result);
         self::assertEmpty($result);
-        
+
     }
 
     //=============================================
@@ -568,15 +568,15 @@ class CriticalCssTest extends FunctionalTestCase
          */
 
         $filePath = 'EXT:rkw_basics/Tests/Integration/ContentProcessing/CriticalCssTest/Fixtures/Frontend/Files/Check90.css';
-        
+
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
         $result = $this->subject->getRebasedFileContent($filePath);
         $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check90.css');
 
         self::assertEquals($expected, $result);
     }
-    
-    
+
+
 
     //=============================================
 
@@ -589,7 +589,7 @@ class CriticalCssTest extends FunctionalTestCase
         /**
          * Scenario:
          *
-         * Given criticalCss is enabled via configuration 
+         * Given criticalCss is enabled via configuration
          * Given for the current page-layout two critical-css-files are defined
          * Given four normal CSS files are defined
          * Given one of the normal CSS files is marked as to be removed when critical CSS is active
@@ -597,7 +597,7 @@ class CriticalCssTest extends FunctionalTestCase
          * Then three normal CSS-Files are included in the rendered HTML via link-tag
          * Then the one normal CSS-File that is marked as to be removed is removed
          * Then the forceOnTop-setting is respected
-         * Then the media-property is changed 
+         * Then the media-property is changed
          * Then a data-media-property is added which contains the old media-property value
          * Then the link-tag has an onLoad action
          */
@@ -610,12 +610,12 @@ class CriticalCssTest extends FunctionalTestCase
                 self::FIXTURE_PATH . '/Frontend/Configuration/Check60.typoscript',
             ]
         );
-        
+
         $this->subject = GeneralUtility::makeInstance(CriticalCss::class);
 
         $result = $this->getFrontendResponse(1);
         $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check60.html');
-        self::assertContains($expected, $result->getContent());
+        self::assertStringContainsString($expected, $result->getContent());
 
     }
 
@@ -653,9 +653,9 @@ class CriticalCssTest extends FunctionalTestCase
         $result = $this->getFrontendResponse(1);
         $expected = file_get_contents(self::FIXTURE_PATH . '/Expected/Check70.html');
 
-        self::assertContains($expected, $result->getContent());
+        self::assertStringContainsString($expected, $result->getContent());
     }
-    
+
 
     /**
      * @test
@@ -669,7 +669,7 @@ class CriticalCssTest extends FunctionalTestCase
          * Given criticalCss is disabled via configuration
          * Given for the current page-layout two critical Css-files are defined
          * Given four normal CSS files are defined
-         * Given one of the normal CSS files is marked as to be removed when critical CSS is active* 
+         * Given one of the normal CSS files is marked as to be removed when critical CSS is active*
          * When the method is called
          * Then no critical CSS-files are added
          * Then all four normal CSS-Files are included in the rendered HTML via link-tag
@@ -691,12 +691,12 @@ class CriticalCssTest extends FunctionalTestCase
 
         $result = $this->getFrontendResponse(1);
 
-        self::assertNotContains('@charset "UTF-8"; .critical-one {display:none}', $result->getContent());
-        self::assertNotContains('@charset "UTF-8"; .critical-two {display:none}', $result->getContent());
-        self::assertContains('all.css', $result->getContent());
-        self::assertContains('removeOne.css', $result->getContent());
-        self::assertContains('print.css', $result->getContent());
-        self::assertContains('screen.css', $result->getContent());
+        self::assertStringNotContainsString('@charset "UTF-8"; .critical-one {display:none}', $result->getContent());
+        self::assertStringNotContainsString('@charset "UTF-8"; .critical-two {display:none}', $result->getContent());
+        self::assertStringContainsString('all.css', $result->getContent());
+        self::assertStringContainsString('removeOne.css', $result->getContent());
+        self::assertStringContainsString('print.css', $result->getContent());
+        self::assertStringContainsString('screen.css', $result->getContent());
     }
 
     /**
@@ -733,18 +733,18 @@ class CriticalCssTest extends FunctionalTestCase
 
         $result = $this->getFrontendResponse(1);
 
-        self::assertNotContains('@charset "UTF-8"; .critical-one {display:none}', $result->getContent());
-        self::assertNotContains('@charset "UTF-8"; .critical-two {display:none}', $result->getContent());
-        self::assertContains('all.css', $result->getContent());
-        self::assertContains('removeOne.css', $result->getContent());
-        self::assertContains('print.css', $result->getContent());
-        self::assertContains('screen.css', $result->getContent());
+        self::assertStringNotContainsString('@charset "UTF-8"; .critical-one {display:none}', $result->getContent());
+        self::assertStringNotContainsString('@charset "UTF-8"; .critical-two {display:none}', $result->getContent());
+        self::assertStringContainsString('all.css', $result->getContent());
+        self::assertStringContainsString('removeOne.css', $result->getContent());
+        self::assertStringContainsString('print.css', $result->getContent());
+        self::assertStringContainsString('screen.css', $result->getContent());
     }
 
     /**
      * TearDown
      */
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
     }

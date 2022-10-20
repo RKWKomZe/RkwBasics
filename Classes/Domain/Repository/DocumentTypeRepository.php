@@ -65,7 +65,6 @@ class DocumentTypeRepository extends AbstractRepository
      * @param string  $type
      * @param boolean $includeDefault
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
-     * @A
      */
     public function findAllByTypeAndVisibility($type = null, $includeDefault = true)
     {

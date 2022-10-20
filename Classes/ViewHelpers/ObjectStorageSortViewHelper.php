@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
 /**
  * Class ObjectStorageSortViewHelper
  *
@@ -23,12 +26,11 @@ namespace RKW\RkwBasics\ViewHelpers;
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
     /**
      * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
-     *
      */
     public function initializeArguments()
     {
@@ -37,31 +39,33 @@ class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
         $this->registerArgument('sortFlags', 'string', 'Constant name from PHP for SORT_FLAGS: SORT_REGULAR, SORT_STRING, SORT_NUMERIC, SORT_NATURAL, SORT_LOCALE_STRING or SORT_FLAG_CASE', false, 'SORT_REGULAR');
     }
 
+
     /**
      * "Render" method - sorts a target list-type target. Either $array or $objectStorage must be specified. If both are,
      * ObjectStorage takes precedence.
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
-     * @return mixed
+     * @return  \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @throws \TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException
      */
-    public function render(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage)
+    public function render(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage):  \TYPO3\CMS\Extbase\Persistence\ObjectStorage
     {
-
         return $this->sortObjectStorage($objectStorage);
-        //===
     }
+
 
     /**
      * Sort an ObjectStorage
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+     * @throws \TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException
      */
-    protected function sortObjectStorage($objectStorage)
+    protected function sortObjectStorage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage): \TYPO3\CMS\Extbase\Persistence\ObjectStorage
     {
 
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
-        $tempObjectStorage = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+        $tempObjectStorage = $this->objectManager->get(ObjectStorage::class);
 
         // put all into a temporary storage in order to keep the original one untouched
         foreach ($objectStorage as $item) {
@@ -89,13 +93,12 @@ class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
         }
 
         // now we finally rebuild our object storage
-        $storage = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+        $storage = $this->objectManager->get(ObjectStorage::class);
         foreach ($sorted as $item) {
             $storage->attach($item);
         }
 
         return $storage;
-        //===
     }
 
     /**
@@ -110,13 +113,13 @@ class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
         $field = $this->arguments['sortBy'];
 
         /** @var \TYPO3\CMS\Extbase\Reflection\ObjectAccess $objectAccess */
-        $objectAccess = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Reflection\\ObjectAccess');
+        $objectAccess = $this->objectManager->get(ObjectAccess::class);
         $value = $objectAccess::getProperty($object, $field);
 
         if ($value instanceof \DateTime) {
             $value = $value->format('U');
 
-        } elseif ($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+        } elseif ($value instanceof ObjectStorage) {
             $value = $value->count();
 
         } elseif (is_array($value)) {
@@ -124,8 +127,5 @@ class ObjectStorageSortViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstr
         }
 
         return $value;
-        //===
     }
 }
-
-?>

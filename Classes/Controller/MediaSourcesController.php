@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\Controller;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Utility\RootlineUtility;
+
 /**
  * Class MediaSourcesController
  *
@@ -30,7 +33,7 @@ class MediaSourcesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
      * mediaSourcesRepository
      *
      * @var \RKW\RkwBasics\Domain\Repository\MediaSourcesRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $mediaSourcesRepository = null;
 
@@ -45,8 +48,7 @@ class MediaSourcesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
         $pagesList = array();
 
         // get root page of current page
-        $repository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-        $rootlinePages = $repository->getRootLine(intval($GLOBALS['TSFE']->id));
+        $rootlinePages = GeneralUtility::makeInstance(RootlineUtility::class, intval($GLOBALS['TSFE']->id))->get();
 
         if (
             ($rootlinePages[0])
@@ -84,8 +86,7 @@ class MediaSourcesController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionCon
         if ($fieldList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $this->settings['includeFieldsList'], true)) {
 
             // get PageRepository and rootline
-            $repository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Frontend\\Page\\PageRepository');
-            $rootlinePages = $repository->getRootLine(intval($GLOBALS['TSFE']->id));
+            $rootlinePages = GeneralUtility::makeInstance(RootlineUtility::class, intval($GLOBALS['TSFE']->id))->get();
 
             // go through all defined fields
             foreach ($fieldList as $includeField) {

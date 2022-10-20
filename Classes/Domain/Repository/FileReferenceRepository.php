@@ -37,20 +37,20 @@ class FileReferenceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 
     /**
      * Workaround for add-method because the foreign-field has to be updated manually
-     * 
+     *
      * @see https://docs.typo3.org/m/typo3/reference-fal/8.7/en-us/UsingFal/Examples/FileFolder/Index.html
-     * @toDo: remove this work-around when it isn't needed any more
+     * @todo remove this work-around when it isn't needed any more
      * @param \RKW\RkwBasics\Domain\Model\FileReference $object
      * @return void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\IllegalObjectTypeException
      */
     public function add($object)
     {
-        
+
         // save object
         parent::add($object);
         $this->persistenceManager->persistAll();
-        
+
         // now get number of current references to the target-object and update foreign-field
         /** @var  \TYPO3\CMS\Core\Database\Connection $connectionPages */
         $connection = GeneralUtility::makeInstance(ConnectionPool::class)->getConnectionForTable('sys_file_reference');
@@ -89,8 +89,8 @@ class FileReferenceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
                     $updateQueryBuilder->createNamedParameter($object->getUidForeign()), \PDO::PARAM_INT
                 )
             );
-        
+
         $updateQueryBuilder->execute();
-        
+
     }
 }

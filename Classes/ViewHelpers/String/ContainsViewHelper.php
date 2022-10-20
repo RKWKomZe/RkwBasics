@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\ViewHelpers\String;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+
 /**
  * Class ContainsViewHelper
  *
@@ -23,18 +26,45 @@ namespace RKW\RkwBasics\ViewHelpers\String;
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class ContainsViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class ContainsViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
 
+    use CompileWithContentArgumentAndRenderStatic;
+
     /**
-     * @param string $needle
-     * @param string $haystack
-     * @return bool
+     * @var bool
      */
-    public function render(string $needle = '', string $haystack = '')
+    protected $escapeOutput = false;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
     {
-        return false !== strpos($haystack, $needle);
+        parent::initializeArguments();
+        $this->registerArgument('needle', 'string', 'string to search for', true);
+        $this->registerArgument('haystack', 'string', 'string to search in', true);
     }
 
+    /**
+     * Check if needle is in haystack
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
 
+        $needle = $arguments['needle'];
+        $haystack = $arguments['haystack'];
+
+        return false !== strpos($haystack, $needle);
+    }
 }

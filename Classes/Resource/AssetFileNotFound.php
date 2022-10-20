@@ -15,6 +15,7 @@ namespace RKW\RkwBasics\Resource;
  * The TYPO3 project - inspiring people to share!
  */
 
+use \TYPO3\CMS\Core\Core\Environment;
 
 /**
  * Class AssetFileNotFound
@@ -54,7 +55,7 @@ class AssetFileNotFound
             // use the first three parts to search for a file
             $sourceFile = $fileName . '.' . $fileExtension;
             $sourcePathRelative = self::$assetPath . '/' . $sourceFile;
-            $sourcePathAbsolute = PATH_site . $sourcePathRelative;
+            $sourcePathAbsolute = Environment::getPublicPath() . '/'. $sourcePathRelative;
             $searchPattern = $fileNameParts[0] . '_' . $fileNameParts[1] . '_' . $fileNameParts[2];
 
             // check if file exists
@@ -69,7 +70,7 @@ class AssetFileNotFound
             }
 
             // go through folder and search for pattern
-            $files = scandir(PATH_site . self::$assetPath);
+            $files = scandir(Environment::getPublicPath() . '/' . self::$assetPath);
             foreach ($files as $dirFile) {
 
                 // search for pattern and extension
@@ -80,7 +81,7 @@ class AssetFileNotFound
 
                     // return file data and set symlink
                     $targetPathRelative = self::$assetPath . '/' . $dirFile;
-                    $targetPathAbsolute = PATH_site . $targetPathRelative;
+                    $targetPathAbsolute = Environment::getPublicPath() . '/' . $targetPathRelative;
                     symlink($targetPathAbsolute, $sourcePathAbsolute);
 
                     return [
@@ -96,5 +97,4 @@ class AssetFileNotFound
 
         return false;
     }
-
 }

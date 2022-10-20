@@ -15,6 +15,10 @@ namespace RKW\RkwBasics\Helper;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+
+
 /**
  * Class QueryTypo3
  *
@@ -26,7 +30,6 @@ namespace RKW\RkwBasics\Helper;
 class QueryTypo3
 {
 
-
     /**
      * get the WHERE clause for the enabled fields of this TCA table
      * depending on the context
@@ -35,15 +38,12 @@ class QueryTypo3
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    static public function getWhereClauseForEnableFields($table)
+    static public function getWhereClauseForEnableFields(string $table): string
     {
-
-        // backend context
         $whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::BEenableFields($table);
-        $whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table);
+        $whereClause .= self::getWhereClauseForDeleteFields($table);
 
         return $whereClause;
-        //===
     }
 
 
@@ -55,56 +55,71 @@ class QueryTypo3
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    static public function getWhereClauseForDeleteFields($table)
+    static public function getWhereClauseForDeleteFields(string $table): string
     {
 
-        // backend context
-        $whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table);
+        if (empty($GLOBALS['TCA'][$table]['ctrl']['delete'])) {
+            return '';
+        }
+        $expressionBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable($table)
+            ->expr();
 
-        return $whereClause;
-        //===
+        return ' AND ' . $expressionBuilder->eq(
+                $table . '.' . $GLOBALS['TCA'][$table]['ctrl']['delete'],
+                0
+            );
     }
 
     /**
      * get the WHERE clause for the language
      * depending on the context
      *
-     * @param string $table tablename
+     * @param string $table
      * @param integer $languageUid
      * @return string the additional where clause, something like " AND sys_language_uid = X"
      */
-    static public function getWhereClauseForLanguageFields($table, $languageUid = null)
+    static public function getWhereClauseForLanguageFields(string $table, int $languageUid = 0): string
     {
 
-        $whereClause = '';
-
-        if ($GLOBALS['TCA'][$table]['ctrl']['languageField']) {
-            $whereClause = ' AND ' . $table . '.' . $GLOBALS['TCA'][$table]['ctrl']['languageField'] . ' = ' . intval($languageUid);
+        if (empty ($GLOBALS['TCA'][$table]['ctrl']['languageField'])) {
+            return '';
         }
 
-        return $whereClause;
-        //===
+        $expressionBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable($table)
+            ->expr();
+
+        return ' AND ' . $expressionBuilder->eq(
+                $table . '.' . $GLOBALS['TCA'][$table]['ctrl']['languageField'],
+                intval($languageUid)
+            );
+
     }
 
     /**
      * get the WHERE clause for the versioning
      * depending on the context
      *
-     * @param string $table tablename
+     * @param string $table
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
-     * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      * @throws \TYPO3\CMS\Core\Type\Exception\InvalidEnumerationValueException
+     *@see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    static public function getWhereClauseForVersioning($table)
+    static public function getWhereClauseForVersioning(string $table): string
     {
-
-        $whereClause = '';
-        if ($GLOBALS['TCA'][$table] && $GLOBALS['TCA'][$table]['ctrl']['versioningWS']) {
-            $whereClause = ' AND ' . $table . '.t3ver_state = ' . new \TYPO3\CMS\Core\Versioning\VersionState(\TYPO3\CMS\Core\Versioning\VersionState::DEFAULT_STATE);
+        if (empty ($GLOBALS['TCA'][$table]['ctrl']['versioningWS'])) {
+            return '';
         }
 
-        return $whereClause;
-        //===
+        $expressionBuilder = GeneralUtility::makeInstance(ConnectionPool::class)
+            ->getQueryBuilderForTable($table)
+            ->expr();
+
+        return ' AND ' . $expressionBuilder->eq(
+                $table . '.' . $GLOBALS['TCA'][$table]['ctrl']['versioningWS'],
+                new \TYPO3\CMS\Core\Versioning\VersionState(\TYPO3\CMS\Core\Versioning\VersionState::DEFAULT_STATE)
+            );
     }
 
 

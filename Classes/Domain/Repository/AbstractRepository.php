@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use RKW\RkwBasics\Helper\QueryTypo3;
+
 /**
  * Class AbstractRepository
  *
@@ -34,20 +36,9 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    protected function getWhereClauseForEnabledFields($table)
+    protected function getWhereClauseForEnabledFields(string $table): string
     {
-        if ($this->getEnvironmentMode() === 'FE' && $GLOBALS['TSFE']->sys_page) {
-            // frontend context
-            $whereClause = $GLOBALS['TSFE']->sys_page->enableFields($table);
-            $whereClause .= $GLOBALS['TSFE']->sys_page->deleteClause($table);
-        } else {
-            // backend context
-            $whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::BEenableFields($table);
-            $whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table);
-        }
-
-        return $whereClause;
-        //===
+        return QueryTypo3::getWhereClauseForEnableFields($table);
     }
 
 
@@ -66,5 +57,3 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
 
 
 }
-
-?>

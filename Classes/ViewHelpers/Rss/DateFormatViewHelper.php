@@ -14,6 +14,9 @@ namespace RKW\RkwBasics\ViewHelpers\Rss;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+
 /**
  * Class RssDateFormatViewHelper
  *
@@ -22,19 +25,46 @@ namespace RKW\RkwBasics\ViewHelpers\Rss;
  * @copyright Steffen Kroggel, RKW Kompetenzzentrum
  * @licence http://www.gnu.org/copyleft/gpl.htm GNU General Public License, version 2 or later
  */
-class DateFormatViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper {
+class DateFormatViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper {
 
 
-	/**
-	 * Format timestamps to "D, d M Y H:i:s T"
-	 *
-	 * @param integer $dateTime
-	 * @return string
-	 */
-	public function render($dateTime) {
+    use CompileWithContentArgumentAndRenderStatic;
 
-		return date("D, d M Y H:i:s O", $dateTime);
-		//===
-	}
+    /**
+     * @var bool
+     */
+    protected $escapeOutput = false;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
+    {
+        parent::initializeArguments();
+        $this->registerArgument('dateTime', 'integer', 'timestamp to format.', true);
+        $this->registerArgument('format', 'string', 'format for date.', false, "D, d M Y H:i:s O");
+    }
+
+    /**
+     * Format timestamp for usage in RSS-feeds
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
+
+        $dateTime = $arguments['dateTime'];
+        $format = $arguments['format'];
+
+        return date($format, $dateTime);
+    }
 
 }

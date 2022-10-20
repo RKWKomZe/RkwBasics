@@ -15,25 +15,56 @@ namespace RKW\RkwBasics\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface;
+use TYPO3Fluid\Fluid\Core\ViewHelper\Traits\CompileWithContentArgumentAndRenderStatic;
+
 /**
  * Class PageListExplodeViewHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PageListExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractViewHelper
+class PageListExplodeViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper
 {
+    use CompileWithContentArgumentAndRenderStatic;
 
     /**
-     * @param string $list
-     * @param string $delimiter
-     * @param string $delimiterTwo
-     * @return array
+     * @var bool
      */
-    public function render($list, $delimiter = '|', $delimiterTwo = '###')
+    protected $escapeOutput = false;
+
+    /**
+     * Initialize arguments.
+     *
+     * @throws \TYPO3Fluid\Fluid\Core\ViewHelper\Exception
+     */
+    public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('list', 'string', 'The list that is to split', false, '');
+        $this->registerArgument('delimiter', 'string', 'The first delimiter to use', false, '|');
+        $this->registerArgument('delimiterTwo', 'string', 'The second delimiter to use', false, '###');
+    }
+
+    /**
+     * Explodes a list of pages with two given delimiters
+     *
+     * @param array $arguments
+     * @param \Closure $renderChildrenClosure
+     * @param \TYPO3Fluid\Fluid\Core\Rendering\RenderingContextInterface $renderingContext
+     * @return string
+     */
+    public static function renderStatic(
+        array $arguments,
+        \Closure $renderChildrenClosure,
+        RenderingContextInterface $renderingContext
+    ): string {
+
+        $list = $arguments['list'];
+        $delimiter = $arguments['delimiter'];
+        $delimiterTwo = $arguments['delimiterTwo'];
 
         $result = array();
         $items = explode($delimiter, $list);
@@ -45,8 +76,5 @@ class PageListExplodeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\Abstrac
         }
 
         return $result;
-        //===
-
     }
-
 }

@@ -31,7 +31,7 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
 
     /**
      * @var \RKW\RkwBasics\Cache\SitemapCache
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $cache;
 
@@ -45,7 +45,7 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      * pagesRepository
      *
      * @var \RKW\RkwBasics\Domain\Repository\PagesRepository
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
     protected $pagesRepository = null;
 
@@ -102,7 +102,7 @@ class GoogleController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionControlle
      */
     protected function getCacheKey()
     {
-        return GeneralUtility::getHostname();
+        return GeneralUtility::getIndpEnv('HTTP_HOST');
     }
 
 

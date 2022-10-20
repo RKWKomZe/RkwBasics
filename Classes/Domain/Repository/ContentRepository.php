@@ -41,7 +41,7 @@ class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     public function fetchFlexFormDataByUid($ttContentUid, $pluginName, $extensionName)
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
 
         $query = $this->createQuery();
         $query->statement('SELECT pi_flexform from tt_content where list_type="' . strtolower($extensionName) . '_' . strtolower($pluginName) . '" and uid = ' . $ttContentUid);
