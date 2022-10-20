@@ -227,14 +227,14 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
 
     /**
      * Merges arrays by numeric key and sorts them in zipper procedure
-     * 
+     *
      * @param array ...$arrays
      * @return array
      */
     static public function arrayZipMerge(
         array ...$arrays
     ): array {
-        
+
         // find array with highest number of keys
         $maxCount = 0;
         foreach ($arrays as $array) {
@@ -242,12 +242,12 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
                 $maxCount = count($array);
             }
         }
-        
+
         // move all keys to new numeric index
         foreach($arrays as $key => $array) {
             $arrays[$key] = array_values($array);
         }
-        
+
         // now rebuild array
         $result = [];
         for ($i = 0; $i < $maxCount; $i++) {
@@ -256,9 +256,41 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
                     $result[] = $array[$i];
                 }
             }
-        }        
-        
+        }
+
         return $result;
     }
+
+
+
+    /**
+     * @param string $string
+     * @param string $separator
+     * @return string
+     */
+    static public function slugify(string $string, string $separator = '-'): string
+    {
+        // use "mb_strtolower" instead of "strtolower" for ÄÜÖ
+        $slug = mb_strtolower($string);
+
+        $slug = str_replace(['ä', 'ä', 'ö', 'ü', 'ß', '/'], ['ae', 'ae', 'oe', 'ue', 'ss', $separator], $slug);
+
+        // Convert all dashes/underscores into separator
+        $flip = $separator === '-' ? '_' : '-';
+
+        $slug = preg_replace('![' . preg_quote($flip) . ']+!u', $separator, $slug);
+
+        // Replace @ with the word 'at'
+        $slug = str_replace('@', $separator . 'at' . $separator, $slug);
+
+        // Remove all characters that are not the separator, letters, numbers, or whitespace.
+        $slug = preg_replace('![^' . preg_quote($separator) . '\pL\pN\s]+!u', '', $slug);
+
+        // Replace all separator characters and whitespace by a single separator
+        $slug = preg_replace('![' . preg_quote($separator) . '\s]+!u', $separator, $slug);
+
+        return trim($slug, $separator);
+    }
+
 
 }

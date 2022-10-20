@@ -146,6 +146,149 @@ class GeneralUtilityTest extends UnitTestCase
 
     }
 
+
+    //=============================================
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithCommonString()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given is a string with upper and lowercase letters and whitespaces and a dot
+         * When the method is called
+         * Then a lowercase string without dot and with hyphens is returned
+         */
+
+
+        $string = "Fischers Fritz fischt frische Fische.";
+
+        $result = $this->subject::slugify($string);
+
+        self::assertEquals('fischers-fritz-fischt-frische-fische', $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithCommonStringAndAdditionalWhitespaces()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given is a common string with additional whitespaces
+         * When the method is called
+         * Then a lowercase string without dot and with hyphens is returned
+         */
+
+        $string = "Fischers      Fritz fischt frische Fische.";
+
+        $result = $this->subject::slugify($string);
+
+        self::assertEquals('fischers-fritz-fischt-frische-fische', $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithCommonStringAndDifferentSeparator()
+    {
+        /**
+         * Scenario:
+         *
+         * @toDo: Its possible to set a separator sign which is not allowed in the string. As example the sign @. Should we handle
+         * that with an error? The result can be looks like this: "fischers@fritz@fischt@frische@fische"
+         *
+         * Given is a common string
+         * Given is a different separator
+         * When the method is called
+         * Then the common string is returned with the different separator
+         */
+
+        $string = "Fischers Fritz fischt frische Fische.";
+        $separator = "_";
+
+        $result = $this->subject::slugify($string, $separator);
+
+        self::assertEquals('fischers_fritz_fischt_frische_fische', $result);
+    }
+
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithUmlautsAndSpecialSigns()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a string with a lot of special signs
+         * When the method is called
+         * Then a lowercase string with hyphens, converted umlauts and removed special signs is returned
+         */
+
+
+        $string = "ÄÜÖß!§§$% Fischers &/()= Fritz.";
+
+        $result = $this->subject::slugify($string);
+
+        self::assertEquals('aeueoess-fischers-fritz', $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithStringWhichNeedNoChanges()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a string with a lot of special signs
+         * When the method is called
+         * Then a lowercase string without dot and hyphens is returned
+         */
+
+
+        $string = "fischers-super-test-abcdefg123456";
+
+        $result = $this->subject::slugify($string);
+
+        self::assertEquals($string, $result);
+    }
+
+
+    /**
+     * @test
+     */
+    public function slugifyWithAtSymbol()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a string with a @ smybol
+         * When the method is called
+         * Then the @ is converted to "at"
+         */
+
+        $string = "@";
+
+        $result = $this->subject::slugify($string);
+
+        self::assertEquals('at', $result);
+    }
+
     //=============================================
 
     /**
