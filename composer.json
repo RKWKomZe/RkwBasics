@@ -27,10 +27,11 @@
         "ext-json": "*",
         "typo3/cms-core": "~9.5.0",
 		"typo3/cms-filemetadata": "~9.5.0",
-        "rkw/rkw-ajax" : "~9.5.0 || dev-feature/upgrade9.5",
         "ronanguilloux/isocodes": "^2.3",
-		"sjbr/sr-freecap": "~2.4"
-    },
+		"sjbr/sr-freecap": "~2.4",
+		"calien/persisted-sanitized-routing" : "^1.0.4",
+		"rkw/rkw-ajax" : "~9.5.0 || dev-feature/upgrade9.5"
+	},
     "autoload": {
         "psr-4": {
             "RKW\\RkwBasics\\": "Classes/"

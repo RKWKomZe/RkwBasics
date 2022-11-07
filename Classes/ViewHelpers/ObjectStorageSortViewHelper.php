@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwBasics\ViewHelpers;
 
 /*
@@ -15,6 +14,8 @@ namespace RKW\RkwBasics\ViewHelpers;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
@@ -34,6 +35,8 @@ class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
      */
     public function initializeArguments()
     {
+        parent::initializeArguments();
+        $this->registerArgument('objectStorage', ObjectStorage::class, 'The objectStorage to sort', true);
         $this->registerArgument('sortBy', 'string', 'Which property/field to sort by - leave out for numeric sorting based on indexes(keys)', false, false);
         $this->registerArgument('order', 'string', 'ASC or DESC', false, 'ASC');
         $this->registerArgument('sortFlags', 'string', 'Constant name from PHP for SORT_FLAGS: SORT_REGULAR, SORT_STRING, SORT_NUMERIC, SORT_NATURAL, SORT_LOCALE_STRING or SORT_FLAG_CASE', false, 'SORT_REGULAR');
@@ -44,12 +47,13 @@ class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
      * "Render" method - sorts a target list-type target. Either $array or $objectStorage must be specified. If both are,
      * ObjectStorage takes precedence.
      *
-     * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
      * @return  \TYPO3\CMS\Extbase\Persistence\ObjectStorage
      * @throws \TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException
      */
-    public function render(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage):  \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+    public function render(): ObjectStorage
     {
+        /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage */
+        $objectStorage = $this->arguments['objectStorage'];
         return $this->sortObjectStorage($objectStorage);
     }
 
@@ -59,13 +63,15 @@ class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
      *
      * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage
      * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage
-     * @throws \TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException
      */
-    protected function sortObjectStorage(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $objectStorage): \TYPO3\CMS\Extbase\Persistence\ObjectStorage
+    protected function sortObjectStorage(ObjectStorage $objectStorage): ObjectStorage
     {
 
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
         /** @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage $tempObjectStorage */
-        $tempObjectStorage = $this->objectManager->get(ObjectStorage::class);
+        $tempObjectStorage = $objectManager->get(ObjectStorage::class);
 
         // put all into a temporary storage in order to keep the original one untouched
         foreach ($objectStorage as $item) {
@@ -93,7 +99,7 @@ class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
         }
 
         // now we finally rebuild our object storage
-        $storage = $this->objectManager->get(ObjectStorage::class);
+        $storage = $objectManager->get(ObjectStorage::class);
         foreach ($sorted as $item) {
             $storage->attach($item);
         }
@@ -106,14 +112,16 @@ class ObjectStorageSortViewHelper extends \TYPO3Fluid\Fluid\Core\ViewHelper\Abst
      *
      * @param mixed $object
      * @return mixed
-     * @throws \TYPO3\CMS\Extbase\Reflection\Exception\PropertyNotAccessibleException
      */
     protected function getSortValue($object)
     {
         $field = $this->arguments['sortBy'];
 
+        /** @var \TYPO3\CMS\Extbase\Object\ObjectManager $objectManager */
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+
         /** @var \TYPO3\CMS\Extbase\Reflection\ObjectAccess $objectAccess */
-        $objectAccess = $this->objectManager->get(ObjectAccess::class);
+        $objectAccess = $objectManager->get(ObjectAccess::class);
         $value = $objectAccess::getProperty($object, $field);
 
         if ($value instanceof \DateTime) {

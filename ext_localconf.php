@@ -82,6 +82,14 @@ call_user_func(
         $newRootlineFields = 'keywords,abstract,description,tx_rkwbasics_css_class,tx_rkwbasics_fe_layout_next_level,tx_rkwbasics_proxy_caching,tx_rkwbasics_no_index,tx_rkwbasics_no_follow,tx_rkwbasics_cover,tx_rkwbasics_file,tx_rkwbasics_teaser_image,tx_rkwbasics_department,tx_rkwbasics_document_type';
         $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
 
+        //=================================================================
+        // Asset for routing
+        //=================================================================
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['PersistedSlugifiedPatternMapper']
+            = \RKW\RkwBasics\Routing\Aspect\PersistedSlugifiedPatternMapper::class;
+
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['routing']['aspects']['CHashRemovalMapper'] =
+            \RKW\RkwBasics\Routing\Aspect\CHashRemovalMapper::class;
 
         //=================================================================
         // XClasses

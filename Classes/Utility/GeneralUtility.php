@@ -15,6 +15,7 @@ namespace RKW\RkwBasics\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Core\Charset\CharsetConverter;
 use TYPO3\CMS\Core\Database\Query\QueryHelper;
 use TYPO3\CMS\Core\Database\Query\Restriction\DeletedRestriction;
 use TYPO3\CMS\Core\Database\ConnectionPool;
@@ -264,30 +265,40 @@ class GeneralUtility extends \TYPO3\CMS\Core\Utility\GeneralUtility
 
 
     /**
-     * @param string $string
+     * Sanitizes slugs and removes slashes, too
+     *
+     * @param string $slug
      * @param string $separator
      * @return string
+     * @see \TYPO3\CMS\Core\DataHandling\SlugHelper
      */
-    static public function slugify(string $string, string $separator = '-'): string
+    static public function slugify(string $slug, string $separator = '-'): string
     {
         // use "mb_strtolower" instead of "strtolower" for ÄÜÖ
-        $slug = mb_strtolower($string);
+        $slug = mb_strtolower($slug, 'utf-8');
+        $slug = strip_tags($slug);
 
+        // Convert some special tokens (space, "_" and "-") to the separator character
+        $slug = preg_replace('/[ \t\x{00A0}\-+_]+/u', $separator, $slug);
+
+        // handle german umlauts separately
         $slug = str_replace(['ä', 'ä', 'ö', 'ü', 'ß', '/'], ['ae', 'ae', 'oe', 'ue', 'ss', $separator], $slug);
 
-        // Convert all dashes/underscores into separator
-        $flip = $separator === '-' ? '_' : '-';
-
-        $slug = preg_replace('![' . preg_quote($flip) . ']+!u', $separator, $slug);
-
-        // Replace @ with the word 'at'
+        // Replace @ with the word '-at-'
         $slug = str_replace('@', $separator . 'at' . $separator, $slug);
+
+        // Convert extended letters to ascii equivalents
+        // The specCharsToASCII() converts "€" to "EUR"
+        $slug = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(CharsetConverter::class)->specCharsToASCII('utf-8', $slug);
 
         // Remove all characters that are not the separator, letters, numbers, or whitespace.
         $slug = preg_replace('![^' . preg_quote($separator) . '\pL\pN\s]+!u', '', $slug);
 
-        // Replace all separator characters and whitespace by a single separator
-        $slug = preg_replace('![' . preg_quote($separator) . '\s]+!u', $separator, $slug);
+        // Convert multiple fallback characters to a single one
+        $slug = preg_replace('/' . preg_quote($separator) . '{2,}/', $separator, $slug);
+
+        // Ensure slug is lowercase after all replacement was done
+        $slug = mb_strtolower($slug, 'utf-8');
 
         return trim($slug, $separator);
     }

@@ -5,7 +5,6 @@ CREATE TABLE pages (
 
 	tx_rkwbasics_alternative_title varchar(255) DEFAULT '' NOT NULL,
 	tx_rkwbasics_fe_layout_next_level int(11) DEFAULT '0' NOT NULL,
-	tx_rkwbasics_css_class int(11) DEFAULT '0' NOT NULL,
 	tx_rkwbasics_teaser_image int(11) unsigned NOT NULL default '0',
 	tx_rkwbasics_department int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_document_type int(11) unsigned DEFAULT '0' NOT NULL,
@@ -16,9 +15,6 @@ CREATE TABLE pages (
 	tx_rkwbasics_enterprisesize int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_sector int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_companytype int(11) unsigned NOT NULL default '0',
-    tx_rkwbasics_old_domain varchar(255) DEFAULT '' NOT NULL,
-	tx_rkwbasics_old_link varchar(255) DEFAULT '' NOT NULL,
-	tx_rkwbasics_use_as_canonical int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_proxy_caching int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_no_index int(11) unsigned DEFAULT '0' NOT NULL,
     tx_rkwbasics_no_follow int(11) unsigned DEFAULT '0' NOT NULL,

@@ -286,7 +286,7 @@ class CriticalCss
             }
         }
 
-        return implode(array_unique($mediaArray), ',');
+        return implode(',', array_unique($mediaArray));
     }
 
 

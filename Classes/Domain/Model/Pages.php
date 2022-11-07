@@ -138,31 +138,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      */
     protected $txRkwbasicsFeLayoutNextLevel = 0;
 
-    /**
-     * txRkwbasicsCssClass
-     *
-     * @var \integer
-     * @deprecated
-     */
-    protected $txRkwbasicsCssClass = 0;
-
-
-    /**
-     * txRkwbasicsOldDomain
-     *
-     * @var string
-     * @deprecated
-     */
-    protected $txRkwbasicsOldDomain = '';
-
-
-    /**
-     * txRkwbasicsOldLink
-     *
-     * @var string
-     * @deprecated
-     */
-    protected $txRkwbasicsOldLink = '';
 
 
     /**
@@ -555,87 +530,6 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     public function setTxRkwbasicsFeLayoutNextLevel(int $txRkwbasicsFeLayoutNextLevel): void
     {
         $this->txRkwbasicsFeLayoutNextLevel = $txRkwbasicsFeLayoutNextLevel;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsCssClass
-     *
-     * @return int $txRkwbasicsCssClass
-     * @deprecated
-     */
-    public function getTxRkwbasicsCssClass(): int
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        return $this->txRkwbasicsCssClass;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsCssClass
-     *
-     * @param int $txRkwbasicsCssClass
-     * @return void
-     * @deprecated
-     */
-    public function setTxRkwbasicsCssClass(int $txRkwbasicsCssClass): void
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        $this->txRkwbasicsCssClass = $txRkwbasicsCssClass;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsOldDomain
-     *
-     * @return string $txRkwbasicsOldDomain
-     * @deprecated
-     */
-    public function getTxRkwbasicsOldDomain(): string
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        return $this->txRkwbasicsOldDomain;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsOldDomain
-     *
-     * @param string $txRkwbasicsOldDomain
-     * @return void
-     * @deprecated
-     */
-    public function setTxRkwbasicsOldDomain(string $txRkwbasicsOldDomain): void
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        $this->txRkwbasicsOldDomain = $txRkwbasicsOldDomain;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsOldLink
-     *
-     * @return string $txRkwbasicsOldLink
-     * @deprecated
-     */
-    public function getTxRkwbasicsOldLink(): string
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        return $this->txRkwbasicsOldLink;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsOldLink
-     *
-     * @param string $txRkwbasicsOldLink
-     * @return void
-     * @deprecated
-     */
-    public function setTxRkwbasicsOldLink(string $txRkwbasicsOldLink): void
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        $this->txRkwbasicsOldLink = $txRkwbasicsOldLink;
     }
 
 

@@ -18,55 +18,6 @@ $tempColumnsPages = [
 			'maxitems' => 1,
 		],
 	],
-
-	'tx_rkwbasics_css_class' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class',
-        'config' => [
-            'type' => 'select',
-            'renderType' => 'selectSingle',
-            'items' => [
-                ['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.0', '0'],
-                ['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.1', '1'],
-                ['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.2', '2'],
-                ['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.3', '3'],
-            ],
-            'size' => 1,
-            'maxitems' => 1,
-        ],
-	],
-    'tx_rkwbasics_old_domain' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_domain',
-        'config' => [
-            'type' => 'input',
-            'size' => '50',
-            'eval' => 'trim,domainname'
-        ],
-    ],
-
-    'tx_rkwbasics_old_link' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_link',
-        'config' => [
-            'type' => 'input',
-            'size' => '50',
-            'eval' => 'trim,nospace'
-        ],
-    ],
-    'tx_rkwbasics_use_as_canonical' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical',
-        'config' => [
-            'type' => 'check',
-            'default' => 0,
-            'items' => [
-                '1' => [
-                    '0' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical.I.enabled'
-                ],
-            ],
-        ],
-    ],
     'tx_rkwbasics_department' => [
 		'exclude' => 0,
         'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
@@ -82,7 +33,6 @@ $tempColumnsPages = [
                 ['---', NULL],
             ],
         ],
-
 	],
 
 	'tx_rkwbasics_document_type' => [
@@ -273,7 +223,7 @@ $tempColumnsPages = [
                 ],
             ],
         ],
-    ],    
+    ],
 ];
 
 $tempColumnsPagesMulti = [

@@ -49,16 +49,6 @@ lib.txRkwBasics {
                         }
                     }
                 }
-
-                if.isFalse.field = tx_rkwbasics_use_as_canonical
-            }
-
-            # Alternative: Use canonical based on old link
-            20 = TEXT
-            20 {
-                value = https://{field:tx_rkwbasics_old_domain}/{field:tx_rkwbasics_old_link}
-                value.insertData = 1
-                if.isTrue.field = tx_rkwbasics_use_as_canonical
             }
         }
 
