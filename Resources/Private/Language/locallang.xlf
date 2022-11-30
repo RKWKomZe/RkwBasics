@@ -12,9 +12,6 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level">
 				<source>txRkwbasicsFeLayoutNextLevel</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class">
-				<source>CSS-Class</source>
-			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department">
                 <source>TxRkwBasicsDepartment</source>
             </trans-unit>
@@ -46,7 +43,7 @@
 			<trans-unit id="tx_rkwbasics_domain_model_mediafile.tx_rkwbasics_source">
 				<source>Tx Rkw Basics Source</source>
 			</trans-unit>
-			
+
 
 			<!--tx_rkwbasics_domain_model_mediasources -->
 			<trans-unit id="tx_rkwbasics_domain_model_mediasources">

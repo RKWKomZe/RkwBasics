@@ -280,12 +280,6 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'access','--linebreak--,tx_rkwbasics_proxy_caching','after:fe_login_mode');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'visibility','--linebreak--,tx_rkwbasics_no_index, tx_rkwbasics_no_follow','after:nav_hide');
 
-// Add field after another
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_css_class', '', 'after:backend_layout_next_level');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_old_domain', '', 'after:subtitle');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_old_link', '', 'after:tx_rkwbasics_old_domain');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages','tx_rkwbasics_use_as_canonical', '', 'after:tx_rkwbasics_old_link');
-
 // Add new palette for departments etc.
 $tempConfig = 'tx_rkwbasics_department,tx_rkwbasics_document_type';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'tx_rkwbasics_common', $tempConfig);

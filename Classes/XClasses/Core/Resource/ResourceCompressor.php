@@ -15,7 +15,14 @@ namespace RKW\RkwBasics\XClasses\Core\Resource;
  */
 
 /**
- * Override default .htaccess-file
+ * Class ResourceCompressor
+ *
+ * Override defaults for .htaccess
+ *
+ * @author Steffen Kroggel <developer@steffenkroggel.de>
+ * @copyright RKW Kompetenzzentrum
+ * @package RKW_RkwBasics
+ * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ResourceCompressor extends \TYPO3\CMS\Core\Resource\ResourceCompressor
 {

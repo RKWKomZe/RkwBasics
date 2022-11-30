@@ -24,7 +24,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * CookieService
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @deprecated This class is deprecated and will be removed with version 10.x

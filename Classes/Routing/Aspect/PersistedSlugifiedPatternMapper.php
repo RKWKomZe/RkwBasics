@@ -15,34 +15,52 @@ namespace RKW\RkwBasics\Routing\Aspect;
  */
 
 use RKW\RkwBasics\DataHandling\SlugHelper;
+use RKW\RkwBasics\Exception;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class PersistedSlugifiedPatternMapper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class PersistedSlugifiedPatternMapper extends \Calien\PersistedSanitizedRouting\Routing\Aspect\PersistedSanitizedPatternMapper
-{
+if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('persisted_sanitized_routing')) {
 
-    /**
-     * @return SlugHelper
-     */
-    protected function getSlugHelper(): SlugHelper
+    class PersistedSlugifiedPatternMapper extends \Calien\PersistedSanitizedRouting\Routing\Aspect\PersistedSanitizedPatternMapper
     {
-        if ($this->slugHelper === null) {
-            $this->slugHelper = GeneralUtility::makeInstance(
-                SlugHelper::class,
-                $this->tableName,
-                '',
-                []
-            );
+
+        /**
+         * @return SlugHelper
+         */
+        protected function getSlugHelper(): SlugHelper
+        {
+            if ($this->slugHelper === null) {
+                $this->slugHelper = GeneralUtility::makeInstance(
+                    SlugHelper::class,
+                    $this->tableName,
+                    '',
+                    []
+                );
+            }
+
+            return $this->slugHelper;
         }
 
-        return $this->slugHelper;
     }
 
+} else {
+
+    class PersistedSlugifiedPatternMapper
+    {
+        /**
+         * @throws Exception
+         */
+        public function __construct(array $settings)
+        {
+            throw new Exception('Extension persisted_sanitized_routing has to be installed');
+        }
+
+    }
 }

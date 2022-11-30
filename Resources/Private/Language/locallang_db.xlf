@@ -32,7 +32,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.0">
 				<source>Standard</source>
-			</trans-unit>	
+			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.1">
 				<source>Layout 1</source>
 			</trans-unit>
@@ -41,9 +41,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.3">
 				<source>Layout 3</source>
-			</trans-unit>			
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class">
-				<source>CSS- Class for Menus</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
 				<source>Proxy Caching for logged in users</source>
@@ -56,18 +53,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.disabled">
 				<source>Disallow</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.0">
-				<source>Standard</source>
-			</trans-unit>	
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.1">
-				<source>Layout 1</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.2">
-				<source>Layout 2</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.3">
-				<source>Layout 3</source>
 			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department">
                 <source>Department</source>
@@ -355,7 +340,7 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_sector.visibility.I.visible">
 				<source>Show in search filter</source>
-			</trans-unit>			
+			</trans-unit>
 
 			<!-- tx_rkwbasics_domain_model_companytype -->
 			<trans-unit id="tx_rkwbasics_domain_model_companytype">

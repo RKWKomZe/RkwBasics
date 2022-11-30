@@ -25,7 +25,7 @@ use \TYPO3\CMS\Frontend\ContentObject\Exception\ProductionExceptionHandler;
  * Exception handler class for content object rendering
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */

@@ -22,15 +22,15 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * Class CriticalCssHook
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class CriticalCssHook
 {
-        
+
     /**
-     * Called before page is outputed 
+     * Called before page is outputed
      *
      * @param array $params
      * @param \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer
@@ -38,7 +38,7 @@ class CriticalCssHook
      */
     function render_postTransform(&$params, \TYPO3\CMS\Core\Page\PageRenderer $pageRenderer)
     {
-        
+
         /** @var \RKW\RkwBasics\ContentProcessing\CriticalCss $criticalCss */
         $criticalCss = GeneralUtility::makeInstance(CriticalCss::class);
 
@@ -64,4 +64,4 @@ class CriticalCssHook
 
     }
 
-} 
+}

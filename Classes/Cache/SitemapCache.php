@@ -19,8 +19,8 @@ namespace RKW\RkwBasics\Cache;
  * Class SitemapCache
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
- * @package RKW_RkwRss
+ * @copyright RKW Kompetenzzentrum
+ * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class SitemapCache extends CacheAbstract

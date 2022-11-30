@@ -14,7 +14,6 @@ namespace RKW\RkwBasics\Utility;
  * The TYPO3 project - inspiring people to share!
  */
 
-
 use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Context\Context;
 use TYPO3\CMS\Core\Context\DateTimeAspect;
@@ -38,7 +37,7 @@ use TYPO3\CMS\Lang\LanguageService;
  * Utility to simulate a frontend in backend context.
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -60,7 +59,7 @@ class FrontendSimulatorUtility
     /**
      * @var \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
      */
-    protected static $frontendUserAuthentification;
+    protected static $frontendUserAuthentication;
 
 
     /**
@@ -113,7 +112,7 @@ class FrontendSimulatorUtility
 
                 /** @todo do we really need this? Currently we seem to need this for file access **/
                 if (!is_object($GLOBALS['BE_USER'])) {
-                    $GLOBALS['BE_USER'] = self::getBackendUserAuthentification();
+                    $GLOBALS['BE_USER'] = self::getBackendUserAuthentication();
                 }
                 self::initConfigurationManager();
 
@@ -126,7 +125,6 @@ class FrontendSimulatorUtility
 
         return 0;
     }
-
 
 
     /**
@@ -155,7 +153,6 @@ class FrontendSimulatorUtility
     }
 
 
-
     /**
      * Init configuration manager
      *
@@ -171,6 +168,9 @@ class FrontendSimulatorUtility
         /** @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManager $configurationManager */
         $configurationManager = $objectManager->get(ConfigurationManager::class);
         $configurationManager->initializeObject();
+
+        // reset configuration cache via setConfiguration
+        $configurationManager->setConfiguration([]);
 
         // set contentObjectRenderer if not set
         if (! $configurationManager->getContentObject()) {
@@ -195,7 +195,7 @@ class FrontendSimulatorUtility
         $time = $GLOBALS['EXEC_TIME'] ?? time();
         $context->setAspect('date', new DateTimeAspect(new \DateTimeImmutable('@' . $time)));
         $context->setAspect('visibility', new VisibilityAspect());
-        $context->setAspect('frontend.user', GeneralUtility::makeInstance(UserAspect::class, self::getFrontendUserAuthentification()));
+        $context->setAspect('frontend.user', GeneralUtility::makeInstance(UserAspect::class, self::getFrontendUserAuthentication()));
         $context->setAspect('backend.user', new UserAspect());
         $context->setAspect('workspace', new WorkspaceAspect());
         $context->setAspect('language', new LanguageAspect());
@@ -213,11 +213,12 @@ class FrontendSimulatorUtility
     protected static function initTypoScriptFrontendController (int $pid): void
     {
         /**
-         * Init TypoScriptFrontendController
-         * @var \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController $GLOBALS ['TSFE']
+         * Init TypoScriptFrontendController - but using our own class because
+         * we need to disable the groupAccessCheck e.g. in order to be able to send emails from pages with feGroups set
+         * @var \RKW\RkwBasics\Frontend\Controller\TypoScriptFrontendController $GLOBALS ['TSFE']
          */
         $GLOBALS['TSFE'] = GeneralUtility::makeInstance(
-            \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class,
+            \RKW\RkwBasics\Frontend\Controller\TypoScriptFrontendController::class,
             $GLOBALS['TYPO3_CONF_VARS'],
             $pid,
             0
@@ -231,7 +232,7 @@ class FrontendSimulatorUtility
         $connection->connect();
 
         /** @deprecated Keep the backwards-compatibility for TYPO3 v9, to have the fe_user within the global TSFE object*/
-        $GLOBALS['TSFE']->fe_user = self::getFrontendUserAuthentification();
+        $GLOBALS['TSFE']->fe_user = self::getFrontendUserAuthentication();
 
         // Determine the id and evaluate any preview settings
         $GLOBALS['TSFE']->determineId();
@@ -259,36 +260,36 @@ class FrontendSimulatorUtility
 
 
     /**
-     * Get a frontendUserAuthentification
+     * Get a frontendUserAuthentication
      *
      * @return \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication
      * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      */
-    protected static function getFrontendUserAuthentification (): FrontendUserAuthentication
+    protected static function getFrontendUserAuthentication (): FrontendUserAuthentication
     {
 
-        if (! self::$frontendUserAuthentification) {
+        if (! self::$frontendUserAuthentication) {
 
             /**
              * @var \TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication $frontendUserAuthentication
              * @see \TYPO3\CMS\Frontend\Middleware\FrontendUserAuthenticator
              */
-            self::$frontendUserAuthentification = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
-            self::$frontendUserAuthentification->start();
-            self::$frontendUserAuthentification->unpack_uc();
+            self::$frontendUserAuthentication = GeneralUtility::makeInstance(FrontendUserAuthentication::class);
+            self::$frontendUserAuthentication->start();
+            self::$frontendUserAuthentication->unpack_uc();
         }
 
-        return self::$frontendUserAuthentification;
+        return self::$frontendUserAuthentication;
 
     }
 
 
     /**
-     * Get a backendUserAuthentification
+     * Get a BackendUserAuthentication
      *
      * @return \TYPO3\CMS\Core\Authentication\BackendUserAuthentication
      */
-    protected static function getBackendUserAuthentification (): BackendUserAuthentication
+    protected static function getBackendUserAuthentication (): BackendUserAuthentication
     {
 
         return GeneralUtility::makeInstance(

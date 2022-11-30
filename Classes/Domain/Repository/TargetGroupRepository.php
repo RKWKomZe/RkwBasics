@@ -19,7 +19,7 @@ namespace RKW\RkwBasics\Domain\Repository;
  * Class TargetGroupRepository
  *
  * @author Christian Dilger <c.dilger@addorange.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */

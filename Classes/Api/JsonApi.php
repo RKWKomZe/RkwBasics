@@ -19,7 +19,7 @@ namespace RKW\RkwBasics\Api;
  * Class JsonApi
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  * @deprecated Class RKW\RkwBasics\Api\JsonApi is deprecated and will be removed with version 10.x. Use RKW\RkwAjax\Encoder\JsonTemplateEncoder instead.

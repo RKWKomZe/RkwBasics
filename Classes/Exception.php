@@ -1,5 +1,6 @@
 <?php
-namespace RKW\RkwBasics\Utility;
+
+namespace RKW\RkwBasics;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -15,21 +16,14 @@ namespace RKW\RkwBasics\Utility;
  */
 
 /**
- * Class FrontendLocalizationUtility
+ * Class Exception
  *
- * Localization helper which should be used to fetch localized labels.
- * We can not extend the basic class here, since the methods are used as static methods and this confuses translation-handling
- *
- * @api
  * @author Steffen Kroggel <developer@steffenkroggel.de>
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @see \TYPO3\CMS\Extbase\Utility\LocalizationUtility, base is TYPO3 8.7
  */
-class FrontendLocalizationUtility extends \TYPO3\CMS\Extbase\Utility\LocalizationUtility
+class Exception extends \Exception
 {
 
 }
-
-

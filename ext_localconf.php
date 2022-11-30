@@ -79,7 +79,7 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['FE']['pageOverlayFields'] .= ',keywords,abstract,description';
 
         $rootlineFields = &$GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'];
-        $newRootlineFields = 'keywords,abstract,description,tx_rkwbasics_css_class,tx_rkwbasics_fe_layout_next_level,tx_rkwbasics_proxy_caching,tx_rkwbasics_no_index,tx_rkwbasics_no_follow,tx_rkwbasics_cover,tx_rkwbasics_file,tx_rkwbasics_teaser_image,tx_rkwbasics_department,tx_rkwbasics_document_type';
+        $newRootlineFields = 'keywords,abstract,description,tx_rkwbasics_fe_layout_next_level,tx_rkwbasics_proxy_caching,tx_rkwbasics_no_index,tx_rkwbasics_no_follow,tx_rkwbasics_cover,tx_rkwbasics_file,tx_rkwbasics_teaser_image,tx_rkwbasics_department,tx_rkwbasics_document_type';
         $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
 
         //=================================================================
@@ -106,15 +106,14 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Service\EnvironmentService::class] = [
             'className' => RKW\RkwBasics\XClasses\Extbase\Service\EnvironmentService::class
         ];
-        /*if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('varnish')) {
-            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\Snowflake\Varnish\Utility\VarnishHttpUtility::class] = [
-                'className' => RKW\RkwBasics\XClasses\Varnish\Utility\VarnishHttpUtility::class
-            ];
-        }*/
-        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][SJBR\SrFreecap\Validation\Validator\CaptchaValidator::class] = [
-            'className' => RKW\RkwBasics\XClasses\Validation\Validator\CaptchaValidator::class
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][TYPO3\CMS\Extbase\Service\ExtensionService::class] = [
+            'className' => RKW\RkwBasics\XClasses\Extbase\Service\ExtensionService::class
         ];
-
+        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sr_freecap')) {
+            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][SJBR\SrFreecap\Validation\Validator\CaptchaValidator::class] = [
+                'className' => RKW\RkwBasics\XClasses\Validation\Validator\CaptchaValidator::class
+            ];
+        }
         //=================================================================
         // Configure Logger
         //=================================================================

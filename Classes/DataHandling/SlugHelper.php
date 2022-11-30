@@ -1,5 +1,6 @@
 <?php
 namespace RKW\RkwBasics\DataHandling;
+
 /*
  * This file is part of the TYPO3 CMS project.
  *
@@ -13,12 +14,11 @@ namespace RKW\RkwBasics\DataHandling;
  * The TYPO3 project - inspiring people to share!
  */
 
-
 /**
  * Class SlugHelper
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */

@@ -24,10 +24,6 @@
 				<source>Frontend Layout (for subpages of this page)</source>
 				<target>Frontend Layout (für Unterseiten dieser Seite)</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class" approved="yes">
-				<source>CSS- Class</source>
-				<target>CSS- Klasse</target>
-			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
                 <source>Allow Proxy Caching (ATTENTION: valid even for logged in FE-users)</source>
                 <target>Proxy Caching erlauben (ACHTUNG: gilt auch für angemeldete FE-Nutzer)</target>
@@ -373,7 +369,7 @@
                 <target>In Suchfilter anzeigen</target>
             </trans-unit>
 
-            
+
             <!-- tx_rkwbasics_domain_model_sector -->
             <trans-unit id="tx_rkwbasics_domain_model_sector" appoved="yes">
                 <source>RKW Basics: Sector</source>
@@ -414,7 +410,7 @@
             <trans-unit id="tx_rkwbasics_domain_model_sector.visibility.I.visible">
                 <source>Show in search filter</source>
                 <target>In Suchfilter anzeigen</target>
-            </trans-unit>            
+            </trans-unit>
 
             <!-- tx_rkwbasics_domain_model_companytype-->
             <trans-unit id="tx_rkwbasics_domain_model_companytype" appoved="yes">
@@ -490,5 +486,5 @@
             </trans-unit>
 
 		</body>
-	</file>	
+	</file>
 </xliff>

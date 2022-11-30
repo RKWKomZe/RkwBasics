@@ -30,7 +30,7 @@ use TYPO3\CMS\Frontend\ContentObject\ContentObjectRenderer;
  * FrontendSimulatorUtilityTest
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -78,6 +78,14 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
                 self::REL_BASE_PATH  .'/Fixtures/Frontend/Configuration/Rootpage.typoscript',
             ],
             [11 => self::REL_BASE_PATH  .'/Fixtures/Sites/config10.yaml']
+        );
+        $this->setUpFrontendRootPage(
+            21,
+            [
+                'EXT:rkw_basics/Configuration/TypoScript/setup.txt',
+                self::REL_BASE_PATH  .'/Fixtures/Frontend/Configuration/Rootpage.typoscript',
+            ],
+            [11 => self::REL_BASE_PATH  .'/Fixtures/Sites/config.yaml']
         );
 
     }
@@ -225,6 +233,62 @@ class FrontendSimulatorUtilityTest extends FunctionalTestCase
         self::assertEquals(3, $rootline[2]['uid']);
 
         self::assertEquals(3, $GLOBALS['TSFE']->page['uid']);
+        self::assertEquals('Test-Sub-Page', $GLOBALS['TSFE']->page['title']);
+
+        //  self::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);
+
+        /** @deprecated since TYPO3 9.x - instead we use the Aspect-Version below */
+        self::assertEquals(0,$GLOBALS['TSFE']->sys_language_uid);
+
+        self::assertEquals(0, $GLOBALS['TSFE']->pageNotFound);
+
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Page\PageRepository::class, $GLOBALS['TSFE']->sys_page);
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication::class, $GLOBALS['TSFE']->fe_user);
+        self::assertInstanceOf(\TYPO3\CMS\Core\TypoScript\TemplateService::class, $GLOBALS['TSFE']->tmpl);
+
+    }
+
+    /**
+     * @test
+     */
+    public function simulateFrontendEnvironmentForAPageWithUsergroupGeneratesCompleteFrontendObject()
+    {
+
+        /**
+         * Scenario:
+         *
+         * Given a sub-page in the rootline
+         * Given that subpage is only accessable for a usergroup
+         * Given that usergroup is persisted
+         * When the method is called
+         * Then the method returns the value 1
+         * Then a TyposcriptFrontendController-Object is generated
+         * Then this TyposcriptFrontendController-Object has the property 'id' set to the given sub-page-id
+         * Then this TyposcriptFrontendController-Object has the property 'rootline' set to an array
+         * Then this array has three items
+         * Then this three items are the root-page, the parent-page and the given sub-page in that order
+         * Then this TyposcriptFrontendController-Object has the property 'page' set to an array
+         * Then this array has the key 'id' with the id of the given sub-page
+         * Then this array has the key 'title' with the title of the given sub-page
+         * Then this TyposcriptFrontendController-Object has the property 'domainStartPage' set to root-page id (=1)
+         * Then this TyposcriptFrontendController-Object has the property 'sys_language_uid' / language-aspect set to zero
+         * Then this TyposcriptFrontendController-Object has the property 'pageNotFound' set to zero
+         * Then this TyposcriptFrontendController-Object has the property 'sys_page' set to a TYPO3\CMS\Frontend\Page\PageRepository-object
+         * Then this TyposcriptFrontendController-Object has the property 'fe_user' set to a TYPO3\CMS\Frontend\Authentication\FrontendUserAuthentication-object
+         * Then this TyposcriptFrontendController-Object has the property 'tmpl' set to a TYPO3\CMS\Core\TypoScript\TemplateService-object
+         */
+
+        self::assertEquals(1, FrontendSimulatorUtility::simulateFrontendEnvironment(21));
+        self::assertInstanceOf(\TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController::class, $GLOBALS['TSFE']);
+        self::assertEquals(21, $GLOBALS['TSFE']->id);
+        self::assertIsArray($GLOBALS['TSFE']->rootLine);
+
+        $rootline = $GLOBALS['TSFE']->rootLine;
+        self::assertCount(2, $rootline);
+        self::assertEquals(20, $rootline[0]['uid']);
+        self::assertEquals(21, $rootline[1]['uid']);
+
+        self::assertEquals(21, $GLOBALS['TSFE']->page['uid']);
         self::assertEquals('Test-Sub-Page', $GLOBALS['TSFE']->page['title']);
 
         //  self::assertEquals(1, $GLOBALS['TSFE']->domainStartPage);

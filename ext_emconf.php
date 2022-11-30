@@ -32,13 +32,13 @@ $EM_CONF[$_EXTKEY] = [
 		'depends' => [
 			'typo3' => '8.7.0-8.7.99',
             'filemetadata' => '8.7.0-8.7.99',
-            'sr_freecap' => '2.5.6-2.5.99',
-            'persisted_sanitized_routing' => '1.0.4',
             'rkw_ajax' => '8.7.0-8.7.99'
         ],
 		'conflicts' => [
 		],
 		'suggests' => [
+            'persisted_sanitized_routing' => '1.0.4',
+            'sr_freecap' => '2.5.6-2.5.99',
 		],
 	],
 ];

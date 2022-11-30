@@ -16,18 +16,18 @@ namespace RKW\RkwBasics\XClasses\Extbase\Service;
 
 
 /**
- * Utility to simulate a frontend in backend context 
+ * Utility to simulate a frontend in backend context
  * This class is need as addition to RKW\RkwBasics\Utility\FrontendSimulatorUtility
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class EnvironmentService extends \TYPO3\CMS\Extbase\Service\EnvironmentService 
+class EnvironmentService extends \TYPO3\CMS\Extbase\Service\EnvironmentService
 {
-    
-  
+
+
     /**
      * Detects if TYPO3_MODE is defined and its value is "FE"
      *
@@ -39,9 +39,9 @@ class EnvironmentService extends \TYPO3\CMS\Extbase\Service\EnvironmentService
             (isset($GLOBALS['TSFE']))
             && (is_object($GLOBALS['TSFE']))
         ){
-            return true;   
+            return true;
         }
-        
+
         return (defined('TYPO3_MODE') && TYPO3_MODE === 'FE') ?: false;
     }
 
@@ -58,8 +58,8 @@ class EnvironmentService extends \TYPO3\CMS\Extbase\Service\EnvironmentService
         ){
             return false;
         }
-        
+
         return (defined('TYPO3_MODE') && TYPO3_MODE === 'BE') ?: false;
     }
-    
+
 }
