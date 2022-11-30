@@ -15,7 +15,6 @@ CREATE TABLE pages (
 	tx_rkwbasics_enterprisesize int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_sector int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_companytype int(11) unsigned NOT NULL default '0',
-	tx_rkwbasics_proxy_caching int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_no_index int(11) unsigned DEFAULT '0' NOT NULL,
     tx_rkwbasics_no_follow int(11) unsigned DEFAULT '0' NOT NULL,
 );

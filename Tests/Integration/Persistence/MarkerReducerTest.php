@@ -14,10 +14,10 @@ namespace RKW\RkwMailer\Tests\Integration\Persistence;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\Accelerator\Persistence\MarkerReducer;
 use Nimut\TestingFramework\TestCase\FunctionalTestCase;
 use RKW\RkwBasics\Domain\Model\Pages;
-use RKW\RkwBasics\Persistence\MarkerReducer;
-use \RKW\RkwBasics\Domain\Repository\PagesRepository;
+use RKW\RkwBasics\Domain\Repository\PagesRepository;
 use TYPO3\CMS\Extbase\Persistence\Generic\PersistenceManager;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
