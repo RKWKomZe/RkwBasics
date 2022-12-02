@@ -13,65 +13,6 @@
                 <source>Extended</source>
                 <target>Erweitert</target>
             </trans-unit>
-
-
-            <!-- tx_rkwbasics_domain_model_pages -->
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_alternative_title">
-                <source>Alternative Label for Menu</source>
-                <target>Alternative Beschriftung für Menü (Kurzbeschriftung)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level" approved="yes">
-				<source>Frontend Layout (for subpages of this page)</source>
-				<target>Frontend Layout (für Unterseiten dieser Seite)</target>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
-                <source>Allow Proxy Caching (ATTENTION: valid even for logged in FE-users)</source>
-                <target>Proxy Caching erlauben (ACHTUNG: gilt auch für angemeldete FE-Nutzer)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.inherit">
-                <source>Inherit</source>
-                <target>Vererben</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.enabled">
-                <source>Allow</source>
-                <target>Erlauben</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.disabled">
-                <source>Disallow</source>
-                <target>Verbieten</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_domain">
-                <source>Old Domain (Domain only, without "http://"!)</source>
-                <target>Alte Domain (ohne vorangestelltes "http://"!)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_link">
-                <source>Old Link (Link only, without domain and prepended backslash)</source>
-                <target>Alter Link (ohne vorangestellte Domain und ohne vorangestelltes "/"!)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical">
-                <source>Canonical</source>
-                <target>Canonical</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical.I.enabled">
-                <source>Use old domain/link as canonical</source>
-                <target>Alten Link als Canonical verwenden</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index">
-                <source>Indexing by Search Engines</source>
-                <target>Indexierung durch Suchmaschinen</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index.I.enabled">
-                <source>Inactivate (incl. Subpages)</source>
-                <target>Deaktivieren (inkl. Unterseiten)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow">
-                <source>Link-Following by Search Engines</source>
-                <target>Link-Folgen durch Suchmaschinen</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow.I.enabled">
-                <source>Inactivate (incl. Subpages)</source>
-                <target>Deaktivieren (inkl. Unterseiten)</target>
-            </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text" approved="yes">
 				<source>Teaser Text</source>
 				<target>Teaser-Text</target>
@@ -80,11 +21,6 @@
 				<source>Teaser Image</source>
 				<target>Teaser-Bild</target>
 			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage" approved="yes">
-                <source>Preview for Social Media</source>
-                <target>Vorschaubild für Social Media</target>
-            </trans-unit>
-
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
                 <source>Department</source>
                 <target>Fachbereich/Thema</target>
@@ -124,65 +60,6 @@
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link">
                 <source>External Link</source>
                 <target>Externer Link</target>
-            </trans-unit>
-
-
-
-
-            <!-- tx_rkwbasics_domain_model_mediafilemeta -->
-            <trans-unit id="tx_rkwbasics_domain_model_mediafilemeta" approved="yes" >
-				<source>Media File</source>
-				<target>Media File</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_publisher" approved="yes">
-				<source>Publisher</source>
-				<target>Herausgeber / Copyright</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_source" approved="yes">
-				<source>Source</source>
-				<target>Quelle</target>
-			</trans-unit>
-
-
-
-            <!-- tx_rkwbasics_domain_model_mediasources -->
-            <trans-unit id="tx_rkwbasics_domain_model_mediasources" approved="yes">
-				<source>RKW Basics: Media Sources</source>
-				<target>RKW Basics: Medienquellen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.name" approved="yes">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.url" approved="yes">
-				<source>Url</source>
-				<target>Url</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal">
-				<source>Internal  (e.g. for own photos)</source>
-				<target>Intern (z.B. bei eigenen Fotos)</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal.I.disabled" approved="yes">
-				<source>Do not show as copyright information in frontend</source>
-				<target>Im Frontend nicht als Copyright-Information anzeigen</target>
-			</trans-unit>
-
-
-            <!-- tx_rkwbasics_domain_model_content-->
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright" approved="yes">
-				<source>Copyright Information</source>
-				<target>Copyright-Informationen</target>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright.I.disabled" approved="yes">
-				<source>Do not show copyright information in frontend</source>
-				<target>Im Frontend keine Copyright-Informationen ausgeben</target>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_bodytext_mobile">
-                <source>Alternative text</source>
-                <target>Alternativer Text (Sonderfunktionen)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_header_link_caption">
-                <source>Caption for Link</source>
-                <target>Beschriftung für Link (nur Slider und Partner-Boxen)</target>
             </trans-unit>
 
 
@@ -412,6 +289,7 @@
                 <target>In Suchfilter anzeigen</target>
             </trans-unit>
 
+
             <!-- tx_rkwbasics_domain_model_companytype-->
             <trans-unit id="tx_rkwbasics_domain_model_companytype" appoved="yes">
                 <source>RKW Basics: Company type</source>
@@ -421,6 +299,7 @@
                 <source>Name</source>
                 <target>Name</target>
             </trans-unit>
+
 
             <!-- tx_rkwbasics_domain_model_target_group-->
             <trans-unit id="tx_rkwbasics_domain_model_target_group" appoved="yes">
@@ -435,6 +314,7 @@
                 <source>Description</source>
                 <target>Beschreibung</target>
             </trans-unit>
+
 
             <!-- sys_file_reference -->
             <trans-unit id="sys_file_reference.ratio.topic_page">
@@ -452,37 +332,6 @@
             <trans-unit id="sys_file_reference.ratio.free">
                 <source>Free</source>
                 <target>Frei</target>
-            </trans-unit>
-
-
-            <!-- Flexform -->
-			<trans-unit id="flexform.mediasources.function.headline" approved="yes">
-				<source>Function</source>
-				<target>Funktion</target>
-			</trans-unit>
-			<trans-unit id="flexform.mediasources.function.select" approved="yes">
-				<source>Select function</source>
-				<target>Funktion auswählen</target>
-			</trans-unit>
-			<trans-unit id="flexform.mediasources.function.select.I.list" approved="yes">
-				<source>List of used media sources</source>
-				<target>Liste aller verwendeten Medienquellen</target>
-			</trans-unit>
-            <trans-unit id="flexform.mediasources.function.select.I.listPage" approved="yes">
-                <source>List of used media sources for current page</source>
-                <target>Liste aller verwendeten Medienquellen für aktuelle Seite</target>
-            </trans-unit>
-            <trans-unit id="flexform.departments.function.headline">
-                <source>Function</source>
-                <target>Funktion</target>
-            </trans-unit>
-            <trans-unit id="flexform.departments.function.select">
-                <source>Select function</source>
-                <target>Funktion auswählen</target>
-            </trans-unit>
-            <trans-unit id="flexform.departments.function.select.I.boxes">
-                <source>Show boxes</source>
-                <target>Fachbereiche als Boxen</target>
             </trans-unit>
 
 		</body>

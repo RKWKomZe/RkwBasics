@@ -22,9 +22,9 @@ namespace RKW\RkwBasics\Api;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- * @deprecated Class RKW\RkwBasics\Api\JsonApi is deprecated and will be removed with version 10.x. Use RKW\RkwAjax\Encoder\JsonTemplateEncoder instead.
+ * @deprecated Class RKW\RkwBasics\Api\JsonApi is deprecated and will be removed with version 10.x. Use Madj2k\AjaxApi\Encoder\JsonTemplateEncoder instead.
  */
-class JsonApi extends \RKW\RkwAjax\Encoder\JsonTemplateEncoder
+class JsonApi extends \Madj2k\AjaxApi\Encoder\JsonTemplateEncoder
 {
 
 

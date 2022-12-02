@@ -2,22 +2,6 @@
 
 $tempColumnsPages = [
 
-	'tx_rkwbasics_fe_layout_next_level' => [
-		'exclude' => 1,
-		'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level',
-		'config' => [
-		    'type' => 'select',
-            'renderType' => 'selectSingle',
-			'items' => [
-				['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.0', '0'],
-				['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.1', '1'],
-				['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.2', '2'],
-				['LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.3', '3'],
-			],
-			'size' => 1,
-			'maxitems' => 1,
-		],
-	],
     'tx_rkwbasics_department' => [
 		'exclude' => 0,
         'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
@@ -179,48 +163,6 @@ $tempColumnsPages = [
             ]
         ),
     ],
-    'tx_rkwbasics_no_index' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index',
-        'config' => [
-            'type' => 'check',
-            'default' => 0,
-            'exclude' => true,
-            'items' => [
-                '1' => [
-                    '0' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index.I.enabled'
-                ],
-            ],
-        ],
-    ],
-    'tx_rkwbasics_no_follow' => [
-        'exclude' => 1,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow',
-        'config' => [
-            'type' => 'check',
-            'default' => 0,
-            'exclude' => true,
-            'items' => [
-                '1' => [
-                    '0' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow.I.enabled'
-                ],
-            ],
-        ],
-    ],
-];
-
-$tempColumnsPagesMulti = [
-
-    'tx_rkwbasics_alternative_title' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_alternative_title',
-        'config' => [
-            'type' => 'input',
-            'size' => 50,
-            'eval' => 'trim'
-        ],
-    ],
-
 ];
 
 
@@ -252,15 +194,9 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 //===========================================================================
 // Add TCA
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages',$tempColumnsPages);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages',$tempColumnsPagesMulti);
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages_language_overlay',$tempColumnsPagesMulti);
 
 // Add field to the existing palette
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages_language_overlay', 'title','--linebreak--,tx_rkwbasics_alternative_title','after:title');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'layout','tx_rkwbasics_fe_layout_next_level','after:layout');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--,tx_rkwbasics_external_link,--linebreak--','after:media');
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'visibility','--linebreak--,tx_rkwbasics_no_index, tx_rkwbasics_no_follow','after:nav_hide');
 
 // Add new palette for departments etc.
 $tempConfig = 'tx_rkwbasics_department,tx_rkwbasics_document_type';
@@ -286,20 +222,3 @@ $GLOBALS['TCA']['pages_language_overlay']['palettes']['tx_rkwbasics_extended2'][
 $tempConfig = '--div--;LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tabs.rkw,--palette--;LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.palettes.common;tx_rkwbasics_common,--palette--;LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.palettes.extended;tx_rkwbasics_extended,--palette--;LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.palettes.extended2;tx_rkwbasics_extended2';
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages', $tempConfig , '1,3');
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('pages_language_overlay',$tempConfig , '1,3');
-
-//===========================================================================
-// Add cropping for ogImage
-//===========================================================================
-/*$GLOBALS['TCA']['pages']['columns']['tx_rkwbasics_teaser_image']['config']['overrideChildTca']['columns']['crop']['config']['cropVariants'] = [
-
-    'ogImage' => [
-        'title' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage',
-        'allowedAspectRatios' => [
-            '1200:630' => [
-                'title' => '1200 x 630',
-                'value' => 1200 / 630
-            ]
-        ]
-    ],
-];
-*/

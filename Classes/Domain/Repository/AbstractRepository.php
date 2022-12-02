@@ -15,7 +15,7 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
-use RKW\RkwBasics\Helper\QueryTypo3;
+use Madj2k\CoreExtended\Utility\QueryUtility;
 
 /**
  * Class AbstractRepository
@@ -38,7 +38,7 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      */
     protected function getWhereClauseForEnabledFields(string $table): string
     {
-        return QueryTypo3::getWhereClauseForEnableFields($table);
+        return QueryTypo3::getWhereClauseEnabled($table);
     }
 
 
@@ -52,7 +52,6 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
     protected function getEnvironmentMode()
     {
         return TYPO3_MODE;
-        //===
     }
 
 

@@ -36,7 +36,7 @@ class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $pluginName
      * @param string $extensionName
      * @return array
-     * @deprecated This function is is deprecated and will be removed soon. Use RKW\RkwAjax\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.
+     * @deprecated This function is is deprecated and will be removed soon. Use Madj2k\AjaxApi\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.
      */
     public function fetchFlexFormDataByUid($ttContentUid, $pluginName, $extensionName)
     {

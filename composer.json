@@ -27,13 +27,12 @@
         "ext-json": "*",
         "typo3/cms-core": "~9.5.0",
 		"typo3/cms-filemetadata": "~9.5.0",
-        "ronanguilloux/isocodes": "^2.3",
+		"ronanguilloux/isocodes": "^2.3",
+		"madj2k/core-extended": "~9.5.0",
 		"madj2k/accelerator": "~9.5.0",
 		"rkw/rkw-ajax" : "~9.5.0 || dev-feature/upgrade9.5"
 	},
 	"suggest": {
-		"sjbr/sr-freecap": "~2.4",
-		"calien/persisted-sanitized-routing" : "^1.0.4"
 	},
     "autoload": {
         "psr-4": {
