@@ -15,77 +15,68 @@ namespace RKW\RkwBasics\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Domain\Model\FileReference;
+
 /**
  * Class Department
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since v9.5. References should be replaced with sys_categories in the long run
  */
 class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * name
-     *
      * @var string
      */
-    protected $name = '';
+    protected string $name = '';
 
 
     /**
-     * shortName
-     *
      * @var string
      */
-    protected $shortName = '';
+    protected string $shortName = '';
 
 
     /**
-     * internalName
-     *
      * @var string
      * @deprecated
      */
-    protected $internalName = '';
+    protected string $internalName = '';
 
 
     /**
-     * cssClass
-     *
+     * @var string
+     * @deprecated since TYPO3 v9
+     */
+    protected string $cssClass = '';
+
+
+    /**
      * @var string
      */
-    protected $cssClass = '';
+    protected string $mainPage = '';
+
 
     /**
-     * main page
-     *
+     * @var bool
+     */
+    protected bool $visibility = false;
+
+
+    /**
      * @var string
      */
-    protected $mainPage = '';
-
-    /**
-     * visibility
-     *
-     * @var integer
-     */
-    protected $visibility = 0;
-
-    /**
-     * description
-     *
-     * @var string
-     */
-    protected $description = '';
+    protected string $description = '';
 
 
     /**
-     * boxImage
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
+     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference|null
      */
-    protected $boxImage = null;
+    protected ?FileReference $boxImage = null;
 
 
     /**
@@ -93,10 +84,11 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
+
 
     /**
      * Sets the name
@@ -104,20 +96,22 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
+
 
     /**
      * Returns the shortName
      *
      * @return string $shortName
      */
-    public function getShortName()
+    public function getShortName(): string
     {
         return $this->shortName;
     }
+
 
     /**
      * Sets the shortName
@@ -125,10 +119,11 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $shortName
      * @return void
      */
-    public function setShortName($shortName)
+    public function setShortName(string $shortName): void
     {
         $this->shortName = $shortName;
     }
+
 
     /**
      * Returns the internalName
@@ -136,10 +131,11 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return string $internalName
      * @deprecated
      */
-    public function getInternalName()
+    public function getInternalName(): string
     {
         return $this->internalName;
     }
+
 
     /**
      * Sets the internalName
@@ -148,41 +144,47 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @return void
      * @deprecated
      */
-    public function setInternalName($internalName)
+    public function setInternalName(string $internalName): void
     {
         $this->internalName = $internalName;
     }
+
 
     /**
      * Returns the cssClass
      *
      * @return string $cssClass
+     * @deprecated since TYPO3 v9
      */
-    public function getCssClass()
+    public function getCssClass(): string
     {
         return $this->cssClass;
     }
+
 
     /**
      * Sets the cssClass
      *
      * @param string $cssClass
      * @return void
+     * @deprecated since TYPO3 v9
      */
-    public function setCssClass($cssClass)
+    public function setCssClass(string $cssClass): void
     {
         $this->cssClass = $cssClass;
     }
+
 
     /**
      * Returns the mainPage
      *
      * @return string $mainPage
      */
-    public function getMainPage()
+    public function getMainPage(): string
     {
         return $this->mainPage;
     }
+
 
     /**
      * Sets the mainPage
@@ -190,42 +192,45 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $mainPage
      * @return void
      */
-    public function setMainPage($mainPage)
+    public function setMainPage(string $mainPage): void
     {
         $this->mainPage = $mainPage;
     }
 
+
     /**
      * Returns the visibility
      *
-     * @return string $type
+     * @return bool
      */
-    public function getVisibility()
+    public function getVisibility(): bool
     {
         return $this->visibility;
-        //===
     }
+
 
     /**
      * Sets the visibility
      *
-     * @param string $visibility
+     * @param bool $visibility
      * @return void
      */
-    public function setVisibility($visibility)
+    public function setVisibility(bool $visibility): void
     {
-        $this->visibility = intval($visibility);
+        $this->visibility = $visibility;
     }
+
 
     /**
      * Returns the description
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
+
 
     /**
      * Sets the description
@@ -233,30 +238,30 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }
+
 
     /**
      * Returns the boxImage
      *
      * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $boxImage
      */
-    public function getBoxImage()
+    public function getBoxImage():? FileReference
     {
 
         if (!is_object($this->boxImage)) {
             return null;
-            //===
 
         } elseif ($this->boxImage instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
             $this->boxImage->_loadRealInstance();
         }
 
         return $this->boxImage->getOriginalResource();
-        //===
     }
+
 
     /**
      * Sets the boxImage
@@ -264,7 +269,7 @@ class Department extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $boxImage
      * @return void
      */
-    public function setBoxImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $boxImage)
+    public function setBoxImage(\TYPO3\CMS\Extbase\Domain\Model\FileReference $boxImage): void
     {
         $this->boxImage = $boxImage;
     }

@@ -3,9 +3,9 @@
 	<f:link.page pageUid="{page.uid}" class="box publication" title="{page.title}" >
 
 		<div class="cover">
-			<f:if condition="{page.txRkwbasicsTeaserImage}" >
+			<f:if condition="{page.txCoreextendedPreviewImage}" >
 				<f:then>
-					<figure><f:cObject typoscriptObjectPath="plugin.tx_rkwsearch.libs.responsivePdfThumbnail" data="{page.txRkwbasicsFile}"/></figure>
+					<figure><f:cObject typoscriptObjectPath="plugin.tx_rkwsearch.libs.responsivePdfThumbnail" data="{page.txCoreextendedFile}"/></figure>
 				</f:then>
 				<f:else>
 					<figure><f:cObject typoscriptObjectPath="plugin.tx_rkwsearch.libs.responsivePdfThumbnail" data="EXT:rkw_search/Resources/Public/Images/publications-fallback.jpg"/></figure>
@@ -22,7 +22,7 @@
 
 			<div class="wysiwyg">
 				<p>
-					<f:format.crop maxCharacters="{box.contentCrop}" respectWordBoundaries="TRUE">{box.item.subtitleParent}</f:format.crop>
+					<f:format.crop maxCharacters="{box.contentCrop}" respectWordBoundaries="true">{box.item.subtitleParent}</f:format.crop>
 				</p>
 			</div>
 		</div>

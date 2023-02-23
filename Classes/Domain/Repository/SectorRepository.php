@@ -15,13 +15,17 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * Class SectorRepository
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since v9.5. Should be replaced by sys_categories in the long run
  */
 class SectorRepository extends AbstractRepository
 {
@@ -31,11 +35,11 @@ class SectorRepository extends AbstractRepository
      *
      * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
 
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
 
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
@@ -48,9 +52,9 @@ class SectorRepository extends AbstractRepository
      * findAllByTypeAndVisibility
      *
      * @param string $type
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllByTypeAndVisibility($type = null)
+    public function findAllByTypeAndVisibility(string $type = ''): QueryResultInterface
     {
 
         if (!$type) {
@@ -69,8 +73,6 @@ class SectorRepository extends AbstractRepository
         );
 
         return $query->execute();
-        //===
     }
-
 
 }

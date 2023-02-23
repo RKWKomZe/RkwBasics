@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwBasics\Domain\Repository;
 
 /*
@@ -15,11 +14,13 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use Madj2k\CoreExtended\Utility\QueryUtility;
+
 /**
  * Class AbstractRepository
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
@@ -32,22 +33,12 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      *
      * @param string $table
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    protected function getWhereClauseForEnabledFields($table)
+    protected function getWhereClauseForEnabledFields(string $table): string
     {
-        if ($this->getEnvironmentMode() === 'FE' && $GLOBALS['TSFE']->sys_page) {
-            // frontend context
-            $whereClause = $GLOBALS['TSFE']->sys_page->enableFields($table);
-            $whereClause .= $GLOBALS['TSFE']->sys_page->deleteClause($table);
-        } else {
-            // backend context
-            $whereClause = \TYPO3\CMS\Backend\Utility\BackendUtility::BEenableFields($table);
-            $whereClause .= \TYPO3\CMS\Backend\Utility\BackendUtility::deleteClause($table);
-        }
-
-        return $whereClause;
-        //===
+        return QueryUtility::getWhereClauseEnabled($table);
     }
 
 
@@ -58,13 +49,10 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      * @return string
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    protected function getEnvironmentMode()
+    protected function getEnvironmentMode(): string
     {
         return TYPO3_MODE;
-        //===
     }
 
 
 }
-
-?>

@@ -1,5 +1,0 @@
-config {
-    tx_rkwbasics_cdn {
-        ignoreIfContains = Old-Setup-Test
-    }
-}
