@@ -15,201 +15,42 @@ namespace RKW\RkwBasics\Domain\Model;
  * The TYPO3 project - inspiring people to share!
  */
 
+use \Madj2k\CoreExtended\Domain\Model\FileReference;
+
 /**
  * Class Pages
  *
  * @author Steffen Kroggel <developer@steffenkroggel.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since v9.5. References should be replaced with sys_categories in the long run
  */
-class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
 {
-
-
-    /**
-     * crdate
-     *
-     * @var integer
-     */
-    protected $crdate = 0;
-
-
-    /**
-     * tstamp
-     *
-     * @var integer
-     */
-    protected $tstamp = 0;
-
-
-    /**
-     * hidden
-     *
-     * @var bool
-     */
-    protected $hidden = 0;
-
-
-    /**
-     * deleted
-     *
-     * @var bool
-     */
-    protected $deleted = 0;
-
-
-    /**
-     * sorting
-     *
-     * @var int
-     */
-    protected $sorting = 0;
-
-
-    /**
-     * doktype
-     *
-     * @var int
-     */
-    protected $doktype = 1;
-
-
-    /**
-     * title
-     *
-     * @var string
-     */
-    protected $title = '';
-
-
-    /**
-     * subtitle
-     *
-     * @var string
-     */
-    protected $subtitle = '';
-
-
-    /**
-     * abstract
-     *
-     * @var string
-     */
-    protected $abstract = '';
-
-
-    /**
-     * description
-     *
-     * @var string
-     */
-    protected $description = '';
-
-
-    /**
-     * noSearch
-     *
-     * @var bool
-     */
-    protected $noSearch = false;
-
-
-    /**
-     * lastUpdated
-     *
-     * @var integer
-     */
-    protected $lastUpdated = 0;
-
-
-    /**
-     * txRkwbasicsAlternativeTitle
-     *
-     * @var string
-     */
-    protected $txRkwbasicsAlternativeTitle = '';
-
-
-    /**
-     * txRkwbasicsFeLayoutNextLevel
-     *
-     * @var \integer
-     */
-    protected $txRkwbasicsFeLayoutNextLevel = 0;
-
-    /**
-     * txRkwbasicsCssClass
-     *
-     * @var \integer
-     * @deprecated
-     */
-    protected $txRkwbasicsCssClass = 0;
-
-
-    /**
-     * txRkwbasicsOldDomain
-     *
-     * @var string
-     * @deprecated
-     */
-    protected $txRkwbasicsOldDomain = '';
-
-
-    /**
-     * txRkwbasicsOldLink
-     *
-     * @var string
-     * @deprecated
-     */
-    protected $txRkwbasicsOldLink = '';
-
-
-    /**
-     * txRkwbasicsTeaserImage
-     *
-     * @var \RKW\RkwBasics\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsTeaserImage = null;
-
 
     /**
      * txRkwbasicsDepartment
      *
-     * @var \RKW\RkwBasics\Domain\Model\Department
+     * @var \RKW\RkwBasics\Domain\Model\Department|null
      */
-    protected $txRkwbasicsDepartment = null;
+    protected ?Department $txRkwbasicsDepartment = null;
+
 
     /**
      * txRkwbasicsDocumentType
      *
-     * @var \RKW\RkwBasics\Domain\Model\DocumentType
+     * @var \RKW\RkwBasics\Domain\Model\DocumentType|null
      */
-    protected $txRkwbasicsDocumentType = null;
+    protected ?DocumentType $txRkwbasicsDocumentType = null;
 
 
     /**
      * txRkwbasicsSeries
      *
-     * @var \RKW\RkwBasics\Domain\Model\Series
+     * @var \RKW\RkwBasics\Domain\Model\Series|null
      */
-    protected $txRkwbasicsSeries = null;
-
-
-    /**
-     * txRkwbasicsFile
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsFile = null;
-
-
-    /**
-     * txRkwbasicsCover
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsCover = null;
+    protected ?Series $txRkwbasicsSeries = null;
 
 
     /**
@@ -217,480 +58,27 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @var string
      */
-    protected $txRkwbasicsExternalLink = null;
-
-    
-    /**
-     * Returns the pid
-     *
-     * @return int $pid
-     */
-    public function getPid(): int
-    {
-        return $this->pid;
-    }
-
-    /**
-     * Returns the crdate value
-     *
-     * @return integer
-     * @api
-     */
-    public function getCrdate(): int
-    {
-        return $this->crdate;
-    }
+    protected string $txRkwbasicsExternalLink =  '';
 
 
-    /**
-     * Sets the crdate value
-     *
-     * @param int $crdate
-     * @return void
-     * @api
-     */
-    public function setCrdate(int $crdate): void
-    {
-        $this->crdate = $crdate;
-    }
-
-    /**
-     * Returns the tstamp value
-     *
-     * @return integer
-     * @api
-     */
-    public function getTstamp(): int
-    {
-        return $this->tstamp;
-    }
-
-    /**
-     * Sets the tstamp value
-     *
-     * @param int $tstamp
-     * @return void
-     * @api
-     */
-    public function setTstamp(int $tstamp): void
-    {
-        $this->tstamp = $tstamp;
-    }
-    
-    /**
-     * Returns the hidden value
-     *
-     * @return bool
-     * @api
-     */
-    public function getHidden(): bool
-    {
-        return $this->hidden;
-    }
-    
-
-    /**
-     * Sets the hidden value
-     *
-     * @param bool $hidden
-     * @return void
-     * @api
-     */
-    public function setHidden(bool $hidden)
-    {
-        $this->hidden = $hidden;
-    }
-
-    /**
-     * Returns the deleted value
-     *
-     * @return bool
-     * @api
-     */
-    public function getDeleted(): int
-    {
-        return $this->deleted;
-    }
-
-
-    /**
-     * Sets the deleted value
-     *
-     * @param bool $deleted
-     * @return void
-     * @api
-     */
-    public function setDeleted(bool $deleted): void
-    {
-        $this->deleted = $deleted;
-    }
-
-
-    /**
-     * Returns the sorting
-     *
-     * @return int $sorting
-     */
-    public function getSorting(): int
-    {
-        return $this->sorting;
-    }
-
-
-    /**
-     * Sets the sorting value
-     *
-     * @param int $sorting
-     * @return void
-     * @api
-     */
-    public function setSorting(int $sorting): void
-    {
-        $this->sorting = $sorting;
-    }
-
-
-    /**
-     * Returns the doktype
-     *
-     * @return int $doktype
-     */
-    public function getDoktype(): int
-    {
-        return $this->doktype;
-    }
-
-
-    /**
-     * Sets the doktype value
-     *
-     * @param int $doktype
-     * @return void
-     * @api
-     */
-    public function setDoktype(int $doktype): void
-    {
-        $this->doktype = $doktype;
-    }
-
-
-    /**
-     * Returns the title
-     *
-     * @return string $title
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    
-    /**
-     * Returns the title
-     *
-     * @param string $title
-     * @return void
-     */
-    public function setTitle(string $title): void
-    {
-        $this->title = $title;
-    }
-
-    
-    /**
-     * Returns the subtitle
-     *
-     * @return string $subtitle
-     */
-    public function getSubtitle(): string
-    {
-        return $this->subtitle;
-    }
-
-    
-    /**
-     * Set the subtitle
-     *
-     * @param string $subtitle
-     * @return void
-     */
-    public function setSubtitle(string $subtitle): void
-    {
-        $this->subtitle = $subtitle;
-    }
-
-    
-    /**
-     * Returns the abstract
-     *
-     * @return string $abstract
-     */
-    public function getAbstract(): string
-    {
-        return $this->abstract;
-    }
-
-    
-    /**
-     * Set the abstract
-     *
-     * @param string $abstract
-     * @return void
-     */
-    public function setAbstract(string $abstract): void
-    {
-        $this->abstract = $abstract;
-    }
-    
-
-    /**
-     * Returns the description
-     *
-     * @return string $description
-     */
-    public function getDescription(): string
-    {
-        return $this->description;
-    }
-
-    
-    /**
-     * Sets the description
-     *
-     * @param string $description
-     * @return void
-     */
-    public function setDescription(string $description): void
-    {
-        $this->description = $description;
-    }
-
-
-    /**
-     * Returns the noSearch
-     *
-     * @return bool $noSearch
-     */
-    public function getNoSearch(): bool
-    {
-        return $this->noSearch;
-    }
-
-
-    /**
-     * Set the noSearch
-     *
-     * @param bool $noSearch
-     * @return void
-     */
-    public function setNoSearch(bool $noSearch): void
-    {
-        $this->noSearch = $noSearch;
-    }
-
-
-    /**
-     * Returns the lastUpdated
-     *
-     * @return int $lastUpdated
-     */
-    public function getLastUpdated(): int
-    {
-        return $this->lastUpdated;
-    }
-
-    
-    /**
-     * Set the lastUpdated
-     *
-     * @param int $lastUpdated
-     * @return void
-     */
-    public function setLastUpdated(int $lastUpdated): void
-    {
-        $this->lastUpdated = $lastUpdated;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsAlternativeTitle
-     *
-     * @return string $txRkwbasicsAlternativeTitle
-     */
-    public function getTxRkwbasicsAlternativeTitle(): string
-    {
-        return $this->txRkwbasicsAlternativeTitle;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsAlternativeTitle
-     *
-     * @param string $txRkwbasicsAlternativeTitle
-     * @return void
-     */
-    public function setTxRkwbasicsAlternativeTitle(string $txRkwbasicsAlternativeTitle): void
-    {
-        $this->txRkwbasicsAlternativeTitle = $txRkwbasicsAlternativeTitle;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsFeLayoutNextLevel
-     *
-     * @return int txRkwbasicsFeLayoutNextLevel
-     */
-    public function getTxRkwbasicsFeLayoutNextLevel(): int
-    {
-        return $this->txRkwbasicsFeLayoutNextLevel;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsFeLayoutNextLevel
-     *
-     * @param \integer $txRkwbasicsFeLayoutNextLevel
-     * @return \integer txRkwbasicsFeLayoutNextLevel
-     */
-    public function setTxRkwbasicsFeLayoutNextLevel(int $txRkwbasicsFeLayoutNextLevel): void
-    {
-        $this->txRkwbasicsFeLayoutNextLevel = $txRkwbasicsFeLayoutNextLevel;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsCssClass
-     *
-     * @return int $txRkwbasicsCssClass
-     * @deprecated 
-     */
-    public function getTxRkwbasicsCssClass(): int
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return $this->txRkwbasicsCssClass;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsCssClass
-     *
-     * @param int $txRkwbasicsCssClass
-     * @return void
-     * @deprecated 
-     */
-    public function setTxRkwbasicsCssClass(int $txRkwbasicsCssClass): void
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        $this->txRkwbasicsCssClass = $txRkwbasicsCssClass;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsOldDomain
-     *
-     * @return string $txRkwbasicsOldDomain
-     * @deprecated 
-     */
-    public function getTxRkwbasicsOldDomain(): string
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return $this->txRkwbasicsOldDomain;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsOldDomain
-     *
-     * @param string $txRkwbasicsOldDomain
-     * @return void
-     * @deprecated 
-     */
-    public function setTxRkwbasicsOldDomain(string $txRkwbasicsOldDomain): void
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        $this->txRkwbasicsOldDomain = $txRkwbasicsOldDomain;
-    }
-
-    
-    /**
-     * Returns the txRkwbasicsOldLink
-     *
-     * @return string $txRkwbasicsOldLink
-     * @deprecated 
-     */
-    public function getTxRkwbasicsOldLink(): string
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return $this->txRkwbasicsOldLink;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsOldLink
-     *
-     * @param string $txRkwbasicsOldLink
-     * @return void
-     * @deprecated 
-     */
-    public function setTxRkwbasicsOldLink(string $txRkwbasicsOldLink): void
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        $this->txRkwbasicsOldLink = $txRkwbasicsOldLink;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsTeaserText
-     *
-     * @return string $txRkwbasicsTeaserText
-     * @deprecated This function  is deprecated and will be removed soon.
-     */
-    public function getTxRkwbasicsTeaserText(): string
-    {
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
-        return $this->getAbstract();
-    }
-
-   
-    /**
-     * Returns the txRkwbasicsTeaserImage
-     *
-     * @return \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     */
-    public function getTxRkwbasicsTeaserImage()
-    {
-        return $this->txRkwbasicsTeaserImage;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsTeaserImage
-     *
-     * @param \RKW\RkwBasics\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     * @return void
-     */
-    public function setTxRkwbasicsTeaserImage(FileReference $txRkwbasicsTeaserImage): void
-    {
-        $this->txRkwbasicsTeaserImage = $txRkwbasicsTeaserImage;
-    }
-
-    
     /**
      * Returns the txRkwbasicsDepartment
      *
-     * @return \RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment
+     * @return \RKW\RkwBasics\Domain\Model\Department
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsDepartment()
+    public function getTxRkwbasicsDepartment():? Department
     {
         return $this->txRkwbasicsDepartment;
     }
 
-    
+
     /**
      * Sets the txRkwbasicsDepartment
      *
      * @param \RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsDepartment(Department $txRkwbasicsDepartment): void
     {
@@ -701,105 +89,63 @@ class Pages extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
     /**
      * Returns the txRkwbasicsDocumentType
      *
-     * @return \RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType
+     * @return \RKW\RkwBasics\Domain\Model\DocumentType
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsDocumentType()
+    public function getTxRkwbasicsDocumentType():? DocumentType
     {
         return $this->txRkwbasicsDocumentType;
     }
 
-    
+
     /**
      * Sets the txRkwbasicsDocumentType
      *
      * @param \RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsDocumentType(DocumentType $txRkwbasicsDocumentType): void
     {
         $this->txRkwbasicsDocumentType = $txRkwbasicsDocumentType;
     }
 
-    
+
     /**
      * Returns the txRkwbasicsSeries
      *
-     * @return \RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries
+     * @return \RKW\RkwBasics\Domain\Model\Series
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsSeries()
+    public function getTxRkwbasicsSeries():? Series
     {
         return $this->txRkwbasicsSeries;
     }
 
-    
+
     /**
      * Sets the txRkwbasicsSeries
      *
      * @param \RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsSeries(Series $txRkwbasicsSeries): void
     {
         $this->txRkwbasicsSeries = $txRkwbasicsSeries;
     }
 
-    
-    /**
-     * Returns the txRkwbasicsFile
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile
-     */
-    public function getTxRkwbasicsFile()
-    {
-        return $this->txRkwbasicsFile;
-    }
 
-    
-    /**
-     * Sets the txRkwbasicsFile
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile
-     * @return void
-     */
-    public function setTxRkwbasicsFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile): void
-    {
-        $this->txRkwbasicsFile = $txRkwbasicsFile;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsCover
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover
-     */
-    public function getTxRkwbasicsCover()
-    {
-        return $this->txRkwbasicsCover;
-    }
-
-    
-    /**
-     * Sets the txRkwbasicsCover
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover
-     * @return void
-     */
-    public function setTxRkwbasicsCover(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover): void
-    {
-        $this->txRkwbasicsCover = $txRkwbasicsCover;
-    }
-
-    
     /**
      * Returns the txRkwbasicsExternalLink
      *
-     * @return string $txRkwbasicsExternalLink
+     * @return string
      */
     public function getTxRkwbasicsExternalLink(): string
     {
         return $this->txRkwbasicsExternalLink;
     }
-    
+
 
     /**
      * Sets the txRkwbasicsExternalLink

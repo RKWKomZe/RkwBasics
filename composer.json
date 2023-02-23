@@ -23,13 +23,17 @@
         }
     ],
     "require": {
-        "php": ">=5.6",
+        "php": ">=7.4",
         "ext-json": "*",
-        "typo3/cms-core": "~7.6.0 || ~8.7.0",
-        "rkw/rkw-ajax" : "~8.7.0",
-        "ronanguilloux/isocodes": "^2.3",
-		"sjbr/sr-freecap": "~2.4"
-    },
+        "typo3/cms-core": "~9.5.0",
+		"typo3/cms-filemetadata": "~9.5.0",
+		"ronanguilloux/isocodes": "^2.3",
+		"madj2k/t3-core-extended": "~9.5.4",
+		"madj2k/t3-accelerator": "~9.5.2",
+		"madj2k/t3-ajax-api": "~9.5.0"
+	},
+	"suggest": {
+	},
     "autoload": {
         "psr-4": {
             "RKW\\RkwBasics\\": "Classes/"

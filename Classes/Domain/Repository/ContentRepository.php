@@ -1,6 +1,8 @@
 <?php
 
 namespace RKW\RkwBasics\Domain\Repository;
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+
 /**
  * ContentRepository
  *
@@ -8,15 +10,19 @@ namespace RKW\RkwBasics\Domain\Repository;
  * in the RkwTools extension, where we also need to fetch flexform data in AJAX context
  *
  * @author Maximilian Fäßler <maximilian@faesslerweb.de>
- * @copyright Rkw Kompetenzzentrum
+ * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
 {
-    public function initializeObject()
+
+    /**
+     * @return void
+     */
+    public function initializeObject(): void
     {
-        $this->defaultQuerySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $this->defaultQuerySettings = $this->objectManager->get(Typo3QuerySettings::class);
         $this->defaultQuerySettings->setRespectStoragePage(false);
         $this->defaultQuerySettings->setRespectSysLanguage(false);
     }
@@ -25,23 +31,26 @@ class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * fetchFlexFormDataByUid
      *
-     * To integrate it directly in you settings:
+     * To integrate it directly in your settings:
      * -----
      *  foreach ($this->contentRepository->fetchFlexFormDataByUid(intval($this->configurationManager->getContentObject()->data['uid']), $this->request->getPluginName(), $this->extensionName) as $settingKey => $settingValue) {
      *		$this->settings[str_replace('settings.', '', $settingKey)] = $settingValue;
      *	}
      * -----
      *
-     * @param integer $ttContentUid
+     * @param int $ttContentUid
      * @param string $pluginName
      * @param string $extensionName
      * @return array
-     * @deprecated This function is is deprecated and will be removed soon. Use RKW\RkwAjax\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.
+     * @deprecated This function is is deprecated and will be removed soon. Use Madj2k\AjaxApi\Domain\Repository\ContentRepository::fetchFlexFormDataByUid instead.
      */
-    public function fetchFlexFormDataByUid($ttContentUid, $pluginName, $extensionName)
+    public function fetchFlexFormDataByUid(int $ttContentUid, string $pluginName, string $extensionName): array
     {
 
-        \TYPO3\CMS\Core\Utility\GeneralUtility::logDeprecatedFunction();
+        trigger_error(
+            'This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.',
+            E_USER_DEPRECATED
+        );
 
         $query = $this->createQuery();
         $query->statement('SELECT pi_flexform from tt_content where list_type="' . strtolower($extensionName) . '_' . strtolower($pluginName) . '" and uid = ' . $ttContentUid);
@@ -66,6 +75,5 @@ class ContentRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         return $flexFormData;
-        //===
     }
 }
