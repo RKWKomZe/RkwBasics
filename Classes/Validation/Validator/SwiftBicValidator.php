@@ -31,7 +31,7 @@ class SwiftBicValidator extends AbstractValidator
      * @param mixed $value The value that should be validated
      * @return void
      */
-    public function isValid($value)
+    public function isValid($value): void
     {
 
         if (! SwiftBic::validate($value)) {

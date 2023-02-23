@@ -5,79 +5,24 @@
 		<body>
 
 			<!-- Palettes -->
-
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tabs.rkw">
-				<source>RKW</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.palettes.common" approved="yes">
+				<source>Common</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.palettes.common">
-                <source>Common</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.palettes.extended">
-                <source>Extended</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.palettes.extended2">
-				<source>Extended 2</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.palettes.extended" approved="yes">
+				<source>Extended</source>
 			</trans-unit>
-
-
-			<!-- tx_rkwbasics_domain_model_pages -->
-			<trans-unit id="tx_rkwbasics_domain_model_pages">
-				<source>Pages</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text" approved="yes">
+				<source>Teaser Text</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_alternative_title">
-                <source>Alternative Label for Menu</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
+				<source>Department</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level">
-				<source>Frontend Layout (for subpages of this page)</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_genre" approved="yes">
+				<source>Genre</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.0">
-				<source>Standard</source>
-			</trans-unit>	
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.1">
-				<source>Layout 1</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_type" approved="yes">
+				<source>Document Type</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.2">
-				<source>Layout 2</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_fe_layout_next_level.I.3">
-				<source>Layout 3</source>
-			</trans-unit>			
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class">
-				<source>CSS- Class for Menus</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching">
-				<source>Proxy Caching for logged in users</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.inherit">
-				<source>Inherit</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.enabled">
-				<source>Allow</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_proxy_caching.I.disabled">
-				<source>Disallow</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.0">
-				<source>Standard</source>
-			</trans-unit>	
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.1">
-				<source>Layout 1</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.2">
-				<source>Layout 2</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_css_class.I.3">
-				<source>Layout 3</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department">
-                <source>Department</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_genre">
-                <source>Genre</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_type">
-                <source>Document Type</source>
-            </trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_series">
 				<source>Series</source>
 			</trans-unit>
@@ -90,156 +35,66 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
 				<source>Company type</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_target_group">
-				<source>Target group</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_domain">
-                <source>Old Domain (Domain only, without "http://"!)</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_old_link">
-                <source>Old Link (Link only, without domain and prepended backslash)</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical">
-				<source>Canonical</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_use_as_canonical.I.enabled">
-				<source>Use old domain/link as canonical</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index">
-                <source>Indexing by Search Engines</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_index.I.enabled">
-                <source>Inactivate (incl. Subpages)</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow">
-                <source>Link-Following by Search Engines</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_no_follow.I.enabled">
-                <source>Inactivate (incl. Subpages)</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text">
-				<source>Teaster Text</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image">
-				<source>Teaster Image</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image.imageManipulation.ogImage" approved="yes">
-                <source>Preview for Social Media</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file">
-                <source>Download</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
-				<source>Cover (Used only when no Download-File is set)</source>
-			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link" approved="yes">
-                <source>Externer Link</source>
-            </trans-unit>
-
-
-			<!-- tx_rkwbasics_domain_model_mediafilemeta -->
-			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta">
-				<source>Media File Meta</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_publisher">
-				<source>Publisher</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediafilemeta.tx_rkwbasics_source">
-				<source>Source</source>
-			</trans-unit>
-
-
-			<!-- tx_rkwbasics_domain_model_mediasources -->
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources">
-				<source>RKW Basics: Media Sources</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.name">
-				<source>Name</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.url">
-				<source>Url</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal">
-				<source>Internal (e.g. for own photos)</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_mediasources.internal.I.disabled">
-				<source>Do not show as copyright information in frontend</source>
-			</trans-unit>
-
-
-			<!-- tx_rkwbasics_domain_model_content -->
-			<trans-unit id="tx_rkwbasics_domain_model_content">
-				<source>Content</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright">
-				<source>Copyright information</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_images_no_copyright.I.disabled">
-				<source>Do not show copyright information in frontend</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_bodytext_mobile">
-				<source>Alternative text</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_content.tx_rkwbasics_header_link_caption">
-				<source>Caption for Link</source>
+			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link">
+				<source>External Link</source>
 			</trans-unit>
 
 
 			<!-- tx_rkwbasics_domain_model_department -->
-            <trans-unit id="tx_rkwbasics_domain_model_department">
-                <source>RKW Basics: Department</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_department.name">
-                <source>Name</source>
-            </trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_department.short_name">
+			<trans-unit id="tx_rkwbasics_domain_model_department" appoved="yes">
+				<source>RKW Basics: Department</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.name" appoved="yes">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.short_name" appoved="yes">
 				<source>Short Name</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_department.internal_name" approved="yes">
 				<source>Internal Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_department.css_class">
-                <source>CSS- Class</source>
-            </trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.css_class" appoved="yes">
+				<source>CSS- Class</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_department.main_page">
 				<source>Main Page</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_department.box_image">
 				<source>Box Image</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_department.description">
-                <source>Description</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_department.visibility">
-                <source>Visibility</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_department.visibility.I.visible">
-                <source>Show in search filter</source>
-            </trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.description" appoved="yes">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.visibility">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_department.visibility.I.visible">
+				<source>Show in search filter</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwbasics_domain_model_documenttype -->
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype">
-                <source>RKW Basics: Document Type</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.name">
-                <source>Name</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.short_name">
-                <source>Short Name</source>
-            </trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype" appoved="yes">
+				<source>RKW Basics: Document Type</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.name" appoved="yes">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.short_name" appoved="yes">
+				<source>Short Name</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwprojects_domain_model_documenttype.internal_name">
 				<source>Internal Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_documenttype.box_template_name">
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.box_template_name" appoved="yes">
 				<source>Box Template Name</source>
 			</trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.description">
-                <source>Description</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type">
-                <source>Use with Type</source>
-            </trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.description" appoved="yes">
+				<source>Description</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.type">
+				<source>Use with type</source>
+			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.default">
 				<source>All</source>
 			</trans-unit>
@@ -247,34 +102,34 @@
 				<source>Other</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.events">
-                <source>Events</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.publications">
-                <source>Publications</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility">
-                <source>Visibility</source>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility.I.visible">
-                <source>Show in search filter</source>
-            </trans-unit>
+				<source>Events</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.type.I.publications">
+				<source>Publications</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility">
+				<source>Visibility</source>
+			</trans-unit>
+			<trans-unit id="tx_rkwbasics_domain_model_documenttype.visibility.I.visible">
+				<source>Show in search filter</source>
+			</trans-unit>
 
 
 			<!-- tx_rkwbasics_domain_model_series -->
-			<trans-unit id="tx_rkwbasics_domain_model_series">
+			<trans-unit id="tx_rkwbasics_domain_model_series" appoved="yes">
 				<source>RKW Basics: Series</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_series.name">
+			<trans-unit id="tx_rkwbasics_domain_model_series.name" appoved="yes">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_series.short_name">
+			<trans-unit id="tx_rkwbasics_domain_model_series.short_name" appoved="yes">
 				<source>Short Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_series.description">
+			<trans-unit id="tx_rkwbasics_domain_model_series.description" appoved="yes">
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_series.type">
-				<source>Use with Type</source>
+				<source>Use with type</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_series.type.I.default">
 				<source>Other</source>
@@ -293,53 +148,54 @@
 			</trans-unit>
 
 
-			<!-- tx_rkwbasics_domain_model_enterpriseSize -->
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize">
+			<!-- tx_rkwbasics_domain_model_enterprisesize -->
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize" appoved="yes">
 				<source>RKW Basics: Enterprise Size</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.name">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.name" appoved="yes">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.short_name">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.short_name" appoved="yes">
 				<source>Short Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.description">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.description" appoved="yes">
 				<source>Description</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.type">
-				<source>Use with Type</source>
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type">
+				<source>Use with type</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.type.I.default">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.default">
 				<source>Other</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.type.I.events">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.events">
 				<source>Events</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.type.I.publications">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.type.I.publications">
 				<source>Publications</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.visibility">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.visibility">
 				<source>Visibility</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_enterpriseSize.visibility.I.visible">
+			<trans-unit id="tx_rkwbasics_domain_model_enterprisesize.visibility.I.visible">
 				<source>Show in search filter</source>
 			</trans-unit>
 
+
 			<!-- tx_rkwbasics_domain_model_sector -->
-			<trans-unit id="tx_rkwbasics_domain_model_sector">
+			<trans-unit id="tx_rkwbasics_domain_model_sector" appoved="yes">
 				<source>RKW Basics: Sector</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_sector.name">
+			<trans-unit id="tx_rkwbasics_domain_model_sector.name" appoved="yes">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_sector.short_name">
+			<trans-unit id="tx_rkwbasics_domain_model_sector.short_name" appoved="yes">
 				<source>Short Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_sector.description">
+			<trans-unit id="tx_rkwbasics_domain_model_sector.description" appoved="yes">
 				<source>Description</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_sector.type">
-				<source>Use with Type</source>
+				<source>Use with type</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_sector.type.I.default">
 				<source>Other</source>
@@ -355,26 +211,29 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_sector.visibility.I.visible">
 				<source>Show in search filter</source>
-			</trans-unit>			
+			</trans-unit>
 
-			<!-- tx_rkwbasics_domain_model_companytype -->
-			<trans-unit id="tx_rkwbasics_domain_model_companytype">
+
+			<!-- tx_rkwbasics_domain_model_companytype-->
+			<trans-unit id="tx_rkwbasics_domain_model_companytype" appoved="yes">
 				<source>RKW Basics: Company type</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_companytype.name">
+			<trans-unit id="tx_rkwbasics_domain_model_companytype.name" appoved="yes">
 				<source>Name</source>
 			</trans-unit>
 
-			<!-- tx_rkwbasics_domain_model_target_group -->
-			<trans-unit id="tx_rkwbasics_domain_model_target_group">
+
+			<!-- tx_rkwbasics_domain_model_target_group-->
+			<trans-unit id="tx_rkwbasics_domain_model_target_group" appoved="yes">
 				<source>RKW Basics: Target group</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_target_group.name">
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.name" appoved="yes">
 				<source>Name</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_target_group.description">
+			<trans-unit id="tx_rkwbasics_domain_model_target_group.description" appoved="yes">
 				<source>Description</source>
 			</trans-unit>
+
 
 			<!-- sys_file_reference -->
 			<trans-unit id="sys_file_reference.ratio.topic_page">
@@ -388,45 +247,6 @@
 			</trans-unit>
 			<trans-unit id="sys_file_reference.ratio.free">
 				<source>Free</source>
-			</trans-unit>
-
-
-			<!-- Flexform -->
-            <trans-unit id="flexform.mediasources.function.headline">
-				<source>Function</source>
-			</trans-unit>
-			<trans-unit id="flexform.mediasources.function.select">
-				<source>Select function</source>
-			</trans-unit>
-			<trans-unit id="flexform.mediasources.function.select.I.list">
-				<source>List of used media sources</source>
-			</trans-unit>
-			<trans-unit id="flexform.mediasources.function.select.I.listPage" approved="yes">
-				<source>List of used media sources for current page</source>
-			</trans-unit>
-			<trans-unit id="flexform.departments.function.headline">
-				<source>Function</source>
-			</trans-unit>
-			<trans-unit id="flexform.departments.function.select">
-				<source>Select function</source>
-			</trans-unit>
-			<trans-unit id="flexform.departments.function.select.I.boxes">
-				<source>Show boxes</source>
-			</trans-unit>
-
-
-
-			<trans-unit id="pages.tx_extbase_type.Tx_RkwBasics_Pages">
-				<source>RKW Basics Pages</source>
-			</trans-unit>
-			<trans-unit id="tt_content.tx_extbase_type.Tx_RkwBasics_Content">
-				<source>RKW Basics Content</source>
-			</trans-unit>
-			<trans-unit id="sys_file_meta.tx_extbase_type.Tx_RkwBasics_MediaFileMeta">
-				<source>RKW Basics MediaFileMeta</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics.tx_extbase_type">
-				<source>RKW Basics Type</source>
 			</trans-unit>
 
 		</body>

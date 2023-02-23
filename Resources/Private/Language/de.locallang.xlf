@@ -4,12 +4,6 @@
 		<header/>
 		<body>
 
-            <!-- Templates/MediaSources/List -->
-            <trans-unit id="templates_mediaSources_list_sum">
-                <source>%s media sources.</source>
-                <target>%s Bildquellen.</target>
-            </trans-unit>
-
             <!-- ===================================================== -->
             <!-- VALIDATOR -->
             <!-- ===================================================== -->

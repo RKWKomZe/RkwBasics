@@ -5,15 +5,9 @@ config.tx_extbase {
     persistence {
         classes {
 
-            // Subclasses
-            \TYPO3\CMS\Extbase\Domain\Model\FileReference {
+            Madj2k\CoreExtended\Domain\Model\Pages {
                 subclasses {
-                    Tx_RkwBasics_FileReference = RKW\RkwBasics\Domain\Model\FileReference
-                }
-            }
-            \TYPO3\CMS\Extbase\Domain\Model\File {
-                subclasses {
-                    Tx_RkwBasics_File = RKW\RkwBasics\Domain\Model\File
+                    Tx_RkwBasics_Pages = RKW\RkwBasics\Domain\Model\Pages
                 }
             }
 
@@ -42,6 +36,13 @@ config.tx_extbase {
                         lastUpdated.mapOnProperty = lastUpdated
                         abstract.mapOnProperty = abstract
                     }
+                }
+            }
+
+            // ==================================================================
+            Madj2k\CoreExtended\Domain\Model\PagesLanguageOverlay {
+                subclasses {
+                    Tx_RkwBasics_Pages = RKW\RkwBasics\Domain\Model\PagesLanguageOverlay
                 }
             }
 
@@ -76,35 +77,7 @@ config.tx_extbase {
                 }
             }
 
-            RKW\RkwBasics\Domain\Model\MediaFile {
-                mapping {
-                    tableName = sys_file_metadata
-                    recordType =
-                }
-            }
-
-            RKW\RkwBasics\Domain\Model\File {
-                mapping {
-                    tableName = sys_file
-                }
-            }
-
-            RKW\RkwBasics\Domain\Model\FileReference {
-                mapping {
-                    tableName = sys_file_reference
-                    columns {
-                        uid_local.mapOnProperty = file
-                    }
-                }
-            }
-
-            RKW\RkwBasics\Domain\Model\Content {
-                mapping {
-                    tableName = tt_content
-                    recordType =
-                }
-            }
-
+            // ==================================================================
             RKW\RkwBasics\Domain\Model\Category {
                 mapping {
                     tableName = sys_category
@@ -139,49 +112,10 @@ plugin.tx_rkwbasics {
     #===============================================================
     settings {
 
-        # comma-separated list of fields to look up when searching for images
-        includeFieldsList = {$plugin.tx_rkwbasics.settings.includeFieldsList}
-
         proxy = {$plugin.tx_rkwbasics.settings.proxy}
         proxyUsername = {$plugin.tx_rkwbasics.settings.proxyUsername}
         proxyPassword = {$plugin.tx_rkwbasics.settings.proxyPassword}
 
-        pageNotFoundConfig {
-
-            _DEFAULT {
-                fallbackPid =
-                defaultDomain =
-            }
-        }
-
-        cookie {
-            isActive = {$plugin.tx_rkwbasics.settings.cookie.isActive}
-            allowedKeys = {$plugin.tx_rkwbasics.settings.cookie.allowedKeys}
-        }
-
-        cdn {
-            enable = {$plugin.tx_rkwbasics.settings.cdn.enable}
-            maxConnectionsPerDomain = {$plugin.tx_rkwbasics.settings.cdn.maxConnectionsPerDomain}
-            maxSubdomains = {$plugin.tx_rkwbasics.settings.cdn.maxSubdomains}
-            ignoreIfContains = {$plugin.tx_rkwbasics.settings.cdn.ignoreIfContains}
-            search = {$plugin.tx_rkwbasics.settings.cdn.search}
-        }
-
-        htmlMinify {
-            enable = {$plugin.tx_rkwbasics.settings.htmlMinify.enable}
-            excludePids = {$plugin.tx_rkwbasics.settings.htmlMinify.excludePids}
-            includePageTypes = {$plugin.tx_rkwbasics.settings.htmlMinify.includePageTypes}
-        }
-        
-        criticalCss {
-            enable = {$plugin.tx_rkwbasics.settings.criticalCss.enable}
-            filesForLayout {
-                        
-            }
-            filesToRemoveWhenActive {
-            
-            }
-        }
     }
 }
 
@@ -192,9 +126,3 @@ plugin.tx_rkwbasics {
 plugin.tx_rkwbasics._CSS_DEFAULT_STYLE (
 
 )
-
-
-#===============================================================
-# Includes
-#===============================================================
-<INCLUDE_TYPOSCRIPT: source="DIR:./Includes" extensions="typoscript">
