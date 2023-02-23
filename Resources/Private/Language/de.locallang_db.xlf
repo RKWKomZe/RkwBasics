@@ -17,10 +17,6 @@
 				<source>Teaser Text</source>
 				<target>Teaser-Text</target>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image" approved="yes">
-				<source>Teaser Image</source>
-				<target>Teaser-Bild</target>
-			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
                 <source>Department</source>
                 <target>Fachbereich/Thema</target>
@@ -48,14 +44,6 @@
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
                 <source>Company type</source>
                 <target>Rechtsform</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file" approved="yes">
-                <source>Download</source>
-                <target>Download (Cover wird automatisch erstellt aus erster Seite!)</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
-                <source>Cover (Used only when no Download-File is set)</source>
-                <target>Cover (Überschreibt Cover aus Download-Datei)</target>
             </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link">
                 <source>External Link</source>

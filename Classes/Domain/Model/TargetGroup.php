@@ -27,29 +27,27 @@ class TargetGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * name
-     *
      * @var string
      */
-    protected $name = '';
+    protected string $name = '';
+
 
     /**
-     * description
-     *
      * @var string
      */
-    protected $description = '';
+    protected string $description = '';
+
 
     /**
      * Returns the name
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
-        //===
     }
+
 
     /**
      * Sets the name
@@ -57,27 +55,29 @@ class TargetGroup extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
+
 
     /**
      * Returns the description
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
+
 
     /**
      * Sets the description
      *
      * @param string $description
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }

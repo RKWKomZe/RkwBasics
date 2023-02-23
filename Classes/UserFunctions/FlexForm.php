@@ -17,6 +17,7 @@ namespace RKW\RkwBasics\UserFunctions;
 use Madj2k\CoreExtended\Utility\GeneralUtility;
 use TYPO3\CMS\Backend\Utility\BackendUtility;
 use TYPO3\CMS\Core\Database\ConnectionPool;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 
 /**
  * Class FlexForm
@@ -36,15 +37,17 @@ class FlexForm
      *
      * @var string
      */
-    protected $tableName = 'tx_rkwbasics_domain_model_department';
+    protected string $tableName = 'tx_rkwbasics_domain_model_department';
+
 
     /**
      * configurationManager
      *
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
-     * @inject
+     * @TYPO3\CMS\Extbase\Annotation\Inject
      */
-    protected $configurationManager;
+    protected ConfigurationManagerInterface $configurationManager;
+
 
     /**
      * Returns items from a given database table (set specific PID via TsConfig, see following line)
@@ -67,7 +70,7 @@ class FlexForm
      * @param array $flexForm
      * @return array
      */
-    public function filterRecordsByTsConfigPid($flexForm)
+    public function filterRecordsByTsConfigPid(array $flexForm): array
     {
         if (isset($flexForm['config']['parameters']['tableName'])){
             // override table name if set
@@ -159,6 +162,7 @@ class FlexForm
             ->execute()
             ->fetchColumn();
     }
+
 
     /**
      * @return int

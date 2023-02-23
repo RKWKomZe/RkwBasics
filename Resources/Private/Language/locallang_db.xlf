@@ -14,9 +14,6 @@
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text" approved="yes">
 				<source>Teaser Text</source>
 			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image" approved="yes">
-				<source>Teaser Image</source>
-			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
 				<source>Department</source>
 			</trans-unit>
@@ -37,12 +34,6 @@
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_companytype">
 				<source>Company type</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_file" approved="yes">
-				<source>Download</source>
-			</trans-unit>
-			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover">
-				<source>Cover (Used only when no Download-File is set)</source>
 			</trans-unit>
 			<trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_external_link">
 				<source>External Link</source>

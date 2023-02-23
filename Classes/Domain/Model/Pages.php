@@ -24,56 +24,33 @@ use \Madj2k\CoreExtended\Domain\Model\FileReference;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated since v9.5. References should be replaced with sys_categories in the long run
  */
 class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
 {
 
-
-    /**
-     * txRkwbasicsTeaserImage
-     *
-     * @var \Madj2k\CoreExtended\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsTeaserImage = null;
-
-
     /**
      * txRkwbasicsDepartment
      *
-     * @var \RKW\RkwBasics\Domain\Model\Department
+     * @var \RKW\RkwBasics\Domain\Model\Department|null
      */
-    protected $txRkwbasicsDepartment = null;
+    protected ?Department $txRkwbasicsDepartment = null;
+
 
     /**
      * txRkwbasicsDocumentType
      *
-     * @var \RKW\RkwBasics\Domain\Model\DocumentType
+     * @var \RKW\RkwBasics\Domain\Model\DocumentType|null
      */
-    protected $txRkwbasicsDocumentType = null;
+    protected ?DocumentType $txRkwbasicsDocumentType = null;
 
 
     /**
      * txRkwbasicsSeries
      *
-     * @var \RKW\RkwBasics\Domain\Model\Series
+     * @var \RKW\RkwBasics\Domain\Model\Series|null
      */
-    protected $txRkwbasicsSeries = null;
-
-
-    /**
-     * txRkwbasicsFile
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsFile = null;
-
-
-    /**
-     * txRkwbasicsCover
-     *
-     * @var \TYPO3\CMS\Extbase\Domain\Model\FileReference
-     */
-    protected $txRkwbasicsCover = null;
+    protected ?Series $txRkwbasicsSeries = null;
 
 
     /**
@@ -81,51 +58,16 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
      *
      * @var string
      */
-    protected $txRkwbasicsExternalLink = null;
-
-
-    /**
-     * Returns the txRkwbasicsTeaserText
-     *
-     * @return string $txRkwbasicsTeaserText
-     * @deprecated This function  is deprecated and will be removed soon.
-     */
-    public function getTxRkwbasicsTeaserText(): string
-    {
-        trigger_error('This method "' . __METHOD__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
-        return $this->getAbstract();
-    }
-
-
-    /**
-     * Returns the txRkwbasicsTeaserImage
-     *
-     * @return \Madj2k\CoreExtended\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     */
-    public function getTxRkwbasicsTeaserImage()
-    {
-        return $this->txRkwbasicsTeaserImage;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsTeaserImage
-     *
-     * @param \Madj2k\CoreExtended\Domain\Model\FileReference $txRkwbasicsTeaserImage
-     * @return void
-     */
-    public function setTxRkwbasicsTeaserImage(FileReference $txRkwbasicsTeaserImage): void
-    {
-        $this->txRkwbasicsTeaserImage = $txRkwbasicsTeaserImage;
-    }
+    protected string $txRkwbasicsExternalLink =  '';
 
 
     /**
      * Returns the txRkwbasicsDepartment
      *
-     * @return \RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment
+     * @return \RKW\RkwBasics\Domain\Model\Department
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsDepartment()
+    public function getTxRkwbasicsDepartment():? Department
     {
         return $this->txRkwbasicsDepartment;
     }
@@ -136,6 +78,7 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
      *
      * @param \RKW\RkwBasics\Domain\Model\Department $txRkwbasicsDepartment
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsDepartment(Department $txRkwbasicsDepartment): void
     {
@@ -146,9 +89,10 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
     /**
      * Returns the txRkwbasicsDocumentType
      *
-     * @return \RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType
+     * @return \RKW\RkwBasics\Domain\Model\DocumentType
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsDocumentType()
+    public function getTxRkwbasicsDocumentType():? DocumentType
     {
         return $this->txRkwbasicsDocumentType;
     }
@@ -159,6 +103,7 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
      *
      * @param \RKW\RkwBasics\Domain\Model\DocumentType $txRkwbasicsDocumentType
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsDocumentType(DocumentType $txRkwbasicsDocumentType): void
     {
@@ -169,9 +114,10 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
     /**
      * Returns the txRkwbasicsSeries
      *
-     * @return \RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries
+     * @return \RKW\RkwBasics\Domain\Model\Series
+     * @deprecated should be changed to usage of sys_categories
      */
-    public function getTxRkwbasicsSeries()
+    public function getTxRkwbasicsSeries():? Series
     {
         return $this->txRkwbasicsSeries;
     }
@@ -182,6 +128,7 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
      *
      * @param \RKW\RkwBasics\Domain\Model\Series $txRkwbasicsSeries
      * @return void
+     * @deprecated should be changed to usage of sys_categories
      */
     public function setTxRkwbasicsSeries(Series $txRkwbasicsSeries): void
     {
@@ -190,55 +137,9 @@ class Pages extends \Madj2k\CoreExtended\Domain\Model\Pages
 
 
     /**
-     * Returns the txRkwbasicsFile
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile
-     */
-    public function getTxRkwbasicsFile()
-    {
-        return $this->txRkwbasicsFile;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsFile
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile
-     * @return void
-     */
-    public function setTxRkwbasicsFile(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsFile): void
-    {
-        $this->txRkwbasicsFile = $txRkwbasicsFile;
-    }
-
-
-    /**
-     * Returns the txRkwbasicsCover
-     *
-     * @return \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover
-     */
-    public function getTxRkwbasicsCover()
-    {
-        return $this->txRkwbasicsCover;
-    }
-
-
-    /**
-     * Sets the txRkwbasicsCover
-     *
-     * @param \TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover
-     * @return void
-     */
-    public function setTxRkwbasicsCover(\TYPO3\CMS\Extbase\Domain\Model\FileReference $txRkwbasicsCover): void
-    {
-        $this->txRkwbasicsCover = $txRkwbasicsCover;
-    }
-
-
-    /**
      * Returns the txRkwbasicsExternalLink
      *
-     * @return string $txRkwbasicsExternalLink
+     * @return string
      */
     public function getTxRkwbasicsExternalLink(): string
     {

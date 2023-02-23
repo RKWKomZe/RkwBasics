@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+
 /**
  * Class DocumentTypeRepository
  *
@@ -31,11 +33,11 @@ class DocumentTypeRepository extends AbstractRepository
      *
      * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
 
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
 
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);

@@ -15,6 +15,9 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * Class DepartmentRepository
  *
@@ -22,6 +25,7 @@ namespace RKW\RkwBasics\Domain\Repository;
  * @copyright RKW Kompetenzzentrum
  * @package RKW_RkwBasics
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * @deprecated Should be replaced by using sys_categories
  */
 class DepartmentRepository extends AbstractRepository
 {
@@ -31,11 +35,11 @@ class DepartmentRepository extends AbstractRepository
      *
      * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
 
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
 
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
@@ -46,9 +50,9 @@ class DepartmentRepository extends AbstractRepository
     /**
      * findAllByVisibility
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllByVisibility()
+    public function findAllByVisibility(): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -57,32 +61,31 @@ class DepartmentRepository extends AbstractRepository
         );
 
         return $query->execute();
-        //===
 
     }
+
 
     /**
      * findAllSorted
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findAllSorted()
+    public function findAllSorted(): QueryResultInterface
     {
         $query = $this->createQuery();
         $query->setOrderings(array('name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
 
         return $query->execute();
-        //===
     }
 
 
     /**
      * findAllByVisibility
      *
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAllByBoxImageAndMainPage()
+    public function findAllByBoxImageAndMainPage(): QueryResultInterface
     {
 
         $query = $this->createQuery();
@@ -94,8 +97,6 @@ class DepartmentRepository extends AbstractRepository
         );
 
         return $query->execute();
-        //===
-
     }
 
 

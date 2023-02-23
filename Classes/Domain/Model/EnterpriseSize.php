@@ -27,41 +27,34 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * name
-     *
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
-    protected $name = '';
+    protected string $name = '';
+
 
     /**
-     * shortName
-     *
      * @var string
      */
-    protected $shortName = '';
+    protected string $shortName = '';
+
 
     /**
-     * type
-     *
      * @var string
-     * 0     */
-    protected $type = '';
+     **/
+    protected string $type = '';
 
 
     /**
-     * visibility
-     *
-     * @var integer
+     * @var bool
      */
-    protected $visibility = 0;
+    protected bool $visibility = false;
+
 
     /**
-     * description
-     *
      * @var string
      */
-    protected $description = '';
+    protected string $description = '';
 
 
     /**
@@ -69,10 +62,9 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $name
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
-        //===
     }
 
 
@@ -82,7 +74,7 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -93,11 +85,11 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $shortName
      */
-    public function getShortName()
+    public function getShortName(): string
     {
         return $this->shortName;
-        //===
     }
+
 
     /**
      * Sets the shortName
@@ -105,7 +97,7 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $shortName
      * @return void
      */
-    public function setShortName($shortName)
+    public function setShortName(string $shortName): void
     {
         $this->shortName = $shortName;
     }
@@ -116,11 +108,11 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      *
      * @return string $type
      */
-    public function getType()
+    public function getType(): string
     {
         return $this->type;
-        //===
     }
+
 
     /**
      * Sets the type
@@ -128,43 +120,45 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $type
      * @return void
      */
-    public function setType($type)
+    public function setType(string $type): void
     {
         $this->type = $type;
     }
 
+
     /**
      * Returns the visibility
      *
-     * @return string $type
+     * @return bool
      */
-    public function getVisibility()
+    public function getVisibility(): string
     {
         return $this->visibility;
-        //===
     }
+
 
     /**
      * Sets the visibility
      *
-     * @param string $visibility
+     * @param bool $visibility
      * @return void
      */
-    public function setVisibility($visibility)
+    public function setVisibility(bool $visibility): void
     {
-        $this->visibility = intval($visibility);
+        $this->visibility = $visibility;
     }
+
 
     /**
      * Returns the description
      *
      * @return string $description
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
-        //===
     }
+
 
     /**
      * Sets the description
@@ -172,7 +166,7 @@ class EnterpriseSize extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }

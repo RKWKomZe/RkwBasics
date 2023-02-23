@@ -33,7 +33,10 @@ class JsonApi extends \Madj2k\AjaxApi\Encoder\JsonTemplateEncoder
      */
     public function __construct()
     {
-        trigger_error('This class "' . __CLASS__ . '" is deprecated and will be removed soon. Do not use it anymore.', E_USER_DEPRECATED);
+        trigger_error('
+            This class "' . __CLASS__ . '" is deprecated and will be removed soon. Do not use it anymore.',
+            E_USER_DEPRECATED
+        );
         parent::__construct();
     }
 

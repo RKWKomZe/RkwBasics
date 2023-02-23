@@ -39,6 +39,13 @@ config.tx_extbase {
                 }
             }
 
+            // ==================================================================
+            Madj2k\CoreExtended\Domain\Model\PagesLanguageOverlay {
+                subclasses {
+                    Tx_RkwBasics_Pages = RKW\RkwBasics\Domain\Model\PagesLanguageOverlay
+                }
+            }
+
             RKW\RkwBasics\Domain\Model\PagesLanguageOverlay {
 
                 mapping {
@@ -67,14 +74,6 @@ config.tx_extbase {
                         abstract.mapOnProperty = abstract
                         sys_language_uid.mapOnProperty = sysLanguageUid
                     }
-                }
-            }
-
-            // ==================================================================
-            RKW\RkwBasics\Domain\Model\Content {
-                mapping {
-                    tableName = tt_content
-                    recordType =
                 }
             }
 

@@ -11,7 +11,7 @@ call_user_func(
         $GLOBALS['TYPO3_CONF_VARS']['FE']['pageOverlayFields'] .= ',keywords,abstract,description';
 
         $rootlineFields = &$GLOBALS['TYPO3_CONF_VARS']['FE']['addRootLineFields'];
-        $newRootlineFields = 'keywords,abstract,description,tx_rkwbasics_cover,tx_rkwbasics_file,tx_rkwbasics_teaser_image,tx_rkwbasics_department,tx_rkwbasics_document_type';
+        $newRootlineFields = 'tx_rkwbasics_department,tx_rkwbasics_document_type';
         $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
 
 

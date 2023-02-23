@@ -1,5 +1,4 @@
 <?php
-
 namespace RKW\RkwBasics\Domain\Repository;
 
 /*
@@ -34,11 +33,12 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      *
      * @param string $table
      * @return string the additional where clause, something like " AND deleted=0 AND hidden=0"
+     * @throws \TYPO3\CMS\Core\Context\Exception\AspectNotFoundException
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
     protected function getWhereClauseForEnabledFields(string $table): string
     {
-        return QueryTypo3::getWhereClauseEnabled($table);
+        return QueryUtility::getWhereClauseEnabled($table);
     }
 
 
@@ -49,7 +49,7 @@ abstract class AbstractRepository extends \TYPO3\CMS\Extbase\Persistence\Reposit
      * @return string
      * @see \TYPO3\CMS\Core\Resource\AbstractRepository
      */
-    protected function getEnvironmentMode()
+    protected function getEnvironmentMode(): string
     {
         return TYPO3_MODE;
     }

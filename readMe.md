@@ -26,4 +26,13 @@ UPDATE pages SET tx_coreextended_fe_layout_next_level = tx_rkwbasics_fe_layout_n
 UPDATE pages SET tx_coreextended_no_index = tx_rkwbasics_no_index;
 UPDATE pages SET tx_coreextended_no_follow = tx_rkwbasics_no_follow;
 UPDATE tt_content SET tx_coreextended_images_no_copyright = tx_rkwbasics_images_no_copyright;
+
+UPDATE tt_content SET tx_coreextended_preview_image = tx_rkwbasics_teaser_image;
+UPDATE tt_content SET tx_coreextended_file = tx_rkwbasics_file;
+UPDATE tt_content SET tx_coreextended_cover = tx_rkwbasics_cover;
+UPDATE sys_file_reference SET fieldname = 'txCoreextendedPreviewImage' WHERE fieldname = 'txRkwbasicsTeaserImage';
+UPDATE sys_file_reference SET fieldname = 'txCoreextendedFile' WHERE fieldname = 'txRkwbasicsFile';
+UPDATE sys_file_reference SET fieldname = 'txCoreextendedCover' WHERE fieldname = 'txRkwbasicsCover';
+
+
 ```

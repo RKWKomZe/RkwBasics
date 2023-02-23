@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * Class PagesRepository
  *
@@ -29,11 +31,11 @@ class PagesRepository extends \Madj2k\CoreExtended\Domain\Repository\PagesReposi
     /**
      * find all pages which have the given seriesId but not the currentPageId
      *
-     * @param integer $seriesId
-     * @param integer $currentPageId
-     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
+     * @param int $seriesId
+     * @param int $currentPageId
+     * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
      */
-    public function findByTxRkwbasicsSeries($seriesId, $currentPageId)
+    public function findByTxRkwbasicsSeries(int $seriesId, int $currentPageId): QueryResultInterface
     {
 
         $query = $this->createQuery();

@@ -104,49 +104,6 @@ $tempColumnsPages = [
             ],
         ],
     ],
-    'tx_rkwbasics_teaser_image' => [
-        'exclude' => 0,
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_image',
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'txRkwBasicsTeaserImage',
-            [
-                'maxitems' => 1,
-                'overrideChildTca' => [
-                    'types' => [
-                        \TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => [
-                            'showitem' => '
-                            --palette--;LLL:EXT:lang/Resources/Private/Language/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
-                            --palette--;;filePalette'
-                        ],
-                    ],
-                ],
-            ],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        ),
-    ],
-
-    'tx_rkwbasics_file' => [
-        'exclude' => 0,
-        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_file',
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'txRkwbasicsFile',
-            ['maxitems' => 1],
-            'doc,docx,docm,xls,xlsx,pdf,zip'
-        ),
-    ],
-
-    'tx_rkwbasics_cover' => [
-        'exclude' => 0,
-        'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
-        'label' => 'LLL:EXT:rkw_basics/Resources/Private/Language/locallang_db.xlf:tx_rkwbasics_domain_model_pages.tx_rkwbasics_cover',
-        'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
-            'txRkwbasicsCover',
-            ['maxitems' => 1],
-            $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
-        ),
-    ],
-
     'tx_rkwbasics_external_link' => [
         'exclude' => 0,
         'displayCond' => 'FIELD:tx_rkwpdf2content_is_import_sub:=:0',
@@ -196,7 +153,7 @@ $GLOBALS['TCA']['pages']['types'][(string)\TYPO3\CMS\Frontend\Page\PageRepositor
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('pages',$tempColumnsPages);
 
 // Add field to the existing palette
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_teaser_image,--linebreak--,tx_rkwbasics_file,--linebreak--,tx_rkwbasics_cover,--linebreak--,tx_rkwbasics_external_link,--linebreak--','after:media');
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette('pages', 'media','--linebreak--,tx_rkwbasics_external_link,--linebreak--','after:media');
 
 // Add new palette for departments etc.
 $tempConfig = 'tx_rkwbasics_department,tx_rkwbasics_document_type';

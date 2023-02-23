@@ -4,11 +4,8 @@
 CREATE TABLE pages
 (
 
-	tx_rkwbasics_teaser_image   int(11) unsigned NOT NULL default '0',
 	tx_rkwbasics_department     int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_document_type  int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_rkwbasics_file           int(11) unsigned DEFAULT '0' NOT NULL,
-	tx_rkwbasics_cover          int(11) unsigned NOT NULL default '0',
 	tx_rkwbasics_external_link  varchar(255) DEFAULT '' NOT NULL,
 	tx_rkwbasics_series         int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_enterprisesize int(11) unsigned DEFAULT '0' NOT NULL,

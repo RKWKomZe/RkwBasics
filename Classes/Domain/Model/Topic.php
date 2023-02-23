@@ -27,29 +27,28 @@ class Topic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
 {
 
     /**
-     * name
-     *
      * @var string
      * @TYPO3\CMS\Extbase\Annotation\Validate("NotEmpty")
      */
-    protected $name = '';
+    protected string $name = '';
+
 
     /**
-     * description
-     *
      * @var string
      */
-    protected $description = '';
+    protected string $description = '';
+
 
     /**
      * Returns the name
      *
-     * @return string $name
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
+
 
     /**
      * Sets the name
@@ -57,20 +56,22 @@ class Topic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $name
      * @return void
      */
-    public function setName($name)
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
+
     /**
      * Returns the description
      *
-     * @return string $description
+     * @return string
      */
-    public function getDescription()
+    public function getDescription(): string
     {
         return $this->description;
     }
+
 
     /**
      * Sets the description
@@ -78,7 +79,7 @@ class Topic extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
      * @param string $description
      * @return void
      */
-    public function setDescription($description)
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }

@@ -15,6 +15,8 @@ namespace RKW\RkwBasics\Domain\Repository;
  * The TYPO3 project - inspiring people to share!
  */
 
+use TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings;
+
 /**
  * Class CompanyTypeRepository
  *
@@ -26,16 +28,22 @@ namespace RKW\RkwBasics\Domain\Repository;
 class CompanyTypeRepository extends AbstractRepository
 {
 
+    // Order by name
+    protected $defaultOrderings = [
+        'name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
+    ];
+
+
     /**
      * initializeObject
      *
      * @return void
      */
-    public function initializeObject()
+    public function initializeObject(): void
     {
 
         /** @var $querySettings \TYPO3\CMS\Extbase\Persistence\Generic\Typo3QuerySettings */
-        $querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Typo3QuerySettings');
+        $querySettings = $this->objectManager->get(Typo3QuerySettings::class);
 
         // don't add the pid constraint
         $querySettings->setRespectStoragePage(false);
@@ -43,9 +51,5 @@ class CompanyTypeRepository extends AbstractRepository
         $this->setDefaultQuerySettings($querySettings);
     }
 
-    // Order by name
-    protected $defaultOrderings = array(
-        'name' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING,
-    );
 
 }

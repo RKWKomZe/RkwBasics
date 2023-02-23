@@ -3,6 +3,7 @@
 namespace RKW\RkwBasics\Domain\Repository;
 
 use \RKW\RkwBasics\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /*
  * This file is part of the TYPO3 CMS project.
@@ -31,15 +32,21 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
     /**
      * findOneWithAllRecursiveChildren
      *
-     * @param \RKW\RkwBasics\Domain\Model\Category $sysCategory
+     * @param \RKW\RkwBasics\Domain\Model\Category|null $sysCategory
      * @param boolean $returnUidArray
      * @param boolean $excludeEntriesWithoutParent
      * @param string $ordering
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array|object|void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @toDo: rework - too many return types!
      */
-    public function findOneWithAllRecursiveChildren(Category $sysCategory = null, $returnUidArray = null, $excludeEntriesWithoutParent = false, $ordering = "ASC")
-    {
+    public function findOneWithAllRecursiveChildren(
+        Category $sysCategory = null,
+        bool $returnUidArray = false,
+        bool $excludeEntriesWithoutParent = false,
+        string $ordering = 'ASC'
+    ) {
+
         $query = $this->createQuery();
         $constraints = array();
         $sysCategoryUidArray = array();
@@ -48,7 +55,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         if (!$sysCategory instanceof \RKW\RkwBasics\Domain\Model\Category) {
             // important: Return void. No empty string, no empty array - simply nothing!
             return;
-            //===
+
         } else {
 
             // 1. Set initial UID
@@ -83,7 +90,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // If wanted: Return the UID array and get out of here! :)
             if ($returnUidArray) {
                 return $sysCategoryUidArray;
-                //===
+
             }
 
             // 3. define final query with summary of sysCategoryUid's!
@@ -101,10 +108,10 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // orderings
-        if ($ordering == "ASC") {
+        if ($ordering == 'ASC') {
             $query->setOrderings(array('title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
         }
-        if ($ordering == "DESC") {
+        if ($ordering == 'DESC') {
             $query->setOrderings(array('title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
         }
 
@@ -112,12 +119,11 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         // get single result
         if (count($sysCategoryUidArray) == 1) {
             return $query->execute()->getFirst();
-            //===
         }
 
         // here we got a good old QueryResultInterface-Result
         return $query->execute();
-        //===
+
     }
 
 
@@ -131,8 +137,12 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-    public function findAllOrRecursiveBySelection($sysCategoryList = null, $returnUidArray = null, $excludeEntriesWithoutParent = true, $ordering = "ASC")
-    {
+    public function findAllOrRecursiveBySelection(
+        array $sysCategoryList = [],
+        bool $returnUidArray = false,
+        bool $excludeEntriesWithoutParent = true,
+        string $ordering = 'ASC'
+    ) {
         $query = $this->createQuery();
         $constraints = array();
 
@@ -184,7 +194,6 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             // If wanted: Return the UID array and get out of here! :)
             if ($returnUidArray) {
                 return $sysCategoryUidArray;
-                //===
             }
 
             // 3. define final query with summary of sysCategoryUid's!
@@ -202,10 +211,10 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
         }
 
         // orderings
-        if ($ordering == "ASC") {
+        if ($ordering == 'ASC') {
             $query->setOrderings(array('title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING));
         }
-        if ($ordering == "DESC") {
+        if ($ordering == 'DESC') {
             $query->setOrderings(array('title' => \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING));
         }
 
@@ -216,14 +225,10 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
             }
 
             return $sysCategoryUidArray;
-            //===
         }
 
         // if there is no sysCategoryList defined, this execute is equal to a findAll()!
         // here we got a good old QueryResultInterface-Result
         return $query->execute();
-        //===
     }
 }
-
-?>
