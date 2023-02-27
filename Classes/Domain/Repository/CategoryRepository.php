@@ -38,7 +38,7 @@ class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository
      * @param string $ordering
      * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface|array|object|void
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
-     * @toDo: rework - too many return types!
+     *  @todo: rework - too many return types!
      */
     public function findOneWithAllRecursiveChildren(
         Category $sysCategory = null,
