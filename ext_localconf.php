@@ -16,15 +16,6 @@ call_user_func(
 
 
         //=================================================================
-        // XClasses
-        //=================================================================
-        if (\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::isLoaded('sr_freecap')) {
-            $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][SJBR\SrFreecap\Validation\Validator\CaptchaValidator::class] = [
-                'className' => RKW\RkwBasics\XClasses\Validation\Validator\CaptchaValidator::class
-            ];
-        }
-
-        //=================================================================
         // Configure Logger
         //=================================================================
         $GLOBALS['TYPO3_CONF_VARS']['LOG']['RKW']['RkwBasics']['writerConfiguration'] = array(
@@ -35,7 +26,7 @@ call_user_func(
                 // add a FileWriter
                 'TYPO3\\CMS\\Core\\Log\\Writer\\FileWriter' => array(
                     // configuration for the writer
-                    'logFile' => 'typo3temp/var/logs/tx_rkwbasics.log'
+                    'logFile' => \TYPO3\CMS\Core\Core\Environment::getVarPath()  . '/log/tx_rkwbasics.log'
                 )
             ),
         );
