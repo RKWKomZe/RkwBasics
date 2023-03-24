@@ -4,6 +4,13 @@
 		<header/>
 		<body>
 
+            <!-- Tabs -->
+            <trans-unit id="tx_rkwbasics_domain_model_pages.tabs.rkw" approved="yes">
+                <source>RKW</source>
+                <target>RKW</target>
+            </trans-unit>
+
+
             <!-- Palettes -->
             <trans-unit id="tx_rkwbasics_domain_model_pages.palettes.common" approved="yes">
                 <source>Common</source>
@@ -13,17 +20,9 @@
                 <source>Extended</source>
                 <target>Erweitert</target>
             </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_teaser_text" approved="yes">
-				<source>Teaser Text</source>
-				<target>Teaser-Text</target>
-			</trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_department" approved="yes">
                 <source>Department</source>
                 <target>Fachbereich/Thema</target>
-            </trans-unit>
-            <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_genre" approved="yes">
-                <source>Genre</source>
-                <target>Textgattung</target>
             </trans-unit>
             <trans-unit id="tx_rkwbasics_domain_model_pages.tx_rkwbasics_document_type" approved="yes">
                 <source>Document Type</source>

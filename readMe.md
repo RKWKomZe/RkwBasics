@@ -27,8 +27,8 @@ RENAME TABLE `tx_rkwbasics_domain_model_mediasources` TO `tx_coreextended_domain
 UPDATE pages SET tx_accelerator_proxy_caching = tx_rkwbasics_proxy_caching;
 UPDATE pages SET tx_coreextended_alternative_title = tx_rkwbasics_alternative_title;
 UPDATE pages SET tx_coreextended_fe_layout_next_level = tx_rkwbasics_fe_layout_next_level;
-UPDATE pages SET tx_coreextended_no_index = tx_rkwbasics_no_index;
-UPDATE pages SET tx_coreextended_no_follow = tx_rkwbasics_no_follow;
+UPDATE pages SET no_index = tx_rkwbasics_no_index;
+UPDATE pages SET no_follow = tx_rkwbasics_no_follow;
 UPDATE pages SET tx_coreextended_preview_image = tx_rkwbasics_teaser_image;
 UPDATE pages SET tx_coreextended_file = tx_rkwbasics_file;
 UPDATE pages SET tx_coreextended_cover = tx_rkwbasics_cover;
