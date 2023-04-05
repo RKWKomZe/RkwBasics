@@ -36,5 +36,7 @@ UPDATE pages SET tx_coreextended_images_no_copyright = tx_rkwbasics_images_no_co
 UPDATE sys_file_reference SET fieldname = 'txCoreextendedPreviewImage' WHERE fieldname = 'txRkwbasicsTeaserImage';
 UPDATE sys_file_reference SET fieldname = 'txCoreextendedFile' WHERE fieldname = 'txRkwbasicsFile';
 UPDATE sys_file_reference SET fieldname = 'txCoreextendedCover' WHERE fieldname = 'txRkwbasicsCover';
+UPDATE sys_file_metadata SET tx_coreextended_source = tx_rkwbasics_source;
+UPDATE sys_file_metadata SET tx_coreextended_publisher = tx_rkwbasics_publisher;
 UPDATE tt_content SET list_type = "coreextended_mediasources" WHERE list_type = "rkwbasics_rkwmediasources";
 ```
