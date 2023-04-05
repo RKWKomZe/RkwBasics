@@ -176,3 +176,9 @@ $GLOBALS['TCA']['pages'] = array_replace_recursive($GLOBALS['TCA']['pages'], $tc
     (string)\TYPO3\CMS\Frontend\Page\PageRepository::DOKTYPE_LINK,
 );
 
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addFieldsToPalette(
+    'pages',
+    'media',
+    '--linebreak--,tx_rkwbasics_external_link,--linebreak--',
+    'after:media'
+);
