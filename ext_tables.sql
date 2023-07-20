@@ -11,6 +11,13 @@ CREATE TABLE pages
 	tx_rkwbasics_enterprisesize int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_sector         int(11) unsigned DEFAULT '0' NOT NULL,
 	tx_rkwbasics_companytype    int(11) unsigned NOT NULL default '0',
+
+	KEY tx_rkwbasics_department (tx_rkwbasics_department),
+	KEY tx_rkwbasics_document_type (tx_rkwbasics_document_type),
+	KEY tx_rkwbasics_series (tx_rkwbasics_series),
+	KEY tx_rkwbasics_enterprisesize (tx_rkwbasics_enterprisesize),
+	KEY tx_rkwbasics_sector (tx_rkwbasics_sector),
+	KEY tx_rkwbasics_companytype (tx_rkwbasics_companytype)
 );
 
 CREATE TABLE pages_language_overlay
