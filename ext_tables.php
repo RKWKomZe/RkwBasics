@@ -14,8 +14,8 @@ call_user_func(
             'tx_rkwbasics_domain_model_companytype'
         );
 
-        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('
-            tx_rkwbasics_domain_model_department'
+        \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
+            'tx_rkwbasics_domain_model_department'
         );
 
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages(
