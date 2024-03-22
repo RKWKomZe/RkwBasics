@@ -14,6 +14,23 @@ call_user_func(
         $newRootlineFields = 'tx_rkwbasics_department,tx_rkwbasics_document_type';
         $rootlineFields .= (empty($rootlineFields))? $newRootlineFields : ',' . $newRootlineFields;
 
+        //=================================================================
+        // Add XClasses for extending existing classes
+        // ATTENTION: deactivated due to faulty mapping in TYPO3 9.5
+        //=================================================================
+        /*
+        /// for TYPO3 12+
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['Objects'][\Madj2k\CoreExtended\Domain\Model\Pages::class] = [
+            'className' => \RKW\RkwBasics\Domain\Model\Pages::class
+        ];
+
+        // for TYPO3 9.5 - 11.5 only, not required for TYPO3 12
+        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Extbase\Object\Container\Container::class)
+            ->registerImplementation(
+                \Madj2k\CoreExtended\Domain\Model\Pages::class,
+                \RKW\RkwBasics\Domain\Model\Pages::class
+            );
+        */
 
         //=================================================================
         // Configure Logger

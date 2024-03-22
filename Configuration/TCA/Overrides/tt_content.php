@@ -2,14 +2,19 @@
 if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
+call_user_func(
+    function($extKey)
+    {
+        //=================================================================
+        // Register Plugin
+        //=================================================================
 
-//=================================================================
-// Register Plugin
-//=================================================================
+        \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
+            $extKey,
+            'Rkwdepartments',
+            'RKW Departments'
+        );
 
-\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    'RKW.RkwBasics',
-    'Rkwdepartments',
-    'RKW Departments'
+    },
+    'rkw_basics'
 );
-

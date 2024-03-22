@@ -1,6 +1,11 @@
 #############################################################################
 # Tables that are extended
 #############################################################################
+/** !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  * TABLE-MAPPING IS DEPRECATED SINCE TYPO3 10.4
+  * PLEASE ADD ANY CHANGES TO
+  * EXT:extension/Configuration/Extbase/Persistence/Classes.php
+  * !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 config.tx_extbase {
     persistence {
         classes {
@@ -35,44 +40,6 @@ config.tx_extbase {
                         no_search.mapOnProperty = noSearch
                         lastUpdated.mapOnProperty = lastUpdated
                         abstract.mapOnProperty = abstract
-                    }
-                }
-            }
-
-            // ==================================================================
-            Madj2k\CoreExtended\Domain\Model\PagesLanguageOverlay {
-                subclasses {
-                    Tx_RkwBasics_Pages = RKW\RkwBasics\Domain\Model\PagesLanguageOverlay
-                }
-            }
-
-            RKW\RkwBasics\Domain\Model\PagesLanguageOverlay {
-
-                mapping {
-
-                    # set table name to map to
-                    tableName = pages_language_overlay
-
-                    # on pages tables it's the doktype
-                    # if we set an value, we filter by it
-                    # if do not set anything, all pages are found
-                    recordType =
-
-                    # mapping to properties of class
-                    columns {
-                        uid.mapOnProperty = uid
-                        pid.mapOnProperty = pid
-                        sorting.mapOnProperty = sorting
-                        crdate.mapOnProperty = crdate
-                        tstamp.mapOnProperty = tstamp
-                        hidden.mapOnProperty = hidden
-                        deleted.mapOnProperty = deleted
-                        title.mapOnProperty = title
-                        subtitle.mapOnProperty = subtitle
-                        no_search.mapOnProperty = noSearch
-                        lastUpdated.mapOnProperty = lastUpdated
-                        abstract.mapOnProperty = abstract
-                        sys_language_uid.mapOnProperty = sysLanguageUid
                     }
                 }
             }
