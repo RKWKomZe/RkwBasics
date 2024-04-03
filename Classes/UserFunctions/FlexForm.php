@@ -52,7 +52,7 @@ class FlexForm
     /**
      * @var \TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface
      */
-    public function injectAuthorsRepository(ConfigurationManagerInterface $configurationManager)
+    public function injectConfigurationManagerInterface(ConfigurationManagerInterface $configurationManager)
     {
         $this->configurationManager = $configurationManager;
     }
