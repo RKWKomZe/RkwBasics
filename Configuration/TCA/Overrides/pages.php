@@ -27,6 +27,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -44,6 +45,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
