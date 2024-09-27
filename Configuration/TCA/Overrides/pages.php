@@ -27,6 +27,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -44,6 +45,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -61,6 +63,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -78,6 +81,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -95,6 +99,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
 
@@ -112,6 +117,7 @@ $tca = [
                 'items' => [
                     ['---', NULL],
                 ],
+                'default' => 0
             ],
         ],
         'tx_rkwbasics_external_link' => [
